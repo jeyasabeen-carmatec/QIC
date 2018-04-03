@@ -1,28 +1,28 @@
 //
-//  VC_home_tab.m
+//  VC_news.m
 //  QIC
 //
 //  Created by anumolu mac mini on 03/04/18.
 //  Copyright © 2018 anumolu mac mini. All rights reserved.
 //
 
-#import "VC_home_tab.h"
+#import "VC_news.h"
 #import "menu_cell.h"
 
-@interface VC_home_tab ()<UITableViewDelegate,UITableViewDataSource>
+
+@interface VC_news ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *arr_images;
 }
+
+
 @end
 
-@implementation VC_home_tab
+@implementation VC_news
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    _TBL_list.delegate= self;
-//    _TBL_list.dataSource = self;
-    
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
 }
 #pragma Table view delegate Methods
@@ -57,6 +57,7 @@
 {
     return 10;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

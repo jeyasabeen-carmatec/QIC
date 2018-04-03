@@ -10,6 +10,9 @@
 #import "categorie_cell.h"
 
 @interface VC_categories ()<UICollectionViewDelegate,UICollectionViewDataSource>
+{
+    NSArray *arr_images;
+}
 
 @end
 
@@ -17,6 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+
     
     /************** setting the dlegates ******************/
     
@@ -32,13 +39,14 @@
 #pragma collection view delgate methods
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return arr_images.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     categorie_cell *cell = (categorie_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
+    cell.IMG_categories.image = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
     cell.BTN_categories.layer.cornerRadius = 2.0f;
     
     return cell;
@@ -47,14 +55,14 @@
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(_collection_categoriesl.bounds.size.width/2.11 ,217);
+    return CGSizeMake(_collection_categoriesl.bounds.size.width/2.02 ,217);
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 2;
+    return 4;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

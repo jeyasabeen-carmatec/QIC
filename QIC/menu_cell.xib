@@ -24,6 +24,9 @@
                     </imageView>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="IMG_image" destination="JIU-3V-TNw" id="HQv-o5-LWi"/>
+            </connections>
             <point key="canvasLocation" x="25" y="46.5"/>
         </tableViewCell>
     </objects>

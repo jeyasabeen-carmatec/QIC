@@ -1,5 +1,5 @@
 //
-//  menu_cell.h
+//  VC_offers.h
 //  QIC
 //
 //  Created by anumolu mac mini on 03/04/18.
@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface menu_cell : UITableViewCell
-@property(nonatomic,weak) IBOutlet UIImageView *IMG_image;
+@interface VC_offers : UIViewController
+
+#pragma Table view
+@property(nonatomic,weak) IBOutlet UITableView *TBL_list;
 
 @end

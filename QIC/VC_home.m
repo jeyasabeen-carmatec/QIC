@@ -9,8 +9,14 @@
 #import "VC_home.h"
 #import "VC_categories.h"
 #import "VC_home_tab.h"
+#import "VC_offers.h"
+#import "VC_news.h"
 
 @interface VC_home ()<UITabBarDelegate>
+{
+    float scroll_ht;
+    
+}
 
 @end
 
@@ -22,10 +28,14 @@
     
     
     /********************* setting the delegates ***************************/
- 
+    scroll_ht = _VW_main.frame.size.height;
     
     [self highlight_IMAGE];
     [self tab_BAR_set_UP];
+     [self HOme_view_calling];
+     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:0]];
+    
+    
 }
 #pragma mark highight the Tab menu indicator image
 
@@ -45,6 +55,17 @@
     _TAB_menu.selectionIndicatorImage = img;
 
 }
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+   // [_VW_main layoutIfNeeded];
+    
+    //_VW_main.contentSize = CGSizeMake(_VW_main.frame.size.width,scroll_ht);
+    
+    
+}
+
 #pragma tab bar setUP
 
 -(void)tab_BAR_set_UP
@@ -68,35 +89,98 @@
 {
     if([item.title isEqualToString:@"Home"])
     {
-      //  [self.view addSubview:self.TBL_list];
+        /************** calling home view  ******************/
+
         
-        VC_home_tab *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_home_tab"];
-        CGRect frameset = categorie_vw.view.frame;
-        frameset.origin.x =  0;
-        frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-        frameset.size.height = self.view.frame.size.height - _TAB_menu.frame.size.height;
-        frameset.size.width = self.view.frame.size.width;
-        categorie_vw.view.frame =  frameset;
-        [self.VW_main addSubview:categorie_vw.view];
+        [self HOme_view_calling];
 
     }
     
-    else  if([item.title isEqualToString:@"Provider"])
+    else  if([item.title isEqualToString:@"Providers"])
     {
+        /************** creating objet for provider view controller and and grabbing that view  ******************/
         
         VC_categories *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_categoies"];
+        
         CGRect frameset = categorie_vw.view.frame;
         frameset.origin.x =  0;
         frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-        frameset.size.height = self.view.frame.size.height - _TAB_menu.frame.size.height;
+        frameset.size.height = _VW_main.frame.size.height ;
         frameset.size.width = self.view.frame.size.width;
         categorie_vw.view.frame =  frameset;
+        [categorie_vw.collection_categoriesl reloadData];
         [self.VW_main addSubview:categorie_vw.view];
+        
+        [self addChildViewController:categorie_vw];
+        [categorie_vw didMoveToParentViewController:self];
         
         
         
     }
+    else  if([item.title isEqualToString:@"News"])
+    {
+        /************** creating objet for News view controller and and grabbing that view  ******************/
+        
+        VC_news *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_news"];
+        
+        CGRect frameset = categorie_vw.view.frame;
+        frameset.origin.x =  0;
+        frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+        frameset.size.height = _VW_main.frame.size.height ;
+        frameset.size.width = self.view.frame.size.width;
+        categorie_vw.view.frame =  frameset;
+        [self.VW_main addSubview:categorie_vw.view];
+        
+        [self addChildViewController:categorie_vw];
+        [categorie_vw didMoveToParentViewController:self];
+        
+        
+        
+    }
+    else  if([item.title isEqualToString:@"Offers"])
+    {
+        /************** creating objet for provider view controller and and grabbing that view  ******************/
+        
+        VC_offers *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
+        
+        CGRect frameset = categorie_vw.view.frame;
+        frameset.origin.x =  0;
+        frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+        frameset.size.height = _VW_main.frame.size.height ;
+        frameset.size.width = self.view.frame.size.width;
+        categorie_vw.view.frame =  frameset;
+        [self.VW_main addSubview:categorie_vw.view];
+        
+        [self addChildViewController:categorie_vw];
+        [categorie_vw didMoveToParentViewController:self];
+        
+        
+        
+    }
+
+
     
+}
+
+#pragma Home page view calling
+
+-(void)HOme_view_calling
+{
+    
+    /************** creating objet for Home view controller and and grabbing that view  ******************/
+
+    VC_home_tab *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_home_tab"];
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = scroll_ht;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [self.VW_main addSubview:categorie_vw.view];
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {
