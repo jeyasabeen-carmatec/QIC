@@ -1,16 +1,16 @@
 //
-//  VC_news.m
+//  VC_sub_categories.m
 //  QIC
 //
-//  Created by anumolu mac mini on 03/04/18.
+//  Created by anumolu mac mini on 04/04/18.
 //  Copyright © 2018 anumolu mac mini. All rights reserved.
 //
 
-#import "VC_news.h"
+#import "VC_sub_categories.h"
 #import "news_cell.h"
+#import "subcategory_cell.h"
 
-
-@interface VC_news ()<UITableViewDelegate,UITableViewDataSource>
+@interface VC_sub_categories ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *arr_images;
 }
@@ -18,14 +18,16 @@
 
 @end
 
-@implementation VC_news
+@implementation VC_sub_categories
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+    [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
 }
 #pragma Table view delegate Methods
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return arr_images.count;
@@ -37,18 +39,20 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    news_cell *cell = (news_cell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+    subcategory_cell *cell = (subcategory_cell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil)
     {
         NSArray *nib;
-        nib = [[NSBundle mainBundle] loadNibNamed:@"news_cell" owner:self options:nil];
+        nib = [[NSBundle mainBundle] loadNibNamed:@"subcategory_cell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-   // UIImage *img = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
-    cell.LBL_name.text = @"Health Insurance";
-    cell.LBL_address.text = @"This is going to Provide some offers. which is useful to do the insurance.You will get that in  an Exact time.";
-    cell.LBL_company.text = @"Abc company";
-   // cell.IMG_image.image = img;
+    cell.LBL_name.text = @"Al SHAMI MEDICAL CENTER";
+    cell.LBL_addres.text = @"This is going to Provide some offers. which is useful to do the insurance.You will get that in  an Exact time.";
+    cell.LBL_designnantion.text = @"Dentist";
+    cell.LBL_phone.text = @"PH:123456789";
+    
+    cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
+    
     return cell;
     
 }
@@ -63,6 +67,12 @@
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 10;
+}
+
+#pragma back action
+-(void)back_actions
+{
+    [self.delegate subcategories_back_action:@"back"];
 }
 
 - (void)didReceiveMemoryWarning {

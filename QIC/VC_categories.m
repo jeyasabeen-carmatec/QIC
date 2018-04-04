@@ -8,6 +8,7 @@
 
 #import "VC_categories.h"
 #import "categorie_cell.h"
+#import "VC_sub_categories.h"
 
 @interface VC_categories ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -67,7 +68,14 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"display the cell");
+    [self.delegate sub_categories_action:@"subcategories"];
+
+
+    
+    
+    
 }
+
 
 
 - (void)didReceiveMemoryWarning {

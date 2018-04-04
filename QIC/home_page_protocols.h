@@ -12,5 +12,14 @@
 
 @optional
 
+#pragma Sub categories action
+-(void)sub_categories_action:(NSString *)str_status;
+-(void)subcategories_back_action : (NSString *)str_back;
+
+#pragma consultation offers
+-(void)consultation_offers:(NSString *)str_status;
+-(void)consultation_offers_back:(NSString *)str_back;
+
+
 
 @end

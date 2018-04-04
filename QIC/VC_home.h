@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "home_page_protocols.h"
 
-@interface VC_home : UIViewController
+@interface VC_home : UIViewController<home_page_protocols>
 
 #pragma Tab bar 
 @property(nonatomic,weak) IBOutlet UITabBar *TAB_menu;

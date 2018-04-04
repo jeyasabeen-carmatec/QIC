@@ -58,7 +58,11 @@
 {
     return 10;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.delegate consultation_offers:@"consulation"];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

@@ -1,29 +1,29 @@
 //
-//  VC_news.m
+//  VC_consultation.m
 //  QIC
 //
-//  Created by anumolu mac mini on 03/04/18.
+//  Created by anumolu mac mini on 04/04/18.
 //  Copyright © 2018 anumolu mac mini. All rights reserved.
 //
 
-#import "VC_news.h"
-#import "news_cell.h"
+#import "VC_consultation.h"
+#import "consultation_cell.h"
 
-
-@interface VC_news ()<UITableViewDelegate,UITableViewDataSource>
+@interface VC_consultation ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *arr_images;
 }
 
-
 @end
 
-@implementation VC_news
+@implementation VC_consultation
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+    [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
+
 }
 #pragma Table view delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -37,18 +37,19 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    news_cell *cell = (news_cell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+    consultation_cell *cell = (consultation_cell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil)
     {
         NSArray *nib;
-        nib = [[NSBundle mainBundle] loadNibNamed:@"news_cell" owner:self options:nil];
+        nib = [[NSBundle mainBundle] loadNibNamed:@"consultation_cell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-   // UIImage *img = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
-    cell.LBL_name.text = @"Health Insurance";
-    cell.LBL_address.text = @"This is going to Provide some offers. which is useful to do the insurance.You will get that in  an Exact time.";
-    cell.LBL_company.text = @"Abc company";
-   // cell.IMG_image.image = img;
+    cell.LBL_name.text = @"Al SHAMI MEDICAL CENTER";
+    cell.LBL_addres.text = @"This is going to Provide some offers. which is useful to do the insurance.You will get that in  an Exact time.";
+    cell.LBL_designnantion.text = @"Dentist";
+    
+    cell.VW_back_ground.layer.cornerRadius = 2.0f;
+  //  cell.VW_back_ground.backgroundColor = [UIColor whiteColor];
     return cell;
     
 }
@@ -56,14 +57,21 @@
 {
     return UITableViewAutomaticDimension;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10;
-}
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 10;
 }
+
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 10;
+//}
+#pragma back action
+-(void)back_actions
+{
+    [self.delegate consultation_offers_back:@"back"];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -11,6 +11,9 @@
 #import "VC_home_tab.h"
 #import "VC_offers.h"
 #import "VC_news.h"
+#import "VC_profile.h"
+#import "VC_sub_categories.h"
+#import "VC_consultation.h"
 
 @interface VC_home ()<UITabBarDelegate>
 {
@@ -56,15 +59,6 @@
 
 }
 
--(void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-   // [_VW_main layoutIfNeeded];
-    
-    //_VW_main.contentSize = CGSizeMake(_VW_main.frame.size.width,scroll_ht);
-    
-    
-}
 
 #pragma tab bar setUP
 
@@ -98,21 +92,10 @@
     
     else  if([item.title isEqualToString:@"Providers"])
     {
-        /************** creating objet for provider view controller and and grabbing that view  ******************/
         
-        VC_categories *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_categoies"];
-        
-        CGRect frameset = categorie_vw.view.frame;
-        frameset.origin.x =  0;
-        frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-        frameset.size.height = _VW_main.frame.size.height ;
-        frameset.size.width = self.view.frame.size.width;
-        categorie_vw.view.frame =  frameset;
-        [categorie_vw.collection_categoriesl reloadData];
-        [self.VW_main addSubview:categorie_vw.view];
-        
-        [self addChildViewController:categorie_vw];
-        [categorie_vw didMoveToParentViewController:self];
+        /************** calling providers view  ******************/
+
+        [self providers_view_calling];
         
         
         
@@ -139,14 +122,22 @@
     }
     else  if([item.title isEqualToString:@"Offers"])
     {
-        /************** creating objet for provider view controller and and grabbing that view  ******************/
+        /************** calling Offers view  ******************/
+
+        [self offers_view_calling];
+    }
+    else  if([item.title isEqualToString:@"Profile"])
+    {
+        /************** creating objet for Profile view controller and and grabbing that view  ******************/
         
-        VC_offers *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
+        VC_profile *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_profile"];
+        [categorie_vw.TBL_profile reloadData];
+        
         
         CGRect frameset = categorie_vw.view.frame;
         frameset.origin.x =  0;
         frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-        frameset.size.height = _VW_main.frame.size.height ;
+        frameset.size.height = _VW_main.frame.size.height+5 ;
         frameset.size.width = self.view.frame.size.width;
         categorie_vw.view.frame =  frameset;
         [self.VW_main addSubview:categorie_vw.view];
@@ -182,6 +173,103 @@
     
 
 }
+
+#pragma Providers view callig
+
+-(void)providers_view_calling
+{
+    
+    VC_categories *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_categoies"];
+    categorie_vw.delegate= self;
+    
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = _VW_main.frame.size.height ;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [categorie_vw.collection_categoriesl reloadData];
+    [self.VW_main addSubview:categorie_vw.view];
+    
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+
+}
+
+#pragma Offers view calling
+
+-(void)offers_view_calling
+{
+    
+    /************** creating objet for provider view controller and and grabbing that view  ******************/
+    
+    VC_offers *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
+    categorie_vw.delegate= self;
+    
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = _VW_main.frame.size.height ;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [self.VW_main addSubview:categorie_vw.view];
+    
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+
+}
+
+#pragma categories to Sub category action
+
+-(void)sub_categories_action:(NSString *)str_status
+{
+    
+    /************** creating objet for sub category view controller and and grabbing that view  ******************/
+
+    VC_sub_categories *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_subcategories"];
+    categorie_vw.delegate = self;
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = scroll_ht;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [self.VW_main addSubview:categorie_vw.view];
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+}
+
+-(void)subcategories_back_action:(NSString *)str_back
+{
+    [self providers_view_calling];
+}
+
+#pragma offers to Consultation offers
+
+-(void)consultation_offers:(NSString *)str_status
+{
+    /************** creating objet for consultation  view controller and and grabbing that view  ******************/
+    
+    VC_consultation *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_consultation"];
+    categorie_vw.delegate = self;
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = scroll_ht;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [self.VW_main addSubview:categorie_vw.view];
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+
+    
+}
+-(void)consultation_offers_back:(NSString *)str_back
+{
+    [self offers_view_calling];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

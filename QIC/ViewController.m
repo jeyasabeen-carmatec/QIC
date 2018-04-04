@@ -27,6 +27,17 @@
 
 -(void)setUP_VIEW
 {
+    
+    /**************** settign te frame for view center **********************/
+    
+   // _VW_center.center=self.view.center;
+    
+    CGRect frameset = _BTN_guest.frame;
+    frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 40;
+    _BTN_guest.frame = frameset;
+    
+    
+    
     /****************** setting the Button guest Text ***********************/
     
     NSString *str_name = @"If you are not a registered QIC - Anaya product customer\nClick here  --->";
