@@ -19,7 +19,18 @@
 #pragma consultation offers
 -(void)consultation_offers:(NSString *)str_status;
 -(void)consultation_offers_back:(NSString *)str_back;
+-(void)consultation_detail:(NSString *)str_status;
+-(void)consultation_detail_back:(NSString *)str_back;
 
 
+#pragma Detail_page action
+-(void)detail_page_visibility:(NSString *)str_status;
+-(void)detail_page_back:(NSString *)str_back;
 
+
+#pragma Profile_page_action
+-(void)dependets_ACTION:(NSString *)str_dependet;
+
+#pragma Dependents_Action
+-(void)back_ACTION : (NSString *)str_back;
 @end

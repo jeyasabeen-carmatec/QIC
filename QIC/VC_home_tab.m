@@ -23,7 +23,7 @@
 //    _TBL_list.delegate= self;
 //    _TBL_list.dataSource = self;
     
-    arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+    arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg",@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
 }
 #pragma Table view delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -7,7 +7,34 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "home_page_protocols.h"
 
 @interface VC_detail : UIViewController
+#pragma Scroll view
+@property(nonatomic,weak) IBOutlet UIScrollView *scroll_contents;
+
+#pragma View main components
+@property(nonatomic,weak) IBOutlet UIView *VW_main;
+@property(nonatomic,weak) IBOutlet UIView *sub_VW_main;
+
+@property(nonatomic,weak) IBOutlet UIImageView *IMG_center_image;
+@property(nonatomic,weak) IBOutlet UILabel *LBL_center_name;
+@property(nonatomic,weak) IBOutlet UILabel *LBL_designation;
+@property(nonatomic,weak) IBOutlet UILabel *LBL_address;
+@property(nonatomic,weak) IBOutlet UILabel *LBL_phone;
+@property(nonatomic,weak) IBOutlet UIView *VW_segment;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_call;
+
+#pragma Button
+@property(nonatomic,weak) IBOutlet UIButton *BTN_back;
+
+#pragma tableview 
+@property(nonatomic,weak)IBOutlet UITableView *TBL_offers;
+
+
+#pragma delegate calling
+
+@property(nonatomic,assign) id <home_page_protocols> delegate;
+
 
 @end

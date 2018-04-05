@@ -9,8 +9,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="FontAwesome.otf">
-            <string>FontAwesome</string>
+        <array key="Futura URW Medium.ttf">
+            <string>FuturaT-Medi</string>
         </array>
     </customFonts>
     <objects>
@@ -23,29 +23,34 @@
                 <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1N-K9-zYf">
-                        <rect key="frame" x="8" y="7" width="30" height="30"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1E8-xO-TWX">
+                        <rect key="frame" x="7" y="11" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="15"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVD-YF-Qgx">
-                        <rect key="frame" x="46" y="8" width="271" height="28"/>
+                        <rect key="frame" x="46" y="8" width="237" height="28"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="FuturaT-Medi" family="FuturaTMed" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="next-arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="R50-kx-vKc">
+                        <rect key="frame" x="318" y="14" width="15" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="LBL_icon" destination="g1N-K9-zYf" id="ZzP-Gu-E86"/>
+                <outlet property="BTN_arrow" destination="R50-kx-vKc" id="xLJ-0t-gng"/>
+                <outlet property="IMG_icon" destination="1E8-xO-TWX" id="PXG-JW-3HK"/>
                 <outlet property="LBL_name" destination="bVD-YF-Qgx" id="bf3-x8-RmG"/>
             </connections>
             <point key="canvasLocation" x="35.5" y="52"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="next-arrow.png" width="25" height="45"/>
+    </resources>
 </document>

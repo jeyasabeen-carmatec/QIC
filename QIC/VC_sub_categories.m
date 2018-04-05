@@ -46,10 +46,14 @@
         nib = [[NSBundle mainBundle] loadNibNamed:@"subcategory_cell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
+    
+    cell.contentView.layer.cornerRadius = 2.0f;
+    
     cell.LBL_name.text = @"Al SHAMI MEDICAL CENTER";
     cell.LBL_addres.text = @"This is going to Provide some offers. which is useful to do the insurance.You will get that in  an Exact time.";
     cell.LBL_designnantion.text = @"Dentist";
     cell.LBL_phone.text = @"PH:123456789";
+    cell.VW_background.layer.cornerRadius = 2.0f;
     
     cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
     
@@ -60,13 +64,17 @@
 {
     return UITableViewAutomaticDimension;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10;
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 10;
+//}
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 10;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.delegate detail_page_visibility:@"subcategory_detail"];
 }
 
 #pragma back action

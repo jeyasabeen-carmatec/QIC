@@ -14,6 +14,8 @@
 #import "VC_profile.h"
 #import "VC_sub_categories.h"
 #import "VC_consultation.h"
+#import "VC_detail.h"
+#import "VC_dependents.h"
 
 @interface VC_home ()<UITabBarDelegate>
 {
@@ -130,22 +132,8 @@
     {
         /************** creating objet for Profile view controller and and grabbing that view  ******************/
         
-        VC_profile *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_profile"];
-        [categorie_vw.TBL_profile reloadData];
         
-        
-        CGRect frameset = categorie_vw.view.frame;
-        frameset.origin.x =  0;
-        frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-        frameset.size.height = _VW_main.frame.size.height+5 ;
-        frameset.size.width = self.view.frame.size.width;
-        categorie_vw.view.frame =  frameset;
-        [self.VW_main addSubview:categorie_vw.view];
-        
-        [self addChildViewController:categorie_vw];
-        [categorie_vw didMoveToParentViewController:self];
-        
-        
+        [self Profile_VIEW_celling];
         
     }
 
@@ -224,8 +212,14 @@
 -(void)sub_categories_action:(NSString *)str_status
 {
     
+    [self sub_category_view];
+}
+-(void)sub_category_view
+{
+    
     /************** creating objet for sub category view controller and and grabbing that view  ******************/
 
+    
     VC_sub_categories *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_subcategories"];
     categorie_vw.delegate = self;
     CGRect frameset = categorie_vw.view.frame;
@@ -237,8 +231,8 @@
     [self.VW_main addSubview:categorie_vw.view];
     [self addChildViewController:categorie_vw];
     [categorie_vw didMoveToParentViewController:self];
-}
 
+}
 -(void)subcategories_back_action:(NSString *)str_back
 {
     [self providers_view_calling];
@@ -264,13 +258,86 @@
 
     
 }
+/**************** consulatation back ***********************/
 -(void)consultation_offers_back:(NSString *)str_back
 {
     [self offers_view_calling];
 }
+-(void)consultation_detail:(NSString *)str_status
+{
+    [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:1]];
+    [self detail_PAGE];
+}
 
 
 
+#pragma detail page visibilty
+-(void)detail_page_visibility:(NSString *)str_status;
+{
+    [self detail_PAGE];
+
+}
+-(void)detail_page_back:(NSString *)str_back
+{
+    [self sub_category_view];
+}
+
+#pragma Detail page creating
+-(void)detail_PAGE
+{
+    VC_detail *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_detail"];
+    categorie_vw.delegate = self;
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = scroll_ht;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [self.VW_main addSubview:categorie_vw.view];
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+}
+
+#pragma Profile View Pages calling
+-(void)Profile_VIEW_celling
+{
+    VC_profile *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_profile"];
+    [categorie_vw.TBL_profile reloadData];
+    
+    categorie_vw.delegate = self;
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = _VW_main.frame.size.height+5 ;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [self.VW_main addSubview:categorie_vw.view];
+    
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+
+}
+-(void)dependets_ACTION:(NSString *)str_dependet
+{
+    VC_dependents *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_dependents"];
+  //  [categorie_vw.TBL_profile reloadData];
+    categorie_vw.delegate = self;
+    
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = _VW_main.frame.size.height+5 ;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [self.VW_main addSubview:categorie_vw.view];
+    
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+}
+-(void)back_ACTION:(NSString *)str_dependet
+{
+    [self Profile_VIEW_celling];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -61,11 +61,12 @@
 {
     return 10;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.delegate consultation_detail:@"consultation_detail"];
+}
 
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 10;
-//}
+
 #pragma back action
 -(void)back_actions
 {

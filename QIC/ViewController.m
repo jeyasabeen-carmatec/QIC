@@ -33,8 +33,7 @@
    // _VW_center.center=self.view.center;
     
     CGRect frameset = _BTN_guest.frame;
-    frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 40;
-    _BTN_guest.frame = frameset;
+   
     
     
     
@@ -44,6 +43,29 @@
     _BTN_guest.titleLabel.numberOfLines = 2;
     _BTN_guest.titleLabel.textAlignment = NSTextAlignmentCenter;
     [_BTN_guest setTitle:str_name forState:UIControlStateNormal];
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+    
+    if(result.height <= 480)
+    {
+      _BTN_guest.titleLabel.font =   [UIFont systemFontOfSize: 11];
+        frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 20;
+
+    }
+    else if(result.height <= 568)
+    {
+        _BTN_guest.titleLabel.font =   [UIFont systemFontOfSize: 11];
+        frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 20;
+
+
+    }
+    else
+    {
+        _BTN_guest.titleLabel.font =   [UIFont systemFontOfSize: 14];
+        frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 20;
+
+
+    }
+    _BTN_guest.frame = frameset;
     
     
     

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "home_page_protocols.h"
 
 @interface VC_profile : UIViewController
 
@@ -16,11 +17,16 @@
 @property(nonatomic,weak) IBOutlet UIView *VW_IMG_background;
 @property(nonatomic,weak) IBOutlet UIView *IMG_prfoile_image;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_profile_name;
+@property(nonatomic,weak) IBOutlet UILabel *LBL_mobile_number;
+
 @property(nonatomic,weak) IBOutlet UITableView *TBL_profile;
 
 #pragma VIew controller view Components
 
 @property(nonatomic,weak) IBOutlet UIScrollView *Scroll_contents;
+
+#pragma Delegate action
+@property(nonatomic,assign) id <home_page_protocols> delegate;
 
 
 @end

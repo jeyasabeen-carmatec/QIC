@@ -13,8 +13,9 @@
 #pragma mark cell components
 
 
-@property(nonatomic,weak) IBOutlet UILabel *LBL_icon;
+@property(nonatomic,weak) IBOutlet UIImageView *IMG_icon;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_name;
+@property(nonatomic,weak) IBOutlet UIImageView *BTN_arrow;
 
 
 
