@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "home_page_protocols.h"
+#import <GoogleMaps/GoogleMaps.h>
+
 
 @interface VC_detail : UIViewController
 #pragma Scroll view
@@ -36,5 +38,8 @@
 
 @property(nonatomic,assign) id <home_page_protocols> delegate;
 
+
+#pragma mapview creation
+@property(nonatomic,weak) IBOutlet  GMSMapView *mapView ;
 
 @end

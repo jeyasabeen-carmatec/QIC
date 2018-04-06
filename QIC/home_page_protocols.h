@@ -33,4 +33,8 @@
 
 #pragma Dependents_Action
 -(void)back_ACTION : (NSString *)str_back;
+
+#pragma Favourites_Action
+-(void)favourites_ACTION;
+-(void)favourites_back_ACTION;
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B48" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B1003" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -30,7 +30,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dK6-HB-Sv5">
-                        <rect key="frame" x="0.0" y="3" width="320" height="139"/>
+                        <rect key="frame" x="0.0" y="3" width="320" height="144.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Banner-B.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="pp1-x9-4Cc">
                                 <rect key="frame" x="8" y="8" width="95" height="100"/>
@@ -101,7 +101,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="dK6-HB-Sv5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="5hl-6f-QST"/>
-                    <constraint firstAttribute="bottom" secondItem="dK6-HB-Sv5" secondAttribute="bottom" constant="7.5" id="73b-md-GQs"/>
+                    <constraint firstAttribute="bottom" secondItem="dK6-HB-Sv5" secondAttribute="bottom" constant="2" id="73b-md-GQs"/>
                     <constraint firstAttribute="trailing" secondItem="dK6-HB-Sv5" secondAttribute="trailing" id="Q8y-bm-Vh6"/>
                     <constraint firstItem="dK6-HB-Sv5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jrF-v1-7if"/>
                 </constraints>

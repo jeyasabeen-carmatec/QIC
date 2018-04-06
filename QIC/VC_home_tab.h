@@ -7,11 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "home_page_protocols.h"
+
 
 @interface VC_home_tab : UIViewController
 
 #pragma Table view
 @property(nonatomic,weak) IBOutlet UITableView *TBL_list;
+
+#pragma Favourites Button
+@property(nonatomic,weak) IBOutlet UIButton *BTN_favourite;
+
+#pragma Delegate action
+@property(nonatomic,assign) id <home_page_protocols> delegate;
 
 
 @end

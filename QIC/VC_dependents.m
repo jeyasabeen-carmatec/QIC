@@ -101,7 +101,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate consultation_offers:@"consulation"];
+   // [self.delegate consultation_offers:@"consulation"];
     
 }
 

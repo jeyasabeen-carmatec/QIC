@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B48" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B1003" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -30,17 +30,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t16-qK-NhG">
-                        <rect key="frame" x="6" y="8" width="306" height="142"/>
+                        <rect key="frame" x="6" y="8" width="306" height="154.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Banner-C.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="LEd-cd-7aR">
-                                <rect key="frame" x="8" y="13" width="102" height="100"/>
+                                <rect key="frame" x="8" y="13" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Fcb-UW-LjM"/>
-                                    <constraint firstAttribute="width" constant="102" id="UtF-kf-twK"/>
+                                    <constraint firstAttribute="width" constant="100" id="UtF-kf-twK"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83y-8m-hlr">
-                                <rect key="frame" x="130" y="15" width="145" height="20"/>
+                                <rect key="frame" x="128" y="15" width="147" height="20"/>
                                 <fontDescription key="fontDescription" name="FuturaT-Medi" family="FuturaTMed" pointSize="17"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.71764705880000002" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -57,13 +57,13 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ReZ-V4-UXZ">
-                                <rect key="frame" x="130" y="43" width="164" height="21.5"/>
+                                <rect key="frame" x="128" y="43" width="166" height="21.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="16"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJI-rB-CwG">
-                                <rect key="frame" x="127" y="78.5" width="171" height="21.5"/>
+                                <rect key="frame" x="125" y="78.5" width="173" height="21.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="16"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -79,7 +79,7 @@
                             <constraint firstItem="JJI-rB-CwG" firstAttribute="top" secondItem="ReZ-V4-UXZ" secondAttribute="bottom" constant="14" id="Pex-eK-MFL"/>
                             <constraint firstItem="ReZ-V4-UXZ" firstAttribute="leading" secondItem="83y-8m-hlr" secondAttribute="leading" id="VzM-ad-H5I"/>
                             <constraint firstItem="LEd-cd-7aR" firstAttribute="top" secondItem="t16-qK-NhG" secondAttribute="top" constant="13" id="aWt-iu-FR6"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JJI-rB-CwG" secondAttribute="bottom" constant="30" id="cC6-MO-DRe"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JJI-rB-CwG" secondAttribute="bottom" constant="10" id="cC6-MO-DRe"/>
                             <constraint firstItem="83y-8m-hlr" firstAttribute="leading" secondItem="LEd-cd-7aR" secondAttribute="trailing" constant="20" id="dWQ-ho-6No"/>
                             <constraint firstItem="bF5-E5-pco" firstAttribute="top" secondItem="83y-8m-hlr" secondAttribute="top" constant="-2" id="eeL-2c-nmY"/>
                             <constraint firstItem="83y-8m-hlr" firstAttribute="top" secondItem="LEd-cd-7aR" secondAttribute="top" constant="2" id="ezR-im-x6v"/>
@@ -90,9 +90,8 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="t16-qK-NhG" secondAttribute="bottom" constant="7.5" id="3bc-4l-bsE"/>
+                    <constraint firstAttribute="bottom" secondItem="t16-qK-NhG" secondAttribute="bottom" constant="-5" id="3bc-4l-bsE"/>
                     <constraint firstItem="t16-qK-NhG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="DYB-wi-bU2"/>
-                    <constraint firstAttribute="bottom" secondItem="t16-qK-NhG" secondAttribute="bottom" constant="7.5" id="YQj-Ct-zkF"/>
                     <constraint firstAttribute="trailing" secondItem="t16-qK-NhG" secondAttribute="trailing" constant="8" id="jNm-rE-Ug5"/>
                     <constraint firstItem="t16-qK-NhG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="mH7-Hi-o4a"/>
                     <constraint firstItem="t16-qK-NhG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="mdt-gR-2jg"/>
@@ -108,7 +107,7 @@
                 <outlet property="LBL_name" destination="83y-8m-hlr" id="YFZ-iF-gsJ"/>
                 <outlet property="VW_back_ground" destination="t16-qK-NhG" id="7oc-2i-4mt"/>
             </connections>
-            <point key="canvasLocation" x="-4" y="112"/>
+            <point key="canvasLocation" x="-6" y="-16"/>
         </tableViewCell>
     </objects>
     <resources>

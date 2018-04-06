@@ -49,6 +49,8 @@
     cell.LBL_designnantion.text = @"Dentist";
     
     cell.VW_back_ground.layer.cornerRadius = 2.0f;
+    cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
+    cell.IMG_title.layer.masksToBounds = YES;
   //  cell.VW_back_ground.backgroundColor = [UIColor whiteColor];
     return cell;
     

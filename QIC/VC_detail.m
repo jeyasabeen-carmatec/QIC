@@ -30,6 +30,8 @@
 
 -(void)SET_UP_VIEW
 {
+    _IMG_center_image.layer.cornerRadius = _IMG_center_image.frame.size.width/2;
+    _IMG_center_image.layer.masksToBounds =  YES;
     
     _LBL_center_name.text = @"Al shami medical center";
     [_LBL_center_name sizeToFit];
@@ -45,7 +47,7 @@
     [_LBL_address sizeToFit];
 
     frameset = _LBL_address.frame;
-    frameset.origin.y = _LBL_designation.frame.origin.y + _LBL_designation.frame.size.height+4;
+    frameset.origin.y = _LBL_designation.frame.origin.y + _LBL_designation.frame.size.height;
     _LBL_address.frame = frameset;
     
     
@@ -58,12 +60,14 @@
     [_LBL_phone sizeToFit];
     
     frameset = _LBL_phone.frame;
-    frameset.origin.y = _LBL_address.frame.origin.y + _LBL_address.frame.size.height+4;
+    frameset.origin.y = _BTN_call.frame.origin.y - 10;
     _LBL_phone.frame = frameset;
     
     frameset =  _sub_VW_main.frame;
     frameset.size.height = _LBL_phone.frame.origin.y + _LBL_phone.frame.size.height + 10;
     _sub_VW_main.frame = frameset;
+    
+    _sub_VW_main.layer.cornerRadius = 2.0f;
     
     frameset = _VW_segment.frame;
     frameset.origin.x = _sub_VW_main.frame.origin.x;
@@ -83,6 +87,14 @@
     [self.VW_main addSubview:_TBL_offers];
     
     
+     frameset = _mapView.frame;
+    frameset.origin.x = _TBL_offers.frame.origin.x;
+    frameset.origin.y = _TBL_offers.frame.origin.y;
+    frameset.size.width = _TBL_offers.frame.size.width;
+    frameset.size.height = 400;
+    _mapView.frame = frameset;
+    [self.VW_main addSubview:_mapView];
+    _mapView.hidden = YES;
 
     
     frameset = _VW_main.frame;
@@ -92,9 +104,7 @@
     
     scroll_ht = _VW_main.frame.origin.y + _VW_main.frame.size.height;
     
-//    frameset = _scroll_contents.frame;
-//    frameset.size.height = scroll_ht;
-//    _scroll_contents.frame = frameset;
+
     
     
     [self.scroll_contents addSubview:_VW_main];
@@ -107,6 +117,7 @@
     
     
 }
+
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -116,29 +127,21 @@
     
 }
 
-
 #pragma Set up of segment controller
 
 -(void)setting_the_segemnt_controller
 {
-//self.segmentedControl4 = [[HMSegmentedControl alloc] initWithFrame:_VW_segment.frame];
-    
-    
-//CGRect frame = self.segmentedControl4.frame;
-//frame.origin.x  = _IMG_center_image.frame.origin.x;
-//frame.origin.y = _VW_segment.frame.origin.y;
-//frame.size.width = _sub_VW_main.frame.size.width;
-//self.segmentedControl4.frame = frame;
-    NSArray<UIImage *> *images = @[[UIImage imageNamed:@"home"],
-                                   [UIImage imageNamed:@"news"],
+    NSArray<UIImage *> *images = @[[UIImage imageNamed:@"services"],
+                                   [UIImage imageNamed:@"map"],
                                    ];
     
-    NSArray<UIImage *> *selectedImages = @[[UIImage imageNamed:@"home"],
-                                           [UIImage imageNamed:@"news"],
+    NSArray<UIImage *> *selectedImages = @[[UIImage imageNamed:@"services"],
+                                           [UIImage imageNamed:@"map"],
                                           ];
     NSArray<NSString *> *titles = @[@"services", @"Map"];
     
     _segmentedControl4= [[HMSegmentedControl alloc] initWithSectionImages:images sectionSelectedImages:selectedImages titlesForSections:titles];
+    
     self.segmentedControl4.frame = _VW_segment.frame;
 _segmentedControl4.imagePosition = HMSegmentedControlImagePositionAboveText;
 
@@ -162,6 +165,10 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
     {
         [self Offers_view_showing];
     }
+    else
+    {
+        [self map_view_calling];
+    }
     
 }
 #pragma showing the offers view 
@@ -169,26 +176,102 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 -(void)Offers_view_showing
 {
     [_TBL_offers reloadData];
-    
-//    CGRect frameset = _TBL_offers.frame;
-//    frameset.origin.x = _VW_segment.frame.origin.x;
-//    frameset.origin.y = _VW_segment.frame.origin.y + _VW_segment.frame.size.height + 10;
-//    frameset.size.height = scroll_ht - _TBL_offers.frame.origin.y;
-//    frameset.size.width = _VW_segment.frame.size.width;
-//    _TBL_offers.frame = frameset;
-    
-    
-    
+    _mapView.hidden = YES;
+    _TBL_offers.hidden = NO;
    CGRect frameset = _VW_main.frame;
     frameset.size.height = _TBL_offers.frame.origin.y + _TBL_offers.contentSize.height;
     _VW_main.frame = frameset;
     
     scroll_ht =  _VW_main.frame.origin.y + _VW_main.frame.size.height;
+    
+      [self viewDidLayoutSubviews];
+    
+    [UIView transitionWithView:_TBL_offers
+                      duration:0.4
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        _TBL_offers.hidden = NO;
+                    }
+                    completion:NULL];
+    
+    [UIView beginAnimations:@"LeftFlip" context:nil];
+    [UIView setAnimationDuration:0.4];
+    _mapView.hidden = YES;
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:_TBL_offers cache:YES];
+    [UIView commitAnimations];
+    
+    [UIView beginAnimations:@"LeftFlip" context:nil];
+    [UIView setAnimationDuration:0.4];
+    _mapView.hidden = YES;
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:_TBL_offers cache:YES];
+    [UIView commitAnimations];
+
 
     
     
 }
+#pragma mark Map view calling
 
+-(void)map_view_calling
+{
+    _TBL_offers.hidden = YES;
+    _mapView.hidden= NO;
+    
+    
+    CGRect frameset = _VW_main.frame;
+    frameset.size.height = _mapView.frame.origin.y + _mapView.frame.size.height ;
+    _VW_main.frame = frameset;
+    
+    scroll_ht =  _VW_main.frame.origin.y + _VW_main.frame.size.height;
+    [self viewDidLayoutSubviews];
+    
+    [self map_VIEW_call];
+
+
+}
+
+#pragma map view calling
+-(void)map_VIEW_call
+{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
+                                                            longitude:151.20
+                                                                 zoom:15];
+    [_mapView animateToCameraPosition:camera];
+    _mapView.myLocationEnabled = YES;
+    
+    // Creates a marker in the center of the map.
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
+    marker.title = @"Sydney";
+    marker.snippet = @"Australia";
+    marker.map = _mapView;
+    
+    [UIView transitionWithView:_mapView
+                      duration:0.4
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        _TBL_offers.hidden = YES;
+                    }
+                    completion:NULL];
+    
+    [UIView beginAnimations:@"LeftFlip" context:nil];
+    [UIView setAnimationDuration:0.4];
+    _mapView.hidden = NO;
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:_mapView cache:YES];
+    [UIView commitAnimations];
+    
+    [UIView beginAnimations:@"LeftFlip" context:nil];
+    [UIView setAnimationDuration:0.4];
+    _mapView.hidden = NO;
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:_mapView cache:YES];
+    [UIView commitAnimations];
+    
+    
+}
 
 #pragma back action
 -(void)back_actions

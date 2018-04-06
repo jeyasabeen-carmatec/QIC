@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64B522C230F531A38E1DA83C /* libPods-QIC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */; };
+		D0025570207730140059A349 /* VC_favourites.m in Sources */ = {isa = PBXBuildFile; fileRef = D002556F207730140059A349 /* VC_favourites.m */; };
+		D0025574207732BE0059A349 /* favourites_cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0025572207732BE0059A349 /* favourites_cell.m */; };
+		D0025575207732BE0059A349 /* favourites_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0025573207732BE0059A349 /* favourites_cell.xib */; };
+		D002557920775CF90059A349 /* Profile_langugage_cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D002557820775CF90059A349 /* Profile_langugage_cell.m */; };
+		D002557D207773690059A349 /* TXT_placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D002557C207773690059A349 /* TXT_placeholder.m */; };
 		D02AC7B62072301D00F47C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC7B52072301D00F47C93 /* main.m */; };
 		D02AC7B92072301D00F47C93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC7B82072301D00F47C93 /* AppDelegate.m */; };
 		D02AC7BC2072301D00F47C93 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC7BB2072301D00F47C93 /* ViewController.m */; };
@@ -104,6 +110,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6DD2584364BC599693B662AC /* Pods-QIC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QIC.release.xcconfig"; path = "Pods/Target Support Files/Pods-QIC/Pods-QIC.release.xcconfig"; sourceTree = "<group>"; };
+		CCF1A403BDEB38A3523C5095 /* Pods-QIC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QIC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QIC/Pods-QIC.debug.xcconfig"; sourceTree = "<group>"; };
+		D002556E207730140059A349 /* VC_favourites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VC_favourites.h; sourceTree = "<group>"; };
+		D002556F207730140059A349 /* VC_favourites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VC_favourites.m; sourceTree = "<group>"; };
+		D0025571207732BE0059A349 /* favourites_cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = favourites_cell.h; sourceTree = "<group>"; };
+		D0025572207732BE0059A349 /* favourites_cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = favourites_cell.m; sourceTree = "<group>"; };
+		D0025573207732BE0059A349 /* favourites_cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = favourites_cell.xib; sourceTree = "<group>"; };
+		D002557720775CF90059A349 /* Profile_langugage_cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile_langugage_cell.h; sourceTree = "<group>"; };
+		D002557820775CF90059A349 /* Profile_langugage_cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile_langugage_cell.m; sourceTree = "<group>"; };
+		D002557B207773690059A349 /* TXT_placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXT_placeholder.h; sourceTree = "<group>"; };
+		D002557C207773690059A349 /* TXT_placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXT_placeholder.m; sourceTree = "<group>"; };
 		D02AC7B12072301D00F47C93 /* QIC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QIC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02AC7B52072301D00F47C93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D02AC7B72072301D00F47C93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -224,6 +241,7 @@
 		D02AC8A9207624D500F47C93 /* Futura URW Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura URW Medium.ttf"; sourceTree = "<group>"; };
 		D02AC8AF207624DE00F47C93 /* Futura Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Thin.ttf"; sourceTree = "<group>"; };
 		D02AC8B12076274700F47C93 /* coupon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon.png; sourceTree = "<group>"; };
+		F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QIC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,17 +249,66 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64B522C230F531A38E1DA83C /* libPods-QIC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		016ABE74970599615BE0A7C8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4EFD63FBD3BCFD193EA33222 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CCF1A403BDEB38A3523C5095 /* Pods-QIC.debug.xcconfig */,
+				6DD2584364BC599693B662AC /* Pods-QIC.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D002556D20772FD30059A349 /* Favourites */ = {
+			isa = PBXGroup;
+			children = (
+				D002556E207730140059A349 /* VC_favourites.h */,
+				D002556F207730140059A349 /* VC_favourites.m */,
+				D0025576207732C20059A349 /* favourites_cell */,
+			);
+			name = Favourites;
+			sourceTree = "<group>";
+		};
+		D0025576207732C20059A349 /* favourites_cell */ = {
+			isa = PBXGroup;
+			children = (
+				D0025571207732BE0059A349 /* favourites_cell.h */,
+				D0025572207732BE0059A349 /* favourites_cell.m */,
+				D0025573207732BE0059A349 /* favourites_cell.xib */,
+			);
+			name = favourites_cell;
+			sourceTree = "<group>";
+		};
+		D002557A207773340059A349 /* TextField Rect */ = {
+			isa = PBXGroup;
+			children = (
+				D002557B207773690059A349 /* TXT_placeholder.h */,
+				D002557C207773690059A349 /* TXT_placeholder.m */,
+			);
+			name = "TextField Rect";
+			sourceTree = "<group>";
+		};
 		D02AC7A82072301D00F47C93 = {
 			isa = PBXGroup;
 			children = (
 				D02AC7B32072301D00F47C93 /* QIC */,
 				D02AC7B22072301D00F47C93 /* Products */,
+				4EFD63FBD3BCFD193EA33222 /* Pods */,
+				016ABE74970599615BE0A7C8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -273,6 +340,7 @@
 				D02AC81A2074764000F47C93 /* My Profile */,
 				D02AC81220739ED300F47C93 /* News */,
 				D02AC8442074DA0300F47C93 /* Detail Page */,
+				D002556D20772FD30059A349 /* Favourites */,
 				D02AC7C22072301D00F47C93 /* LaunchScreen.storyboard */,
 				D02AC7C52072301D00F47C93 /* Info.plist */,
 				D02AC7B42072301D00F47C93 /* Supporting Files */,
@@ -475,6 +543,8 @@
 				D02AC82320747EF000F47C93 /* profile_cell.h */,
 				D02AC82420747EF000F47C93 /* profile_cell.m */,
 				D02AC82520747EF000F47C93 /* profile_cell.xib */,
+				D002557720775CF90059A349 /* Profile_langugage_cell.h */,
+				D002557820775CF90059A349 /* Profile_langugage_cell.m */,
 			);
 			name = profile_cell;
 			sourceTree = "<group>";
@@ -551,6 +621,7 @@
 		D02AC84C2074E6ED00F47C93 /* Third parties */ = {
 			isa = PBXGroup;
 			children = (
+				D002557A207773340059A349 /* TextField Rect */,
 				D02AC84B2074E6DC00F47C93 /* Hmsegmented controller */,
 			);
 			name = "Third parties";
@@ -618,9 +689,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D02AC7C82072301D00F47C93 /* Build configuration list for PBXNativeTarget "QIC" */;
 			buildPhases = (
+				434B0616319A9B89B3D8CC2D /* [CP] Check Pods Manifest.lock */,
 				D02AC7AD2072301D00F47C93 /* Sources */,
 				D02AC7AE2072301D00F47C93 /* Frameworks */,
 				D02AC7AF2072301D00F47C93 /* Resources */,
+				1898AE62D6F69058A5AAFAF5 /* [CP] Embed Pods Frameworks */,
+				9B8EF71867DB50072F107907 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -675,6 +749,7 @@
 				D02AC87C2075FC9100F47C93 /* Vector-Smart-Object.png in Resources */,
 				D02AC88D2076238A00F47C93 /* Futura Bold.ttf in Resources */,
 				D02AC7C42072301D00F47C93 /* LaunchScreen.storyboard in Resources */,
+				D0025575207732BE0059A349 /* favourites_cell.xib in Resources */,
 				D02AC897207624AD00F47C93 /* Futura Std Book.ttf in Resources */,
 				D02AC80A2073903A00F47C93 /* provide-App-20x20@3x.png in Resources */,
 				D02AC8002073889600F47C93 /* provider.png in Resources */,
@@ -744,6 +819,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1898AE62D6F69058A5AAFAF5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QIC/Pods-QIC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		434B0616319A9B89B3D8CC2D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QIC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B8EF71867DB50072F107907 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-QIC/Pods-QIC-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QIC/Pods-QIC-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D02AC7AD2072301D00F47C93 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -759,13 +890,16 @@
 				D02AC8472074DA4900F47C93 /* VC_detail.m in Sources */,
 				D02AC82C2074992F00F47C93 /* news_cell.m in Sources */,
 				D02AC83320749F2500F47C93 /* VC_sub_categories.m in Sources */,
+				D002557D207773690059A349 /* TXT_placeholder.m in Sources */,
 				D02AC7EF2073599B00F47C93 /* VC_home_tab.m in Sources */,
 				D02AC7D6207250AB00F47C93 /* homw_tab_bar.m in Sources */,
 				D02AC7BC2072301D00F47C93 /* ViewController.m in Sources */,
 				D02AC8422074C48400F47C93 /* consultation_cell.m in Sources */,
 				D02AC82620747EF000F47C93 /* profile_cell.m in Sources */,
 				D02AC8542075D53000F47C93 /* offers_cell.m in Sources */,
+				D002557920775CF90059A349 /* Profile_langugage_cell.m in Sources */,
 				D02AC8212074768200F47C93 /* TXT_profile.m in Sources */,
+				D0025574207732BE0059A349 /* favourites_cell.m in Sources */,
 				D02AC7CF2072480C00F47C93 /* VC_home.m in Sources */,
 				D02AC81D2074766100F47C93 /* VC_profile.m in Sources */,
 				D02AC7B92072301D00F47C93 /* AppDelegate.m in Sources */,
@@ -773,6 +907,7 @@
 				D02AC8852076082200F47C93 /* dependents_cell.m in Sources */,
 				D02AC8192073A02A00F47C93 /* VC_offers.m in Sources */,
 				D02AC7B62072301D00F47C93 /* main.m in Sources */,
+				D0025570207730140059A349 /* VC_favourites.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -892,6 +1027,7 @@
 		};
 		D02AC7C92072301D00F47C93 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCF1A403BDEB38A3523C5095 /* Pods-QIC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
@@ -904,6 +1040,7 @@
 		};
 		D02AC7CA2072301D00F47C93 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DD2584364BC599693B662AC /* Pods-QIC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
@@ -933,6 +1070,7 @@
 				D02AC7CA2072301D00F47C93 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

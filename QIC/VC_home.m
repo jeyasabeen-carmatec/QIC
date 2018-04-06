@@ -16,6 +16,7 @@
 #import "VC_consultation.h"
 #import "VC_detail.h"
 #import "VC_dependents.h"
+#import "VC_favourites.h"
 
 @interface VC_home ()<UITabBarDelegate>
 {
@@ -111,7 +112,7 @@
         CGRect frameset = categorie_vw.view.frame;
         frameset.origin.x =  0;
         frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-        frameset.size.height = _VW_main.frame.size.height ;
+        frameset.size.height =scroll_ht ;
         frameset.size.width = self.view.frame.size.width;
         categorie_vw.view.frame =  frameset;
         [self.VW_main addSubview:categorie_vw.view];
@@ -149,6 +150,7 @@
     /************** creating objet for Home view controller and and grabbing that view  ******************/
 
     VC_home_tab *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_home_tab"];
+    categorie_vw.delegate = self;
     CGRect frameset = categorie_vw.view.frame;
     frameset.origin.x =  0;
     frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
@@ -173,7 +175,7 @@
     CGRect frameset = categorie_vw.view.frame;
     frameset.origin.x =  0;
     frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-    frameset.size.height = _VW_main.frame.size.height ;
+    frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
     [categorie_vw.collection_categoriesl reloadData];
@@ -308,7 +310,7 @@
     CGRect frameset = categorie_vw.view.frame;
     frameset.origin.x =  0;
     frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-    frameset.size.height = _VW_main.frame.size.height+5 ;
+    frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
     [self.VW_main addSubview:categorie_vw.view];
@@ -326,7 +328,7 @@
     CGRect frameset = categorie_vw.view.frame;
     frameset.origin.x =  0;
     frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-    frameset.size.height = _VW_main.frame.size.height+5 ;
+    frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
     [self.VW_main addSubview:categorie_vw.view];
@@ -337,6 +339,31 @@
 -(void)back_ACTION:(NSString *)str_dependet
 {
     [self Profile_VIEW_celling];
+}
+
+
+#pragma Favourites  Action
+-(void)favourites_ACTION
+{
+    VC_favourites *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_favourites"];
+    //  [categorie_vw.TBL_profile reloadData];
+    categorie_vw.delegate = self;
+    
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = _VW_main.frame.size.height;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [self.VW_main addSubview:categorie_vw.view];
+    
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+    
+}
+-(void)favourites_back_ACTION
+{
+    [self HOme_view_calling];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

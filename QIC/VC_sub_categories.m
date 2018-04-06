@@ -56,6 +56,8 @@
     cell.VW_background.layer.cornerRadius = 2.0f;
     
     cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
+    cell.IMG_title.layer.masksToBounds = YES;
+
     
     return cell;
     
