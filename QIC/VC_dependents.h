@@ -17,4 +17,8 @@
 
 #pragma Button
 @property(nonatomic,weak) IBOutlet UIButton *BTN_back;
+
+#pragma Favourites Button
+@property(nonatomic,weak) IBOutlet UIButton *BTN_favourite;
+
 @end

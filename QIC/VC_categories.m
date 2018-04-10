@@ -10,7 +10,7 @@
 #import "categorie_cell.h"
 #import "VC_sub_categories.h"
 
-@interface VC_categories ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface VC_categories ()<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate>
 {
     NSArray *arr_images;
 }
@@ -35,6 +35,9 @@
     [self.collection_categoriesl registerNib:[UINib nibWithNibName:@"categorie_cell" bundle:nil]  forCellWithReuseIdentifier:@"cell"];
    // _collection_categoriesl.backgroundColor = [UIColor redColor];
 
+    [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+
+    
     // Do any additional setup after loading the view.
 }
 #pragma collection view delgate methods
@@ -69,14 +72,36 @@
 {
     NSLog(@"display the cell");
     [self.delegate sub_categories_action:@"subcategories"];
-
-
-    
-    
+ 
     
 }
 
 
+#pragma favourites_action
+-(void)favourites_ACTION
+{
+    [self.delegate favourites_ACTION];
+}
+#pragma Textfield Delegates
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    _LBL_search_place_holder.alpha = 0.0f;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if([textField.text isEqualToString:@""])
+    {
+        _LBL_search_place_holder.alpha = 1.0f;
+    }
+    else{
+        _LBL_search_place_holder.alpha = 0.0f;
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

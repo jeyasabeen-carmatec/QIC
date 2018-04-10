@@ -22,6 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [_BTN_back addTarget:self action:@selector(back_action) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+
 }
 #pragma Table view delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -109,6 +111,11 @@
 -(void)back_action
 {
     [self.delegate back_ACTION:@"back"];
+}
+#pragma favourites_action
+-(void)favourites_ACTION
+{
+    [self.delegate favourites_ACTION];
 }
 
 - (void)didReceiveMemoryWarning {

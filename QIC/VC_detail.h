@@ -42,4 +42,10 @@
 #pragma mapview creation
 @property(nonatomic,weak) IBOutlet  GMSMapView *mapView ;
 
+#pragma Favourites Button
+@property(nonatomic,weak) IBOutlet UIButton *BTN_favourite;
+
+#pragma Get Direction button
+@property(nonatomic,weak) IBOutlet UIButton *BTN_get_direction;
+
 @end

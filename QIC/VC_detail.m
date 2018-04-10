@@ -39,7 +39,7 @@
     _LBL_designation.text = @"Dentist";
     [_LBL_designation sizeToFit];
     CGRect frameset = _LBL_designation.frame;
-    frameset.origin.y = _LBL_center_name.frame.origin.y + _LBL_center_name.frame.size.height+4;
+    frameset.origin.y = _LBL_center_name.frame.origin.y + _LBL_center_name.frame.size.height;
     _LBL_designation.frame = frameset;
     
     
@@ -114,7 +114,8 @@
     [self setting_the_segemnt_controller];
     self.segmentedControl4.selectedSegmentIndex = 0;
 
-    
+    [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+
     
 }
 
@@ -175,6 +176,7 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 
 -(void)Offers_view_showing
 {
+      _BTN_get_direction.hidden = YES;
     [_TBL_offers reloadData];
     _mapView.hidden = YES;
     _TBL_offers.hidden = NO;
@@ -218,11 +220,16 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 {
     _TBL_offers.hidden = YES;
     _mapView.hidden= NO;
+    _BTN_get_direction.hidden = NO;
     
     
     CGRect frameset = _VW_main.frame;
     frameset.size.height = _mapView.frame.origin.y + _mapView.frame.size.height ;
     _VW_main.frame = frameset;
+    
+    frameset = _BTN_get_direction.frame;
+    frameset.origin.y = _mapView.frame.origin.y + _mapView.frame.size.height - 30;
+    _BTN_get_direction.frame = frameset;
     
     scroll_ht =  _VW_main.frame.origin.y + _VW_main.frame.size.height;
     [self viewDidLayoutSubviews];
@@ -273,11 +280,7 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
     
 }
 
-#pragma back action
--(void)back_actions
-{
-    [self.delegate detail_page_back:@"back"];
-}
+
 #pragma Table view delegates
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -298,6 +301,19 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
+}
+
+#pragma back action
+-(void)back_actions
+{
+    NSString *str_page = [[NSUserDefaults standardUserDefaults] valueForKey:@"tab_param"];
+    [self.delegate detail_page_back:str_page];
+    
+}
+#pragma favourites_action
+-(void)favourites_ACTION
+{
+    [self.delegate favourites_ACTION];
 }
 
 - (void)didReceiveMemoryWarning {

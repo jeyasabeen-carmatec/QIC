@@ -73,7 +73,8 @@
 #pragma Back action
 -(void)back_actions
 {
-    [self.delegate favourites_back_ACTION];
+    NSString *str_page = [[NSUserDefaults standardUserDefaults] valueForKey:@"tab_param"];
+    [self.delegate favourites_back_ACTION:str_page];
 }
 
 - (void)didReceiveMemoryWarning {

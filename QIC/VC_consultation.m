@@ -23,6 +23,8 @@
     // Do any additional setup after loading the view.
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+
 
 }
 #pragma Table view delegate Methods
@@ -72,9 +74,14 @@
 #pragma back action
 -(void)back_actions
 {
+    
     [self.delegate consultation_offers_back:@"back"];
 }
-
+#pragma favourites_action
+-(void)favourites_ACTION
+{
+    [self.delegate favourites_ACTION];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

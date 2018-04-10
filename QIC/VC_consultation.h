@@ -22,6 +22,7 @@
 
 @property(nonatomic,assign) id <home_page_protocols> delegate;
 
-
+#pragma Favourites Button
+@property(nonatomic,weak) IBOutlet UIButton *BTN_favourite;
 
 @end

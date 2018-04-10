@@ -107,6 +107,15 @@
 		D02AC8B0207624DE00F47C93 /* Futura Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D02AC8AF207624DE00F47C93 /* Futura Thin.ttf */; };
 		D02AC8B22076274700F47C93 /* coupon.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC8B12076274700F47C93 /* coupon.png */; };
 		D02AC8B320762E6B00F47C93 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7C52072301D00F47C93 /* Info.plist */; };
+		D079D663207B7A470079CA99 /* CFCoverFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = D079D662207B7A470079CA99 /* CFCoverFlowView.m */; };
+		D079D666207C5FC60079CA99 /* Rectangle-button-2.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D664207C5FC60079CA99 /* Rectangle-button-2.png */; };
+		D079D667207C5FC60079CA99 /* search-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D665207C5FC60079CA99 /* search-bar.png */; };
+		D079D66C207C78940079CA99 /* offers_list_cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D079D66A207C78940079CA99 /* offers_list_cell.m */; };
+		D079D66D207C78940079CA99 /* offers_list_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D079D66B207C78940079CA99 /* offers_list_cell.xib */; };
+		D079D672207C948B0079CA99 /* BN_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D66F207C948B0079CA99 /* BN_1.jpg */; };
+		D079D673207C948B0079CA99 /* BN_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D670207C948B0079CA99 /* BN_2.jpg */; };
+		D079D674207C948B0079CA99 /* BN_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D671207C948B0079CA99 /* BN_3.jpg */; };
+		D079D685207CAD980079CA99 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = D079D683207CAD980079CA99 /* iCarousel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -241,6 +250,18 @@
 		D02AC8A9207624D500F47C93 /* Futura URW Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura URW Medium.ttf"; sourceTree = "<group>"; };
 		D02AC8AF207624DE00F47C93 /* Futura Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Thin.ttf"; sourceTree = "<group>"; };
 		D02AC8B12076274700F47C93 /* coupon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon.png; sourceTree = "<group>"; };
+		D079D661207B7A470079CA99 /* CFCoverFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFCoverFlowView.h; sourceTree = "<group>"; };
+		D079D662207B7A470079CA99 /* CFCoverFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFCoverFlowView.m; sourceTree = "<group>"; };
+		D079D664207C5FC60079CA99 /* Rectangle-button-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle-button-2.png"; sourceTree = "<group>"; };
+		D079D665207C5FC60079CA99 /* search-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-bar.png"; sourceTree = "<group>"; };
+		D079D669207C78940079CA99 /* offers_list_cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = offers_list_cell.h; sourceTree = "<group>"; };
+		D079D66A207C78940079CA99 /* offers_list_cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = offers_list_cell.m; sourceTree = "<group>"; };
+		D079D66B207C78940079CA99 /* offers_list_cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = offers_list_cell.xib; sourceTree = "<group>"; };
+		D079D66F207C948B0079CA99 /* BN_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BN_1.jpg; sourceTree = "<group>"; };
+		D079D670207C948B0079CA99 /* BN_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BN_2.jpg; sourceTree = "<group>"; };
+		D079D671207C948B0079CA99 /* BN_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BN_3.jpg; sourceTree = "<group>"; };
+		D079D682207CAD980079CA99 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		D079D683207CAD980079CA99 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QIC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -439,6 +460,9 @@
 		D02AC7EB2073416F00F47C93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D079D66E207C947A0079CA99 /* Home page_images */,
+				D079D664207C5FC60079CA99 /* Rectangle-button-2.png */,
+				D079D665207C5FC60079CA99 /* search-bar.png */,
 				D02AC8B12076274700F47C93 /* coupon.png */,
 				D02AC8582075FC9100F47C93 /* profile page */,
 				D02AC8562075D62E00F47C93 /* 20-20_percent_off_solid_red-2.png */,
@@ -511,6 +535,7 @@
 			children = (
 				D02AC8172073A02A00F47C93 /* VC_offers.h */,
 				D02AC8182073A02A00F47C93 /* VC_offers.m */,
+				D079D668207C785F0079CA99 /* Offers cell */,
 				D02AC83A2074C35600F47C93 /* Consultation offers */,
 			);
 			name = Offers;
@@ -621,6 +646,8 @@
 		D02AC84C2074E6ED00F47C93 /* Third parties */ = {
 			isa = PBXGroup;
 			children = (
+				D079D660207B7A470079CA99 /* CFCoverFlowView */,
+				D079D681207CAD980079CA99 /* iCarousel */,
 				D002557A207773340059A349 /* TextField Rect */,
 				D02AC84B2074E6DC00F47C93 /* Hmsegmented controller */,
 			);
@@ -682,6 +709,44 @@
 			name = Dependents_cell;
 			sourceTree = "<group>";
 		};
+		D079D660207B7A470079CA99 /* CFCoverFlowView */ = {
+			isa = PBXGroup;
+			children = (
+				D079D661207B7A470079CA99 /* CFCoverFlowView.h */,
+				D079D662207B7A470079CA99 /* CFCoverFlowView.m */,
+			);
+			path = CFCoverFlowView;
+			sourceTree = "<group>";
+		};
+		D079D668207C785F0079CA99 /* Offers cell */ = {
+			isa = PBXGroup;
+			children = (
+				D079D669207C78940079CA99 /* offers_list_cell.h */,
+				D079D66A207C78940079CA99 /* offers_list_cell.m */,
+				D079D66B207C78940079CA99 /* offers_list_cell.xib */,
+			);
+			name = "Offers cell";
+			sourceTree = "<group>";
+		};
+		D079D66E207C947A0079CA99 /* Home page_images */ = {
+			isa = PBXGroup;
+			children = (
+				D079D66F207C948B0079CA99 /* BN_1.jpg */,
+				D079D670207C948B0079CA99 /* BN_2.jpg */,
+				D079D671207C948B0079CA99 /* BN_3.jpg */,
+			);
+			name = "Home page_images";
+			sourceTree = "<group>";
+		};
+		D079D681207CAD980079CA99 /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				D079D682207CAD980079CA99 /* iCarousel.h */,
+				D079D683207CAD980079CA99 /* iCarousel.m */,
+			);
+			path = iCarousel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -716,6 +781,7 @@
 				TargetAttributes = {
 					D02AC7B02072301D00F47C93 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 3ZXFYCSC7U;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -756,6 +822,7 @@
 				D02AC898207624AD00F47C93 /* Futura TOT Book.ttf in Resources */,
 				D02AC8902076238A00F47C93 /* Futura Std Extra Bold.ttf in Resources */,
 				D02AC8AA207624D500F47C93 /* Futura Medium.ttf in Resources */,
+				D079D667207C5FC60079CA99 /* search-bar.png in Resources */,
 				D02AC80F207396E000F47C93 /* Banner-B.jpg in Resources */,
 				D02AC7E02073342400F47C93 /* categorie_cell.xib in Resources */,
 				D02AC8792075FC9100F47C93 /* services.png in Resources */,
@@ -766,6 +833,7 @@
 				D02AC8392074AA5600F47C93 /* subcategory_cell.xib in Resources */,
 				D02AC86E2075FC9100F47C93 /* dependent.png in Resources */,
 				D02AC8782075FC9100F47C93 /* profile-icon.png in Resources */,
+				D079D673207C948B0079CA99 /* BN_2.jpg in Resources */,
 				D02AC7F52073868C00F47C93 /* Logo.png in Resources */,
 				D02AC8732075FC9100F47C93 /* like.png in Resources */,
 				D02AC8432074C48400F47C93 /* consultation_cell.xib in Resources */,
@@ -784,6 +852,7 @@
 				D02AC7C12072301D00F47C93 /* Assets.xcassets in Resources */,
 				D02AC8722075FC9100F47C93 /* Image_1.png in Resources */,
 				D02AC8762075FC9100F47C93 /* next-arrow.png in Resources */,
+				D079D66D207C78940079CA99 /* offers_list_cell.xib in Resources */,
 				D02AC88E2076238A00F47C93 /* Futura Extra Bold.ttf in Resources */,
 				D02AC8862076082200F47C93 /* dependents_cell.xib in Resources */,
 				D02AC8AE207624D500F47C93 /* Futura URW Medium.ttf in Resources */,
@@ -797,11 +866,13 @@
 				D02AC8AD207624D500F47C93 /* Futura TOT Medium Condensed.ttf in Resources */,
 				D02AC7E82073410600F47C93 /* menu_cell.xib in Resources */,
 				D02AC7FE2073889600F47C93 /* offer.png in Resources */,
+				D079D666207C5FC60079CA99 /* Rectangle-button-2.png in Resources */,
 				D02AC87A2075FC9100F47C93 /* terms-&-condition.png in Resources */,
 				D02AC7FD2073889600F47C93 /* news.png in Resources */,
 				D02AC80420738FD700F47C93 /* news-App-20x20@3x.png in Resources */,
 				D02AC8B22076274700F47C93 /* coupon.png in Resources */,
 				D02AC8912076238A00F47C93 /* Futura URW Extra Bold.ttf in Resources */,
+				D079D672207C948B0079CA99 /* BN_1.jpg in Resources */,
 				D02AC8A1207624C200F47C93 /* Futura Light.ttf in Resources */,
 				D02AC8A3207624C200F47C93 /* Futura Std Light Condensed.ttf in Resources */,
 				D02AC8A4207624C200F47C93 /* Futura Std Light.ttf in Resources */,
@@ -810,6 +881,7 @@
 				D02AC89C207624B700F47C93 /* Futura Std Heavy.ttf in Resources */,
 				D02AC8712075FC9100F47C93 /* get-direction.png in Resources */,
 				D02AC8572075D62E00F47C93 /* 20-20_percent_off_solid_red-2.png in Resources */,
+				D079D674207C948B0079CA99 /* BN_3.jpg in Resources */,
 				D02AC86D2075FC9100F47C93 /* change-language.png in Resources */,
 				D02AC8752075FC9100F47C93 /* mobile.png in Resources */,
 				D02AC7FF2073889600F47C93 /* profile.png in Resources */,
@@ -888,13 +960,16 @@
 				D02AC7E72073410500F47C93 /* menu_cell.m in Sources */,
 				D02AC81520739F0000F47C93 /* VC_news.m in Sources */,
 				D02AC8472074DA4900F47C93 /* VC_detail.m in Sources */,
+				D079D685207CAD980079CA99 /* iCarousel.m in Sources */,
 				D02AC82C2074992F00F47C93 /* news_cell.m in Sources */,
 				D02AC83320749F2500F47C93 /* VC_sub_categories.m in Sources */,
 				D002557D207773690059A349 /* TXT_placeholder.m in Sources */,
 				D02AC7EF2073599B00F47C93 /* VC_home_tab.m in Sources */,
+				D079D66C207C78940079CA99 /* offers_list_cell.m in Sources */,
 				D02AC7D6207250AB00F47C93 /* homw_tab_bar.m in Sources */,
 				D02AC7BC2072301D00F47C93 /* ViewController.m in Sources */,
 				D02AC8422074C48400F47C93 /* consultation_cell.m in Sources */,
+				D079D663207B7A470079CA99 /* CFCoverFlowView.m in Sources */,
 				D02AC82620747EF000F47C93 /* profile_cell.m in Sources */,
 				D02AC8542075D53000F47C93 /* offers_cell.m in Sources */,
 				D002557920775CF90059A349 /* Profile_langugage_cell.m in Sources */,
@@ -1030,11 +1105,14 @@
 			baseConfigurationReference = CCF1A403BDEB38A3523C5095 /* Pods-QIC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3ZXFYCSC7U;
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
 				INFOPLIST_FILE = QIC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.com.QIC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1043,11 +1121,14 @@
 			baseConfigurationReference = 6DD2584364BC599693B662AC /* Pods-QIC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3ZXFYCSC7U;
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
 				INFOPLIST_FILE = QIC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.com.QIC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

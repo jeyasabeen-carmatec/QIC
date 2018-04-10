@@ -7,9 +7,9 @@
 //
 
 #import "VC_offers.h"
-#import "menu_cell.h"
+#import "offers_list_cell.h"
 
-@interface VC_offers ()<UITableViewDelegate,UITableViewDataSource>
+@interface VC_offers ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 {
     NSArray *arr_images;
@@ -25,6 +25,8 @@
     // Do any additional setup after loading the view.
     
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg",@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+    [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+
 }
 #pragma Table view delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -38,21 +40,21 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    menu_cell *cell = (menu_cell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+    offers_list_cell *cell = (offers_list_cell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil)
     {
         NSArray *nib;
-        nib = [[NSBundle mainBundle] loadNibNamed:@"menu_cell" owner:self options:nil];
+        nib = [[NSBundle mainBundle] loadNibNamed:@"offers_list_cell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    UIImage *img = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
+    UIImage *img = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.section]];
     cell.IMG_image.image = img;
     return cell;
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 150;
+    return 200;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -64,10 +66,34 @@
     
 }
 
-
+#pragma favourites_action
+-(void)favourites_ACTION
+{
+    [self.delegate favourites_ACTION];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma Textfield Delegates
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    _LBL_search_place_holder.alpha = 0.0f;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if([textField.text isEqualToString:@""])
+    {
+        _LBL_search_place_holder.alpha = 1.0f;
+    }
+    else{
+        _LBL_search_place_holder.alpha = 0.0f;
+    }
 }
 
 /*

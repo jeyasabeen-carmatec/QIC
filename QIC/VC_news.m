@@ -10,7 +10,7 @@
 #import "news_cell.h"
 
 
-@interface VC_news ()<UITableViewDelegate,UITableViewDataSource>
+@interface VC_news ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     NSArray *arr_images;
 }
@@ -24,6 +24,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+    [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+
 }
 #pragma Table view delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -58,13 +60,38 @@
 {
     return UITableViewAutomaticDimension;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10;
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 10;
+//}
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 10;
+}
+#pragma favourites_action
+-(void)favourites_ACTION
+{
+    [self.delegate favourites_ACTION];
+}
+#pragma Textfield Delegates
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    _LBL_search_place_holder.alpha = 0.0f;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if([textField.text isEqualToString:@""])
+    {
+        _LBL_search_place_holder.alpha = 1.0f;
+    }
+    else{
+        _LBL_search_place_holder.alpha = 0.0f;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

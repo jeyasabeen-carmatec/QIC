@@ -36,5 +36,12 @@
 
 #pragma Favourites_Action
 -(void)favourites_ACTION;
--(void)favourites_back_ACTION;
+-(void)favourites_back_ACTION:(NSString *)page_param;
+
+
+#pragma Images Actions views calling
+-(void)calling_providers_view;
+-(void)calling_offers_view;
+-(void)calling_news_view;
+
 @end

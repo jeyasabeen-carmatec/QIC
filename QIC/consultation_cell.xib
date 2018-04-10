@@ -40,13 +40,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83y-8m-hlr">
-                                <rect key="frame" x="128" y="15" width="147" height="20"/>
-                                <fontDescription key="fontDescription" name="FuturaT-Medi" family="FuturaTMed" pointSize="17"/>
+                                <rect key="frame" x="128" y="15" width="142" height="19"/>
+                                <fontDescription key="fontDescription" name="FuturaT-Medi" family="FuturaTMed" pointSize="16"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.71764705880000002" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bF5-E5-pco">
-                                <rect key="frame" x="276" y="13" width="30" height="32"/>
+                                <rect key="frame" x="271" y="10" width="30" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="EbG-Q1-5jc"/>
                                     <constraint firstAttribute="width" constant="30" id="zb0-45-95u"/>
@@ -57,14 +57,14 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ReZ-V4-UXZ">
-                                <rect key="frame" x="128" y="43" width="166" height="21.5"/>
-                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="16"/>
+                                <rect key="frame" x="128" y="42" width="161" height="20"/>
+                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJI-rB-CwG">
-                                <rect key="frame" x="125" y="78.5" width="173" height="21.5"/>
-                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="16"/>
+                                <rect key="frame" x="125" y="71" width="173" height="20"/>
+                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -76,14 +76,14 @@
                             <constraint firstItem="ReZ-V4-UXZ" firstAttribute="top" secondItem="83y-8m-hlr" secondAttribute="bottom" constant="8" id="DUc-KM-zOq"/>
                             <constraint firstItem="bF5-E5-pco" firstAttribute="leading" secondItem="83y-8m-hlr" secondAttribute="trailing" constant="1" id="Hwn-pt-GC5"/>
                             <constraint firstAttribute="trailing" secondItem="JJI-rB-CwG" secondAttribute="trailing" constant="8" id="Mwo-Sb-arm"/>
-                            <constraint firstItem="JJI-rB-CwG" firstAttribute="top" secondItem="ReZ-V4-UXZ" secondAttribute="bottom" constant="14" id="Pex-eK-MFL"/>
+                            <constraint firstItem="JJI-rB-CwG" firstAttribute="top" secondItem="ReZ-V4-UXZ" secondAttribute="bottom" constant="9" id="Pex-eK-MFL"/>
                             <constraint firstItem="ReZ-V4-UXZ" firstAttribute="leading" secondItem="83y-8m-hlr" secondAttribute="leading" id="VzM-ad-H5I"/>
                             <constraint firstItem="LEd-cd-7aR" firstAttribute="top" secondItem="t16-qK-NhG" secondAttribute="top" constant="13" id="aWt-iu-FR6"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JJI-rB-CwG" secondAttribute="bottom" constant="10" id="cC6-MO-DRe"/>
                             <constraint firstItem="83y-8m-hlr" firstAttribute="leading" secondItem="LEd-cd-7aR" secondAttribute="trailing" constant="20" id="dWQ-ho-6No"/>
-                            <constraint firstItem="bF5-E5-pco" firstAttribute="top" secondItem="83y-8m-hlr" secondAttribute="top" constant="-2" id="eeL-2c-nmY"/>
+                            <constraint firstItem="bF5-E5-pco" firstAttribute="top" secondItem="83y-8m-hlr" secondAttribute="top" constant="-5" id="eeL-2c-nmY"/>
                             <constraint firstItem="83y-8m-hlr" firstAttribute="top" secondItem="LEd-cd-7aR" secondAttribute="top" constant="2" id="ezR-im-x6v"/>
-                            <constraint firstAttribute="trailing" secondItem="bF5-E5-pco" secondAttribute="trailing" id="lV4-iw-FvX"/>
+                            <constraint firstAttribute="trailing" secondItem="bF5-E5-pco" secondAttribute="trailing" constant="5" id="lV4-iw-FvX"/>
                             <constraint firstItem="ReZ-V4-UXZ" firstAttribute="trailing" secondItem="83y-8m-hlr" secondAttribute="trailing" constant="19" id="tEp-WW-fuc"/>
                         </constraints>
                     </view>

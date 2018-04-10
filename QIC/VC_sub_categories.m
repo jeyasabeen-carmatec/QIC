@@ -10,7 +10,7 @@
 #import "news_cell.h"
 #import "subcategory_cell.h"
 
-@interface VC_sub_categories ()<UITableViewDelegate,UITableViewDataSource>
+@interface VC_sub_categories ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     NSArray *arr_images;
 }
@@ -25,6 +25,8 @@
     // Do any additional setup after loading the view.
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+
 }
 #pragma Table view delegate Methods
 
@@ -83,6 +85,31 @@
 -(void)back_actions
 {
     [self.delegate subcategories_back_action:@"back"];
+}
+#pragma favourites_action
+-(void)favourites_ACTION
+{
+    [self.delegate favourites_ACTION];
+}
+#pragma Textfield Delegates
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    _LBL_search_place_holder.alpha = 0.0f;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if([textField.text isEqualToString:@""])
+    {
+        _LBL_search_place_holder.alpha = 1.0f;
+    }
+    else{
+        _LBL_search_place_holder.alpha = 0.0f;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

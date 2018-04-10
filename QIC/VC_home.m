@@ -87,6 +87,9 @@
     if([item.title isEqualToString:@"Home"])
     {
         /************** calling home view  ******************/
+        
+        [[NSUserDefaults standardUserDefaults] setValue:@"home" forKey:@"tab_param"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
 
         
         [self HOme_view_calling];
@@ -97,6 +100,10 @@
     {
         
         /************** calling providers view  ******************/
+        
+        [[NSUserDefaults standardUserDefaults] setValue:@"providers" forKey:@"tab_param"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
 
         [self providers_view_calling];
         
@@ -105,27 +112,23 @@
     }
     else  if([item.title isEqualToString:@"News"])
     {
-        /************** creating objet for News view controller and and grabbing that view  ******************/
+        /************** calling News view  ******************/
         
-        VC_news *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_news"];
+        [[NSUserDefaults standardUserDefaults] setValue:@"news" forKey:@"tab_param"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
-        CGRect frameset = categorie_vw.view.frame;
-        frameset.origin.x =  0;
-        frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-        frameset.size.height =scroll_ht ;
-        frameset.size.width = self.view.frame.size.width;
-        categorie_vw.view.frame =  frameset;
-        [self.VW_main addSubview:categorie_vw.view];
-        
-        [self addChildViewController:categorie_vw];
-        [categorie_vw didMoveToParentViewController:self];
-        
-        
+
+
+        [self news_VIEW_calling];
         
     }
     else  if([item.title isEqualToString:@"Offers"])
     {
         /************** calling Offers view  ******************/
+        
+        [[NSUserDefaults standardUserDefaults] setValue:@"offers" forKey:@"tab_param"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
 
         [self offers_view_calling];
     }
@@ -133,7 +136,9 @@
     {
         /************** creating objet for Profile view controller and and grabbing that view  ******************/
         
-        
+        [[NSUserDefaults standardUserDefaults] setValue:@"profile" forKey:@"tab_param"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
         [self Profile_VIEW_celling];
         
     }
@@ -267,7 +272,7 @@
 }
 -(void)consultation_detail:(NSString *)str_status
 {
-    [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:1]];
+  //  [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:1]];
     [self detail_PAGE];
 }
 
@@ -281,7 +286,16 @@
 }
 -(void)detail_page_back:(NSString *)str_back
 {
-    [self sub_category_view];
+    if([str_back isEqualToString:@"providers"])
+    {
+        [self sub_category_view];
+    }
+    else  if([str_back isEqualToString:@"offers"])
+
+    {
+        [self consultation_offers:@"consult"];
+    }
+  //  [self sub_category_view];
 }
 
 #pragma Detail page creating
@@ -341,7 +355,26 @@
     [self Profile_VIEW_celling];
 }
 
-
+#pragma News View Calling
+-(void)news_VIEW_calling
+{
+    
+    /************** creating objet for News view controller and and grabbing that view  ******************/
+    
+    VC_news *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_news"];
+    categorie_vw.delegate = self;
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height =scroll_ht ;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [self.VW_main addSubview:categorie_vw.view];
+    
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+ 
+}
 #pragma Favourites  Action
 -(void)favourites_ACTION
 {
@@ -361,9 +394,49 @@
     [categorie_vw didMoveToParentViewController:self];
     
 }
--(void)favourites_back_ACTION
+-(void)favourites_back_ACTION:(NSString *)page_param
 {
+    if([page_param isEqualToString:@"home"])
+    {
     [self HOme_view_calling];
+    }
+    else if([page_param isEqualToString:@"providers"])
+    {
+    [self providers_view_calling];
+    }
+    else if([page_param isEqualToString:@"news"])
+    {
+        [self news_VIEW_calling];
+    }
+    else if([page_param isEqualToString:@"offers"])
+    {
+        [self offers_view_calling];
+    }
+    else if([page_param isEqualToString:@"profile"])
+    {
+        [self Profile_VIEW_celling];
+    }
+
+}
+
+#pragma Images_Action
+-(void)calling_providers_view
+{
+    [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:1]];
+
+    [self providers_view_calling];
+}
+-(void)calling_offers_view
+{
+    [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:2]];
+
+    [self offers_view_calling];
+}
+-(void)calling_news_view
+{
+    [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:3]];
+
+    [self news_VIEW_calling];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
