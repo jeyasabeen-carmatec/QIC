@@ -47,12 +47,16 @@
         cell = [nib objectAtIndex:0];
     }
     cell.LBL_name.text = @"Al SHAMI MEDICAL CENTER";
-    cell.LBL_addres.text = @"This is going to Provide some offers. which is useful to do the insurance.You will get that in  an Exact time.";
-    cell.LBL_designnantion.text = @"Dentist";
+    cell.LBL_addres.text = @"Wadi Al utooria Street,\nAin Khaled.";
+
+    cell.LBL_designnantion.text = @"Services: Consultation";
     
     cell.VW_back_ground.layer.cornerRadius = 2.0f;
-    cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
+    //cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
     cell.IMG_title.layer.masksToBounds = YES;
+    cell.LBL_cost.layer.cornerRadius = 3.0f;
+    cell.LBL_cost.layer.borderWidth = 1.0f;
+    cell.LBL_cost.layer.borderColor = cell.LBL_name.textColor.CGColor;
   //  cell.VW_back_ground.backgroundColor = [UIColor whiteColor];
     return cell;
     

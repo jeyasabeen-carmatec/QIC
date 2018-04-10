@@ -116,6 +116,7 @@
 		D079D673207C948B0079CA99 /* BN_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D670207C948B0079CA99 /* BN_2.jpg */; };
 		D079D674207C948B0079CA99 /* BN_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D671207C948B0079CA99 /* BN_3.jpg */; };
 		D079D685207CAD980079CA99 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = D079D683207CAD980079CA99 /* iCarousel.m */; };
+		D079D688207CCF830079CA99 /* discount.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D687207CCF830079CA99 /* discount.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -262,6 +263,7 @@
 		D079D671207C948B0079CA99 /* BN_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BN_3.jpg; sourceTree = "<group>"; };
 		D079D682207CAD980079CA99 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		D079D683207CAD980079CA99 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		D079D687207CCF830079CA99 /* discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discount.png; sourceTree = "<group>"; };
 		F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QIC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -731,6 +733,7 @@
 		D079D66E207C947A0079CA99 /* Home page_images */ = {
 			isa = PBXGroup;
 			children = (
+				D079D687207CCF830079CA99 /* discount.png */,
 				D079D66F207C948B0079CA99 /* BN_1.jpg */,
 				D079D670207C948B0079CA99 /* BN_2.jpg */,
 				D079D671207C948B0079CA99 /* BN_3.jpg */,
@@ -857,6 +860,7 @@
 				D02AC8862076082200F47C93 /* dependents_cell.xib in Resources */,
 				D02AC8AE207624D500F47C93 /* Futura URW Medium.ttf in Resources */,
 				D02AC8A2207624C200F47C93 /* Futura SCTOT Light.ttf in Resources */,
+				D079D688207CCF830079CA99 /* discount.png in Resources */,
 				D02AC7EA2073416A00F47C93 /* upload-27.png in Resources */,
 				D02AC87B2075FC9100F47C93 /* validity.png in Resources */,
 				D02AC80E207396E000F47C93 /* Banner-A.jpg in Resources */,

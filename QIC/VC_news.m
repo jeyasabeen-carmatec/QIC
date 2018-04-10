@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+    arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg",@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
 
 }
@@ -50,8 +50,7 @@
     cell.LBL_address.text = @"This is going to Provide some offers. which is useful to do the insurance.You will get that in  an Exact time.";
     cell.LBL_company.text = @"Abc company";
     
-    cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
-    cell.IMG_title.layer.masksToBounds = YES;
+  
 
     return cell;
     

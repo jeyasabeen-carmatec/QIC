@@ -282,6 +282,23 @@
     
     return view;
 }
+-(void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+{
+    if(carousel == _carousel)
+    {
+        [self.delegate calling_providers_view];
+
+    }
+    else if(carousel == _carousel1)
+    {
+        [self.delegate calling_offers_view];
+
+    }
+    else
+    {
+         [self.delegate calling_news_view];
+    }
+}
 
 /*
 #pragma mark - Navigation

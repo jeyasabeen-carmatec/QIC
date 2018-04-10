@@ -52,7 +52,7 @@
     cell.contentView.layer.cornerRadius = 2.0f;
     
     cell.LBL_name.text = @"Al SHAMI MEDICAL CENTER";
-    cell.LBL_addres.text = @"This is going to Provide some offers. which is useful to do the insurance.You will get that in  an Exact time.";
+    cell.LBL_addres.text = @"Wadi Al utooria Street,\nAin Khaled.";
     cell.LBL_designnantion.text = @"Dentist";
     cell.LBL_phone.text = @"PH:123456789";
     cell.VW_background.layer.cornerRadius = 2.0f;

@@ -17,5 +17,6 @@
 
 @property(nonatomic,weak) IBOutlet UIView *VW_back_ground;
 
+@property(nonatomic,weak) IBOutlet UILabel *LBL_cost;
 
 @end
