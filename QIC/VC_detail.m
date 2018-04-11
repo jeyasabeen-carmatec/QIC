@@ -13,6 +13,7 @@
 @interface VC_detail ()<UITableViewDelegate,UITableViewDataSource>
 {
     float scroll_ht;
+    NSMutableArray *Arr_ofrs_list;
 }
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl4;
 
@@ -30,25 +31,89 @@
 
 -(void)SET_UP_VIEW
 {
+    Arr_ofrs_list = [[NSMutableArray alloc]init];
+    NSDictionary *temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Consultations",@"key1",@"20%",@"key2",nil];
+    [Arr_ofrs_list addObject:temp_dict];
+    
+    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Procedures",@"key1",@"30%",@"key2", nil];
+    [Arr_ofrs_list addObject:temp_dict];
+    
+    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Pharmacy",@"key1",@"40%",@"key2", nil];
+    [Arr_ofrs_list addObject:temp_dict];
+    
+    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Laser",@"key1",@"20%",@"key2", nil];
+    [Arr_ofrs_list addObject:temp_dict];
+    
+    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Cosmetic",@"key1",@"30%",@"key2", nil];
+    [Arr_ofrs_list addObject:temp_dict];
+    
+
+    
+    
     _IMG_center_image.layer.cornerRadius = _IMG_center_image.frame.size.width/2;
     _IMG_center_image.layer.masksToBounds =  YES;
     
-    _LBL_center_name.text = @"Al shami medical center";
-    [_LBL_center_name sizeToFit];
+    _LBL_center_name.text = @"AL SHAMI MEDICAL CENTER";
+   /* NSString *str_center_name =@"Al shami medical center";
+    NSString *str_designaton = @"Dentist";
+    NSString *str_address = @"Wadi Al Utooria Strret,Khaled.";
+    NSString *str_PHONE = @"PHONE:1234567891";
+    
+    NSString *str_addres = [NSString  stringWithFormat:@"%@\n%@\n%@\n%@",str_center_name,str_designaton,str_address,str_PHONE];
+    
+    if ([_TXT_VW_address respondsToSelector:@selector(setAttributedText:)])
+    {
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.lineHeightMultiple = 5.0f;
+        paragraphStyle.maximumLineHeight = 5.0f;
+        paragraphStyle.minimumLineHeight = 5.0f;
+
+        
+        NSDictionary *attribs = @{
+                                  NSForegroundColorAttributeName:_TXT_VW_address.textColor,
+                                  NSFontAttributeName: _TXT_VW_address.font,
+                                  NSParagraphStyleAttributeName : paragraphStyle,
+                                  };
+        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_addres attributes:attribs];
+        
+
+      [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:15.0],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0],}range:[str_addres rangeOfString:str_center_name] ];
+        
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:15.0],NSForegroundColorAttributeName:[UIColor lightGrayColor],}range:[str_addres rangeOfString:str_designaton] ];
+        
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:15.0],NSForegroundColorAttributeName:[UIColor lightGrayColor],}range:[str_addres rangeOfString:str_address] ];
+        
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:15.0],NSForegroundColorAttributeName:[UIColor lightGrayColor],}range:[str_addres rangeOfString:str_PHONE] ];
+        
+        
+        
+        _TXT_VW_address.attributedText = attributedText;
+    }
+    else{
+        _TXT_VW_address.text = str_address;
+    }*/
+
+    
+    
+    
+   // [_LBL_center_name sizeToFit];
     
     _LBL_designation.text = @"Dentist";
-    [_LBL_designation sizeToFit];
+    //[_LBL_designation sizeToFit];
     CGRect frameset = _LBL_designation.frame;
-    frameset.origin.y = _LBL_center_name.frame.origin.y + _LBL_center_name.frame.size.height;
+    frameset.origin.y = _LBL_center_name.frame.origin.y + _LBL_center_name.frame.size.height+4;
     _LBL_designation.frame = frameset;
     
     
-    _LBL_address.text = @"Al shami medical center,Al shami medical centerAl shami medical center";
-    [_LBL_address sizeToFit];
+    _LBL_address.text = @"Wadi Al Utooria Strret,Khaled.";
+  
 
     frameset = _LBL_address.frame;
-    frameset.origin.y = _LBL_designation.frame.origin.y + _LBL_designation.frame.size.height;
+    frameset.origin.y = _LBL_designation.frame.origin.y + _LBL_designation.frame.size.height+4;
+   // frameset.size.height = _LBL_address.frame.origin.y + _LBL_address.intrinsicContentSize.height;
     _LBL_address.frame = frameset;
+    
+     [_LBL_address sizeToFit];
     
     
     
@@ -57,14 +122,24 @@
     _BTN_call.frame = frameset;
     
     _LBL_phone.text = @"PHONE:1234567891";
-    [_LBL_phone sizeToFit];
     
     frameset = _LBL_phone.frame;
-    frameset.origin.y = _BTN_call.frame.origin.y - 10;
+    frameset.origin.y = _LBL_address.frame.origin.y + _LBL_address.frame.size.height+4;
     _LBL_phone.frame = frameset;
+
+  //  [_LBL_phone sizeToFit];*/
+    
+//     frameset = _TXT_VW_address.frame;
+//    frameset.size.height = _TXT_VW_address.frame.origin.y + _TXT_VW_address.contentSize.height;
+//    _TXT_VW_address.frame = frameset;
+    
+    frameset = _BTN_call.frame;
+    frameset.origin.y = _LBL_address.frame.origin.y + _LBL_address.frame.size.height;
+    _BTN_call.frame = frameset;
+
     
     frameset =  _sub_VW_main.frame;
-    frameset.size.height = _LBL_phone.frame.origin.y + _LBL_phone.frame.size.height + 10;
+    frameset.size.height = _LBL_phone.frame.origin.y + _LBL_phone.frame.size.height + 20;
     _sub_VW_main.frame = frameset;
     
     _sub_VW_main.layer.cornerRadius = 2.0f;
@@ -284,7 +359,7 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 #pragma Table view delegates
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return Arr_ofrs_list.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -295,7 +370,8 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
         nib = [[NSBundle mainBundle] loadNibNamed:@"offers_cell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-
+    cell.LBL_offer_names.text = [[Arr_ofrs_list objectAtIndex:indexPath.row] valueForKey:@"key1"];
+    [cell.BTN_discout setTitle:[[Arr_ofrs_list objectAtIndex:indexPath.row] valueForKey:@"key2"] forState:UIControlStateNormal];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

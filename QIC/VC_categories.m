@@ -12,7 +12,7 @@
 
 @interface VC_categories ()<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate>
 {
-    NSArray *arr_images;
+    NSMutableArray *arr_images;
 }
 
 @end
@@ -23,8 +23,33 @@
     [super viewDidLoad];
     
     
-    arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg",@"Banner-A.jpg",@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg",@"Banner-A.jpg", nil];
+    arr_images = [[NSMutableArray alloc]init];
+    NSDictionary *temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"house.jpg",@"key5",nil];
+    [arr_images addObject:temp_dict];
+    
+   temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"POLYCLINIC",@"key1",@"private-clinic.jpg",@"key5",nil];
+    [arr_images addObject:temp_dict];
+    
+    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"PRIVATE CLICNIC",@"key1",@"Dental_centar.jpg",@"key5",nil];
+    [arr_images addObject:temp_dict];
+    
+   temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"PHYSIOTHERAPHY",@"key1",@"physiotherapy.png",@"key5",nil];    [arr_images addObject:temp_dict];
+    
+    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"DENTAL CENTERS",@"key1",@"Dental_centar.jpg",@"key5",nil];    [arr_images addObject:temp_dict];
+    
+   temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"POLYCLINIC",@"key1",@"house.jpg",@"key5",nil];
+    [arr_images addObject:temp_dict];
+    
+  temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"PHYSIOTHERAPHY",@"key1",@"physiotherapy.png",@"key5",nil];
+    [arr_images addObject:temp_dict];
+    
+  temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"DENTAL CENTERS",@"key1",@"Dental_centar.jpg",@"key5",nil];
+    [arr_images addObject:temp_dict];
+    
+  temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"PRIVATE CLICNIC",@"key1",@"Dental_centar.jpg",@"key5",nil];
+    [arr_images addObject:temp_dict];
 
+    
     
     /************** setting the dlegates ******************/
     
@@ -50,7 +75,8 @@
 {
     categorie_cell *cell = (categorie_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
-    cell.IMG_categories.image = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
+    cell.IMG_categories.image = [UIImage imageNamed:[[arr_images objectAtIndex:indexPath.row] valueForKey:@"key5"]];
+    [cell.BTN_categories setTitle:[[arr_images objectAtIndex:indexPath.row] valueForKey:@"key1"] forState:UIControlStateNormal];
     cell.BTN_categories.layer.cornerRadius = 2.0f;
     
     return cell;
@@ -59,7 +85,7 @@
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(_collection_categoriesl.bounds.size.width/2.02 ,217);
+    return CGSizeMake(_collection_categoriesl.bounds.size.width/2.02 ,200);
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0;

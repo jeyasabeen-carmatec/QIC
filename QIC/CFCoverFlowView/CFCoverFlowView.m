@@ -129,6 +129,15 @@
         imageView.layer.shouldRasterize = YES;
         imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         imageView.tag = i;
+        
+//        UILabel *lbl = [[UILabel alloc]init];
+//        lbl.frame = CGRectMake(0, imageView.frame.size.height - 30,imageView.frame.size.width,30);
+//        lbl.textAlignment = NSTextAlignmentCenter;
+//        lbl.textColor = [UIColor whiteColor];
+//        lbl.font = [UIFont fontWithName:@"Futura-Book" size:10];
+//        lbl.text = imageNames[i];
+        
+        
 
         // add long press gesture as tap gesture
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressHandler:)];
@@ -137,9 +146,11 @@
         [imageView addGestureRecognizer:longPressGesture];
 
         [self addSubview:imageView];
+       //[self addSubview:lbl];
 
         CATransform3D transform = CATransform3DMakeTranslation(i * _pageItemSpace, 0, 0);
         imageView.layer.transform = transform;
+       // lbl.layer.transform = transform;
     }
 
     self.views = self.subviews;

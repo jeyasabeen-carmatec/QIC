@@ -47,8 +47,8 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hp-NM-NCG">
                                 <rect key="frame" x="220" y="8" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="7"/>
-                                <state key="normal" title="20%off" backgroundImage="coupon.png">
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="12"/>
+                                <state key="normal" title="20%" backgroundImage="coupon.png">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
@@ -59,6 +59,10 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="BTN_discout" destination="5Hp-NM-NCG" id="LOO-jk-EHZ"/>
+                <outlet property="LBL_offer_names" destination="Zgs-1a-ONq" id="gsy-QM-7vP"/>
+            </connections>
             <point key="canvasLocation" x="25" y="51.5"/>
         </tableViewCell>
     </objects>

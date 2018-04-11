@@ -11,7 +11,8 @@
 
 @interface VC_consultation ()<UITableViewDelegate,UITableViewDataSource>
 {
-    NSArray *arr_images;
+    NSMutableArray  *arr_status;
+    
 }
 
 @end
@@ -21,7 +22,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+    arr_status  = [[NSMutableArray alloc]init];
+    for(int i= 0 ;i<= 10;i++)
+    {
+        [arr_status addObject:@"active"];
+    }
+    
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
 
@@ -30,7 +36,8 @@
 #pragma Table view delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return arr_images.count;
+    return 10
+    ;
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -57,6 +64,24 @@
     cell.LBL_cost.layer.cornerRadius = 3.0f;
     cell.LBL_cost.layer.borderWidth = 1.0f;
     cell.LBL_cost.layer.borderColor = cell.LBL_name.textColor.CGColor;
+    
+    [cell.BTN_favourite addTarget:self action:@selector(wish_list_action:) forControlEvents:UIControlEventTouchUpInside];
+    cell.BTN_favourite.tag = indexPath.section;
+    
+    cell.BTN_favourite.titleLabel.textColor = [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0];
+    
+    
+    
+    if([[arr_status objectAtIndex:indexPath.section] isEqualToString:@"inactive"])
+    {
+        [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
+        
+    }
+
   //  cell.VW_back_ground.backgroundColor = [UIColor whiteColor];
     return cell;
     
@@ -86,7 +111,27 @@
 {
     [self.delegate favourites_ACTION];
 }
+#pragma Wish_list_action
+-(void)wish_list_action:(UIButton *)sender
+{
+    NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
+    consultation_cell *cell = (consultation_cell *)[self.TBL_list cellForRowAtIndexPath:index];
+    
+    if([cell.BTN_favourite.titleLabel.text isEqualToString:@""])
+    {
+         [arr_status removeObjectAtIndex:sender.tag];
+         [arr_status insertObject:@"inactive" atIndex:sender.tag];
+        
+       [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [arr_status removeObjectAtIndex:sender.tag];
+        [arr_status insertObject:@"active" atIndex:sender.tag];
+        [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
 
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

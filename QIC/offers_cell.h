@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface offers_cell : UITableViewCell
+@property(nonatomic,weak)IBOutlet UILabel *LBL_offer_names;
+@property(nonatomic,weak)IBOutlet UIButton *BTN_discout;
+
+
 
 @end

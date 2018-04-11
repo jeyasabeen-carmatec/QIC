@@ -156,7 +156,7 @@
             </objects>
             <point key="canvasLocation" x="1685.625" y="30"/>
         </scene>
-        <!--Data Source-->
+        <!--home tab-->
         <scene sceneID="3H8-iU-cMW">
             <objects>
                 <viewController storyboardIdentifier="vc_home_tab" id="Gu3-bG-sDy" customClass="VC_home_tab" sceneMemberID="viewController">
@@ -219,7 +219,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azM-S9-h1D">
                                 <rect key="frame" x="284" y="20" width="25" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                                 <state key="normal" title="2" backgroundImage="like.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -234,18 +234,22 @@
                     </view>
                     <connections>
                         <outlet property="BTN_favourite" destination="azM-S9-h1D" id="4z1-u4-tug"/>
+                        <outlet property="BTN_providers_all" destination="Z9T-f2-ref" id="3o4-1D-fOh"/>
                         <outlet property="IMG_News" destination="9TQ-fF-Vfu" id="Wv2-nv-v2K"/>
                         <outlet property="IMG_offers" destination="Aie-pm-o8s" id="71X-4T-kB8"/>
                         <outlet property="IMG_providers" destination="iLj-LN-Enl" id="Uuw-Wl-lkb"/>
+                        <outlet property="LBL_news_header_label" destination="bM3-7A-cOP" id="YEN-tp-TKp"/>
+                        <outlet property="LBL_offer_header_label" destination="msC-He-dAQ" id="3kF-ko-4ao"/>
+                        <outlet property="LBL_provider_header_label" destination="z37-dp-t8X" id="kNa-oU-0hk"/>
                         <outlet property="LBL_search_place_holder" destination="3MP-xS-oOp" id="53t-eO-FzP"/>
                         <outlet property="Scroll_contents" destination="Fk0-Sa-go5" id="G5q-mz-4X2"/>
                         <outlet property="TXT_search" destination="Kpo-5H-gJ9" id="Q36-Zc-Myd"/>
+                        <outlet property="VW_indicagtor_for_cover" destination="8fA-qF-L2I" id="98s-mQ-4lO"/>
                         <outlet property="VW_news" destination="s2Q-gP-7ex" id="UlL-AJ-SkX"/>
+                        <outlet property="VW_news_indicator_for_cover" destination="3wm-Bd-AMn" id="8S3-ov-4qv"/>
+                        <outlet property="VW_offer_indicator_for_cover" destination="VJt-Cv-SMt" id="gUb-mZ-90Z"/>
                         <outlet property="VW_offers" destination="Nm9-XT-IIQ" id="qWt-va-hcG"/>
                         <outlet property="VW_providers" destination="iln-gr-deQ" id="zS3-R1-b4N"/>
-                        <outlet property="carousel" destination="8fA-qF-L2I" id="8hM-hX-ddR"/>
-                        <outlet property="carousel1" destination="VJt-Cv-SMt" id="TxX-qs-ofo"/>
-                        <outlet property="carousel2" destination="3wm-Bd-AMn" id="WYQ-s7-WHT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pg7-uf-sK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -257,15 +261,34 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fA-qF-L2I" customClass="iCarousel">
-                            <rect key="frame" x="0.0" y="20" width="320" height="174"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black-bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="9pj-Nw-L9i">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="12.png" translatesAutoresizingMaskIntoConstraints="NO" id="NIN-V7-qcS">
+                            <rect key="frame" x="10" y="7" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9T-f2-ref">
+                            <rect key="frame" x="251" y="3" width="65" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="14"/>
+                            <state key="normal" title="View all">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fA-qF-L2I">
+                            <rect key="frame" x="0.0" y="56" width="320" height="155"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <outlet property="dataSource" destination="Gu3-bG-sDy" id="RAp-bX-80G"/>
-                                <outlet property="delegate" destination="Gu3-bG-sDy" id="fEl-b7-vNX"/>
-                            </connections>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TOP 5 PROVIDERS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z37-dp-t8X">
+                            <rect key="frame" x="49" y="4" width="196" height="35"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -277,14 +300,25 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3wm-Bd-AMn" customClass="iCarousel">
-                            <rect key="frame" x="0.0" y="34" width="320" height="152"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black-bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="hvR-Mz-M6C">
+                            <rect key="frame" x="0.0" y="1" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="14.png" translatesAutoresizingMaskIntoConstraints="NO" id="WdX-qv-Tcx">
+                            <rect key="frame" x="11" y="8" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bM3-7A-cOP">
+                            <rect key="frame" x="49" y="6" width="251" height="35"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3wm-Bd-AMn">
+                            <rect key="frame" x="0.0" y="56" width="320" height="152"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <outlet property="dataSource" destination="Gu3-bG-sDy" id="tHK-4j-GqV"/>
-                                <outlet property="delegate" destination="Gu3-bG-sDy" id="v3g-E6-3bG"/>
-                            </connections>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -297,14 +331,25 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJt-Cv-SMt" customClass="iCarousel">
-                            <rect key="frame" x="0.0" y="34" width="320" height="152"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black-bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="oZ9-Rr-7Vs">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="13.png" translatesAutoresizingMaskIntoConstraints="NO" id="dga-xA-VBD">
+                            <rect key="frame" x="14" y="7" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msC-He-dAQ">
+                            <rect key="frame" x="51" y="5" width="255" height="35"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJt-Cv-SMt">
+                            <rect key="frame" x="0.0" y="59" width="320" height="152"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <outlet property="dataSource" destination="Gu3-bG-sDy" id="SBd-fZ-w9b"/>
-                                <outlet property="delegate" destination="Gu3-bG-sDy" id="gSn-hR-KUu"/>
-                            </connections>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -338,7 +383,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UW-N2-LEP">
                                         <rect key="frame" x="287" y="19" width="25" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                                         <state key="normal" title="2" backgroundImage="like.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -428,7 +473,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwe-gD-8s1">
                                         <rect key="frame" x="287" y="19" width="25" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                                         <state key="normal" title="2" backgroundImage="like.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -532,7 +577,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ts-Ks-twd">
                                         <rect key="frame" x="286" y="26" width="25" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                                         <state key="normal" title="2" backgroundImage="like.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -601,41 +646,41 @@
                             <rect key="frame" x="15" y="9" width="288" height="200"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Banner-A.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="oFc-EH-jnu">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="house.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="oFc-EH-jnu">
                                     <rect key="frame" x="8" y="15" width="80" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydH-Mc-6iH">
-                                    <rect key="frame" x="101" y="15" width="164" height="21"/>
+                                    <rect key="frame" x="101" y="8" width="164" height="21"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="FuturaT-Medi" family="FuturaTMed" pointSize="18"/>
                                     <color key="textColor" red="0.32549019610000002" green="0.71764705880000002" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Spb-nX-nD8">
-                                    <rect key="frame" x="101" y="39" width="164" height="21"/>
+                                    <rect key="frame" x="101" y="28" width="164" height="21"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFA-bJ-hUy">
-                                    <rect key="frame" x="101" y="67" width="164" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFA-bJ-hUy">
+                                    <rect key="frame" x="101" y="49" width="164" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMZ-sc-1Ub">
-                                    <rect key="frame" x="101" y="96" width="112" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="101" y="80" width="112" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="14"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="luq-I2-FdQ">
-                                    <rect key="frame" x="221" y="96" width="57" height="25"/>
+                                    <rect key="frame" x="221" y="80" width="57" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
@@ -726,7 +771,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Np-eA-VVj">
                                         <rect key="frame" x="287" y="19" width="25" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                                         <state key="normal" title="2" backgroundImage="like.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -809,7 +854,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efs-XA-w8s">
                                         <rect key="frame" x="284" y="19" width="25" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                                         <state key="normal" title="2" backgroundImage="like.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -967,7 +1012,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OiU-DE-cxe">
                                         <rect key="frame" x="281" y="28" width="25" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                                         <state key="normal" title="2" backgroundImage="like.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1036,7 +1081,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zW-Pq-wjV">
                                         <rect key="frame" x="281" y="28" width="25" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                                         <state key="normal" title="2" backgroundImage="like.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1128,15 +1173,19 @@
         </scene>
     </scenes>
     <resources>
+        <image name="12.png" width="73" height="70"/>
+        <image name="13.png" width="84" height="67"/>
+        <image name="14.png" width="88" height="68"/>
         <image name="BN_1.jpg" width="1081" height="741"/>
         <image name="BN_2.jpg" width="1079" height="736"/>
         <image name="BN_3.jpg" width="1082" height="700"/>
-        <image name="Banner-A.jpg" width="1018" height="423"/>
         <image name="Login-Screen-background.jpg" width="1080" height="2009"/>
         <image name="Logo.png" width="345" height="342"/>
+        <image name="black-bar.png" width="1082" height="129"/>
         <image name="call-button.png" width="141" height="54"/>
         <image name="get-direction.png" width="284" height="60"/>
         <image name="home.png" width="61" height="55"/>
+        <image name="house.jpg" width="493" height="740"/>
         <image name="like.png" width="60" height="51"/>
         <image name="news.png" width="55" height="57"/>
         <image name="offer.png" width="56" height="56"/>

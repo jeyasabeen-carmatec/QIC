@@ -55,7 +55,7 @@
     str_qid = [NSString stringWithFormat:@"Qatar ID Number: %@",str_QID];
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_qid attributes:nil];
     
-    [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue" size:15.0],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_qid rangeOfString:str_QID] ];
+    [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"FuturaT-Medi" size:15.0],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_qid rangeOfString:str_QID] ];
     
     
     cell.LBL_QID.attributedText = attributedText;
@@ -72,7 +72,7 @@
         member_ID = [NSString stringWithFormat:@"Membership ID: %@",str_MID];
         NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:member_ID attributes:nil];
         
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue" size:15.0],NSForegroundColorAttributeName:[UIColor blackColor],}range:[member_ID rangeOfString:str_MID] ];
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"FuturaT-Medi" size:15.0],NSForegroundColorAttributeName:[UIColor blackColor],}range:[member_ID rangeOfString:str_MID] ];
         
         
         cell.LBL_member_ID.attributedText = attributedText;

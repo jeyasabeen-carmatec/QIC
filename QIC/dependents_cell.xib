@@ -12,6 +12,9 @@
         <array key="Futura Book.ttf">
             <string>Futura-Book</string>
         </array>
+        <array key="Futura Std Book Oblique.ttf">
+            <string>FuturaStd-BookOblique</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -27,34 +30,34 @@
                         <rect key="frame" x="0.0" y="5" width="320" height="141.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7f-11-AUV">
-                                <rect key="frame" x="12" y="10" width="203" height="19.5"/>
+                                <rect key="frame" x="12" y="10" width="203" height="18.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="203" id="Awt-Rw-yPg"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.71764705880000002" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIn-A3-tYs">
-                                <rect key="frame" x="237" y="10" width="75" height="20"/>
-                                <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="15"/>
+                                <rect key="frame" x="236" y="10" width="75" height="15"/>
+                                <fontDescription key="fontDescription" name="FuturaStd-BookOblique" family="Futura Std" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kba-rS-5NP">
-                                <rect key="frame" x="12" y="68.5" width="299" height="20"/>
+                                <rect key="frame" x="12" y="67.5" width="299" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUc-BV-dZD">
-                                <rect key="frame" x="12" y="43.5" width="299" height="20"/>
+                                <rect key="frame" x="12" y="42.5" width="299" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xkc-CO-zjx">
-                                <rect key="frame" x="12" y="102.5" width="299" height="20"/>
+                                <rect key="frame" x="12" y="101.5" width="299" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -62,7 +65,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CIn-A3-tYs" firstAttribute="leading" secondItem="N7f-11-AUV" secondAttribute="trailing" constant="22" id="1kb-My-q4K"/>
+                            <constraint firstItem="CIn-A3-tYs" firstAttribute="leading" secondItem="N7f-11-AUV" secondAttribute="trailing" constant="21" id="1kb-My-q4K"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xkc-CO-zjx" secondAttribute="bottom" constant="10" id="2kS-Lu-Dhu"/>
                             <constraint firstItem="ZUc-BV-dZD" firstAttribute="top" secondItem="N7f-11-AUV" secondAttribute="bottom" constant="14" id="6cj-Pr-EtM"/>
                             <constraint firstItem="CIn-A3-tYs" firstAttribute="top" secondItem="N7f-11-AUV" secondAttribute="top" id="78C-oG-nw6"/>
@@ -76,7 +79,7 @@
                             <constraint firstItem="Kba-rS-5NP" firstAttribute="leading" secondItem="ZUc-BV-dZD" secondAttribute="leading" id="nn3-Ql-j7v"/>
                             <constraint firstItem="Kba-rS-5NP" firstAttribute="trailing" secondItem="ZUc-BV-dZD" secondAttribute="trailing" id="vgp-Jm-oKi"/>
                             <constraint firstItem="Kba-rS-5NP" firstAttribute="top" secondItem="ZUc-BV-dZD" secondAttribute="bottom" constant="5" id="wb6-ks-8I4"/>
-                            <constraint firstAttribute="trailing" secondItem="CIn-A3-tYs" secondAttribute="trailing" constant="8" id="zUL-Xp-iJV"/>
+                            <constraint firstAttribute="trailing" secondItem="CIn-A3-tYs" secondAttribute="trailing" constant="9" id="zUL-Xp-iJV"/>
                         </constraints>
                     </view>
                 </subviews>

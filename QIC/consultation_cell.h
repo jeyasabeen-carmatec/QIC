@@ -19,4 +19,6 @@
 
 @property(nonatomic,weak) IBOutlet UILabel *LBL_cost;
 
+@property(nonatomic,weak)IBOutlet UIButton *BTN_favourite;
+
 @end

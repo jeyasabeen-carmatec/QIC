@@ -117,6 +117,20 @@
 		D079D674207C948B0079CA99 /* BN_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D671207C948B0079CA99 /* BN_3.jpg */; };
 		D079D685207CAD980079CA99 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = D079D683207CAD980079CA99 /* iCarousel.m */; };
 		D079D688207CCF830079CA99 /* discount.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D687207CCF830079CA99 /* discount.png */; };
+		D079D68A207DCDE00079CA99 /* house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D689207DCDE00079CA99 /* house.jpg */; };
+		D079D68F207DDCEC0079CA99 /* 10%25-Discount.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D68C207DDCEC0079CA99 /* 10%25-Discount.png */; };
+		D079D690207DDCEC0079CA99 /* 20%25-Discount.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D68D207DDCEC0079CA99 /* 20%25-Discount.png */; };
+		D079D691207DDCEC0079CA99 /* 30%25-Discount.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D68E207DDCEC0079CA99 /* 30%25-Discount.png */; };
+		D079D693207E15140079CA99 /* Futura Std Book Oblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D079D692207E15140079CA99 /* Futura Std Book Oblique.ttf */; };
+		D079D695207E228D0079CA99 /* upload-7.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D694207E228D0079CA99 /* upload-7.png */; };
+		D079D69B207E2B010079CA99 /* 12.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D697207E2B010079CA99 /* 12.png */; };
+		D079D69C207E2B010079CA99 /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D698207E2B010079CA99 /* 13.png */; };
+		D079D69D207E2B010079CA99 /* 14.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D699207E2B010079CA99 /* 14.png */; };
+		D079D69E207E2B010079CA99 /* black-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D69A207E2B010079CA99 /* black-bar.png */; };
+		D079D6A6207E362D0079CA99 /* polyclinic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D6A3207E362D0079CA99 /* polyclinic.jpg */; };
+		D079D6A7207E362D0079CA99 /* private-clinic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D6A4207E362D0079CA99 /* private-clinic.jpg */; };
+		D079D6A8207E362D0079CA99 /* Dental_centar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D6A5207E362D0079CA99 /* Dental_centar.jpg */; };
+		D079D6AA207E36770079CA99 /* physiotherapy.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D6A9207E36770079CA99 /* physiotherapy.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -264,6 +278,20 @@
 		D079D682207CAD980079CA99 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		D079D683207CAD980079CA99 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		D079D687207CCF830079CA99 /* discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discount.png; sourceTree = "<group>"; };
+		D079D689207DCDE00079CA99 /* house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = house.jpg; sourceTree = "<group>"; };
+		D079D68C207DDCEC0079CA99 /* 10%25-Discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10%25-Discount.png"; sourceTree = "<group>"; };
+		D079D68D207DDCEC0079CA99 /* 20%25-Discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "20%25-Discount.png"; sourceTree = "<group>"; };
+		D079D68E207DDCEC0079CA99 /* 30%25-Discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "30%25-Discount.png"; sourceTree = "<group>"; };
+		D079D692207E15140079CA99 /* Futura Std Book Oblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Std Book Oblique.ttf"; sourceTree = "<group>"; };
+		D079D694207E228D0079CA99 /* upload-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload-7.png"; sourceTree = "<group>"; };
+		D079D697207E2B010079CA99 /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12.png; sourceTree = "<group>"; };
+		D079D698207E2B010079CA99 /* 13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 13.png; sourceTree = "<group>"; };
+		D079D699207E2B010079CA99 /* 14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 14.png; sourceTree = "<group>"; };
+		D079D69A207E2B010079CA99 /* black-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black-bar.png"; sourceTree = "<group>"; };
+		D079D6A3207E362D0079CA99 /* polyclinic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = polyclinic.jpg; sourceTree = "<group>"; };
+		D079D6A4207E362D0079CA99 /* private-clinic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "private-clinic.jpg"; sourceTree = "<group>"; };
+		D079D6A5207E362D0079CA99 /* Dental_centar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dental_centar.jpg; sourceTree = "<group>"; };
+		D079D6A9207E36770079CA99 /* physiotherapy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = physiotherapy.png; sourceTree = "<group>"; };
 		F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QIC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -393,6 +421,7 @@
 		D02AC7D020724A6500F47C93 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				D079D692207E15140079CA99 /* Futura Std Book Oblique.ttf */,
 				D02AC8872076238A00F47C93 /* Futura Bold.ttf */,
 				D02AC8882076238A00F47C93 /* Futura Extra Bold.ttf */,
 				D02AC8892076238A00F47C93 /* Futura Round Bold.ttf */,
@@ -462,6 +491,11 @@
 		D02AC7EB2073416F00F47C93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D079D6AB207E397B0079CA99 /* categorie_images */,
+				D079D696207E2B010079CA99 /* black-bar */,
+				D079D694207E228D0079CA99 /* upload-7.png */,
+				D079D68B207DDCEC0079CA99 /* discount */,
+				D079D689207DCDE00079CA99 /* house.jpg */,
 				D079D66E207C947A0079CA99 /* Home page_images */,
 				D079D664207C5FC60079CA99 /* Rectangle-button-2.png */,
 				D079D665207C5FC60079CA99 /* search-bar.png */,
@@ -750,6 +784,38 @@
 			path = iCarousel;
 			sourceTree = "<group>";
 		};
+		D079D68B207DDCEC0079CA99 /* discount */ = {
+			isa = PBXGroup;
+			children = (
+				D079D68C207DDCEC0079CA99 /* 10%25-Discount.png */,
+				D079D68D207DDCEC0079CA99 /* 20%25-Discount.png */,
+				D079D68E207DDCEC0079CA99 /* 30%25-Discount.png */,
+			);
+			path = discount;
+			sourceTree = "<group>";
+		};
+		D079D696207E2B010079CA99 /* black-bar */ = {
+			isa = PBXGroup;
+			children = (
+				D079D697207E2B010079CA99 /* 12.png */,
+				D079D698207E2B010079CA99 /* 13.png */,
+				D079D699207E2B010079CA99 /* 14.png */,
+				D079D69A207E2B010079CA99 /* black-bar.png */,
+			);
+			path = "black-bar";
+			sourceTree = "<group>";
+		};
+		D079D6AB207E397B0079CA99 /* categorie_images */ = {
+			isa = PBXGroup;
+			children = (
+				D079D6A3207E362D0079CA99 /* polyclinic.jpg */,
+				D079D6A4207E362D0079CA99 /* private-clinic.jpg */,
+				D079D6A5207E362D0079CA99 /* Dental_centar.jpg */,
+				D079D6A9207E36770079CA99 /* physiotherapy.png */,
+			);
+			name = categorie_images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -813,28 +879,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				D02AC8082073902300F47C93 /* profile-App-20x20@3x.png in Resources */,
+				D079D6AA207E36770079CA99 /* physiotherapy.png in Resources */,
 				D02AC86F2075FC9100F47C93 /* Eclipse.png in Resources */,
 				D02AC8AC207624D500F47C93 /* Futura Std Medium.ttf in Resources */,
 				D02AC87C2075FC9100F47C93 /* Vector-Smart-Object.png in Resources */,
+				D079D6A6207E362D0079CA99 /* polyclinic.jpg in Resources */,
 				D02AC88D2076238A00F47C93 /* Futura Bold.ttf in Resources */,
 				D02AC7C42072301D00F47C93 /* LaunchScreen.storyboard in Resources */,
 				D0025575207732BE0059A349 /* favourites_cell.xib in Resources */,
+				D079D69C207E2B010079CA99 /* 13.png in Resources */,
 				D02AC897207624AD00F47C93 /* Futura Std Book.ttf in Resources */,
+				D079D68F207DDCEC0079CA99 /* 10%25-Discount.png in Resources */,
 				D02AC80A2073903A00F47C93 /* provide-App-20x20@3x.png in Resources */,
+				D079D69B207E2B010079CA99 /* 12.png in Resources */,
 				D02AC8002073889600F47C93 /* provider.png in Resources */,
 				D02AC898207624AD00F47C93 /* Futura TOT Book.ttf in Resources */,
 				D02AC8902076238A00F47C93 /* Futura Std Extra Bold.ttf in Resources */,
 				D02AC8AA207624D500F47C93 /* Futura Medium.ttf in Resources */,
 				D079D667207C5FC60079CA99 /* search-bar.png in Resources */,
 				D02AC80F207396E000F47C93 /* Banner-B.jpg in Resources */,
+				D079D6A7207E362D0079CA99 /* private-clinic.jpg in Resources */,
 				D02AC7E02073342400F47C93 /* categorie_cell.xib in Resources */,
 				D02AC8792075FC9100F47C93 /* services.png in Resources */,
 				D02AC80220738FA400F47C93 /* home-App-20x20@3x.png in Resources */,
 				D02AC8772075FC9100F47C93 /* privacy-policy.png in Resources */,
+				D079D69D207E2B010079CA99 /* 14.png in Resources */,
+				D079D695207E228D0079CA99 /* upload-7.png in Resources */,
 				D02AC7FC2073889600F47C93 /* home.png in Resources */,
 				D02AC8AB207624D500F47C93 /* Futura Std Medium Condensed.ttf in Resources */,
 				D02AC8392074AA5600F47C93 /* subcategory_cell.xib in Resources */,
 				D02AC86E2075FC9100F47C93 /* dependent.png in Resources */,
+				D079D68A207DCDE00079CA99 /* house.jpg in Resources */,
 				D02AC8782075FC9100F47C93 /* profile-icon.png in Resources */,
 				D079D673207C948B0079CA99 /* BN_2.jpg in Resources */,
 				D02AC7F52073868C00F47C93 /* Logo.png in Resources */,
@@ -845,6 +920,7 @@
 				D02AC86C2075FC9100F47C93 /* call-button.png in Resources */,
 				D02AC89B207624B700F47C93 /* Futura Heavy.ttf in Resources */,
 				D02AC82720747EF000F47C93 /* profile_cell.xib in Resources */,
+				D079D69E207E2B010079CA99 /* black-bar.png in Resources */,
 				D02AC8552075D53000F47C93 /* offers_cell.xib in Resources */,
 				D02AC8702075FC9100F47C93 /* fingerprint.png in Resources */,
 				D02AC82F20749CA600F47C93 /* news_cell.xib in Resources */,
@@ -865,6 +941,7 @@
 				D02AC87B2075FC9100F47C93 /* validity.png in Resources */,
 				D02AC80E207396E000F47C93 /* Banner-A.jpg in Resources */,
 				D02AC88F2076238A00F47C93 /* Futura Round Bold.ttf in Resources */,
+				D079D6A8207E362D0079CA99 /* Dental_centar.jpg in Resources */,
 				D02AC8B320762E6B00F47C93 /* Info.plist in Resources */,
 				D02AC8062073900400F47C93 /* offerApp-20x20@3x.png in Resources */,
 				D02AC8AD207624D500F47C93 /* Futura TOT Medium Condensed.ttf in Resources */,
@@ -873,10 +950,13 @@
 				D079D666207C5FC60079CA99 /* Rectangle-button-2.png in Resources */,
 				D02AC87A2075FC9100F47C93 /* terms-&-condition.png in Resources */,
 				D02AC7FD2073889600F47C93 /* news.png in Resources */,
+				D079D693207E15140079CA99 /* Futura Std Book Oblique.ttf in Resources */,
 				D02AC80420738FD700F47C93 /* news-App-20x20@3x.png in Resources */,
 				D02AC8B22076274700F47C93 /* coupon.png in Resources */,
 				D02AC8912076238A00F47C93 /* Futura URW Extra Bold.ttf in Resources */,
+				D079D691207DDCEC0079CA99 /* 30%25-Discount.png in Resources */,
 				D079D672207C948B0079CA99 /* BN_1.jpg in Resources */,
+				D079D690207DDCEC0079CA99 /* 20%25-Discount.png in Resources */,
 				D02AC8A1207624C200F47C93 /* Futura Light.ttf in Resources */,
 				D02AC8A3207624C200F47C93 /* Futura Std Light Condensed.ttf in Resources */,
 				D02AC8A4207624C200F47C93 /* Futura Std Light.ttf in Resources */,

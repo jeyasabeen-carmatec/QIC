@@ -166,6 +166,8 @@
     [self addChildViewController:categorie_vw];
     [categorie_vw didMoveToParentViewController:self];
     
+   
+    
 
 }
 
@@ -198,22 +200,34 @@
     
     /************** creating objet for provider view controller and and grabbing that view  ******************/
     
+   /* for (UIViewController *contoller in self.childViewControllers) {
+        if (contoller) {
+            [contoller removeFromParentViewController];
+        }
+    }*/
+    
     VC_offers *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
-    categorie_vw.delegate= self;
+    categorie_vw.delegate = self;
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationDuration:1.0];
+//    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:categorie_vw.view cache:YES];
     
-    CGRect frameset = categorie_vw.view.frame;
-    frameset.origin.x =  0;
-    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
-    frameset.size.height = _VW_main.frame.size.height ;
-    frameset.size.width = self.view.frame.size.width;
-    categorie_vw.view.frame =  frameset;
-    [self.VW_main addSubview:categorie_vw.view];
+        CGRect frameset = categorie_vw.view.frame;
+        frameset.origin.x =  0;
+        frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+        frameset.size.height = _VW_main.frame.size.height ;
+        frameset.size.width = self.view.frame.size.width;
+        categorie_vw.view.frame =  frameset;
+        [self.VW_main addSubview:categorie_vw.view];
+        
+        [self addChildViewController:categorie_vw];
+        [categorie_vw didMoveToParentViewController:self];
+    categorie_vw.definesPresentationContext = YES;
+
+   //    [UIView commitAnimations];
     
-    [self addChildViewController:categorie_vw];
-    [categorie_vw didMoveToParentViewController:self];
-
-}
-
+   
+    }
 #pragma categories to Sub category action
 
 -(void)sub_categories_action:(NSString *)str_status
@@ -441,6 +455,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)remove_from
+{
+    UIViewController *vc = [self.childViewControllers lastObject];
+    [vc willMoveToParentViewController:nil];
+    [vc.view removeFromSuperview];
+    [vc removeFromParentViewController];
 }
 
 /*

@@ -38,6 +38,9 @@
     
    
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_providers_all addTarget:self action:@selector(providers_action) forControlEvents:UIControlEventTouchUpInside];
+  
+
    
 
 }
@@ -52,24 +55,24 @@
     _VW_providers.frame = frameset;
     
     [self.Scroll_contents addSubview:_VW_providers];
-     _carousel.type = iCarouselTypeCoverFlow2;
-     _carousel1.type = iCarouselTypeCoverFlow2;
-     _carousel2.type = iCarouselTypeCoverFlow2;
+//     _carousel.type = iCarouselTypeCoverFlow2;
+//     _carousel1.type = iCarouselTypeCoverFlow2;
+//     _carousel2.type = iCarouselTypeCoverFlow2;
+//    
+//     arr_images = [NSMutableArray arrayWithObjects:@"1",@"Banner-B.jpg",@"2",@"3",@"4",@"5", nil];
+//    [_carousel reloadData];
+//    [_carousel1 reloadData];
+//    [_carousel2 reloadData];
+//    
     
-     arr_images = [NSMutableArray arrayWithObjects:@"1",@"Banner-B.jpg",@"2",@"3",@"4",@"5", nil];
-    [_carousel reloadData];
-    [_carousel1 reloadData];
-    [_carousel2 reloadData];
-    
-    
-//    CFCoverFlowView *coverFlowView = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
-//    coverFlowView.backgroundColor = [UIColor clearColor];
-//    coverFlowView.pageItemWidth = _VW_indicagtor_for_cover.frame.size.width/ 2.5;
-//    coverFlowView.pageItemCoverWidth = -10.0f;
-//    coverFlowView.pageItemHeight = _VW_news.frame.size.height/1.2;
-//    coverFlowView.pageItemCornerRadius = 5.0;
-//    [coverFlowView setPageItemsWithImageNames:@[@"1", @"2", @"3", @"4", @"5", @"6"]];
-//    [self.VW_providers addSubview:coverFlowView];
+    CFCoverFlowView *coverFlowView = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
+    coverFlowView.backgroundColor = [UIColor clearColor];
+    coverFlowView.pageItemWidth = _VW_indicagtor_for_cover.frame.size.width/ 2.5;
+    coverFlowView.pageItemCoverWidth = -10.0f;
+    coverFlowView.pageItemHeight = _VW_news.frame.size.height/1.2;
+    coverFlowView.pageItemCornerRadius = 5.0;
+    [coverFlowView setPageItemsWithImageNames:@[@"1", @"2", @"3", @"4", @"5", @"6"]];
+    [self.VW_providers addSubview:coverFlowView];
     
     
     
@@ -82,14 +85,14 @@
     
     [self.Scroll_contents addSubview:_VW_offers];
     
-//    CFCoverFlowView *coverFlowView1 = [[CFCoverFlowView alloc] initWithFrame:self.VW_offer_indicator_for_cover.frame];
-//    coverFlowView1.backgroundColor = [UIColor clearColor];
-//    coverFlowView1.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.5;
-//    coverFlowView1.pageItemCoverWidth = -10.0;
-//    coverFlowView1.pageItemHeight = _VW_news.frame.size.height/1.2;
-//    coverFlowView1.pageItemCornerRadius = 5.0;
-//    [coverFlowView1 setPageItemsWithImageNames:@[@"1", @"2", @"3", @"4", @"5", @"6"]];
-//    [self.VW_offers addSubview:coverFlowView1];
+    CFCoverFlowView *coverFlowView1 = [[CFCoverFlowView alloc] initWithFrame:self.VW_offer_indicator_for_cover.frame];
+    coverFlowView1.backgroundColor = [UIColor clearColor];
+    coverFlowView1.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.5;
+    coverFlowView1.pageItemCoverWidth = -10.0;
+    coverFlowView1.pageItemHeight = _VW_news.frame.size.height/1.2;
+    coverFlowView1.pageItemCornerRadius = 5.0;
+    [coverFlowView1 setPageItemsWithImageNames:@[@"1", @"2", @"3", @"4", @"5", @"6"]];
+    [self.VW_offers addSubview:coverFlowView1];
     
     
     /***************** setting of News view **********************/
@@ -100,15 +103,15 @@
     
     [self.Scroll_contents addSubview:_VW_news];
     
-//    CFCoverFlowView *coverFlowView2 = [[CFCoverFlowView alloc] initWithFrame:self.VW_news_indicator_for_cover.frame];
-//    coverFlowView2.backgroundColor = [UIColor clearColor];
-//    coverFlowView2.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.5;
-//    coverFlowView2.pageItemCoverWidth = -10.0;
-//    coverFlowView2.pageItemHeight = _VW_news.frame.size.height/1.2;
-//    coverFlowView2.pageItemCornerRadius = 5.0;
-//    [coverFlowView2 setPageItemsWithImageNames:@[@"1", @"2", @"3", @"4", @"5", @"6"]];
-//    
-//    [self.VW_news addSubview:coverFlowView2];
+    CFCoverFlowView *coverFlowView2 = [[CFCoverFlowView alloc] initWithFrame:self.VW_news_indicator_for_cover.frame];
+    coverFlowView2.backgroundColor = [UIColor clearColor];
+    coverFlowView2.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.5;
+    coverFlowView2.pageItemCoverWidth = -10.0;
+    coverFlowView2.pageItemHeight = _VW_news.frame.size.height/1.2;
+    coverFlowView2.pageItemCornerRadius = 5.0;
+    [coverFlowView2 setPageItemsWithImageNames:@[@"1", @"2", @"3", @"4", @"5", @"6"]];
+    
+    [self.VW_news addSubview:coverFlowView2];
     
     frameset = _Scroll_contents.frame;
    // frameset.size.height = _VW_news.frame.origin.y + _VW_news.frame.size.height-100;
@@ -150,10 +153,93 @@
     [news setDelegate:self];
     
     [_IMG_News addGestureRecognizer:news];
+    
+    [self attributed_TEXT];
 
 
 
     
+}
+-(void)attributed_TEXT
+{
+    
+    NSString *str_header_name =@"TOP 5 PROVIDERS";
+    NSString *str_sub_header_name = @"This is showing the top Providers";
+    
+    NSString *str_providers = [NSString  stringWithFormat:@"%@\n%@",str_header_name,str_sub_header_name];
+    
+    if ([_LBL_provider_header_label respondsToSelector:@selector(setAttributedText:)])
+    {
+        
+        
+        
+        NSDictionary *attribs = @{
+                                  NSForegroundColorAttributeName:_LBL_news_header_label.textColor,
+                                  NSFontAttributeName: _LBL_news_header_label.font,
+                                  };
+        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_providers attributes:attribs];
+        
+        
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:10.0],NSForegroundColorAttributeName:[UIColor whiteColor],}range:[str_providers rangeOfString:str_sub_header_name] ];
+        
+        
+        _LBL_provider_header_label.attributedText = attributedText;
+    }
+    else{
+        _LBL_provider_header_label.text = str_providers;
+    }
+    
+    NSString *str_offer_header =@"OFFERS";
+    NSString *str_offer_sub_header_name = @"This is showing the Offers";
+    
+    NSString *str_offers = [NSString  stringWithFormat:@"%@\n%@",str_offer_header,str_offer_sub_header_name];
+    
+    if ([_LBL_offer_header_label respondsToSelector:@selector(setAttributedText:)])
+    {
+        
+        
+        
+        NSDictionary *attribs = @{
+                                  NSForegroundColorAttributeName:_LBL_news_header_label.textColor,
+                                  NSFontAttributeName: _LBL_news_header_label.font,
+                                  };
+        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_offers attributes:attribs];
+        
+        
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:10.0],NSForegroundColorAttributeName:[UIColor whiteColor],}range:[str_offers rangeOfString:str_offer_sub_header_name] ];
+        
+        
+        _LBL_offer_header_label.attributedText = attributedText;
+    }
+    else{
+        _LBL_offer_header_label.text = str_offers;
+    }
+    NSString *str_news_header =@"NEWS";
+    NSString *str_news_sub_header_name = @"This is showing the News";
+    
+    NSString *str_news = [NSString  stringWithFormat:@"%@\n%@",str_news_header,str_news_sub_header_name];
+    
+    if ([_LBL_news_header_label respondsToSelector:@selector(setAttributedText:)])
+    {
+        
+        
+        
+        NSDictionary *attribs = @{
+                                  NSForegroundColorAttributeName:_LBL_news_header_label.textColor,
+                                  NSFontAttributeName: _LBL_news_header_label.font,
+                                  };
+        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_news attributes:attribs];
+        
+        
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:10.0],NSForegroundColorAttributeName:[UIColor whiteColor],}range:[str_news rangeOfString:str_news_sub_header_name] ];
+        
+        
+        _LBL_news_header_label.attributedText = attributedText;
+    }
+    else{
+        _LBL_news_header_label.text = str_news;
+    }
+
 }
 -(void)viewDidLayoutSubviews
 {
@@ -299,6 +385,29 @@
          [self.delegate calling_news_view];
     }
 }
+
+- (void)carouselDidScroll:(iCarousel *)carousel
+{
+    if(carousel == _carousel)
+    {
+        
+        [carousel scrollToItemAtIndex:carousel.currentItemIndex+1 animated:YES];
+    }
+    else if(carousel == _carousel1)
+    {
+        
+        
+    }
+    else
+    {
+        
+    }
+}
+
+//- (void)scrollToItemAtIndex:(NSInteger)index animated:(BOOL)animated
+//{
+//    
+//}
 
 /*
 #pragma mark - Navigation

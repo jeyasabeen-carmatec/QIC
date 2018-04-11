@@ -37,7 +37,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t16-qK-NhG">
                         <rect key="frame" x="6" y="8" width="309" height="149.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="discount.png" translatesAutoresizingMaskIntoConstraints="NO" id="LEd-cd-7aR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10%25-Discount.png" translatesAutoresizingMaskIntoConstraints="NO" id="LEd-cd-7aR">
                                 <rect key="frame" x="8" y="13" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="6Uu-bC-Hlw"/>
@@ -116,6 +116,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="BTN_favourite" destination="bF5-E5-pco" id="S4I-e2-UKd"/>
                 <outlet property="IMG_title" destination="LEd-cd-7aR" id="ecl-Gz-FZy"/>
                 <outlet property="LBL_addres" destination="JJI-rB-CwG" id="kng-AU-IUK"/>
                 <outlet property="LBL_cost" destination="Qov-eh-uU1" id="iE6-Uz-SLR"/>
@@ -127,6 +128,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="discount.png" width="208" height="225"/>
+        <image name="10%25-Discount.png" width="208" height="225"/>
     </resources>
 </document>

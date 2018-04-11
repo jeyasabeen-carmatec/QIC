@@ -38,6 +38,7 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Futura Std Book Oblique</string>
 		<string>FontAwesome</string>
 		<string>Futura Bold</string>
 		<string>Futura Extra Bold</string>

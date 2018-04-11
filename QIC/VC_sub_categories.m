@@ -12,7 +12,7 @@
 
 @interface VC_sub_categories ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
-    NSArray *arr_images;
+    NSMutableArray *arr_total_data;
 }
 
 
@@ -23,7 +23,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+    arr_total_data = [[NSMutableArray alloc]init];
+
+    NSDictionary *temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"Dentist",@"key2",@"Wadi Al utooria Street,\nAin Khaled.",@"key3",@"PH:123456789",@"key4",@"Banner-A.jpg",@"key5",nil];
+    [arr_total_data addObject:temp_dict];
+    
+  temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"Dentist",@"key2",@"Wadi Al utooria Street,\nAin Khaled.",@"key3",@"PH:123456789",@"key4",@"Banner-B.jpg",@"key5",nil];
+    [arr_total_data addObject:temp_dict];
+    
+  temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"Dentist",@"key2",@"Wadi Al utooria Street,\nAin Khaled.",@"key3",@"PH:123456789",@"key4",@"Banner-C.jpg",@"key5",nil];
+    [arr_total_data addObject:temp_dict];
+    
+   temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"Dentist",@"key2",@"Wadi Al utooria Street,\nAin Khaled.",@"key3",@"PH:123456789",@"key4",@"Banner-A.jpg",@"key5",nil];
+    [arr_total_data addObject:temp_dict];
+    
+   temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"Dentist",@"key2",@"Wadi Al utooria Street,\nAin Khaled.",@"key3",@"PH:123456789",@"key4",@"Banner-B.jpg",@"key5",nil];
+    [arr_total_data addObject:temp_dict];
+    
+    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"Dentist",@"key2",@"Wadi Al utooria Street,\nAin Khaled.",@"key3",@"PH:123456789",@"key4",@"Banner-C.jpg",@"key5",nil];
+    [arr_total_data addObject:temp_dict];
+    
+    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"Dentist",@"key2",@"Wadi Al utooria Street,\nAin Khaled.",@"key3",@"PH:123456789",@"key4",@"Banner-A.jpg",@"key5",nil];
+    [arr_total_data addObject:temp_dict];
+    
+    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"Dentist",@"key2",@"Wadi Al utooria Street,\nAin Khaled.",@"key3",@"PH:123456789",@"key4",@"Banner-B.jpg",@"key5",nil];
+    [arr_total_data addObject:temp_dict];
+    
+    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"Dentist",@"key2",@"Wadi Al utooria Street,\nAin Khaled.",@"key3",@"PH:123456789",@"key4",@"Banner-A.jpg",@"key5",nil];
+    [arr_total_data addObject:temp_dict];
+
+   
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
 
@@ -32,7 +61,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return arr_images.count;
+    return arr_total_data.count;
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -51,14 +80,18 @@
     
     cell.contentView.layer.cornerRadius = 2.0f;
     
-    cell.LBL_name.text = @"Al SHAMI MEDICAL CENTER";
-    cell.LBL_addres.text = @"Wadi Al utooria Street,\nAin Khaled.";
-    cell.LBL_designnantion.text = @"Dentist";
-    cell.LBL_phone.text = @"PH:123456789";
+    cell.LBL_name.text = [[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"key1"];
+    cell.LBL_addres.text =[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"key3"];
+    cell.LBL_designnantion.text = [[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"key2"];
+    cell.LBL_phone.text = [[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"key4"];
     cell.VW_background.layer.cornerRadius = 2.0f;
     
     cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
     cell.IMG_title.layer.masksToBounds = YES;
+    
+    cell.IMG_title.image = [UIImage imageNamed:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"key5"]];
+    
+    
 
     
     return cell;

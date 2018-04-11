@@ -49,6 +49,7 @@
     cell.LBL_name.text = @"Health Insurance";
     cell.LBL_address.text = @"This is going to Provide some offers. which is useful to do the insurance.You will get that in  an Exact time.";
     cell.LBL_company.text = @"Abc company";
+    cell.IMG_title.image = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.section]];
     
   
 

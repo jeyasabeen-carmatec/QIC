@@ -28,21 +28,31 @@
 #pragma list of providers
 
 @property(nonatomic,weak) IBOutlet UIView *VW_providers;
-//@property(nonatomic,weak) IBOutlet UIView *VW_indicagtor_for_cover;
+@property(nonatomic,weak) IBOutlet UIView *VW_indicagtor_for_cover;
 @property(nonatomic,weak) IBOutlet UIImageView *IMG_providers;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_providers_all;
+@property(nonatomic,weak) IBOutlet UILabel *LBL_provider_header_label;
+
+
 
 
 
 #pragma list of offers
 @property(nonatomic,weak) IBOutlet UIView *VW_offers;
-//@property(nonatomic,weak) IBOutlet UIView *VW_offer_indicator_for_cover;
+@property(nonatomic,weak) IBOutlet UIView *VW_offer_indicator_for_cover;
 @property(nonatomic,weak) IBOutlet UIImageView *IMG_offers;
+@property(nonatomic,weak) IBOutlet UILabel *LBL_offer_header_label;
+
+
 
 
 #pragma list of News
 @property(nonatomic,weak) IBOutlet UIView *VW_news;
-//@property(nonatomic,weak) IBOutlet UIView *VW_news_indicator_for_cover;
+@property(nonatomic,weak) IBOutlet UIView *VW_news_indicator_for_cover;
 @property(nonatomic,weak) IBOutlet UIImageView *IMG_News;
+@property(nonatomic,weak) IBOutlet UILabel *LBL_news_header_label;
+
+
 
 
 #pragma Search bar views
