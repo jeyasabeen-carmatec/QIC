@@ -44,7 +44,7 @@
  */
 @property (nonatomic, assign) CGFloat pageItemCoverWidth;
 
-- (void)setPageItemsWithImageNames:(NSArray *)imageNames;
+- (void)setPageItemsWithImageNames:(NSArray *) imageNames :(NSArray *)names :(NSArray *) sub_name;
 //- (void)setPageItemsWithImageURLs:(NSArray *)urls placeholderImage:(UIImage *)placeholder;
 
 @end

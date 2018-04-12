@@ -63,7 +63,10 @@
 //    [_carousel reloadData];
 //    [_carousel1 reloadData];
 //    [_carousel2 reloadData];
-//    
+//
+    NSArray *arr_image = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", nil];
+    NSArray *arr_names = [NSArray arrayWithObjects:@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER", nil];
+    NSArray *arr_sub_names = [NSArray arrayWithObjects:@"4 providers",@"3 providers",@"5 providers",@"2 providers",@"7 providers",@"5 providers", nil];
     
     CFCoverFlowView *coverFlowView = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
     coverFlowView.backgroundColor = [UIColor clearColor];
@@ -71,7 +74,7 @@
     coverFlowView.pageItemCoverWidth = -10.0f;
     coverFlowView.pageItemHeight = _VW_news.frame.size.height/1.2;
     coverFlowView.pageItemCornerRadius = 5.0;
-    [coverFlowView setPageItemsWithImageNames:@[@"1", @"2", @"3", @"4", @"5", @"6"]];
+    [coverFlowView setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names];
     [self.VW_providers addSubview:coverFlowView];
     
     
@@ -91,7 +94,11 @@
     coverFlowView1.pageItemCoverWidth = -10.0;
     coverFlowView1.pageItemHeight = _VW_news.frame.size.height/1.2;
     coverFlowView1.pageItemCornerRadius = 5.0;
-    [coverFlowView1 setPageItemsWithImageNames:@[@"1", @"2", @"3", @"4", @"5", @"6"]];
+    
+    NSArray *arr_sub_names_offers = [NSArray arrayWithObjects:@"30% Discount",@"20% Discount",@"10% Discount",@"40% Discount",@"50% Discount",@"60% Discount", nil];
+
+   
+    [coverFlowView1 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_offers];
     [self.VW_offers addSubview:coverFlowView1];
     
     
@@ -109,7 +116,8 @@
     coverFlowView2.pageItemCoverWidth = -10.0;
     coverFlowView2.pageItemHeight = _VW_news.frame.size.height/1.2;
     coverFlowView2.pageItemCornerRadius = 5.0;
-    [coverFlowView2 setPageItemsWithImageNames:@[@"1", @"2", @"3", @"4", @"5", @"6"]];
+    NSArray *arr_sub_names_news = [NSArray arrayWithObjects:@"1 hour ago",@"2 hour ago",@"3 hour ago",@"4 hour ago",@"5 hour ago",@"6 hour ago", nil];
+    [coverFlowView2 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_news];
     
     [self.VW_news addSubview:coverFlowView2];
     

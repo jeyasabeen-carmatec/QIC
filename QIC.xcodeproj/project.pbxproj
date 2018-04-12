@@ -850,8 +850,8 @@
 				TargetAttributes = {
 					D02AC7B02072301D00F47C93 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 3ZXFYCSC7U;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 4MCGAH3G26;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1190,13 +1190,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3ZXFYCSC7U;
+				DEVELOPMENT_TEAM = 4MCGAH3G26;
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
 				INFOPLIST_FILE = QIC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.com.QIC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.QIC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "30b36b58-5e3a-4acf-8670-a5b2ba14f39c";
+				PROVISIONING_PROFILE_SPECIFIER = QICdev;
 			};
 			name = Debug;
 		};
@@ -1206,13 +1207,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3ZXFYCSC7U;
+				DEVELOPMENT_TEAM = 4MCGAH3G26;
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
 				INFOPLIST_FILE = QIC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.com.QIC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.QIC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "30b36b58-5e3a-4acf-8670-a5b2ba14f39c";
+				PROVISIONING_PROFILE_SPECIFIER = QICdev;
 			};
 			name = Release;
 		};

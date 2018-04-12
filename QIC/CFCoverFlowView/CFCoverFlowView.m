@@ -110,7 +110,8 @@
     return shadowView;
 }
 
-- (void)setPageItemsWithImageNames:(NSArray *)imageNames {
+- (void)setPageItemsWithImageNames:(NSArray *) imageNames :(NSArray *)names :(NSArray *) sub_name
+ {
     // page items count > 3
     assert(imageNames != nil && [imageNames count] > 3);
 
@@ -130,12 +131,15 @@
         imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         imageView.tag = i;
         
-//        UILabel *lbl = [[UILabel alloc]init];
-//        lbl.frame = CGRectMake(0, imageView.frame.size.height - 30,imageView.frame.size.width,30);
-//        lbl.textAlignment = NSTextAlignmentCenter;
-//        lbl.textColor = [UIColor whiteColor];
-//        lbl.font = [UIFont fontWithName:@"Futura-Book" size:10];
-//        lbl.text = imageNames[i];
+        UILabel *lbl = [[UILabel alloc]init];
+        lbl.frame = CGRectMake(0, imageView.frame.size.height - 50,imageView.frame.size.width,40);
+        lbl.textAlignment = NSTextAlignmentLeft;
+        lbl.textColor = [UIColor whiteColor];
+        lbl.font = [UIFont fontWithName:@"Futura-Book" size:10];
+        lbl.text = imageNames[i];
+        lbl.backgroundColor = [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:0.5];
+        lbl.text = [NSString stringWithFormat:@"%@\n%@",names[i],sub_name[i]];
+        lbl.numberOfLines = 0;
         
         
 
@@ -146,11 +150,11 @@
         [imageView addGestureRecognizer:longPressGesture];
 
         [self addSubview:imageView];
-       //[self addSubview:lbl];
+       [imageView addSubview:lbl];
 
         CATransform3D transform = CATransform3DMakeTranslation(i * _pageItemSpace, 0, 0);
         imageView.layer.transform = transform;
-       // lbl.layer.transform = transform;
+        //lbl.layer.transform = transform;
     }
 
     self.views = self.subviews;

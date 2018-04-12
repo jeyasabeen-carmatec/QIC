@@ -162,9 +162,17 @@
     frameset.size.height = scroll_ht;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [self.VW_main addSubview:categorie_vw.view];
-    [self addChildViewController:categorie_vw];
-    [categorie_vw didMoveToParentViewController:self];
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
     
    
     
@@ -186,10 +194,19 @@
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
     [categorie_vw.collection_categoriesl reloadData];
-    [self.VW_main addSubview:categorie_vw.view];
-    
-    [self addChildViewController:categorie_vw];
-    [categorie_vw didMoveToParentViewController:self];
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
+
+   
 
 }
 
@@ -208,23 +225,27 @@
     
     VC_offers *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
     categorie_vw.delegate = self;
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:1.0];
-//    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:categorie_vw.view cache:YES];
     
-        CGRect frameset = categorie_vw.view.frame;
+            CGRect frameset = categorie_vw.view.frame;
         frameset.origin.x =  0;
         frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
         frameset.size.height = _VW_main.frame.size.height ;
         frameset.size.width = self.view.frame.size.width;
         categorie_vw.view.frame =  frameset;
-        [self.VW_main addSubview:categorie_vw.view];
-        
-        [self addChildViewController:categorie_vw];
-        [categorie_vw didMoveToParentViewController:self];
-    categorie_vw.definesPresentationContext = YES;
+       [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
+    
 
-   //    [UIView commitAnimations];
+    
     
    
     }
@@ -249,9 +270,17 @@
     frameset.size.height = scroll_ht;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [self.VW_main addSubview:categorie_vw.view];
-    [self addChildViewController:categorie_vw];
-    [categorie_vw didMoveToParentViewController:self];
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
 
 }
 -(void)subcategories_back_action:(NSString *)str_back
@@ -273,9 +302,17 @@
     frameset.size.height = scroll_ht;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [self.VW_main addSubview:categorie_vw.view];
-    [self addChildViewController:categorie_vw];
-    [categorie_vw didMoveToParentViewController:self];
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
 
     
 }
@@ -323,9 +360,18 @@
     frameset.size.height = scroll_ht;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [self.VW_main addSubview:categorie_vw.view];
-    [self addChildViewController:categorie_vw];
-    [categorie_vw didMoveToParentViewController:self];
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
+
 }
 
 #pragma Profile View Pages calling
@@ -341,10 +387,18 @@
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [self.VW_main addSubview:categorie_vw.view];
-    
-    [self addChildViewController:categorie_vw];
-    [categorie_vw didMoveToParentViewController:self];
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
+
 
 }
 -(void)dependets_ACTION:(NSString *)str_dependet
@@ -359,10 +413,18 @@
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [self.VW_main addSubview:categorie_vw.view];
-    
-    [self addChildViewController:categorie_vw];
-    [categorie_vw didMoveToParentViewController:self];
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
+
 }
 -(void)back_ACTION:(NSString *)str_dependet
 {
@@ -383,10 +445,17 @@
     frameset.size.height =scroll_ht ;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [self.VW_main addSubview:categorie_vw.view];
-    
-    [self addChildViewController:categorie_vw];
-    [categorie_vw didMoveToParentViewController:self];
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
  
 }
 #pragma Favourites  Action
@@ -402,10 +471,18 @@
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [self.VW_main addSubview:categorie_vw.view];
-    
-    [self addChildViewController:categorie_vw];
-    [categorie_vw didMoveToParentViewController:self];
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
+
     
 }
 -(void)favourites_back_ACTION:(NSString *)page_param
