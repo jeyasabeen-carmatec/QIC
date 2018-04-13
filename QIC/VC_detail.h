@@ -26,7 +26,7 @@
 @property(nonatomic,weak) IBOutlet UILabel *LBL_phone;
 @property(nonatomic,weak) IBOutlet UIView *VW_segment;
 @property(nonatomic,weak) IBOutlet UIButton *BTN_call;
-@property(nonatomic,weak) IBOutlet UITextView *TXT_VW_address;
+//@property(nonatomic,weak) IBOutlet UITextView *TXT_VW_address;
 
 
 #pragma Button

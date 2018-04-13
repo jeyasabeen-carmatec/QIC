@@ -20,6 +20,9 @@
 @property(nonatomic,weak) IBOutlet UIButton *BTN_login;
 @property(nonatomic,weak) IBOutlet UIButton *BTN_guest;
 
+@property(nonatomic,weak) IBOutlet UIButton *BTN_register;
+
+
 
 #pragma Mark View center
 

@@ -48,7 +48,9 @@
     cell.LBL_name.text = @"Al SHAMI MEDICAL CENTER";
     cell.LBL_addres.text = @"Wadi Al utooria Street,\nAin Khaled.";
     cell.LBL_designnantion.text = @"Services: Dentist";
-    
+    cell.LBL_price_amount.text = @"10%\ndiscount";
+    cell.LBL_price_amount.transform=CGAffineTransformMakeRotation( ( 90 * M_PI ) / -360 );
+
     cell.VW_back_ground.layer.cornerRadius = 2.0f;
     //  cell.VW_back_ground.backgroundColor = [UIColor whiteColor];
     

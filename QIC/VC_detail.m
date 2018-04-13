@@ -10,10 +10,11 @@
 #import "HMSegmentedControl.h"
 #import "offers_cell.h"
 
-@interface VC_detail ()<UITableViewDelegate,UITableViewDataSource>
+@interface VC_detail ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
 {
     float scroll_ht;
     NSMutableArray *Arr_ofrs_list;
+    CLLocationManager *locationManager;
 }
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl4;
 
@@ -170,6 +171,18 @@
     _mapView.frame = frameset;
     [self.VW_main addSubview:_mapView];
     _mapView.hidden = YES;
+    
+    
+    frameset = _BTN_get_direction.frame;
+    frameset.origin.x = _mapView.frame.origin.x + _mapView.frame.size.width - _BTN_get_direction.frame.size.width - 20;
+    frameset.origin.y = _mapView.frame.origin.y + _mapView.frame.size.height - 40;
+    _BTN_get_direction.frame = frameset;
+  
+    
+    [self.VW_main addSubview:_BTN_get_direction];
+    
+      _BTN_get_direction.hidden = YES;
+
 
     
     frameset = _VW_main.frame;
@@ -190,6 +203,10 @@
     self.segmentedControl4.selectedSegmentIndex = 0;
 
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+    
+    //get_DIREction_action
+    [_BTN_get_direction addTarget:self action:@selector(get_DIREction_action) forControlEvents:UIControlEventTouchUpInside];
+
 
     
 }
@@ -390,6 +407,67 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 -(void)favourites_ACTION
 {
     [self.delegate favourites_ACTION];
+}
+-(void)get_DIREction_action
+{
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Acess denied" message:@"Please enable location services to proceed" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+        
+    }
+    else{
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        locationManager.distanceFilter = 100.0;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+        {
+            [locationManager requestWhenInUseAuthorization];
+        }
+        [locationManager startUpdatingLocation];
+    }
+
+}
+#pragma mark - Location Manager
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    
+    
+    CLLocation *LOC_current = newLocation;
+    
+    manager.delegate = nil;
+    
+    
+    @try {
+        NSString *STR_ship_LAT = @"12.9592";
+        NSString *STR_ship_LON = @"77.6974";
+        
+        NSString *URL_STR = [NSString stringWithFormat:@"comgooglemaps://?center=%f,%f&q=%f,%f",LOC_current.coordinate.latitude,LOC_current.coordinate.longitude, [STR_ship_LAT floatValue],[STR_ship_LON floatValue]];
+        
+        
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
+            NSURL *url = [NSURL URLWithString:URL_STR];
+            [[UIApplication sharedApplication] openURL:url];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Please install google map from itunes" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            [alert show];
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"Exception from location %@",exception);
+        /*  NSString *urlString=[NSString stringWithFormat:@"comgooglemaps://?center=%f,%f&zoom=14&views=traffic",LOC_current.coordinate.latitude,LOC_current.coordinate.longitude];
+         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
+         [[UIApplication sharedApplication] openURL:
+         [NSURL URLWithString:urlString]];
+         } else {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Please install google map from itunes" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+         [alert show];
+         } */
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Destination location not available" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

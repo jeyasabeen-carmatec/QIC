@@ -37,6 +37,14 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.1647058824" green="0.53333333329999999" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1aP-ds-MhG">
+                                <rect key="frame" x="103" y="376" width="114" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="17"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTb-r1-zmh">
                                 <rect key="frame" x="3" y="80" width="314" height="289"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -73,9 +81,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgN-4O-zvU">
-                                <rect key="frame" x="3" y="321" width="314" height="47"/>
+                                <rect key="frame" x="3" y="344" width="314" height="24"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
                                 <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -87,6 +95,7 @@
                     <connections>
                         <outlet property="BTN_guest" destination="JgN-4O-zvU" id="W6S-Tk-e1T"/>
                         <outlet property="BTN_login" destination="dma-Rs-scw" id="9R6-BG-YEb"/>
+                        <outlet property="BTN_register" destination="1aP-ds-MhG" id="y9S-1D-MUd"/>
                         <outlet property="TXT_password" destination="WRd-9y-GLW" id="sM0-Ob-Zgg"/>
                         <outlet property="TXT_uname" destination="svA-Gl-JbH" id="Hc8-xK-JkC"/>
                         <outlet property="VW_center" destination="BTb-r1-zmh" id="7iD-Pb-iOU"/>
@@ -261,10 +270,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black-bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="9pj-Nw-L9i">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="12.png" translatesAutoresizingMaskIntoConstraints="NO" id="NIN-V7-qcS">
                             <rect key="frame" x="10" y="7" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -278,7 +283,7 @@
                             </state>
                         </button>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fA-qF-L2I">
-                            <rect key="frame" x="0.0" y="56" width="320" height="155"/>
+                            <rect key="frame" x="78" y="56" width="242" height="155"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -300,10 +305,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black-bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="hvR-Mz-M6C">
-                            <rect key="frame" x="0.0" y="1" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="14.png" translatesAutoresizingMaskIntoConstraints="NO" id="WdX-qv-Tcx">
                             <rect key="frame" x="11" y="8" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -316,7 +317,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3wm-Bd-AMn">
-                            <rect key="frame" x="0.0" y="56" width="320" height="152"/>
+                            <rect key="frame" x="77" y="56" width="242" height="152"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -331,10 +332,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black-bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="oZ9-Rr-7Vs">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="13.png" translatesAutoresizingMaskIntoConstraints="NO" id="dga-xA-VBD">
                             <rect key="frame" x="14" y="7" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -347,7 +344,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJt-Cv-SMt">
-                            <rect key="frame" x="0.0" y="59" width="320" height="152"/>
+                            <rect key="frame" x="77" y="59" width="242" height="152"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -613,20 +610,18 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MF8-EB-ieg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="t6p-XR-QTK">
+                    <rect key="frame" x="0.0" y="0.0" width="106" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="13"/>
+                    <state key="normal" backgroundImage="get-direction.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
                 <view contentMode="scaleToFill" id="Qf3-g4-rMv" customClass="GMSMapView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6p-XR-QTK">
-                            <rect key="frame" x="203" y="298" width="106" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="13"/>
-                            <state key="normal" backgroundImage="get-direction.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="n37-aY-mQC">
@@ -1181,7 +1176,6 @@
         <image name="BN_3.jpg" width="1082" height="700"/>
         <image name="Login-Screen-background.jpg" width="1080" height="2009"/>
         <image name="Logo.png" width="345" height="342"/>
-        <image name="black-bar.png" width="1082" height="129"/>
         <image name="call-button.png" width="141" height="54"/>
         <image name="get-direction.png" width="284" height="60"/>
         <image name="home.png" width="61" height="55"/>

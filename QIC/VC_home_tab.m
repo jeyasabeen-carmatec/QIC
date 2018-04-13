@@ -70,8 +70,8 @@
     
     CFCoverFlowView *coverFlowView = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
     coverFlowView.backgroundColor = [UIColor clearColor];
-    coverFlowView.pageItemWidth = _VW_indicagtor_for_cover.frame.size.width/ 2.5;
-    coverFlowView.pageItemCoverWidth = -10.0f;
+    coverFlowView.pageItemWidth = _VW_indicagtor_for_cover.frame.size.width/ 2.7;
+    coverFlowView.pageItemCoverWidth = 0.0f;
     coverFlowView.pageItemHeight = _VW_news.frame.size.height/1.2;
     coverFlowView.pageItemCornerRadius = 5.0;
     [coverFlowView setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names];
@@ -90,8 +90,8 @@
     
     CFCoverFlowView *coverFlowView1 = [[CFCoverFlowView alloc] initWithFrame:self.VW_offer_indicator_for_cover.frame];
     coverFlowView1.backgroundColor = [UIColor clearColor];
-    coverFlowView1.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.5;
-    coverFlowView1.pageItemCoverWidth = -10.0;
+    coverFlowView1.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.7;
+    coverFlowView1.pageItemCoverWidth = 0.0f;
     coverFlowView1.pageItemHeight = _VW_news.frame.size.height/1.2;
     coverFlowView1.pageItemCornerRadius = 5.0;
     
@@ -112,8 +112,8 @@
     
     CFCoverFlowView *coverFlowView2 = [[CFCoverFlowView alloc] initWithFrame:self.VW_news_indicator_for_cover.frame];
     coverFlowView2.backgroundColor = [UIColor clearColor];
-    coverFlowView2.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.5;
-    coverFlowView2.pageItemCoverWidth = -10.0;
+    coverFlowView2.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.7;
+    coverFlowView2.pageItemCoverWidth = 0.0f;
     coverFlowView2.pageItemHeight = _VW_news.frame.size.height/1.2;
     coverFlowView2.pageItemCornerRadius = 5.0;
     NSArray *arr_sub_names_news = [NSArray arrayWithObjects:@"1 hour ago",@"2 hour ago",@"3 hour ago",@"4 hour ago",@"5 hour ago",@"6 hour ago", nil];

@@ -81,6 +81,9 @@
         [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
         
     }
+    cell.LBL_discount.text = @"10%\ndiscount";
+    cell.LBL_discount.transform=CGAffineTransformMakeRotation( ( 90 * M_PI ) / -360 );
+
 
   //  cell.VW_back_ground.backgroundColor = [UIColor whiteColor];
     return cell;

@@ -59,7 +59,7 @@
 
     _pageItemWidth = _width / 2.0;
     _pageItemHeight = _height;
-    _pageItemCoverWidth = 0.0;
+    _pageItemCoverWidth = 10.0;
     _pageItemCornerRadius = 0.0;
     _lastPointX = 0.0;
 
@@ -73,7 +73,7 @@
 
 - (void)setupSublayerTransform {
     CATransform3D subTransform = CATransform3DIdentity;
-    subTransform.m34 = -1.0 / 1000.0; // perspective transform
+    subTransform.m34 = -2.0/ 1000.0; // perspective transform
     self.layer.sublayerTransform = subTransform;
 }
 
@@ -115,27 +115,27 @@
     // page items count > 3
     assert(imageNames != nil && [imageNames count] > 3);
 
-    _pageItemSpace = _pageItemWidth - _pageItemCoverWidth;
+     _pageItemSpace = _pageItemWidth - _pageItemCoverWidth;
     _pageItemCount = [imageNames count];
     for (NSInteger i = 0; i < _pageItemCount; i++) {
         UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.backgroundColor = [UIColor darkGrayColor];
-        imageView.center = CGPointMake(_width / 2.0, _height / 2.0);
-        imageView.bounds = CGRectMake(0, 0, _pageItemWidth, _pageItemHeight);
+        imageView.backgroundColor = [UIColor clearColor];
+        imageView.center = CGPointMake(_width /4.0, _height / 2.0);
+        imageView.bounds = CGRectMake(0, 0,_pageItemWidth, _pageItemHeight);
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", imageNames[i]]];
         imageView.userInteractionEnabled = YES;
         imageView.layer.cornerRadius = _pageItemCornerRadius;
         imageView.layer.masksToBounds = YES;
-        imageView.layer.shouldRasterize = YES;
-        imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+       // imageView.layer.shouldRasterize = YES;
+      //  imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         imageView.tag = i;
         
         UILabel *lbl = [[UILabel alloc]init];
         lbl.frame = CGRectMake(0, imageView.frame.size.height - 50,imageView.frame.size.width,40);
         lbl.textAlignment = NSTextAlignmentLeft;
         lbl.textColor = [UIColor whiteColor];
-        lbl.font = [UIFont fontWithName:@"Futura-Book" size:10];
+        lbl.font = [UIFont fontWithName:@"Futura-Book" size:8.0];
         lbl.text = imageNames[i];
         lbl.backgroundColor = [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:0.5];
         lbl.text = [NSString stringWithFormat:@"%@\n%@",names[i],sub_name[i]];
@@ -152,22 +152,23 @@
         [self addSubview:imageView];
        [imageView addSubview:lbl];
 
-        CATransform3D transform = CATransform3DMakeTranslation(i * _pageItemSpace, 0, 0);
+        CATransform3D transform = CATransform3DMakeTranslation(i* _pageItemSpace, 0,0);
         imageView.layer.transform = transform;
+        //imageView.transform = CGAffineTransformMakeRotation(M_PI/2);
         //lbl.layer.transform = transform;
     }
 
     self.views = self.subviews;
 
     // add two shadow views
-    [self addShadowViews];
+  //  [self addShadowViews];
     
-    [self setupSelectionMaskLayer];
+  //  [self setupSelectionMaskLayer];
 
     // init page items's transform
-    [self transformPageItemsWithDistance:0.0];
-    [self transformShadowView1WithDistance:-_pageItemSpace];
-    [self transformShadowView2WithDistance:_pageItemSpace];
+   [self transformPageItemsWithDistance:5.0];
+   // [self transformShadowView1WithDistance:-_pageItemSpace];
+  // [self transformShadowView2WithDistance:_pageItemSpace];
 }
 
 //
@@ -200,7 +201,7 @@
     [self stopAutoAnimating];
 
     // transform with 1 point first for avoiding shadow view flash.
-    CGFloat offset = 1.0;
+    CGFloat offset = 0.0;
     [self transformWithDistance:-offset];
     [self animationWithDistance:-_pageItemSpace + offset duration:0.25];
 
@@ -338,7 +339,7 @@
 }
 
 - (void)transformShadowView2WithDistance:(CGFloat)distance {
-    CGFloat position = [self positionForShadowView2Position:_shadowView2.layer.transform.m41 + distance];
+    CGFloat position = [self positionForShadowView2Position:_shadowView2.layer.transform.m41]; //+ distance];
     _shadowView2.layer.transform = [self transformForPosition:position];
     _shadowView2.layer.shadowOffset = [self shadowOffsetForShadowView2:position];
 }
@@ -424,8 +425,8 @@
 }
 
 - (CATransform3D)transformForPosition:(CGFloat)position {
-    CATransform3D translationTransform = CATransform3DMakeTranslation(position, 0.0, fabs(position / _pageItemSpace) * -200.0);
-    CATransform3D transform = CATransform3DRotate(translationTransform, -(M_PI * (position / (_pageItemSpace / 45.0)) / 180.0), 0, 1, 0);
+    CATransform3D translationTransform = CATransform3DMakeTranslation(position, 0.0, fabs(position / 80) * -200);
+    CATransform3D transform = CATransform3DRotate(translationTransform, -(M_PI * (position / (_pageItemSpace / 20)) / 270), 0, 1, 0);
     return transform;
 }
 

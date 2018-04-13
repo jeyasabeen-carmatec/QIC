@@ -16,6 +16,9 @@
         <array key="Futura Book.ttf">
             <string>Futura-Book</string>
         </array>
+        <array key="Futura Extra Bold.ttf">
+            <string>Futura-ExtraBold</string>
+        </array>
         <array key="Futura URW Medium.ttf">
             <string>FuturaT-Medi</string>
         </array>
@@ -33,7 +36,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOb-BT-Wvv">
                         <rect key="frame" x="6" y="8" width="306" height="132"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10%25-Discount.png" translatesAutoresizingMaskIntoConstraints="NO" id="oI9-Nk-HfH">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="discount.png" translatesAutoresizingMaskIntoConstraints="NO" id="oI9-Nk-HfH">
                                 <rect key="frame" x="7" y="9" width="102" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="102" id="87a-3f-sIf"/>
@@ -81,6 +84,13 @@
                                 <color key="textColor" red="0.63529411764705879" green="0.0" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ro1-XC-JRF">
+                                <rect key="frame" x="25" y="38" width="54" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-ExtraBold" family="Futura-ExtraBold" pointSize="11"/>
+                                <color key="textColor" red="0.32549019610000002" green="0.71764705880000002" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -117,12 +127,13 @@
                 <outlet property="LBL_addres" destination="Bqb-8u-jHT" id="mgb-7a-zfh"/>
                 <outlet property="LBL_designnantion" destination="Ccl-V4-Mtb" id="4Vw-E8-zUE"/>
                 <outlet property="LBL_name" destination="WHM-nL-pwz" id="cdC-qW-o24"/>
+                <outlet property="LBL_price_amount" destination="Ro1-XC-JRF" id="vXX-d1-LLx"/>
                 <outlet property="VW_back_ground" destination="UOb-BT-Wvv" id="MOV-qA-Syt"/>
             </connections>
             <point key="canvasLocation" x="-4" y="101.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="10%25-Discount.png" width="208" height="225"/>
+        <image name="discount.png" width="208" height="225"/>
     </resources>
 </document>

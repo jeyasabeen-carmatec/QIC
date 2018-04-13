@@ -39,7 +39,7 @@
     
     /****************** setting the Button guest Text ***********************/
     
-    NSString *str_name = @"If you are not a registered QIC - Anaya product customer\nClick here  --->";
+    NSString *str_name = @"Not a QIC-Anaya Customer?";
     _BTN_guest.titleLabel.numberOfLines = 2;
     _BTN_guest.titleLabel.textAlignment = NSTextAlignmentCenter;
     [_BTN_guest setTitle:str_name forState:UIControlStateNormal];
@@ -47,25 +47,29 @@
     
     if(result.height <= 480)
     {
-      _BTN_guest.titleLabel.font =   [UIFont systemFontOfSize: 11];
+      _BTN_guest.titleLabel.font =   [UIFont systemFontOfSize: 14];
         frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 20;
 
     }
     else if(result.height <= 568)
-    {
-        _BTN_guest.titleLabel.font =   [UIFont systemFontOfSize: 11];
-        frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 20;
-
-
-    }
-    else
     {
         _BTN_guest.titleLabel.font =   [UIFont systemFontOfSize: 14];
         frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 20;
 
 
     }
+    else
+    {
+        _BTN_guest.titleLabel.font =   [UIFont systemFontOfSize: 16];
+        frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 20;
+
+
+    }
     _BTN_guest.frame = frameset;
+    
+    frameset = _BTN_register.frame;
+    frameset.origin.y = _BTN_guest.frame.origin.y + _BTN_guest.frame.size.height + 20;
+    _BTN_register.frame = frameset;
     
     
     
@@ -74,6 +78,13 @@
     _BTN_login.layer.borderWidth = 0.5f;
     _BTN_login.layer.cornerRadius = 2.0f;
     _BTN_login.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    
+    
+    _BTN_register.layer.borderWidth = 0.5f;
+    _BTN_register.layer.cornerRadius = 2.0f;
+    _BTN_register.layer.borderColor = [UIColor whiteColor].CGColor;
+
     
     [_BTN_login addTarget:self action:@selector(login_action) forControlEvents:UIControlEventTouchUpInside];
     
