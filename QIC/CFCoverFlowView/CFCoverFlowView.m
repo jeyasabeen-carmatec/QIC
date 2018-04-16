@@ -57,7 +57,7 @@
     _autoAnimation = NO;
     _animationDuration = 5.0;
 
-    _pageItemWidth = _width / 2.0;
+    _pageItemWidth = _width /2.0;
     _pageItemHeight = _height;
     _pageItemCoverWidth = 10.0;
     _pageItemCornerRadius = 0.0;
@@ -106,7 +106,6 @@
     shadowView.layer.shadowRadius = _shadowRadius;
     shadowView.layer.shadowOpacity = 0.45;
     shadowView.layer.shadowPath = [UIBezierPath bezierPathWithRect:shadowView.bounds].CGPath;
-
     return shadowView;
 }
 
@@ -120,9 +119,35 @@
     for (NSInteger i = 0; i < _pageItemCount; i++) {
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.backgroundColor = [UIColor clearColor];
-        imageView.center = CGPointMake(_width /4.0, _height / 2.0);
-        imageView.bounds = CGRectMake(0, 0,_pageItemWidth, _pageItemHeight);
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        CGSize result = [[UIScreen mainScreen] bounds].size;
+        float size;
+        imageView.center = CGPointMake(_width/5.9, _height / 2.0);
+
+        if(result.height <= 480)
+        {
+          //  imageView.center = CGPointMake(_width/5, _height / 2.0);
+
+            imageView.bounds = CGRectMake(0, 0,_pageItemWidth, _pageItemHeight);
+            size = 7;
+
+        }
+        else if(result.height <= 568)
+        {
+           // imageView.center = CGPointMake(_width/5.9, _height / 2.0);
+
+            imageView.bounds = CGRectMake(0, 0,_pageItemWidth, _pageItemHeight);
+            size = 7;
+
+        }
+        else
+        {
+           
+            imageView.bounds = CGRectMake(0, 0,_pageItemWidth, _pageItemHeight);
+            size = 8;
+
+        }
+        imageView.bounds = CGRectMake(0, 0,_pageItemWidth+10, _pageItemHeight);
+        imageView.contentMode = UIViewContentModeScaleToFill;
         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", imageNames[i]]];
         imageView.userInteractionEnabled = YES;
         imageView.layer.cornerRadius = _pageItemCornerRadius;
@@ -132,10 +157,10 @@
         imageView.tag = i;
         
         UILabel *lbl = [[UILabel alloc]init];
-        lbl.frame = CGRectMake(0, imageView.frame.size.height - 50,imageView.frame.size.width,40);
-        lbl.textAlignment = NSTextAlignmentLeft;
+        lbl.frame = CGRectMake(0, imageView.frame.size.height - 50,imageView.frame.size.width-3,40);
+        lbl.textAlignment = NSTextAlignmentCenter;
         lbl.textColor = [UIColor whiteColor];
-        lbl.font = [UIFont fontWithName:@"Futura-Book" size:8.0];
+        lbl.font = [UIFont fontWithName:@"Futura-Book" size:size];
         lbl.text = imageNames[i];
         lbl.backgroundColor = [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:0.5];
         lbl.text = [NSString stringWithFormat:@"%@\n%@",names[i],sub_name[i]];

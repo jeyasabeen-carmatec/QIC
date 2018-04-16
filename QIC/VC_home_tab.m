@@ -16,6 +16,9 @@
 {
     NSMutableArray *arr_images;
     CGRect frameset;
+    CFCoverFlowView *coverFlowView1;
+    CFCoverFlowView *coverFlowView2;
+    CFCoverFlowView *coverFlowView3;
     
 }
 @property (nonatomic, strong) IBOutlet iCarousel *carousel;
@@ -68,14 +71,15 @@
     NSArray *arr_names = [NSArray arrayWithObjects:@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER", nil];
     NSArray *arr_sub_names = [NSArray arrayWithObjects:@"4 providers",@"3 providers",@"5 providers",@"2 providers",@"7 providers",@"5 providers", nil];
     
-    CFCoverFlowView *coverFlowView = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
-    coverFlowView.backgroundColor = [UIColor clearColor];
-    coverFlowView.pageItemWidth = _VW_indicagtor_for_cover.frame.size.width/ 2.7;
-    coverFlowView.pageItemCoverWidth = 0.0f;
-    coverFlowView.pageItemHeight = _VW_news.frame.size.height/1.2;
-    coverFlowView.pageItemCornerRadius = 5.0;
-    [coverFlowView setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names];
-    [self.VW_providers addSubview:coverFlowView];
+     coverFlowView1 = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
+    coverFlowView1.backgroundColor = [UIColor clearColor];
+    coverFlowView1.pageItemWidth = _VW_indicagtor_for_cover.frame.size.width/2.7;
+    coverFlowView1.pageItemCoverWidth = 0.0f;
+    coverFlowView1.pageItemHeight = _VW_news.frame.size.height/1.2;
+    coverFlowView1.pageItemCornerRadius = 5.0;
+    coverFlowView1.delegate = self;
+    [coverFlowView1 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names];
+    [self.VW_providers addSubview:coverFlowView1];
     
     
     
@@ -88,18 +92,19 @@
     
     [self.Scroll_contents addSubview:_VW_offers];
     
-    CFCoverFlowView *coverFlowView1 = [[CFCoverFlowView alloc] initWithFrame:self.VW_offer_indicator_for_cover.frame];
-    coverFlowView1.backgroundColor = [UIColor clearColor];
-    coverFlowView1.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.7;
-    coverFlowView1.pageItemCoverWidth = 0.0f;
-    coverFlowView1.pageItemHeight = _VW_news.frame.size.height/1.2;
-    coverFlowView1.pageItemCornerRadius = 5.0;
+     coverFlowView2 = [[CFCoverFlowView alloc] initWithFrame:self.VW_offer_indicator_for_cover.frame];
+    coverFlowView2.backgroundColor = [UIColor clearColor];
+    coverFlowView2.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.7;
+    coverFlowView2.pageItemCoverWidth = 0.0f;
+    coverFlowView2.pageItemHeight = _VW_news.frame.size.height/1.2;
+    coverFlowView2.pageItemCornerRadius = 5.0;
+    coverFlowView2.delegate = self;
     
     NSArray *arr_sub_names_offers = [NSArray arrayWithObjects:@"30% Discount",@"20% Discount",@"10% Discount",@"40% Discount",@"50% Discount",@"60% Discount", nil];
 
    
-    [coverFlowView1 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_offers];
-    [self.VW_offers addSubview:coverFlowView1];
+    [coverFlowView2 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_offers];
+    [self.VW_offers addSubview:coverFlowView2];
     
     
     /***************** setting of News view **********************/
@@ -110,16 +115,17 @@
     
     [self.Scroll_contents addSubview:_VW_news];
     
-    CFCoverFlowView *coverFlowView2 = [[CFCoverFlowView alloc] initWithFrame:self.VW_news_indicator_for_cover.frame];
-    coverFlowView2.backgroundColor = [UIColor clearColor];
-    coverFlowView2.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.7;
-    coverFlowView2.pageItemCoverWidth = 0.0f;
-    coverFlowView2.pageItemHeight = _VW_news.frame.size.height/1.2;
-    coverFlowView2.pageItemCornerRadius = 5.0;
+     coverFlowView3 = [[CFCoverFlowView alloc] initWithFrame:self.VW_news_indicator_for_cover.frame];
+    coverFlowView3.backgroundColor = [UIColor clearColor];
+    coverFlowView3.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.7;
+    coverFlowView3.pageItemCoverWidth = 0.0f;
+    coverFlowView3.pageItemHeight = _VW_news.frame.size.height/1.2;
+    coverFlowView3.pageItemCornerRadius = 5.0;
     NSArray *arr_sub_names_news = [NSArray arrayWithObjects:@"1 hour ago",@"2 hour ago",@"3 hour ago",@"4 hour ago",@"5 hour ago",@"6 hour ago", nil];
-    [coverFlowView2 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_news];
+    [coverFlowView3 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_news];
+    coverFlowView3.delegate = self;
     
-    [self.VW_news addSubview:coverFlowView2];
+    [self.VW_news addSubview:coverFlowView3];
     
     frameset = _Scroll_contents.frame;
    // frameset.size.height = _VW_news.frame.origin.y + _VW_news.frame.size.height-100;
@@ -376,42 +382,54 @@
     
     return view;
 }
--(void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+//-(void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+//{
+//    if(carousel == _carousel)
+//    {
+//        [self.delegate calling_providers_view];
+//
+//    }
+//    else if(carousel == _carousel1)
+//    {
+//        [self.delegate calling_offers_view];
+//
+//    }
+//    else
+//    {
+//         [self.delegate calling_news_view];
+//    }
+//}
+//
+//- (void)carouselDidScroll:(iCarousel *)carousel
+//{
+//    if(carousel == _carousel)
+//    {
+//        
+//        [carousel scrollToItemAtIndex:carousel.currentItemIndex+1 animated:YES];
+//    }
+//    else if(carousel == _carousel1)
+//    {
+//        
+//        
+//    }
+//    else
+//    {
+//        
+//    }
+//}
+- (void)coverFlowView:(CFCoverFlowView *)coverFlowView didSelectPageItemAtIndex:(NSInteger)index
 {
-    if(carousel == _carousel)
+    if(coverFlowView == coverFlowView1)
     {
-        [self.delegate calling_providers_view];
-
+         [self.delegate calling_providers_view];
     }
-    else if(carousel == _carousel1)
-    {
+    else if(coverFlowView == coverFlowView2){
         [self.delegate calling_offers_view];
-
     }
-    else
-    {
-         [self.delegate calling_news_view];
+    else{
+        [self.delegate calling_news_view];
     }
 }
-
-- (void)carouselDidScroll:(iCarousel *)carousel
-{
-    if(carousel == _carousel)
-    {
-        
-        [carousel scrollToItemAtIndex:carousel.currentItemIndex+1 animated:YES];
-    }
-    else if(carousel == _carousel1)
-    {
-        
-        
-    }
-    else
-    {
-        
-    }
-}
-
 //- (void)scrollToItemAtIndex:(NSInteger)index animated:(BOOL)animated
 //{
 //    

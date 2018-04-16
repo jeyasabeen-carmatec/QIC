@@ -203,7 +203,7 @@
     self.segmentedControl4.selectedSegmentIndex = 0;
 
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_BTN_call addTarget:self action:@selector(call_ACTION) forControlEvents:UIControlEventTouchUpInside];
     //get_DIREction_action
     [_BTN_get_direction addTarget:self action:@selector(get_DIREction_action) forControlEvents:UIControlEventTouchUpInside];
 
@@ -465,6 +465,34 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
          } */
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Destination location not available" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+    }
+    
+}
+#pragma mark Mobile _call
+
+-(void)call_ACTION
+{
+    NSString *phone_number;
+    @try {
+        phone_number = @"9866806505";
+    } @catch (NSException *exception) {
+        NSLog(@"No phone number available %@",exception);
+    }
+    
+    if (phone_number) {
+        NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phone_number]];
+        if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+            [[UIApplication sharedApplication] openURL:phoneUrl];
+        } else
+        {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Phone number not available" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
     

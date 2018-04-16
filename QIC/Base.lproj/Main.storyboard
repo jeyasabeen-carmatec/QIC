@@ -37,14 +37,6 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.1647058824" green="0.53333333329999999" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1aP-ds-MhG">
-                                <rect key="frame" x="103" y="376" width="114" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="17"/>
-                                <state key="normal" title="Register">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTb-r1-zmh">
                                 <rect key="frame" x="3" y="80" width="314" height="289"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -70,7 +62,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dma-Rs-scw">
-                                        <rect key="frame" x="100" y="255" width="114" height="30"/>
+                                        <rect key="frame" x="107" y="255" width="100" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="17"/>
                                         <state key="normal" title="Login">
@@ -95,7 +87,6 @@
                     <connections>
                         <outlet property="BTN_guest" destination="JgN-4O-zvU" id="W6S-Tk-e1T"/>
                         <outlet property="BTN_login" destination="dma-Rs-scw" id="9R6-BG-YEb"/>
-                        <outlet property="BTN_register" destination="1aP-ds-MhG" id="y9S-1D-MUd"/>
                         <outlet property="TXT_password" destination="WRd-9y-GLW" id="sM0-Ob-Zgg"/>
                         <outlet property="TXT_uname" destination="svA-Gl-JbH" id="Hc8-xK-JkC"/>
                         <outlet property="VW_center" destination="BTb-r1-zmh" id="7iD-Pb-iOU"/>
@@ -263,19 +254,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pg7-uf-sK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="iln-gr-deQ">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BN_1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="iLj-LN-Enl">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="12.png" translatesAutoresizingMaskIntoConstraints="NO" id="NIN-V7-qcS">
-                            <rect key="frame" x="10" y="7" width="30" height="30"/>
+                            <rect key="frame" x="10" y="10" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TOP 5 PROVIDERS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z37-dp-t8X">
+                            <rect key="frame" x="51" y="10" width="196" height="35"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9T-f2-ref">
-                            <rect key="frame" x="251" y="3" width="65" height="20"/>
+                            <rect key="frame" x="251" y="10" width="65" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="14"/>
                             <state key="normal" title="View all">
@@ -283,41 +281,34 @@
                             </state>
                         </button>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fA-qF-L2I">
-                            <rect key="frame" x="78" y="56" width="242" height="155"/>
+                            <rect key="frame" x="51" y="58" width="269" height="182"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TOP 5 PROVIDERS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z37-dp-t8X">
-                            <rect key="frame" x="49" y="5" width="196" height="35"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="13"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="s2Q-gP-7ex">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BN_3.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9TQ-fF-Vfu">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="14.png" translatesAutoresizingMaskIntoConstraints="NO" id="WdX-qv-Tcx">
-                            <rect key="frame" x="11" y="8" width="30" height="30"/>
+                            <rect key="frame" x="10" y="10" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bM3-7A-cOP">
-                            <rect key="frame" x="49" y="6" width="251" height="35"/>
+                            <rect key="frame" x="51" y="10" width="251" height="35"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="13"/>
+                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3wm-Bd-AMn">
-                            <rect key="frame" x="77" y="56" width="242" height="152"/>
+                            <rect key="frame" x="51" y="58" width="269" height="182"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -325,26 +316,26 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="Nm9-XT-IIQ">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BN_2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Aie-pm-o8s">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="13.png" translatesAutoresizingMaskIntoConstraints="NO" id="dga-xA-VBD">
-                            <rect key="frame" x="14" y="7" width="30" height="30"/>
+                            <rect key="frame" x="10" y="10" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msC-He-dAQ">
-                            <rect key="frame" x="51" y="5" width="255" height="35"/>
+                            <rect key="frame" x="51" y="10" width="255" height="35"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="13"/>
+                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJt-Cv-SMt">
-                            <rect key="frame" x="77" y="59" width="242" height="152"/>
+                            <rect key="frame" x="51" y="58" width="269" height="182"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>

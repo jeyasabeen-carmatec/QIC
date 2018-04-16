@@ -39,7 +39,7 @@
     
     /****************** setting the Button guest Text ***********************/
     
-    NSString *str_name = @"Not a QIC-Anaya Customer?";
+    NSString *str_name = @"Not a QIC-Anaya Customer? ----> Go";
     _BTN_guest.titleLabel.numberOfLines = 2;
     _BTN_guest.titleLabel.textAlignment = NSTextAlignmentCenter;
     [_BTN_guest setTitle:str_name forState:UIControlStateNormal];

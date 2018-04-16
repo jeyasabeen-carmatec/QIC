@@ -90,6 +90,8 @@
     cell.IMG_title.layer.masksToBounds = YES;
     
     cell.IMG_title.image = [UIImage imageNamed:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"key5"]];
+    cell.BTN_phone.tag =  indexPath.section;
+    [cell.BTN_phone addTarget:self action:@selector(mobile_dial:) forControlEvents:UIControlEventTouchUpInside];
     
     
 
@@ -148,6 +150,39 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Mobile _call
+
+-(void)mobile_dial:(UIButton *)sender
+{
+    NSIndexPath *buttonIndexPath1 = [NSIndexPath indexPathForRow:sender.tag inSection:0];
+    NSLog(@"From Delete Skill %ld",(long)buttonIndexPath1.row);
+    NSString *index_str = [NSString stringWithFormat:@"%ld",(long)buttonIndexPath1.row];
+    NSLog(@"Index path of Upcomming Event %@",index_str);
+     NSString *phone_number;
+    @try {
+        phone_number = @"1234567891";
+    } @catch (NSException *exception) {
+        NSLog(@"No phone number available %@",exception);
+    }
+    
+    if (phone_number) {
+        NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phone_number]];
+        if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+            [[UIApplication sharedApplication] openURL:phoneUrl];
+        } else
+        {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Phone number not available" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
 }
 
 /*

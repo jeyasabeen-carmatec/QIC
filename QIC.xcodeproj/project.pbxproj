@@ -131,6 +131,7 @@
 		D079D6A7207E362D0079CA99 /* private-clinic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D6A4207E362D0079CA99 /* private-clinic.jpg */; };
 		D079D6A8207E362D0079CA99 /* Dental_centar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D6A5207E362D0079CA99 /* Dental_centar.jpg */; };
 		D079D6AA207E36770079CA99 /* physiotherapy.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D6A9207E36770079CA99 /* physiotherapy.png */; };
+		D079D6D02084CA360079CA99 /* discount3.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D6CF2084CA350079CA99 /* discount3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -292,6 +293,7 @@
 		D079D6A4207E362D0079CA99 /* private-clinic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "private-clinic.jpg"; sourceTree = "<group>"; };
 		D079D6A5207E362D0079CA99 /* Dental_centar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dental_centar.jpg; sourceTree = "<group>"; };
 		D079D6A9207E36770079CA99 /* physiotherapy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = physiotherapy.png; sourceTree = "<group>"; };
+		D079D6CF2084CA350079CA99 /* discount3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discount3.png; sourceTree = "<group>"; };
 		F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QIC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -491,6 +493,7 @@
 		D02AC7EB2073416F00F47C93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D079D6CF2084CA350079CA99 /* discount3.png */,
 				D079D6AB207E397B0079CA99 /* categorie_images */,
 				D079D696207E2B010079CA99 /* black-bar */,
 				D079D694207E228D0079CA99 /* upload-7.png */,
@@ -891,6 +894,7 @@
 				D02AC897207624AD00F47C93 /* Futura Std Book.ttf in Resources */,
 				D079D68F207DDCEC0079CA99 /* 10%25-Discount.png in Resources */,
 				D02AC80A2073903A00F47C93 /* provide-App-20x20@3x.png in Resources */,
+				D079D6D02084CA360079CA99 /* discount3.png in Resources */,
 				D079D69B207E2B010079CA99 /* 12.png in Resources */,
 				D02AC8002073889600F47C93 /* provider.png in Resources */,
 				D02AC898207624AD00F47C93 /* Futura TOT Book.ttf in Resources */,
@@ -1193,6 +1197,7 @@
 				DEVELOPMENT_TEAM = 4MCGAH3G26;
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
 				INFOPLIST_FILE = QIC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.QIC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1210,6 +1215,7 @@
 				DEVELOPMENT_TEAM = 4MCGAH3G26;
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
 				INFOPLIST_FILE = QIC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.QIC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
