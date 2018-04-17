@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "APIHelper.h"
 
 @interface ViewController ()
 
@@ -86,16 +87,81 @@
     _BTN_register.layer.borderColor = [UIColor whiteColor].CGColor;
 
     
-    [_BTN_login addTarget:self action:@selector(login_action) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_login addTarget:self action:@selector(valdations_FOR_Text) forControlEvents:UIControlEventTouchUpInside];
     
+    
+}
+#pragma Validation checking
+
+-(void)valdations_FOR_Text
+{
+    NSString *str_msg;
+   if([_TXT_uname.text isEqualToString:@""])
+   {
+       str_msg =  @"Please enter QID number";
+   }
+    if(str_msg)
+    {
+        [APIHelper createaAlertWithMsg:str_msg andTitle:@"Alert"];
+    }
+    else
+    {
+        [APIHelper start_animation:self];
+        [self performSelector:@selector(login_action) withObject:nil afterDelay:0.01];
+
+    }
     
 }
 
 #pragma mark LOGIN action
-
 -(void)login_action
 {
-    [self performSegueWithIdentifier:@"login_home" sender:self];
+    
+    @try
+    {
+    NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
+    NSString *url_str = [NSString stringWithFormat:@"https://www.devapi.anoudapps.com/anaya/memberPortalLogin?company=001"];
+    NSDictionary *parameters = @{@"memberId":str_QID};
+    [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+        
+        if(error)
+        {
+            [APIHelper stop_activity_animation:self];
+        }
+        if(data)
+        {
+            NSDictionary *TEMP_dict = data;
+             [APIHelper stop_activity_animation:self];
+            
+            if([[TEMP_dict valueForKey:@"errMessage"] isEqualToString:@"Success"])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self performSegueWithIdentifier:@"login_home" sender:self];
+
+                });
+                
+                [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
+                
+            }
+            else
+            {
+                
+                 [APIHelper createaAlertWithMsg:@"Login Failed" andTitle:@"Alert"];
+
+            }
+        
+
+            
+        }
+
+    }];
+    }
+    @catch(NSException *exception)
+    {
+         [APIHelper stop_activity_animation:self];
+        NSLog(@"Exception from login api:%@",exception);
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

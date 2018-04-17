@@ -6,6 +6,7 @@ target 'QIC' do
   # use_frameworks!
    pod 'GoogleMaps'
   pod 'GooglePlaces'
+pod 'SDWebImage/WebP'
   # Pods for QIC
 
 end

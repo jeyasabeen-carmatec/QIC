@@ -55,6 +55,9 @@
     _IMG_center_image.layer.masksToBounds =  YES;
     
     _LBL_center_name.text = @"AL SHAMI MEDICAL CENTER";
+    
+    
+    
    /* NSString *str_center_name =@"Al shami medical center";
     NSString *str_designaton = @"Dentist";
     NSString *str_address = @"Wadi Al Utooria Strret,Khaled.";
@@ -97,10 +100,8 @@
     
     
     
-   // [_LBL_center_name sizeToFit];
     
     _LBL_designation.text = @"Dentist";
-    //[_LBL_designation sizeToFit];
     CGRect frameset = _LBL_designation.frame;
     frameset.origin.y = _LBL_center_name.frame.origin.y + _LBL_center_name.frame.size.height+4;
     _LBL_designation.frame = frameset;
@@ -111,7 +112,6 @@
 
     frameset = _LBL_address.frame;
     frameset.origin.y = _LBL_designation.frame.origin.y + _LBL_designation.frame.size.height+4;
-   // frameset.size.height = _LBL_address.frame.origin.y + _LBL_address.intrinsicContentSize.height;
     _LBL_address.frame = frameset;
     
      [_LBL_address sizeToFit];
@@ -128,11 +128,6 @@
     frameset.origin.y = _LBL_address.frame.origin.y + _LBL_address.frame.size.height+4;
     _LBL_phone.frame = frameset;
 
-  //  [_LBL_phone sizeToFit];*/
-    
-//     frameset = _TXT_VW_address.frame;
-//    frameset.size.height = _TXT_VW_address.frame.origin.y + _TXT_VW_address.contentSize.height;
-//    _TXT_VW_address.frame = frameset;
     
     frameset = _BTN_call.frame;
     frameset.origin.y = _LBL_address.frame.origin.y + _LBL_address.frame.size.height;
@@ -204,6 +199,7 @@
 
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_call addTarget:self action:@selector(call_ACTION) forControlEvents:UIControlEventTouchUpInside];
+    
     //get_DIREction_action
     [_BTN_get_direction addTarget:self action:@selector(get_DIREction_action) forControlEvents:UIControlEventTouchUpInside];
 
@@ -252,6 +248,8 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 
 [self.VW_main addSubview:self.segmentedControl4];
 }
+#pragma Segment controller did select action
+
 -(void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl4
 {
     if(segmentedControl4.selectedSegmentIndex == 0)
@@ -268,7 +266,7 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 
 -(void)Offers_view_showing
 {
-      _BTN_get_direction.hidden = YES;
+    _BTN_get_direction.hidden = YES;
     [_TBL_offers reloadData];
     _mapView.hidden = YES;
     _TBL_offers.hidden = NO;
@@ -455,15 +453,7 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
         }
     } @catch (NSException *exception) {
         NSLog(@"Exception from location %@",exception);
-        /*  NSString *urlString=[NSString stringWithFormat:@"comgooglemaps://?center=%f,%f&zoom=14&views=traffic",LOC_current.coordinate.latitude,LOC_current.coordinate.longitude];
-         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
-         [[UIApplication sharedApplication] openURL:
-         [NSURL URLWithString:urlString]];
-         } else {
-         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Please install google map from itunes" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-         [alert show];
-         } */
-        
+               
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Destination location not available" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [alert show];
     }

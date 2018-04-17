@@ -115,7 +115,6 @@
 		D079D672207C948B0079CA99 /* BN_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D66F207C948B0079CA99 /* BN_1.jpg */; };
 		D079D673207C948B0079CA99 /* BN_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D670207C948B0079CA99 /* BN_2.jpg */; };
 		D079D674207C948B0079CA99 /* BN_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D671207C948B0079CA99 /* BN_3.jpg */; };
-		D079D685207CAD980079CA99 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = D079D683207CAD980079CA99 /* iCarousel.m */; };
 		D079D688207CCF830079CA99 /* discount.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D687207CCF830079CA99 /* discount.png */; };
 		D079D68A207DCDE00079CA99 /* house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D689207DCDE00079CA99 /* house.jpg */; };
 		D079D68F207DDCEC0079CA99 /* 10%25-Discount.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D68C207DDCEC0079CA99 /* 10%25-Discount.png */; };
@@ -132,6 +131,7 @@
 		D079D6A8207E362D0079CA99 /* Dental_centar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D079D6A5207E362D0079CA99 /* Dental_centar.jpg */; };
 		D079D6AA207E36770079CA99 /* physiotherapy.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D6A9207E36770079CA99 /* physiotherapy.png */; };
 		D079D6D02084CA360079CA99 /* discount3.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D6CF2084CA350079CA99 /* discount3.png */; };
+		D079D6D42085F07A0079CA99 /* APIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D079D6D32085F07A0079CA99 /* APIHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -276,8 +276,6 @@
 		D079D66F207C948B0079CA99 /* BN_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BN_1.jpg; sourceTree = "<group>"; };
 		D079D670207C948B0079CA99 /* BN_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BN_2.jpg; sourceTree = "<group>"; };
 		D079D671207C948B0079CA99 /* BN_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BN_3.jpg; sourceTree = "<group>"; };
-		D079D682207CAD980079CA99 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
-		D079D683207CAD980079CA99 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		D079D687207CCF830079CA99 /* discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discount.png; sourceTree = "<group>"; };
 		D079D689207DCDE00079CA99 /* house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = house.jpg; sourceTree = "<group>"; };
 		D079D68C207DDCEC0079CA99 /* 10%25-Discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10%25-Discount.png"; sourceTree = "<group>"; };
@@ -294,6 +292,8 @@
 		D079D6A5207E362D0079CA99 /* Dental_centar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dental_centar.jpg; sourceTree = "<group>"; };
 		D079D6A9207E36770079CA99 /* physiotherapy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = physiotherapy.png; sourceTree = "<group>"; };
 		D079D6CF2084CA350079CA99 /* discount3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discount3.png; sourceTree = "<group>"; };
+		D079D6D22085F07A0079CA99 /* APIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIHelper.h; sourceTree = "<group>"; };
+		D079D6D32085F07A0079CA99 /* APIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIHelper.m; sourceTree = "<group>"; };
 		F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QIC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -376,6 +376,7 @@
 		D02AC7B32072301D00F47C93 /* QIC */ = {
 			isa = PBXGroup;
 			children = (
+				D079D6D12085EFFA0079CA99 /* API helper class */,
 				D02AC7F020737D3600F47C93 /* Delegates files */,
 				D02AC7B72072301D00F47C93 /* AppDelegate.h */,
 				D02AC7B82072301D00F47C93 /* AppDelegate.m */,
@@ -686,7 +687,6 @@
 			isa = PBXGroup;
 			children = (
 				D079D660207B7A470079CA99 /* CFCoverFlowView */,
-				D079D681207CAD980079CA99 /* iCarousel */,
 				D002557A207773340059A349 /* TextField Rect */,
 				D02AC84B2074E6DC00F47C93 /* Hmsegmented controller */,
 			);
@@ -778,15 +778,6 @@
 			name = "Home page_images";
 			sourceTree = "<group>";
 		};
-		D079D681207CAD980079CA99 /* iCarousel */ = {
-			isa = PBXGroup;
-			children = (
-				D079D682207CAD980079CA99 /* iCarousel.h */,
-				D079D683207CAD980079CA99 /* iCarousel.m */,
-			);
-			path = iCarousel;
-			sourceTree = "<group>";
-		};
 		D079D68B207DDCEC0079CA99 /* discount */ = {
 			isa = PBXGroup;
 			children = (
@@ -817,6 +808,15 @@
 				D079D6A9207E36770079CA99 /* physiotherapy.png */,
 			);
 			name = categorie_images;
+			sourceTree = "<group>";
+		};
+		D079D6D12085EFFA0079CA99 /* API helper class */ = {
+			isa = PBXGroup;
+			children = (
+				D079D6D22085F07A0079CA99 /* APIHelper.h */,
+				D079D6D32085F07A0079CA99 /* APIHelper.m */,
+			);
+			name = "API helper class";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1048,12 +1048,12 @@
 				D02AC7E72073410500F47C93 /* menu_cell.m in Sources */,
 				D02AC81520739F0000F47C93 /* VC_news.m in Sources */,
 				D02AC8472074DA4900F47C93 /* VC_detail.m in Sources */,
-				D079D685207CAD980079CA99 /* iCarousel.m in Sources */,
 				D02AC82C2074992F00F47C93 /* news_cell.m in Sources */,
 				D02AC83320749F2500F47C93 /* VC_sub_categories.m in Sources */,
 				D002557D207773690059A349 /* TXT_placeholder.m in Sources */,
 				D02AC7EF2073599B00F47C93 /* VC_home_tab.m in Sources */,
 				D079D66C207C78940079CA99 /* offers_list_cell.m in Sources */,
+				D079D6D42085F07A0079CA99 /* APIHelper.m in Sources */,
 				D02AC7D6207250AB00F47C93 /* homw_tab_bar.m in Sources */,
 				D02AC7BC2072301D00F47C93 /* ViewController.m in Sources */,
 				D02AC8422074C48400F47C93 /* consultation_cell.m in Sources */,
@@ -1193,6 +1193,7 @@
 			baseConfigurationReference = CCF1A403BDEB38A3523C5095 /* Pods-QIC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 4MCGAH3G26;
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
@@ -1201,7 +1202,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.QIC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30b36b58-5e3a-4acf-8670-a5b2ba14f39c";
+				PROVISIONING_PROFILE = "5b0c578c-388f-4b53-97b6-3dafc9d314f5";
 				PROVISIONING_PROFILE_SPECIFIER = QICdev;
 			};
 			name = Debug;
@@ -1211,6 +1212,7 @@
 			baseConfigurationReference = 6DD2584364BC599693B662AC /* Pods-QIC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 4MCGAH3G26;
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
@@ -1219,7 +1221,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.QIC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30b36b58-5e3a-4acf-8670-a5b2ba14f39c";
+				PROVISIONING_PROFILE = "5b0c578c-388f-4b53-97b6-3dafc9d314f5";
 				PROVISIONING_PROFILE_SPECIFIER = QICdev;
 			};
 			name = Release;

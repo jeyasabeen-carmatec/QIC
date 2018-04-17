@@ -9,10 +9,9 @@
 #import "VC_home_tab.h"
 #import "menu_cell.h"
 #import "CFCoverFlowView.h"
-#import "iCarousel.h"
 
 
-@interface VC_home_tab ()<UITableViewDelegate,UITableViewDataSource,CFCoverFlowViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,iCarouselDataSource, iCarouselDelegate>
+@interface VC_home_tab ()<UITableViewDelegate,UITableViewDataSource,CFCoverFlowViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate>
 {
     NSMutableArray *arr_images;
     CGRect frameset;
@@ -21,9 +20,6 @@
     CFCoverFlowView *coverFlowView3;
     
 }
-@property (nonatomic, strong) IBOutlet iCarousel *carousel;
-@property (nonatomic, strong) IBOutlet iCarousel *carousel1;
-@property (nonatomic, strong) IBOutlet iCarousel *carousel2;
 
 
 
@@ -34,8 +30,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    _TBL_list.delegate= self;
-//    _TBL_list.dataSource = self;
     
     [self SET_UP_VIEW];
     
@@ -58,15 +52,7 @@
     _VW_providers.frame = frameset;
     
     [self.Scroll_contents addSubview:_VW_providers];
-//     _carousel.type = iCarouselTypeCoverFlow2;
-//     _carousel1.type = iCarouselTypeCoverFlow2;
-//     _carousel2.type = iCarouselTypeCoverFlow2;
-//    
-//     arr_images = [NSMutableArray arrayWithObjects:@"1",@"Banner-B.jpg",@"2",@"3",@"4",@"5", nil];
-//    [_carousel reloadData];
-//    [_carousel1 reloadData];
-//    [_carousel2 reloadData];
-//
+    
     NSArray *arr_image = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", nil];
     NSArray *arr_names = [NSArray arrayWithObjects:@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER", nil];
     NSArray *arr_sub_names = [NSArray arrayWithObjects:@"4 providers",@"3 providers",@"5 providers",@"2 providers",@"7 providers",@"5 providers", nil];
@@ -174,6 +160,9 @@
 
     
 }
+
+#pragma setting the attributed Text 
+
 -(void)attributed_TEXT
 {
     
@@ -255,6 +244,8 @@
     }
 
 }
+#pragma View did lay out sub views
+
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -265,6 +256,7 @@
 }
 
 #pragma Table view delegate Methods
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return arr_images.count;
@@ -325,7 +317,9 @@
          _LBL_search_place_holder.alpha = 0.0f;
     }
 }
-#pragma Images Action
+
+#pragma Images  carousel Action
+
 -(void)providers_action
 {
 
@@ -339,84 +333,6 @@
 {
     [self.delegate calling_news_view];
 }
-#pragma mark -
-#pragma mark iCarousel methods
-
-- (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
-{
-    //return the total number of items in the carousel
-    return [arr_images count];
-}
-
-- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
-{
-    UILabel *label = nil;
-    
-    //create new view if no view is available for recycling
-    if (view == nil)
-    {
-        if(carousel == _carousel)
-        {
-        view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 150, 160)];
-        ((UIImageView *)view).image = [UIImage imageNamed:[arr_images objectAtIndex:index]];
-        view.contentMode = UIViewContentModeRedraw;
-        }
-        else{
-            view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 150, 160)];
-            ((UIImageView *)view).image = [UIImage imageNamed:[arr_images objectAtIndex:index]];
-            view.contentMode = UIViewContentModeRedraw;
-        }
-    }
-    else
-    {
-        //get a reference to the label in the recycled view
-        label = (UILabel *)[view viewWithTag:1];
-    }
-    
-    //set item label
-    //remember to always set any properties of your carousel item
-    //views outside of the `if (view == nil) {...}` check otherwise
-    //you'll get weird issues with carousel item content appearing
-    //in the wrong place in the carousel
-    // label.text = [items[index] stringValue];
-    
-    return view;
-}
-//-(void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
-//{
-//    if(carousel == _carousel)
-//    {
-//        [self.delegate calling_providers_view];
-//
-//    }
-//    else if(carousel == _carousel1)
-//    {
-//        [self.delegate calling_offers_view];
-//
-//    }
-//    else
-//    {
-//         [self.delegate calling_news_view];
-//    }
-//}
-//
-//- (void)carouselDidScroll:(iCarousel *)carousel
-//{
-//    if(carousel == _carousel)
-//    {
-//        
-//        [carousel scrollToItemAtIndex:carousel.currentItemIndex+1 animated:YES];
-//    }
-//    else if(carousel == _carousel1)
-//    {
-//        
-//        
-//    }
-//    else
-//    {
-//        
-//    }
-//}
 - (void)coverFlowView:(CFCoverFlowView *)coverFlowView didSelectPageItemAtIndex:(NSInteger)index
 {
     if(coverFlowView == coverFlowView1)
@@ -430,10 +346,6 @@
         [self.delegate calling_news_view];
     }
 }
-//- (void)scrollToItemAtIndex:(NSInteger)index animated:(BOOL)animated
-//{
-//    
-//}
 
 /*
 #pragma mark - Navigation

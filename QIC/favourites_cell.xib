@@ -16,9 +16,6 @@
         <array key="Futura Book.ttf">
             <string>Futura-Book</string>
         </array>
-        <array key="Futura Extra Bold.ttf">
-            <string>Futura-ExtraBold</string>
-        </array>
         <array key="Futura URW Medium.ttf">
             <string>FuturaT-Medi</string>
         </array>
@@ -84,10 +81,10 @@
                                 <color key="textColor" red="0.63529411764705879" green="0.0" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ro1-XC-JRF">
-                                <rect key="frame" x="25" y="38" width="54" height="61"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ro1-XC-JRF">
+                                <rect key="frame" x="31" y="34" width="54" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-ExtraBold" family="Futura-ExtraBold" pointSize="11"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="11"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.71764705880000002" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>

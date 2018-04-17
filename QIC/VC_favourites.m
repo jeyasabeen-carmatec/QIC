@@ -48,15 +48,55 @@
     cell.LBL_name.text = @"Al SHAMI MEDICAL CENTER";
     cell.LBL_addres.text = @"Wadi Al utooria Street,\nAin Khaled.";
     cell.LBL_designnantion.text = @"Services: Dentist";
-    cell.LBL_price_amount.text = @"10%\ndiscount";
+   NSString *discount = @"10%";
+
+    
+    NSString *str_addres = [NSString  stringWithFormat:@"%@\ndiscount",discount];
+    
+    if ([cell.LBL_price_amount respondsToSelector:@selector(setAttributedText:)])
+    {
+        NSDictionary *attribs = @{
+                                  NSForegroundColorAttributeName:cell.LBL_price_amount.textColor,
+                                  NSFontAttributeName: cell.LBL_price_amount.font,
+                                  };
+        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_addres attributes:attribs];
+        
+        CGSize result = [[UIScreen mainScreen] bounds].size;
+        float size;
+        if(result.height <= 480)
+        {
+            size = 13.0;
+        }
+        else if(result.height <= 568)
+        {
+            size = 15.0;
+        }
+        else
+        {
+            size = 17.0;
+        }
+        
+        cell.LBL_price_amount.font = [UIFont fontWithName:@"Futura-Heavy" size:size];
+        @try
+        {
+
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Heavy" size:size],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0],}range:[str_addres rangeOfString:discount] ];
+        }
+        @catch(NSException *exception)
+        {
+            NSLog(@"Exception for attributed text:%@",exception);
+        }
+        
+        cell.LBL_price_amount.attributedText = attributedText;
+    }
+    else{
+        cell.LBL_price_amount.text = str_addres;
+    }
+    
     cell.LBL_price_amount.transform=CGAffineTransformMakeRotation( ( 90 * M_PI ) / -360 );
 
     cell.VW_back_ground.layer.cornerRadius = 2.0f;
-    //  cell.VW_back_ground.backgroundColor = [UIColor whiteColor];
-    
-//    cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
-//    cell.IMG_title.layer.masksToBounds = YES;
-
+   
     return cell;
     
 }
@@ -70,7 +110,6 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   // [self.delegate consultation_detail:@"consultation_detail"];
 }
 #pragma Back action
 -(void)back_actions

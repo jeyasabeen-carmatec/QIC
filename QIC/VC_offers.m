@@ -24,15 +24,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-  /*  for (UIViewController *contoller in self.childViewControllers) {
-        if (contoller) {
-            [contoller removeFromParentViewController];
-        }
-    } */
-    
     arr_images = [[NSMutableArray alloc]init];
-    
-  //  arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg",@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+  
     
     NSDictionary *temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"CONSULTATIONS",@"key1",@"Banner-A.jpg",@"key2",nil];
     [arr_images addObject:temp_dict];
@@ -102,6 +95,7 @@
     // Dispose of any resources that can be recreated.
 }
 #pragma Textfield Delegates
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
