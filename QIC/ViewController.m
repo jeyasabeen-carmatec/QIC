@@ -32,6 +32,7 @@
     /**************** settign te frame for view center **********************/
     
    // _VW_center.center=self.view.center;
+    _TXT_uname.text =  @"28535632996";
     
     CGRect frameset = _BTN_guest.frame;
    
@@ -131,22 +132,31 @@
         if(data)
         {
             NSDictionary *TEMP_dict = data;
+            NSLog(@"The login customer Data:%@",TEMP_dict);
              [APIHelper stop_activity_animation:self];
             
             if([[TEMP_dict valueForKey:@"errMessage"] isEqualToString:@"Success"])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self performSegueWithIdentifier:@"login_home" sender:self];
+                    [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
+
 
                 });
                 
-                [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
+                
+                NSMutableDictionary *dictMutable = [TEMP_dict mutableCopy];
+                [dictMutable removeObjectsForKeys:[TEMP_dict allKeysForObject:[NSNull null]]];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
                 
             }
             else
             {
                 
-                 [APIHelper createaAlertWithMsg:@"Login Failed" andTitle:@"Alert"];
+                 [APIHelper createaAlertWithMsg:@"Please check QID number" andTitle:@"Alert"];
 
             }
         

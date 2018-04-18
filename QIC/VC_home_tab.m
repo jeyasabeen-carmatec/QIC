@@ -36,6 +36,10 @@
    
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_providers_all addTarget:self action:@selector(providers_action) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_providers_all addTarget:self action:@selector(providers_action) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_news_all addTarget:self action:@selector(news_all_action) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_offers_all addTarget:self action:@selector(offers_all_action) forControlEvents:UIControlEventTouchUpInside];
+
   
 
    
@@ -47,9 +51,61 @@
 {
     
     /***************** setting of Providers view **********************/
+    
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+
     frameset = _VW_providers.frame;
     frameset.size.width = _Scroll_contents.frame.size.width;
+    float ht;
+    if(result.height <= 480)
+    {
+        ht = 340;
+    }
+    else if(result.height <= 568)
+    {
+        ht= 340;
+    }
+    else
+    {
+       ht = 400;
+
+    }
+   
+    frameset.size.height = ht;
     _VW_providers.frame = frameset;
+    
+    /***************** Height and width Declaration ****************/
+    float HT,width,indicaotr_ht;
+    
+    frameset = _VW_indicagtor_for_cover.frame;
+    frameset.origin.y = _LBL_provider_header_label.frame.origin.y + _LBL_provider_header_label.frame.size.height + 10 ;
+   
+    if(result.height <= 480)
+    {
+       indicaotr_ht  = 203;
+       HT = 1.4;
+       width = 1.7;
+    }
+    else if(result.height <= 568)
+    {
+        indicaotr_ht = 203;
+        HT = 1.5;
+        width = 1.7;
+
+        
+    }
+    else
+    {
+        indicaotr_ht = 290;
+        HT = 1.6;
+        width = 1.7;
+        
+    }
+    
+    
+    frameset.size.height = indicaotr_ht;
+    _VW_indicagtor_for_cover.frame =  frameset;
+    
     
     [self.Scroll_contents addSubview:_VW_providers];
     
@@ -57,32 +113,42 @@
     NSArray *arr_names = [NSArray arrayWithObjects:@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER", nil];
     NSArray *arr_sub_names = [NSArray arrayWithObjects:@"4 providers",@"3 providers",@"5 providers",@"2 providers",@"7 providers",@"5 providers", nil];
     
-     coverFlowView1 = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
+    coverFlowView1 = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
     coverFlowView1.backgroundColor = [UIColor clearColor];
-    coverFlowView1.pageItemWidth = _VW_indicagtor_for_cover.frame.size.width/2.7;
     coverFlowView1.pageItemCoverWidth = 0.0f;
-    coverFlowView1.pageItemHeight = _VW_news.frame.size.height/1.2;
+      coverFlowView1.pageItemWidth = _VW_indicagtor_for_cover.frame.size.width/width;
+
+    coverFlowView1.pageItemHeight = _VW_providers.frame.size.height/HT;
+
     coverFlowView1.pageItemCornerRadius = 5.0;
     coverFlowView1.delegate = self;
     [coverFlowView1 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names];
     [self.VW_providers addSubview:coverFlowView1];
     
+
     
     
     
     /***************** setting of Offers view **********************/
+    
     frameset = _VW_offers.frame;
     frameset.origin.y = _VW_providers.frame.origin.y + _VW_providers.frame.size.height +4;
     frameset.size.width = _Scroll_contents.frame.size.width;
+     frameset.size.height = ht;
     _VW_offers.frame = frameset;
+    
+    frameset = _VW_offer_indicator_for_cover.frame;
+    frameset.origin.y = _LBL_offer_header_label.frame.origin.y + _LBL_offer_header_label.frame.size.height + 10;
+    frameset.size.height = indicaotr_ht;
+    _VW_offer_indicator_for_cover.frame =  frameset;
     
     [self.Scroll_contents addSubview:_VW_offers];
     
      coverFlowView2 = [[CFCoverFlowView alloc] initWithFrame:self.VW_offer_indicator_for_cover.frame];
     coverFlowView2.backgroundColor = [UIColor clearColor];
-    coverFlowView2.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.7;
+    coverFlowView2.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ width;
     coverFlowView2.pageItemCoverWidth = 0.0f;
-    coverFlowView2.pageItemHeight = _VW_news.frame.size.height/1.2;
+    coverFlowView2.pageItemHeight = _VW_offers.frame.size.height/HT;
     coverFlowView2.pageItemCornerRadius = 5.0;
     coverFlowView2.delegate = self;
     
@@ -94,18 +160,26 @@
     
     
     /***************** setting of News view **********************/
+    
     frameset = _VW_news.frame;
     frameset.origin.y = _VW_offers.frame.origin.y + _VW_offers.frame.size.height+4;
     frameset.size.width = _Scroll_contents.frame.size.width;
+    frameset.size.height = ht;
     _VW_news.frame = frameset;
+    
+    frameset = _VW_news_indicator_for_cover.frame;
+    frameset.origin.y = _LBL_news_header_label.frame.origin.y + _LBL_news_header_label.frame.size.height +10;
+    frameset.size.height = indicaotr_ht;
+    _VW_news_indicator_for_cover.frame =  frameset;
+
     
     [self.Scroll_contents addSubview:_VW_news];
     
      coverFlowView3 = [[CFCoverFlowView alloc] initWithFrame:self.VW_news_indicator_for_cover.frame];
     coverFlowView3.backgroundColor = [UIColor clearColor];
-    coverFlowView3.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ 2.7;
+    coverFlowView3.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ width;
     coverFlowView3.pageItemCoverWidth = 0.0f;
-    coverFlowView3.pageItemHeight = _VW_news.frame.size.height/1.2;
+    coverFlowView3.pageItemHeight = _VW_news.frame.size.height/HT;
     coverFlowView3.pageItemCornerRadius = 5.0;
     NSArray *arr_sub_names_news = [NSArray arrayWithObjects:@"1 hour ago",@"2 hour ago",@"3 hour ago",@"4 hour ago",@"5 hour ago",@"6 hour ago", nil];
     [coverFlowView3 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_news];
@@ -166,6 +240,28 @@
 -(void)attributed_TEXT
 {
     
+    
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+    float ht_header,ht_sub_header;
+    if(result.height <= 480)
+    {
+        ht_header = 14.0;
+        ht_sub_header = 12.0;
+    }
+    else if(result.height <= 568)
+    {
+        ht_header = 14.0;
+        ht_sub_header = 12.0;
+
+    }
+    else
+    {
+        ht_header = 17.0;
+        ht_sub_header = 14.0;
+        
+    }
+
+    
     NSString *str_header_name =@"TOP 5 PROVIDERS";
     NSString *str_sub_header_name = @"This is showing the top Providers";
     
@@ -181,9 +277,11 @@
                                   NSFontAttributeName: _LBL_news_header_label.font,
                                   };
         NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_providers attributes:attribs];
+     
+
         
         
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:10.0],NSForegroundColorAttributeName:[UIColor whiteColor],}range:[str_providers rangeOfString:str_sub_header_name] ];
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:ht_sub_header],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_providers rangeOfString:str_sub_header_name] ];
         
         
         _LBL_provider_header_label.attributedText = attributedText;
@@ -209,7 +307,7 @@
         NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_offers attributes:attribs];
         
         
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:10.0],NSForegroundColorAttributeName:[UIColor whiteColor],}range:[str_offers rangeOfString:str_offer_sub_header_name] ];
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:ht_sub_header],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_offers rangeOfString:str_offer_sub_header_name] ];
         
         
         _LBL_offer_header_label.attributedText = attributedText;
@@ -233,8 +331,9 @@
                                   };
         NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_news attributes:attribs];
         
+       
         
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:10.0],NSForegroundColorAttributeName:[UIColor whiteColor],}range:[str_news rangeOfString:str_news_sub_header_name] ];
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:ht_sub_header],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_news rangeOfString:str_news_sub_header_name] ];
         
         
         _LBL_news_header_label.attributedText = attributedText;
@@ -333,6 +432,7 @@
 {
     [self.delegate calling_news_view];
 }
+
 - (void)coverFlowView:(CFCoverFlowView *)coverFlowView didSelectPageItemAtIndex:(NSInteger)index
 {
     if(coverFlowView == coverFlowView1)
@@ -345,6 +445,17 @@
     else{
         [self.delegate calling_news_view];
     }
+}
+
+#pragma View all Buttonns actions
+
+-(void)offers_all_action
+{
+[self.delegate calling_offers_view];
+}
+-(void)news_all_action
+{
+   [self.delegate calling_news_view]; 
 }
 
 /*

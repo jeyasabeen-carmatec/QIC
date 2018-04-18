@@ -91,7 +91,7 @@
     VW_overlay.layer.cornerRadius = 5.0f;
     VW_overlay.clipsToBounds = YES;
     VW_overlay.tag = 1234;
-    
+    VW_overlay.layer.shadowOffset = CGSizeMake(0, 5);
     
     
     VW_overlay.hidden = NO;
@@ -137,5 +137,38 @@
     return  alert;
 }
 
+#pragma Convert NUll
++(NSString *_Nullable)convert_NUll:(NSString *_Nullable)str
+{
+    NSString *str_null = [str stringByReplacingOccurrencesOfString:@"(null)" withString:@"Not mentioned"];
+    str_null = [str stringByReplacingOccurrencesOfString:@"<null>" withString:@"Not mentioned"];
+    if([str_null isKindOfClass:[NSNull class]])
+    {
+        str_null = @"Not mentioned";
+    }
+    return str_null;
+}
+
+#pragma GETTING_HEIGHT
+//+(double *_Nullable)getting_HT_VIEW
+//  {
+//      double VAL=0;
+//      
+//      CGSize result = [[UIScreen mainScreen] bounds].size;
+//      if(result.height <= 480)
+//      {
+//          VAL = 203.0;
+//      }
+//      else if(result.height <= 568)
+//      {
+//          VAL = 203;
+//      }
+//      else
+//      {
+//          VAL = 300;
+//      }
+//      return VAL;
+//
+//  }
 
 @end

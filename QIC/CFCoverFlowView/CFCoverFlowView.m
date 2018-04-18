@@ -121,14 +121,14 @@
         imageView.backgroundColor = [UIColor clearColor];
         CGSize result = [[UIScreen mainScreen] bounds].size;
         float size;
-        imageView.center = CGPointMake(_width/5.9, _height / 2.0);
+        imageView.center = CGPointMake(_width/3.7, _height / 2.0);
 
         if(result.height <= 480)
         {
           //  imageView.center = CGPointMake(_width/5, _height / 2.0);
 
             imageView.bounds = CGRectMake(0, 0,_pageItemWidth, _pageItemHeight);
-            size = 7;
+            size = 10;
 
         }
         else if(result.height <= 568)
@@ -136,14 +136,14 @@
            // imageView.center = CGPointMake(_width/5.9, _height / 2.0);
 
             imageView.bounds = CGRectMake(0, 0,_pageItemWidth, _pageItemHeight);
-            size = 7;
+            size = 10;
 
         }
         else
         {
            
             imageView.bounds = CGRectMake(0, 0,_pageItemWidth, _pageItemHeight);
-            size = 8;
+            size = 14;
 
         }
         imageView.bounds = CGRectMake(0, 0,_pageItemWidth+10, _pageItemHeight);
@@ -243,7 +243,7 @@
     _lastPointX = point.x;
 
     // pause auto animation
-    [self stopAutoAnimating];
+   // [self stopAutoAnimating];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -375,6 +375,9 @@
     UIGestureRecognizerState state = recognizer.state;
     if (state == UIGestureRecognizerStateBegan) {
         [recognizer.view.layer addSublayer:_selectionMaskLayer];
+        
+       // [self.delegate coverFlowView:self didSelectPageItemAtIndex:recognizer.view.tag];
+
     } else if (state == UIGestureRecognizerStateEnded) {
         if ([self.delegate respondsToSelector:@selector(coverFlowView:didSelectPageItemAtIndex:)]) {
             [self.delegate coverFlowView:self didSelectPageItemAtIndex:recognizer.view.tag];
@@ -392,7 +395,7 @@
 
 - (void)respondsToDidScrollPageToIndex {
     static NSInteger lastScrollIndex = 0;
-    NSInteger currentScrollIndex = 0;
+    NSInteger currentScrollIndex = 1;
 
     // find the top level item
     CGFloat zPosition = -FLT_MAX;

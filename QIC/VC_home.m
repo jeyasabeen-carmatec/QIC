@@ -215,24 +215,17 @@
 -(void)offers_view_calling
 {
     
-    /************** creating objet for provider view controller and and grabbing that view  ******************/
-    
-   /* for (UIViewController *contoller in self.childViewControllers) {
-        if (contoller) {
-            [contoller removeFromParentViewController];
-        }
-    }*/
     
     VC_offers *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
     categorie_vw.delegate = self;
     
-            CGRect frameset = categorie_vw.view.frame;
+        CGRect frameset = categorie_vw.view.frame;
         frameset.origin.x =  0;
         frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
         frameset.size.height = _VW_main.frame.size.height ;
         frameset.size.width = self.view.frame.size.width;
         categorie_vw.view.frame =  frameset;
-       [UIView transitionWithView:self.VW_main
+        [UIView transitionWithView:self.VW_main
                       duration:0.5
                        options:UIViewAnimationOptionTransitionFlipFromLeft
                     animations:^{
@@ -248,7 +241,8 @@
     
     
    
-    }
+}
+
 #pragma categories to Sub category action
 
 -(void)sub_categories_action:(NSString *)str_status

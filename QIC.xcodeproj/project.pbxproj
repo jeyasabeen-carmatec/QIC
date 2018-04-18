@@ -132,6 +132,9 @@
 		D079D6AA207E36770079CA99 /* physiotherapy.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D6A9207E36770079CA99 /* physiotherapy.png */; };
 		D079D6D02084CA360079CA99 /* discount3.png in Resources */ = {isa = PBXBuildFile; fileRef = D079D6CF2084CA350079CA99 /* discount3.png */; };
 		D079D6D42085F07A0079CA99 /* APIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D079D6D32085F07A0079CA99 /* APIHelper.m */; };
+		D0AE157F20875B7F004B32CD /* image-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D0AE157C20875B7F004B32CD /* image-1.jpg */; };
+		D0AE158020875B7F004B32CD /* image-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D0AE157D20875B7F004B32CD /* image-2.jpg */; };
+		D0AE158120875B7F004B32CD /* image-3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D0AE157E20875B7F004B32CD /* image-3.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -294,6 +297,9 @@
 		D079D6CF2084CA350079CA99 /* discount3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discount3.png; sourceTree = "<group>"; };
 		D079D6D22085F07A0079CA99 /* APIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIHelper.h; sourceTree = "<group>"; };
 		D079D6D32085F07A0079CA99 /* APIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIHelper.m; sourceTree = "<group>"; };
+		D0AE157C20875B7F004B32CD /* image-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "image-1.jpg"; sourceTree = "<group>"; };
+		D0AE157D20875B7F004B32CD /* image-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "image-2.jpg"; sourceTree = "<group>"; };
+		D0AE157E20875B7F004B32CD /* image-3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "image-3.jpg"; sourceTree = "<group>"; };
 		F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QIC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -494,6 +500,7 @@
 		D02AC7EB2073416F00F47C93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D0AE157B20875AB8004B32CD /* Home_page_banner */,
 				D079D6CF2084CA350079CA99 /* discount3.png */,
 				D079D6AB207E397B0079CA99 /* categorie_images */,
 				D079D696207E2B010079CA99 /* black-bar */,
@@ -819,6 +826,16 @@
 			name = "API helper class";
 			sourceTree = "<group>";
 		};
+		D0AE157B20875AB8004B32CD /* Home_page_banner */ = {
+			isa = PBXGroup;
+			children = (
+				D0AE157C20875B7F004B32CD /* image-1.jpg */,
+				D0AE157D20875B7F004B32CD /* image-2.jpg */,
+				D0AE157E20875B7F004B32CD /* image-3.jpg */,
+			);
+			name = Home_page_banner;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -885,6 +902,7 @@
 				D079D6AA207E36770079CA99 /* physiotherapy.png in Resources */,
 				D02AC86F2075FC9100F47C93 /* Eclipse.png in Resources */,
 				D02AC8AC207624D500F47C93 /* Futura Std Medium.ttf in Resources */,
+				D0AE158020875B7F004B32CD /* image-2.jpg in Resources */,
 				D02AC87C2075FC9100F47C93 /* Vector-Smart-Object.png in Resources */,
 				D079D6A6207E362D0079CA99 /* polyclinic.jpg in Resources */,
 				D02AC88D2076238A00F47C93 /* Futura Bold.ttf in Resources */,
@@ -909,9 +927,11 @@
 				D02AC8772075FC9100F47C93 /* privacy-policy.png in Resources */,
 				D079D69D207E2B010079CA99 /* 14.png in Resources */,
 				D079D695207E228D0079CA99 /* upload-7.png in Resources */,
+				D0AE158120875B7F004B32CD /* image-3.jpg in Resources */,
 				D02AC7FC2073889600F47C93 /* home.png in Resources */,
 				D02AC8AB207624D500F47C93 /* Futura Std Medium Condensed.ttf in Resources */,
 				D02AC8392074AA5600F47C93 /* subcategory_cell.xib in Resources */,
+				D0AE157F20875B7F004B32CD /* image-1.jpg in Resources */,
 				D02AC86E2075FC9100F47C93 /* dependent.png in Resources */,
 				D079D68A207DCDE00079CA99 /* house.jpg in Resources */,
 				D02AC8782075FC9100F47C93 /* profile-icon.png in Resources */,

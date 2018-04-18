@@ -23,5 +23,8 @@
 
 +(UIAlertView *_Nullable)createaAlertWithMsg:(NSString *_Nullable)msg andTitle:(NSString *_Nullable)title;
 
++(NSString *_Nullable)convert_NUll:(NSString *_Nullable)str;
+
++(double *_Nullable)getting_HT_VIEW;
 
 @end
