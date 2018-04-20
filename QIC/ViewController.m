@@ -138,18 +138,20 @@
             if([[TEMP_dict valueForKey:@"errMessage"] isEqualToString:@"Success"])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self performSegueWithIdentifier:@"login_home" sender:self];
+                    NSMutableDictionary *dictMutable = [TEMP_dict mutableCopy];
+                    [dictMutable removeObjectsForKeys:[TEMP_dict allKeysForObject:[NSNull null]]];
+                    
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
                     [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
+                    
+                    [self calling_the_Company_API];
 
 
                 });
                 
                 
-                NSMutableDictionary *dictMutable = [TEMP_dict mutableCopy];
-                [dictMutable removeObjectsForKeys:[TEMP_dict allKeysForObject:[NSNull null]]];
-                
-                [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+               
                 
                 
             }
@@ -171,6 +173,66 @@
          [APIHelper stop_activity_animation:self];
         NSLog(@"Exception from login api:%@",exception);
     }
+    
+}
+#pragma Storing data in Db
+-(void)calling_the_Company_API
+{
+    //customerInfo
+    NSString *str_URL = [NSString stringWithFormat:@"%@customerInfo",SERVER_URL];
+    @try
+    {
+        NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
+        
+        NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        NSDictionary *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+
+        NSDictionary *parameters = TEMP_dict;
+        [APIHelper postServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+            }
+            if(data)
+            {
+                NSDictionary *TEMP_dict = data;
+                NSLog(@"The login customer Data:%@",TEMP_dict);
+                [APIHelper stop_activity_animation:self];
+                
+                NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"code"]];
+                
+                if([str_code isEqualToString:@"1"])
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                    [self performSegueWithIdentifier:@"login_home" sender:self];
+                        
+                        
+                    });
+                    
+                    
+                    
+                }
+                else
+                {
+                    
+                    [APIHelper createaAlertWithMsg:@"Some thing went wrong" andTitle:@"Alert"];
+                    
+                }
+                
+                
+                
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        NSLog(@"Exception from login api:%@",exception);
+    }
+    
     
 }
 

@@ -15,8 +15,10 @@
 
 
 //Local Host
-#define SERVER_URL @"http://192.168.2.116/qic/apis/"
+//#define SERVER_URL @"http://192.168.2.116/qic/apis/"
 
+//192.168.0.171
 
+#define SERVER_URL @"http://192.168.0.171/QIC/apis/"
 
 #endif /* QIC_pch */

@@ -13,6 +13,5 @@
 @property(nonatomic,weak)IBOutlet UILabel *LBL_name;
 @property(nonatomic,weak)IBOutlet UIImageView *IMG_name;
 
-@property(nonatomic,weak)IBOutlet UIView  *VW_background;
 
 @end

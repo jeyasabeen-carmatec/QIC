@@ -62,6 +62,13 @@
     
     [_BTN_news_left addTarget:self action:@selector(BTN_news_left_action) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_news_right addTarget:self action:@selector(BTN_news_right_action) forControlEvents:UIControlEventTouchUpInside];
+    
+    _collection_providers.layer.cornerRadius = 5.0f;
+    _collection_providers.layer.masksToBounds = YES;
+    
+    _collection_offers.layer.cornerRadius = 5.0f;
+    _collection_offers.layer.masksToBounds = YES;
+
 
    
 
@@ -80,11 +87,11 @@
     float ht;
     if(result.height <= 480)
     {
-        ht = 340;
+        ht = 320;
     }
     else if(result.height <= 568)
     {
-        ht= 340;
+        ht= 320;
     }
     else
     {
@@ -531,7 +538,7 @@ if (collectionView == _collection_providers)
     
     @try
     {
-    NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",SERVER_URL,[[[JSON_response_dic valueForKey:@"provider_list"] objectAtIndex:indexPath.row] valueForKey:@"banner_url"]];
+    NSString *str_IMG_URL = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"provider_list"] objectAtIndex:indexPath.row] valueForKey:@"banner_url"]];
     [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:str_IMG_URL]
                  placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
     
@@ -539,7 +546,7 @@ if (collectionView == _collection_providers)
     
     str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:str_name]];
     img_cell.LBL_name.text =  str_name;
-        img_cell.IMG_name.layer.cornerRadius = 5.0f;
+        img_cell.IMG_name.layer.cornerRadius = 10.0;
         img_cell.IMG_name.layer.masksToBounds = YES;
     }
     @catch(NSException *exception)
@@ -558,7 +565,7 @@ else if(collectionView == _collection_offers)
     {
     home_cell *img_cell = (home_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"home_cell_offers" forIndexPath:indexPath];
     img_cell.IMG_name.image = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
-    img_cell.IMG_name.layer.cornerRadius = 5.0f;
+    img_cell.IMG_name.layer.cornerRadius = 10.0;
     img_cell.IMG_name.layer.masksToBounds = YES;
 
 //    [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:[arr_images objectAtIndex:indexPath.row]]
@@ -586,12 +593,13 @@ else if(collectionView == _collection_offers)
 else{
     home_cell *img_cell = (home_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"home_cell_news" forIndexPath:indexPath];
     
-    img_cell.IMG_name.image = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
-
-//    [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:[arr_images objectAtIndex:indexPath.row]]
-//                         placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
     
-    img_cell.LBL_name.text =  [arr_names objectAtIndex:indexPath.row];
+
+    NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",SERVER_URL,[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"image"]];
+    [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:str_IMG_URL]
+                         placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+    NSString *str_time = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"title"]]];
+    img_cell.LBL_name.text =  [NSString stringWithFormat:@"%@",str_time];
     
     img_cell.layer.cornerRadius = 5.0f;
     img_cell.layer.masksToBounds = YES;
@@ -990,6 +998,7 @@ else{
         
     }
 }
+
 #pragma Home page API calling
 -(void)Home_page_API_call
 {
@@ -1030,42 +1039,6 @@ else{
         
     }
 
-//    @try
-//    {
-//    NSString *URL_STR = [NSString stringWithFormat:@"%@home",SERVER_URL];
-//    [APIHelper Get_API_call:URL_STR completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
-//            if (error)
-//            {
-//                [APIHelper stop_activity_animation:self];
-//
-//                [APIHelper createaAlertWithMsg:[error localizedDescription] andTitle:@""];
-//            }
-//            if (data)
-//            {
-//                [APIHelper stop_activity_animation:self];
-//
-//                data = JSON_response_dic;
-//                [APIHelper stop_activity_animation:self];
-//                NSLog(@"%@",JSON_response_dic);
-//
-//            }
-//            else
-//            {
-//                [APIHelper stop_activity_animation:self];
-//                [APIHelper createaAlertWithMsg:@"Connection error" andTitle:@""];
-//            }
-//            
-//        
-//         }];
-//    }
-//    @catch(NSException *Exception)
-//    {
-//        [APIHelper stop_activity_animation:self];
-//        [APIHelper createaAlertWithMsg:@"Connection error" andTitle:@""];
-//        NSLog(@"Exception from HOme page api:%@",Exception)
-//        ;
-//
-//    }
    }
 
 

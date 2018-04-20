@@ -148,6 +148,7 @@
 		D0AE159B20886C1A004B32CD /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = D0AE159520886C1A004B32CD /* 6.png */; };
 		D0AE159E208882A5004B32CD /* digital-7 (mono italic).ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AE159D208882A5004B32CD /* digital-7 (mono italic).ttf */; };
 		D0AE15A0208882DA004B32CD /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AE159F208882DA004B32CD /* digital-7.ttf */; };
+		D0AE15A42089EC48004B32CD /* VC_static_pages.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AE15A32089EC46004B32CD /* VC_static_pages.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -328,6 +329,8 @@
 		D0AE159520886C1A004B32CD /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
 		D0AE159D208882A5004B32CD /* digital-7 (mono italic).ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7 (mono italic).ttf"; sourceTree = "<group>"; };
 		D0AE159F208882DA004B32CD /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7.ttf"; sourceTree = "<group>"; };
+		D0AE15A22089EC46004B32CD /* VC_static_pages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VC_static_pages.h; sourceTree = "<group>"; };
+		D0AE15A32089EC46004B32CD /* VC_static_pages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VC_static_pages.m; sourceTree = "<group>"; };
 		F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QIC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -429,6 +432,7 @@
 				D02AC81220739ED300F47C93 /* News */,
 				D02AC8442074DA0300F47C93 /* Detail Page */,
 				D002556D20772FD30059A349 /* Favourites */,
+				D0AE15A12089EBCA004B32CD /* Static pages */,
 				D02AC7C22072301D00F47C93 /* LaunchScreen.storyboard */,
 				D02AC7C52072301D00F47C93 /* Info.plist */,
 				D02AC7B42072301D00F47C93 /* Supporting Files */,
@@ -903,6 +907,15 @@
 			name = Home_page_cells_images;
 			sourceTree = "<group>";
 		};
+		D0AE15A12089EBCA004B32CD /* Static pages */ = {
+			isa = PBXGroup;
+			children = (
+				D0AE15A22089EC46004B32CD /* VC_static_pages.h */,
+				D0AE15A32089EC46004B32CD /* VC_static_pages.m */,
+			);
+			name = "Static pages";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1153,6 +1166,7 @@
 				D02AC7EF2073599B00F47C93 /* VC_home_tab.m in Sources */,
 				D079D66C207C78940079CA99 /* offers_list_cell.m in Sources */,
 				D079D6D42085F07A0079CA99 /* APIHelper.m in Sources */,
+				D0AE15A42089EC48004B32CD /* VC_static_pages.m in Sources */,
 				D02AC7D6207250AB00F47C93 /* homw_tab_bar.m in Sources */,
 				D02AC7BC2072301D00F47C93 /* ViewController.m in Sources */,
 				D02AC8422074C48400F47C93 /* consultation_cell.m in Sources */,

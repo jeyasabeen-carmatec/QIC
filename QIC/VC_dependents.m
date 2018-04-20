@@ -154,14 +154,6 @@
     NSString *dateString=[dateformatter stringFromDate:date];
     return dateString;
 }
--(NSString*)getting_to_date:(double )timeStamp{
-    NSTimeInterval timeInterval=timeStamp/1000;
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    NSDateFormatter *dateformatter=[[NSDateFormatter alloc]init];
-    [dateformatter setDateFormat:@"dd/MM/yyyy"];
-    NSString *dateString=[dateformatter stringFromDate:date];
-    return dateString;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

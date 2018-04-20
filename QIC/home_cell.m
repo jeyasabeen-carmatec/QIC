@@ -15,8 +15,28 @@
     // Initialization code
     
     CGRect frameset = _LBL_name.frame;
-    frameset.origin.y = _IMG_name.frame.origin.y + _IMG_name.frame.size.height - 70;
-    frameset.size.height = 60;
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+    float ht,origin;
+    if(result.height <= 480)
+    {
+        ht = 40;
+        origin = 50;
+    }
+    else if(result.height <= 568)
+    {
+        ht= 40;
+        origin = 50;
+    }
+    else
+    {
+        ht = 60;
+        origin = 70;
+        
+    }
+    
+    frameset.origin.y = _IMG_name.frame.origin.y + _IMG_name.frame.size.height - origin;
+
+    frameset.size.height = ht;
     _LBL_name.frame = frameset;
     
     _LBL_name.backgroundColor = [UIColor blackColor];

@@ -52,11 +52,8 @@
      NSString *str_QID = [NSString stringWithFormat:@"QID : %@",[APIHelper convert_NUll:[TEMP_dict valueForKey:@"membershipNo"]]];
     NSString *str_MID = [NSString stringWithFormat:@"Membership ID : %@",[APIHelper convert_NUll:[TEMP_dict valueForKey:@"membershipNo"]]];
         
-//    
-//    NSString *str_fromdate =[NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[TEMP_dict valueForKey:@"validityFromDate"]]];
    NSString *str_fromdate = [NSString stringWithFormat:@"%@",[self getting_from_date:[[TEMP_dict valueForKey:@"validityFromDate"] doubleValue]]];
     
-//    NSString *str_todate =[NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[TEMP_dict valueForKey:@"validityToDate"]]];
    NSString * str_to_date = [NSString stringWithFormat:@"%@",[self getting_from_date:[[TEMP_dict valueForKey:@"validityToDate"] doubleValue]]];
     
     NSString *str_validity = [NSString stringWithFormat:@"Validity : %@ to %@",str_fromdate,str_to_date];
@@ -222,6 +219,25 @@
     {
         [self.delegate health_card_ACTION];
     }
+   else if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Privacy Policy"])
+   {
+       [[NSUserDefaults standardUserDefaults] setValue:@"Privacy Policy" forKey:@"header_val"];
+       [[NSUserDefaults standardUserDefaults] synchronize];
+       
+       [self.delegate static_page_view_call];
+   }
+    else if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Terms and Conditions"])
+    {
+        
+        [[NSUserDefaults standardUserDefaults] setValue:@"Terms and Conditions" forKey:@"header_val"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+         [self.delegate static_page_view_call];
+
+        
+    }
+
+
+    
 
 }
 
@@ -272,14 +288,6 @@
 #pragma Converting the Time stamps
 
 -(NSString*)getting_from_date:(double )timeStamp{
-    NSTimeInterval timeInterval=timeStamp/1000;
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    NSDateFormatter *dateformatter=[[NSDateFormatter alloc]init];
-    [dateformatter setDateFormat:@"dd/MM/yyyy"];
-    NSString *dateString=[dateformatter stringFromDate:date];
-    return dateString;
-}
--(NSString*)getting_to_date:(double )timeStamp{
     NSTimeInterval timeInterval=timeStamp/1000;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     NSDateFormatter *dateformatter=[[NSDateFormatter alloc]init];

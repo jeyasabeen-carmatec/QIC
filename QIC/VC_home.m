@@ -18,6 +18,7 @@
 #import "VC_dependents.h"
 #import "VC_favourites.h"
 #import "VC_health_card.h"
+#import "VC_static_pages.h"
 
 @interface VC_home ()<UITabBarDelegate>
 {
@@ -564,6 +565,43 @@
 -(void)calling_profile_view
 {
     [self Profile_VIEW_celling];
+}
+#pragma Static pages action
+-(void)static_page_back:(NSString *)str_param
+{
+    if([str_param isEqualToString:@"news"])
+    {
+        [self news_VIEW_calling];
+    }
+    else{
+         [self Profile_VIEW_celling];
+    }
+}
+#pragma calling static_PAGE_VIEW
+-(void)static_page_view_call
+{
+    VC_static_pages *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_static_page"];
+    //  [categorie_vw.TBL_profile reloadData];
+    categorie_vw.delegate = self;
+    
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = _VW_main.frame.size.height;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
+
 }
 
 /*

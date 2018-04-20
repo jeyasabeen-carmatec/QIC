@@ -9,10 +9,13 @@
 #import "VC_categories.h"
 #import "categorie_cell.h"
 #import "VC_sub_categories.h"
+#import "APIHelper.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface VC_categories ()<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate>
 {
     NSMutableArray *arr_images;
+    NSDictionary *jsonresponse_DIC;
 }
 
 @end
@@ -23,33 +26,7 @@
     [super viewDidLoad];
     
     
-    arr_images = [[NSMutableArray alloc]init];
-    NSDictionary *temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Al SHAMI MEDICAL CENTER",@"key1",@"house.jpg",@"key5",nil];
-    [arr_images addObject:temp_dict];
-    
-   temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"POLYCLINIC",@"key1",@"private-clinic.jpg",@"key5",nil];
-    [arr_images addObject:temp_dict];
-    
-    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"PRIVATE CLICNIC",@"key1",@"Dental_centar.jpg",@"key5",nil];
-    [arr_images addObject:temp_dict];
-    
-   temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"PHYSIOTHERAPHY",@"key1",@"physiotherapy.png",@"key5",nil];    [arr_images addObject:temp_dict];
-    
-    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"DENTAL CENTERS",@"key1",@"Dental_centar.jpg",@"key5",nil];    [arr_images addObject:temp_dict];
-    
-   temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"POLYCLINIC",@"key1",@"house.jpg",@"key5",nil];
-    [arr_images addObject:temp_dict];
-    
-  temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"PHYSIOTHERAPHY",@"key1",@"physiotherapy.png",@"key5",nil];
-    [arr_images addObject:temp_dict];
-    
-  temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"DENTAL CENTERS",@"key1",@"Dental_centar.jpg",@"key5",nil];
-    [arr_images addObject:temp_dict];
-    
-  temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"PRIVATE CLICNIC",@"key1",@"Dental_centar.jpg",@"key5",nil];
-    [arr_images addObject:temp_dict];
-
-    
+       
     
     /************** setting the dlegates ******************/
     
@@ -62,21 +39,37 @@
 
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
 
-    
-    // Do any additional setup after loading the view.
+    [APIHelper start_animation:self];
+    [self performSelector:@selector(News_API_CALL) withObject:nil afterDelay:0.01];
+
 }
 #pragma collection view delgate methods
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return arr_images.count;
+    NSInteger count = 0;
+    if([[jsonresponse_DIC valueForKey:@"Categories"] isKindOfClass:[NSArray class]])
+    {
+        count = [[jsonresponse_DIC valueForKey:@"Categories"] count];
+    }
+    else{
+        count = 0;
+    }
+    return count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     categorie_cell *cell = (categorie_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
-    cell.IMG_categories.image = [UIImage imageNamed:[[arr_images objectAtIndex:indexPath.row] valueForKey:@"key5"]];
-    [cell.BTN_categories setTitle:[[arr_images objectAtIndex:indexPath.row] valueForKey:@"key1"] forState:UIControlStateNormal];
+//    NSString *str_image = [NSString stringWithFormat:@"%@%@",SERVER_URL,[[[jsonresponse_DIC valueForKey:@"newsList"]objectAtIndex:indexPath.section] valueForKey:@"image"]];
+    
+    [cell.IMG_categories sd_setImageWithURL:[NSURL URLWithString:@"Image-placeholder-2.png"]
+                      placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+
+    NSString *str_name = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"Categories"] objectAtIndex:indexPath.row] valueForKey:@"description"]];
+    str_name = [APIHelper convert_NUll:str_name];
+    
+    [cell.BTN_categories setTitle:str_name forState:UIControlStateNormal];
     cell.BTN_categories.layer.cornerRadius = 2.0f;
     
     return cell;
@@ -127,6 +120,47 @@
     else{
         _LBL_search_place_holder.alpha = 0.0f;
     }
+}
+#pragma News API call
+
+-(void)News_API_CALL
+{
+    
+    @try
+    {
+        NSHTTPURLResponse *response = nil;
+        NSError *error;
+        NSString *URL_STR = [NSString stringWithFormat:@"%@getCategoryList",SERVER_URL];
+        
+        NSURL *urlProducts=[NSURL URLWithString:URL_STR];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:urlProducts];
+        [request setHTTPMethod:@"GET"];
+        [request setHTTPShouldHandleCookies:NO];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        [APIHelper stop_activity_animation:self];
+        
+        if(aData)
+        {
+            jsonresponse_DIC =(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
+            NSLog(@"%@",jsonresponse_DIC);
+            [_collection_categoriesl reloadData];
+            
+            
+        }
+        else
+        {
+            NSDictionary *dictin = [[NSDictionary alloc]initWithObjectsAndKeys:@"Nodata",@"error", nil];
+            NSLog(@"%@",dictin);
+        }
+    }
+    @catch(NSException *Exception)
+    {
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

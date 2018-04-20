@@ -48,5 +48,7 @@
 #pragma Health_card_action
 -(void)calling_profile_view;
 
-
+#pragma Static_pages_back_action
+-(void)static_page_view_call;
+-(void)static_page_back:(NSString *)str_param;
 @end

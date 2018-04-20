@@ -7,6 +7,7 @@
 //
 
 #import "VC_health_card.h"
+#import "APIHelper.h"
 
 @interface VC_health_card ()
 
@@ -19,13 +20,34 @@
     // Do any additional setup after loading the view.
     
     CGRect frameset = _IMG_profile.frame;
-    frameset.origin.x = _IMG_card.frame.size.width - _IMG_profile.frame.size.width /2 +20;
+  //  frameset.origin.x = _IMG_card.frame.size.width - _IMG_profile.frame.size.width /2 +20;
     _IMG_profile.frame = frameset;
     
-    NSString *string = @"12345678912";
+    NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
+    
+    NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+   NSDictionary  *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+    
+    NSString *str_name = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"memberName"]];
+    str_name = [APIHelper convert_NUll:str_name];
+    _LBL_name.text = str_name;
+    
+   
+    
+    NSString * str_to_date = [NSString stringWithFormat:@"%@",[self getting_to_date:[[TEMP_dict valueForKey:@"validityToDate"] doubleValue]]];
+    
+    NSString *str_validity = [NSString stringWithFormat:@"Expiry : %@",str_to_date];
+    _LBL_expiry_date.text = str_validity;
+    
+    
+    
+    
+    NSString *str_id = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"membershipNo"]];
+    str_id = [APIHelper convert_NUll:str_id];
     NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger i = 0; i < [string length]; i += 4)
-        [array addObject:[string substringWithRange:NSMakeRange(i, MIN(4, [string length] - i))]];
+    for (NSInteger i = 0; i < [str_id length]; i += 4)
+        [array addObject:[str_id substringWithRange:NSMakeRange(i, MIN(4, [str_id length] - i))]];
     NSString *result = [array componentsJoinedByString:@" "];
     
 
@@ -37,6 +59,14 @@
 -(void)back_action
 {
     [self.delegate calling_profile_view];
+}
+-(NSString*)getting_to_date:(double )timeStamp{
+    NSTimeInterval timeInterval=timeStamp/1000;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    NSDateFormatter *dateformatter=[[NSDateFormatter alloc]init];
+    [dateformatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString=[dateformatter stringFromDate:date];
+    return dateString;
 }
 
 - (void)didReceiveMemoryWarning {
