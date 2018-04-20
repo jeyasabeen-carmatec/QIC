@@ -29,6 +29,7 @@
 	<string>QIC wants to access your location</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>digital-7</string>
 		<string>Futura Std Book Oblique</string>
 		<string>FontAwesome</string>
 		<string>Futura Bold</string>

@@ -9,16 +9,22 @@
 #import "VC_home_tab.h"
 #import "menu_cell.h"
 #import "CFCoverFlowView.h"
+#import "home_cell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "APIHelper.h"
 
 
-@interface VC_home_tab ()<UITableViewDelegate,UITableViewDataSource,CFCoverFlowViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate>
+@interface VC_home_tab ()<UITableViewDelegate,UITableViewDataSource,CFCoverFlowViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 {
-    NSMutableArray *arr_images;
+    NSArray *arr_images;
     CGRect frameset;
     CFCoverFlowView *coverFlowView1;
     CFCoverFlowView *coverFlowView2;
     CFCoverFlowView *coverFlowView3;
-    
+    NSIndexPath *INDX_selected;
+    NSIndexPath *INDX_offers;
+    NSIndexPath *INDX_news;
+    NSDictionary *JSON_response_dic;
 }
 
 
@@ -32,15 +38,30 @@
     // Do any additional setup after loading the view.
     
     [self SET_UP_VIEW];
-    
-   
+
+    [APIHelper start_animation:self];
+    [self performSelector:@selector(Home_page_API_call) withObject:nil afterDelay:0.01];
+
+    _Scroll_contents.delegate = self;
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_providers_all addTarget:self action:@selector(providers_action) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_providers_all addTarget:self action:@selector(providers_action) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_news_all addTarget:self action:@selector(news_all_action) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_offers_all addTarget:self action:@selector(offers_all_action) forControlEvents:UIControlEventTouchUpInside];
 
-  
+    
+    [self.collection_providers registerNib:[UINib nibWithNibName:@"home_cell" bundle:nil]  forCellWithReuseIdentifier:@"home_cell_providers"];
+     [self.collection_offers registerNib:[UINib nibWithNibName:@"home_cell" bundle:nil]  forCellWithReuseIdentifier:@"home_cell_offers"];
+     [self.collection_news registerNib:[UINib nibWithNibName:@"home_cell" bundle:nil]  forCellWithReuseIdentifier:@"home_cell_news"];
+    
+    [_BTN_provide_left addTarget:self action:@selector(BTN_left_action) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_provide_right addTarget:self action:@selector(BTN_right_action) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_BTN_offers_left addTarget:self action:@selector(BTN_offers_left_action) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_offers_right addTarget:self action:@selector(BTN_offers_right_action) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_BTN_news_left addTarget:self action:@selector(BTN_news_left_action) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_news_right addTarget:self action:@selector(BTN_news_right_action) forControlEvents:UIControlEventTouchUpInside];
 
    
 
@@ -77,7 +98,7 @@
     /***************** Height and width Declaration ****************/
     float HT,width,indicaotr_ht;
     
-    frameset = _VW_indicagtor_for_cover.frame;
+    frameset = _collection_providers.frame;
     frameset.origin.y = _LBL_provider_header_label.frame.origin.y + _LBL_provider_header_label.frame.size.height + 10 ;
    
     if(result.height <= 480)
@@ -104,16 +125,16 @@
     
     
     frameset.size.height = indicaotr_ht;
-    _VW_indicagtor_for_cover.frame =  frameset;
+    _collection_providers.frame =  frameset;
     
     
     [self.Scroll_contents addSubview:_VW_providers];
     
-    NSArray *arr_image = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", nil];
-    NSArray *arr_names = [NSArray arrayWithObjects:@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER", nil];
-    NSArray *arr_sub_names = [NSArray arrayWithObjects:@"4 providers",@"3 providers",@"5 providers",@"2 providers",@"7 providers",@"5 providers", nil];
+   arr_images = [NSArray arrayWithObjects:@"1.png", @"2.png", @"3.png", @"4.png", @"5.png", @"6.png", nil];
+
+   
     
-    coverFlowView1 = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
+    /*coverFlowView1 = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
     coverFlowView1.backgroundColor = [UIColor clearColor];
     coverFlowView1.pageItemCoverWidth = 0.0f;
       coverFlowView1.pageItemWidth = _VW_indicagtor_for_cover.frame.size.width/width;
@@ -123,7 +144,7 @@
     coverFlowView1.pageItemCornerRadius = 5.0;
     coverFlowView1.delegate = self;
     [coverFlowView1 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names];
-    [self.VW_providers addSubview:coverFlowView1];
+    [self.VW_providers addSubview:coverFlowView1];*/
     
 
     
@@ -137,14 +158,14 @@
      frameset.size.height = ht;
     _VW_offers.frame = frameset;
     
-    frameset = _VW_offer_indicator_for_cover.frame;
+    frameset = _collection_offers.frame;
     frameset.origin.y = _LBL_offer_header_label.frame.origin.y + _LBL_offer_header_label.frame.size.height + 10;
     frameset.size.height = indicaotr_ht;
-    _VW_offer_indicator_for_cover.frame =  frameset;
+    _collection_offers.frame =  frameset;
     
     [self.Scroll_contents addSubview:_VW_offers];
     
-     coverFlowView2 = [[CFCoverFlowView alloc] initWithFrame:self.VW_offer_indicator_for_cover.frame];
+   /*  coverFlowView2 = [[CFCoverFlowView alloc] initWithFrame:self.VW_offer_indicator_for_cover.frame];
     coverFlowView2.backgroundColor = [UIColor clearColor];
     coverFlowView2.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ width;
     coverFlowView2.pageItemCoverWidth = 0.0f;
@@ -156,7 +177,7 @@
 
    
     [coverFlowView2 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_offers];
-    [self.VW_offers addSubview:coverFlowView2];
+    [self.VW_offers addSubview:coverFlowView2];*/
     
     
     /***************** setting of News view **********************/
@@ -167,15 +188,15 @@
     frameset.size.height = ht;
     _VW_news.frame = frameset;
     
-    frameset = _VW_news_indicator_for_cover.frame;
+    frameset = _collection_news.frame;
     frameset.origin.y = _LBL_news_header_label.frame.origin.y + _LBL_news_header_label.frame.size.height +10;
     frameset.size.height = indicaotr_ht;
-    _VW_news_indicator_for_cover.frame =  frameset;
+    _collection_news.frame =  frameset;
 
     
     [self.Scroll_contents addSubview:_VW_news];
     
-     coverFlowView3 = [[CFCoverFlowView alloc] initWithFrame:self.VW_news_indicator_for_cover.frame];
+   /*  coverFlowView3 = [[CFCoverFlowView alloc] initWithFrame:self.VW_news_indicator_for_cover.frame];
     coverFlowView3.backgroundColor = [UIColor clearColor];
     coverFlowView3.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ width;
     coverFlowView3.pageItemCoverWidth = 0.0f;
@@ -185,7 +206,7 @@
     [coverFlowView3 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_news];
     coverFlowView3.delegate = self;
     
-    [self.VW_news addSubview:coverFlowView3];
+    [self.VW_news addSubview:coverFlowView3];*/
     
     frameset = _Scroll_contents.frame;
    // frameset.size.height = _VW_news.frame.origin.y + _VW_news.frame.size.height-100;
@@ -229,9 +250,41 @@
     [_IMG_News addGestureRecognizer:news];
     
     [self attributed_TEXT];
+    
+    [self ARROWS_BTN_FRAME];
 
 
 
+    
+}
+
+#pragma Setting the frames for button arrows
+
+-(void)ARROWS_BTN_FRAME
+{
+    CGRect framesets = _BTN_provide_left.frame;
+    framesets.origin.y = _collection_providers.frame.origin.y+_collection_providers.frame.size.height / 3;
+    _BTN_provide_left.frame = framesets;
+    
+    framesets = _BTN_provide_right.frame;
+    framesets.origin.y = _collection_providers.frame.origin.y+_collection_providers.frame.size.height / 3;
+    _BTN_provide_right.frame = framesets;
+    
+    framesets = _BTN_offers_left.frame;
+    framesets.origin.y = _collection_offers.frame.origin.y+_collection_offers.frame.size.height /3;
+    _BTN_offers_left.frame = framesets;
+    
+    framesets = _BTN_offers_right.frame;
+    framesets.origin.y = _collection_offers.frame.origin.y+_collection_offers.frame.size.height / 3;
+    _BTN_offers_right.frame = framesets;
+    
+    framesets = _BTN_news_left.frame;
+    framesets.origin.y = _collection_news.frame.origin.y+_collection_news.frame.size.height / 3;
+    _BTN_news_left.frame = framesets;
+    
+    framesets = _BTN_news_right.frame;
+    framesets.origin.y = _collection_news.frame.origin.y+_collection_news.frame.size.height / 3;
+    _BTN_news_right.frame = framesets;
     
 }
 
@@ -354,39 +407,7 @@
  
 }
 
-#pragma Table view delegate Methods
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return arr_images.count;
-    
-}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 1;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    menu_cell *cell = (menu_cell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (cell == nil)
-    {
-        NSArray *nib;
-        nib = [[NSBundle mainBundle] loadNibNamed:@"menu_cell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-    UIImage *img = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
-    cell.IMG_image.image = img;
-    return cell;
-    
-}
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 200;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10;
-}
 #pragma favourites_action
 -(void)favourites_ACTION
 {
@@ -457,6 +478,596 @@
 {
    [self.delegate calling_news_view]; 
 }
+#pragma collection view delegates
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
+    if(collectionView == _collection_providers)
+    {
+        NSInteger count = 0;
+        if([[JSON_response_dic valueForKey:@"provider_list"] isKindOfClass:[NSArray class]])
+        {
+            count = [[JSON_response_dic valueForKey:@"provider_list"] count];
+        }
+        else{
+            count = 0;
+        }
+        return count;
+    }
+   else if(collectionView == _collection_offers)
+    {
+        NSInteger count = 0;
+        if([[JSON_response_dic valueForKey:@"offers_list"] isKindOfClass:[NSArray class]])
+        {
+            count = [[JSON_response_dic valueForKey:@"offers_list"] count];
+        }
+        else{
+            count = 0;
+        }
+        return count;
+    }
+   else{
+       NSInteger count = 0;
+       if([[JSON_response_dic valueForKey:@"offers_list"] isKindOfClass:[NSArray class]])
+       {
+           count = [[JSON_response_dic valueForKey:@"offers_list"] count];
+       }
+       else{
+           count = 0;
+       }
+       return count;
+
+   }
+
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+   
+NSArray *arr_names = [NSArray arrayWithObjects:@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER", nil];
+    
+ /********************** collectionv view Providers *************************/
+if (collectionView == _collection_providers)
+{
+     home_cell *img_cell = (home_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"home_cell_providers" forIndexPath:indexPath];
+    
+    @try
+    {
+    NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",SERVER_URL,[[[JSON_response_dic valueForKey:@"provider_list"] objectAtIndex:indexPath.row] valueForKey:@"banner_url"]];
+    [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:str_IMG_URL]
+                 placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+    
+    NSString *str_name = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"provider_list"] objectAtIndex:indexPath.row] valueForKey:@"provider_name"]];
+    
+    str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:str_name]];
+    img_cell.LBL_name.text =  str_name;
+        img_cell.IMG_name.layer.cornerRadius = 5.0f;
+        img_cell.IMG_name.layer.masksToBounds = YES;
+    }
+    @catch(NSException *exception)
+    {
+        NSLog(@"Exception from Providers:%@",exception);
+    }
+
+    return img_cell;
+}
+    /********************** collectionv view Offers *************************/
+
+else if(collectionView == _collection_offers)
+{
+    
+    @try
+    {
+    home_cell *img_cell = (home_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"home_cell_offers" forIndexPath:indexPath];
+    img_cell.IMG_name.image = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
+    img_cell.IMG_name.layer.cornerRadius = 5.0f;
+    img_cell.IMG_name.layer.masksToBounds = YES;
+
+//    [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:[arr_images objectAtIndex:indexPath.row]]
+//                         placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+    
+    
+    
+    NSString *str_discount = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"offer_value"]];
+    
+    str_discount = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:str_discount]];
+    
+    NSString *str_discount_lbl = @"% discount";
+    img_cell.LBL_name.text =  [NSString stringWithFormat:@"%@%@",str_discount,str_discount_lbl];
+    
+    return img_cell;
+    }
+    @catch(NSException *exception)
+    {
+        NSLog(@"Exceptio from Collection offers:%@",exception);
+    }
+}
+    
+    /********************** collectionv view News *************************/
+
+else{
+    home_cell *img_cell = (home_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"home_cell_news" forIndexPath:indexPath];
+    
+    img_cell.IMG_name.image = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
+
+//    [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:[arr_images objectAtIndex:indexPath.row]]
+//                         placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+    
+    img_cell.LBL_name.text =  [arr_names objectAtIndex:indexPath.row];
+    
+    img_cell.layer.cornerRadius = 5.0f;
+    img_cell.layer.masksToBounds = YES;
+
+    return img_cell;
+}
+    
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (collectionView == _collection_providers) {
+        return CGSizeMake(_collection_providers.frame.size.width ,_collection_providers.frame.size.height);
+        
+    }
+    if (collectionView == _collection_offers) {
+        return CGSizeMake(_collection_offers.frame.size.width ,_collection_offers.frame.size.height);
+        
+    }
+    else{
+       
+            return CGSizeMake(_collection_news.frame.size.width ,_collection_news.frame.size.height);
+            
+        
+
+    }
+
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(collectionView == _collection_providers)
+    {
+        [self.delegate calling_providers_view];
+    }
+    else if(collectionView == _collection_offers){
+        [self.delegate calling_offers_view];
+    }
+    else{
+        [self.delegate calling_news_view];
+    }
+
+}
+#pragma Scrollview handling
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    @try
+    {
+        NSString *cellIdentifier;
+        for (UICollectionViewCell *cell in [scrollView subviews])
+        {
+            cellIdentifier = [cell reuseIdentifier];
+            break;
+        }
+        if ([cellIdentifier isEqualToString:@"home_cell_providers"])
+        {
+            float pageWidth = _collection_providers.frame.size.width; // width + space
+            
+            float currentOffset = _collection_providers.contentOffset.x;
+            float targetOffset = targetContentOffset->x;
+            float newTargetOffset = 1;
+            
+            if (targetOffset > currentOffset)
+                newTargetOffset = ceilf(currentOffset / pageWidth) * pageWidth;
+            else
+                newTargetOffset = floorf(currentOffset / pageWidth) * pageWidth;
+            
+            if (newTargetOffset < 0)
+                newTargetOffset = 0;
+            else if (newTargetOffset > _collection_providers.contentSize.width)
+                newTargetOffset = _collection_providers.contentSize.width;
+            
+            targetContentOffset->x = currentOffset;
+            [_collection_providers setContentOffset:CGPointMake(newTargetOffset  , _collection_providers.contentOffset.y) animated:YES];
+            
+            
+        }
+       else if ([cellIdentifier isEqualToString:@"home_cell_offers"])
+        {
+            float pageWidth = _collection_offers.frame.size.width; // width + space
+            
+            float currentOffset = _collection_offers.contentOffset.x;
+            float targetOffset = targetContentOffset->x;
+            float newTargetOffset = 1;
+            
+            if (targetOffset > currentOffset)
+                newTargetOffset = ceilf(currentOffset / pageWidth) * pageWidth;
+            else
+                newTargetOffset = floorf(currentOffset / pageWidth) * pageWidth;
+            
+            if (newTargetOffset < 0)
+                newTargetOffset = 0;
+            else if (newTargetOffset > _collection_offers.contentSize.width)
+                newTargetOffset = _collection_offers.contentSize.width;
+            
+            targetContentOffset->x = currentOffset;
+            [_collection_offers setContentOffset:CGPointMake(newTargetOffset  , _collection_offers.contentOffset.y) animated:YES];
+            
+            
+        }
+        else if ([cellIdentifier isEqualToString:@"home_cell_news"])
+        {
+            float pageWidth = _collection_news.frame.size.width; // width + space
+            
+            float currentOffset = _collection_news.contentOffset.x;
+            float targetOffset = targetContentOffset->x;
+            float newTargetOffset = 1;
+            
+            if (targetOffset > currentOffset)
+                newTargetOffset = ceilf(currentOffset / pageWidth) * pageWidth;
+            else
+                newTargetOffset = floorf(currentOffset / pageWidth) * pageWidth;
+            
+            if (newTargetOffset < 0)
+                newTargetOffset = 0;
+            else if (newTargetOffset > _collection_news.contentSize.width)
+                newTargetOffset = _collection_news.contentSize.width;
+            
+            targetContentOffset->x = currentOffset;
+            [_collection_news setContentOffset:CGPointMake(newTargetOffset  , _collection_news.contentOffset.y) animated:YES];
+         
+            
+            
+        }
+
+
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
+    
+}
+
+#pragma Providers left and Right scroll button action
+
+-(void)BTN_right_action
+{
+    @try
+    {
+        NSIndexPath *newIndexPath;
+        if (!INDX_selected)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            INDX_selected = newIndexPath;
+        }
+        
+        else if ([arr_images count]  > INDX_selected.row)
+        {
+            if ([arr_images count] == INDX_selected.row + 1) {
+                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] - 1 inSection:0];
+                INDX_selected = newIndexPath;
+            }
+            else
+            {
+                newIndexPath = [NSIndexPath indexPathForRow:INDX_selected.row + 1 inSection:0];
+                INDX_selected = newIndexPath;
+            }
+        }
+        
+        
+        if (!newIndexPath) {
+            newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            INDX_selected = newIndexPath;
+        }
+        
+        
+        [_collection_providers scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:INDX_selected.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
+}
+
+
+
+
+-(void)BTN_left_action
+{
+    @try
+    {
+        NSIndexPath *newIndexPath;
+        if (INDX_selected)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:INDX_selected.row -1 inSection:0];
+            INDX_selected = newIndexPath;
+        }
+        
+        else if ([arr_images count]  < INDX_selected.row)
+        {
+            if ([arr_images count] == INDX_selected.row - 1)
+            {
+                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] + 1 inSection:0];
+                INDX_selected = newIndexPath;
+            }
+            else
+            {
+                newIndexPath = [NSIndexPath indexPathForRow:INDX_selected.row - 1 inSection:0];
+                INDX_selected = newIndexPath;
+            }
+        }
+        if (newIndexPath.row == 1)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            INDX_selected = newIndexPath;
+        }
+        if(newIndexPath.row < 1)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            INDX_selected = newIndexPath;
+        }
+        [_collection_providers scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:INDX_selected.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
+    
+    
+    @catch (NSException *exception)
+    {
+        NSLog(@"exception:%@",exception);
+    }
+    
+}
+
+
+#pragma Offers left  and Rightscroll button action
+
+
+-(void)BTN_offers_left_action
+{
+    @try
+    {
+        NSIndexPath *newIndexPath;
+        if (INDX_offers)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:INDX_offers.row -1 inSection:0];
+            INDX_offers = newIndexPath;
+        }
+        
+        else if ([arr_images count]  < INDX_offers.row)
+        {
+            if ([arr_images count] == INDX_offers.row - 1)
+            {
+                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] + 1 inSection:0];
+                INDX_offers = newIndexPath;
+            }
+            else
+            {
+                newIndexPath = [NSIndexPath indexPathForRow:INDX_offers.row - 1 inSection:0];
+                INDX_offers = newIndexPath;
+            }
+        }
+        if (newIndexPath.row == 1)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            INDX_offers = newIndexPath;
+        }
+        if(newIndexPath.row < 1)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            INDX_offers = newIndexPath;
+        }
+        [_collection_offers scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:INDX_offers.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
+    
+    
+    @catch (NSException *exception)
+    {
+        NSLog(@"exception:%@",exception);
+    }
+    
+}
+
+
+-(void)BTN_offers_right_action
+{
+    @try
+    {
+        NSIndexPath *newIndexPath;
+        if (!INDX_offers)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            INDX_offers = newIndexPath;
+        }
+        
+        else if ([arr_images count]  > INDX_offers.row)
+        {
+            if ([arr_images count] == INDX_offers.row + 1) {
+                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] - 1 inSection:0];
+                INDX_offers = newIndexPath;
+            }
+            else
+            {
+                newIndexPath = [NSIndexPath indexPathForRow:INDX_offers.row + 1 inSection:0];
+                INDX_offers = newIndexPath;
+            }
+        }
+        
+        
+        if (!newIndexPath) {
+            newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            INDX_offers = newIndexPath;
+        }
+        
+        
+        [_collection_offers scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:INDX_offers.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
+}
+
+#pragma Offers left  and Rightscroll button action
+
+
+-(void)BTN_news_left_action
+{
+    @try
+    {
+        NSIndexPath *newIndexPath;
+        if (INDX_news)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:INDX_news.row -1 inSection:0];
+            INDX_news = newIndexPath;
+        }
+        
+        else if ([arr_images count]  < INDX_news.row)
+        {
+            if ([arr_images count] == INDX_news.row - 1)
+            {
+                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] + 1 inSection:0];
+                INDX_news = newIndexPath;
+            }
+            else
+            {
+                newIndexPath = [NSIndexPath indexPathForRow:INDX_news.row - 1 inSection:0];
+                INDX_news = newIndexPath;
+            }
+        }
+        if (newIndexPath.row == 1)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            INDX_news = newIndexPath;
+        }
+        if(newIndexPath.row < 1)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            INDX_news = newIndexPath;
+        }
+        [_collection_news scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:INDX_news.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
+    
+    
+    @catch (NSException *exception)
+    {
+        NSLog(@"exception:%@",exception);
+    }
+    
+}
+
+
+-(void)BTN_news_right_action
+{
+    @try
+    {
+        NSIndexPath *newIndexPath;
+        if (!INDX_news)
+        {
+            newIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            INDX_news = newIndexPath;
+        }
+        
+        else if ([arr_images count]  > INDX_news.row)
+        {
+            if ([arr_images count] == INDX_news.row + 1) {
+                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] - 1 inSection:0];
+                INDX_news = newIndexPath;
+            }
+            else
+            {
+                newIndexPath = [NSIndexPath indexPathForRow:INDX_news.row + 1 inSection:0];
+                INDX_news = newIndexPath;
+            }
+        }
+        
+        
+        if (!newIndexPath) {
+            newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            INDX_news = newIndexPath;
+        }
+        
+        
+        [_collection_news scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:INDX_news.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
+}
+#pragma Home page API calling
+-(void)Home_page_API_call
+{
+    
+    @try
+    {
+    NSHTTPURLResponse *response = nil;
+    NSError *error;
+    NSString *URL_STR = [NSString stringWithFormat:@"%@home",SERVER_URL];
+
+    NSURL *urlProducts=[NSURL URLWithString:URL_STR];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:urlProducts];
+    [request setHTTPMethod:@"GET"];
+    [request setHTTPShouldHandleCookies:NO];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [APIHelper stop_activity_animation:self];
+    if(aData)
+    {
+        JSON_response_dic=(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
+        NSLog(@"%@",JSON_response_dic);
+        
+        [_collection_offers reloadData];
+        [_collection_providers reloadData];
+        [_collection_news reloadData];
+
+    }
+    else
+    {
+        NSDictionary *dictin = [[NSDictionary alloc]initWithObjectsAndKeys:@"Nodata",@"error", nil];
+        NSLog(@"%@",dictin);
+    }
+    }
+    @catch(NSException *Exception)
+    {
+        
+    }
+
+//    @try
+//    {
+//    NSString *URL_STR = [NSString stringWithFormat:@"%@home",SERVER_URL];
+//    [APIHelper Get_API_call:URL_STR completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+//            if (error)
+//            {
+//                [APIHelper stop_activity_animation:self];
+//
+//                [APIHelper createaAlertWithMsg:[error localizedDescription] andTitle:@""];
+//            }
+//            if (data)
+//            {
+//                [APIHelper stop_activity_animation:self];
+//
+//                data = JSON_response_dic;
+//                [APIHelper stop_activity_animation:self];
+//                NSLog(@"%@",JSON_response_dic);
+//
+//            }
+//            else
+//            {
+//                [APIHelper stop_activity_animation:self];
+//                [APIHelper createaAlertWithMsg:@"Connection error" andTitle:@""];
+//            }
+//            
+//        
+//         }];
+//    }
+//    @catch(NSException *Exception)
+//    {
+//        [APIHelper stop_activity_animation:self];
+//        [APIHelper createaAlertWithMsg:@"Connection error" andTitle:@""];
+//        NSLog(@"Exception from HOme page api:%@",Exception)
+//        ;
+//
+//    }
+   }
+
 
 /*
 #pragma mark - Navigation

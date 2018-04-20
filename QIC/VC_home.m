@@ -17,6 +17,7 @@
 #import "VC_detail.h"
 #import "VC_dependents.h"
 #import "VC_favourites.h"
+#import "VC_health_card.h"
 
 @interface VC_home ()<UITabBarDelegate>
 {
@@ -214,8 +215,6 @@
 
 -(void)offers_view_calling
 {
-    
-    
     VC_offers *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
     categorie_vw.delegate = self;
     
@@ -533,6 +532,38 @@
     [vc willMoveToParentViewController:nil];
     [vc.view removeFromSuperview];
     [vc removeFromParentViewController];
+}
+
+#pragma Health card back_action
+
+-(void)health_card_ACTION
+{
+    VC_health_card *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_health_card"];
+    //  [categorie_vw.TBL_profile reloadData];
+    categorie_vw.delegate = self;
+    
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = _VW_main.frame.size.height;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
+
+}
+-(void)calling_profile_view
+{
+    [self Profile_VIEW_celling];
 }
 
 /*

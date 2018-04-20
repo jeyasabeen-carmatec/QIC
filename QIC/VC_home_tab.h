@@ -33,6 +33,10 @@
 @property(nonatomic,weak) IBOutlet UIButton *BTN_providers_all;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_provider_header_label;
 
+@property(nonatomic,weak) IBOutlet UICollectionView *collection_providers;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_provide_left;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_provide_right;
+
 
 
 
@@ -46,6 +50,9 @@
 @property(nonatomic,weak) IBOutlet UIButton *BTN_offers_all;
 
 
+@property(nonatomic,weak) IBOutlet UICollectionView *collection_offers;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_offers_left;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_offers_right;
 
 
 
@@ -56,6 +63,9 @@
 @property(nonatomic,weak) IBOutlet UILabel *LBL_news_header_label;
 @property(nonatomic,weak) IBOutlet UIButton *BTN_news_all;
 
+@property(nonatomic,weak) IBOutlet UICollectionView *collection_news;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_news_left;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_news_right;
 
 
 

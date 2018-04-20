@@ -55,7 +55,7 @@
 }
 #pragma  get api call
 
--(NSDictionary *)API_get_call:(NSString *)url_STR
++(NSDictionary *)API_get_call:(NSString *)url_STR
 {
     NSHTTPURLResponse *response = nil;
     NSError *error;
@@ -149,26 +149,47 @@
     return str_null;
 }
 
-#pragma GETTING_HEIGHT
-//+(double *_Nullable)getting_HT_VIEW
-//  {
-//      double VAL=0;
-//      
-//      CGSize result = [[UIScreen mainScreen] bounds].size;
-//      if(result.height <= 480)
-//      {
-//          VAL = 203.0;
-//      }
-//      else if(result.height <= 568)
-//      {
-//          VAL = 203;
-//      }
-//      else
-//      {
-//          VAL = 300;
-//      }
-//      return VAL;
-//
-//  }
+#pragma Get API call
+
++(void)Get_API_call:(NSString *)URL_STR completionHandler:(void (^)(id _Nullable, NSError * _Nullable))completionHandler{
+    
+    NSString *urlGetuser =[NSString stringWithFormat:@"%@",URL_STR];
+    urlGetuser = [urlGetuser stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSURL *url = [NSURL URLWithString:urlGetuser];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
+    [request setHTTPMethod:@"GET"];
+    [request setTimeoutInterval:70];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.allowsCellularAccess = YES;
+    configuration.HTTPMaximumConnectionsPerHost = 10;
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(id  _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            completionHandler(nil,error);
+            
+            NSLog(@"eror c1:%@",[error localizedDescription]);
+        }else{
+            NSError *err = nil;
+            id resposeJSon = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+            if (err) {
+                
+                completionHandler(nil,err);
+                
+                NSLog(@"eror c2:%@",[err localizedDescription]);
+            }else{
+                @try {
+                    if (resposeJSon) {
+                        completionHandler(resposeJSon,nil);
+                        
+                    }
+                    
+                } @catch (NSException *exception) {
+                    NSLog(@"%@",exception);
+                }
+            }
+        }
+    }];
+    [dataTask resume];
+}
 
 @end

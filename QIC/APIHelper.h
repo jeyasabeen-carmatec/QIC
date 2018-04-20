@@ -15,7 +15,7 @@
 }
 
 + (void)postServiceCall:(NSString*_Nullable)urlStr andParams:(NSDictionary*_Nullable)params completionHandler:(void (^_Nullable)(id  _Nullable data, NSError * _Nullable error))completionHandler;
--(NSDictionary  *_Nullable) API_get_call:(NSString *_Nullable)url_STR;
++(NSDictionary  *_Nullable) API_get_call:(NSString *_Nullable)url_STR;
 
 
 +(void)start_animation:(UIViewController *_Nullable)my_controller;
@@ -25,6 +25,6 @@
 
 +(NSString *_Nullable)convert_NUll:(NSString *_Nullable)str;
 
-+(double *_Nullable)getting_HT_VIEW;
++(void)Get_API_call:(NSString *_Nullable)userId completionHandler:(void (^_Nullable)(id _Nullable, NSError * _Nullable))completionHandler;
 
 @end

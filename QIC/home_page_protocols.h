@@ -29,6 +29,7 @@
 
 
 #pragma Profile_page_action
+-(void)health_card_ACTION;
 -(void)dependets_ACTION:(NSString *)str_dependet;
 
 #pragma Dependents_Action
@@ -43,5 +44,9 @@
 -(void)calling_providers_view;
 -(void)calling_offers_view;
 -(void)calling_news_view;
+
+#pragma Health_card_action
+-(void)calling_profile_view;
+
 
 @end

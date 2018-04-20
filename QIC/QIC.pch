@@ -13,4 +13,10 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 
+
+//Local Host
+#define SERVER_URL @"http://192.168.2.116/qic/apis/"
+
+
+
 #endif /* QIC_pch */

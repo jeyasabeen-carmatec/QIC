@@ -18,6 +18,9 @@
         <array key="Futura URW Medium.ttf">
             <string>FuturaT-Medi</string>
         </array>
+        <array key="digital-7.ttf">
+            <string>Digital-7</string>
+        </array>
     </customFonts>
     <scenes>
         <!--View Controller-->
@@ -235,7 +238,13 @@
                     <connections>
                         <outlet property="BTN_favourite" destination="azM-S9-h1D" id="4z1-u4-tug"/>
                         <outlet property="BTN_news_all" destination="NoE-Q6-nBZ" id="aed-dV-2eZ"/>
+                        <outlet property="BTN_news_left" destination="avi-d8-37S" id="EzG-dg-WWa"/>
+                        <outlet property="BTN_news_right" destination="AgL-70-Eqq" id="8Nn-s2-Tfe"/>
                         <outlet property="BTN_offers_all" destination="f83-vd-Ctj" id="Yvu-JK-qnV"/>
+                        <outlet property="BTN_offers_left" destination="vsn-zO-NR3" id="S5s-Vw-51b"/>
+                        <outlet property="BTN_offers_right" destination="ypC-Wt-kSg" id="5JA-Lj-cMQ"/>
+                        <outlet property="BTN_provide_left" destination="b1o-6d-1La" id="opI-Qh-ipn"/>
+                        <outlet property="BTN_provide_right" destination="nBs-Y8-3BU" id="EhW-JI-S3o"/>
                         <outlet property="BTN_providers_all" destination="Z9T-f2-ref" id="3o4-1D-fOh"/>
                         <outlet property="IMG_News" destination="9TQ-fF-Vfu" id="Wv2-nv-v2K"/>
                         <outlet property="IMG_offers" destination="Aie-pm-o8s" id="71X-4T-kB8"/>
@@ -246,12 +255,12 @@
                         <outlet property="LBL_search_place_holder" destination="3MP-xS-oOp" id="53t-eO-FzP"/>
                         <outlet property="Scroll_contents" destination="Fk0-Sa-go5" id="G5q-mz-4X2"/>
                         <outlet property="TXT_search" destination="Kpo-5H-gJ9" id="Q36-Zc-Myd"/>
-                        <outlet property="VW_indicagtor_for_cover" destination="8fA-qF-L2I" id="98s-mQ-4lO"/>
                         <outlet property="VW_news" destination="s2Q-gP-7ex" id="UlL-AJ-SkX"/>
-                        <outlet property="VW_news_indicator_for_cover" destination="3wm-Bd-AMn" id="8S3-ov-4qv"/>
-                        <outlet property="VW_offer_indicator_for_cover" destination="VJt-Cv-SMt" id="gUb-mZ-90Z"/>
                         <outlet property="VW_offers" destination="Nm9-XT-IIQ" id="qWt-va-hcG"/>
                         <outlet property="VW_providers" destination="iln-gr-deQ" id="zS3-R1-b4N"/>
+                        <outlet property="collection_news" destination="1Oa-f4-s7d" id="vIe-gR-ADU"/>
+                        <outlet property="collection_offers" destination="fD8-S4-X4b" id="JpK-aT-Jzr"/>
+                        <outlet property="collection_providers" destination="kMc-hM-3n3" id="8Dv-TO-xuW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pg7-uf-sK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -264,24 +273,51 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TOP 5 PROVIDERS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z37-dp-t8X">
-                            <rect key="frame" x="16" y="30" width="231" height="50"/>
+                            <rect key="frame" x="12" y="25" width="231" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9T-f2-ref">
-                            <rect key="frame" x="238" y="36" width="78" height="20"/>
+                            <rect key="frame" x="238" y="34" width="78" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="14"/>
                             <state key="normal" title="VIEW ALL">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fA-qF-L2I">
-                            <rect key="frame" x="51" y="88" width="269" height="203"/>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kMc-hM-3n3">
+                            <rect key="frame" x="54" y="79" width="212" height="212"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </view>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="n3i-r8-RPD">
+                                <size key="itemSize" width="0.0" height="0.0"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
+                            <connections>
+                                <outlet property="dataSource" destination="Gu3-bG-sDy" id="Qix-Wi-xSc"/>
+                                <outlet property="delegate" destination="Gu3-bG-sDy" id="wPi-Jc-xl3"/>
+                            </connections>
+                        </collectionView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nBs-Y8-3BU">
+                            <rect key="frame" x="269" y="142" width="46" height="83"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="49"/>
+                            <state key="normal" title="">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1o-6d-1La">
+                            <rect key="frame" x="0.0" y="143" width="46" height="83"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="49"/>
+                            <state key="normal" title="">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -293,19 +329,46 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1Oa-f4-s7d">
+                            <rect key="frame" x="57" y="76" width="212" height="212"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="gPH-Id-8aZ">
+                                <size key="itemSize" width="0.0" height="0.0"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
+                            <connections>
+                                <outlet property="dataSource" destination="Gu3-bG-sDy" id="crj-KW-4ZJ"/>
+                                <outlet property="delegate" destination="Gu3-bG-sDy" id="UjC-QP-9za"/>
+                            </connections>
+                        </collectionView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgL-70-Eqq">
+                            <rect key="frame" x="272" y="144" width="46" height="83"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="49"/>
+                            <state key="normal" title="">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avi-d8-37S">
+                            <rect key="frame" x="3" y="144" width="46" height="83"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="49"/>
+                            <state key="normal" title="">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bM3-7A-cOP">
-                            <rect key="frame" x="22" y="29" width="197" height="39"/>
+                            <rect key="frame" x="22" y="25" width="197" height="39"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3wm-Bd-AMn">
-                            <rect key="frame" x="51" y="76" width="269" height="203"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </view>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NoE-Q6-nBZ">
-                            <rect key="frame" x="227" y="31" width="80" height="20"/>
+                            <rect key="frame" x="227" y="34" width="80" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="14"/>
                             <state key="normal" title="VIEW ALL">
@@ -323,8 +386,40 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fD8-S4-X4b">
+                            <rect key="frame" x="58" y="75" width="212" height="212"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="z0h-mL-2BU">
+                                <size key="itemSize" width="0.0" height="0.0"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
+                            <connections>
+                                <outlet property="dataSource" destination="Gu3-bG-sDy" id="l94-gi-fe1"/>
+                                <outlet property="delegate" destination="Gu3-bG-sDy" id="9bX-By-ab1"/>
+                            </connections>
+                        </collectionView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypC-Wt-kSg">
+                            <rect key="frame" x="273" y="138" width="46" height="83"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="49"/>
+                            <state key="normal" title="">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsn-zO-NR3">
+                            <rect key="frame" x="4" y="139" width="46" height="83"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="49"/>
+                            <state key="normal" title="">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f83-vd-Ctj">
-                            <rect key="frame" x="220" y="30" width="92" height="20"/>
+                            <rect key="frame" x="220" y="34" width="92" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="14"/>
                             <state key="normal" title="VIEW ALL">
@@ -332,16 +427,11 @@
                             </state>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msC-He-dAQ">
-                            <rect key="frame" x="22" y="28" width="197" height="39"/>
+                            <rect key="frame" x="22" y="25" width="197" height="39"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJt-Cv-SMt">
-                            <rect key="frame" x="51" y="76" width="269" height="203"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -963,6 +1053,89 @@
             </objects>
             <point key="canvasLocation" x="5032.5" y="30"/>
         </scene>
+        <!--health card-->
+        <scene sceneID="zkZ-Nk-7Sb">
+            <objects>
+                <viewController storyboardIdentifier="vc_health_card" id="gvN-FA-uBg" customClass="VC_health_card" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bc3-ZP-0e5"/>
+                        <viewControllerLayoutGuide type="bottom" id="l09-e9-che"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qjB-ns-UVx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Login-Screen-background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WkW-wJ-3WD">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5te-3R-RSg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HEALTH CARD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upN-98-293">
+                                        <rect key="frame" x="34" y="29" width="239" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="FuturaT-Medi" family="FuturaTMed" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wlS-74-uIv">
+                                        <rect key="frame" x="6" y="28" width="30" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="26"/>
+                                        <state key="normal" title="">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Health_card.png" translatesAutoresizingMaskIntoConstraints="NO" id="NAd-4Z-E50">
+                                <rect key="frame" x="16" y="81" width="288" height="185"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Image_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="SxC-q5-ohL">
+                                <rect key="frame" x="237" y="97" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2923563992" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYv-PZ-Fww">
+                                <rect key="frame" x="40" y="195" width="227" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Digital-7" family="Digital-7" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mr.Mahaboob karror" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ay-bs-sde">
+                                <rect key="frame" x="40" y="167" width="227" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expiry:01/02/2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kff-Lx-yuu">
+                                <rect key="frame" x="40" y="219" width="227" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="FuturaT-Medi" family="FuturaTMed" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="BTN_back" destination="wlS-74-uIv" id="ZIw-kt-ge5"/>
+                        <outlet property="IMG_card" destination="NAd-4Z-E50" id="DgP-yT-LXX"/>
+                        <outlet property="IMG_profile" destination="SxC-q5-ohL" id="7Pw-M8-CXY"/>
+                        <outlet property="LBL_card_number" destination="yYv-PZ-Fww" id="8v0-JO-Mys"/>
+                        <outlet property="LBL_expiry_date" destination="kff-Lx-yuu" id="sro-xd-dc9"/>
+                        <outlet property="LBL_name" destination="4Ay-bs-sde" id="kTc-uG-T2l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q9d-2Z-8LW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5722.5" y="33.75"/>
+        </scene>
         <!--dependents-->
         <scene sceneID="90Q-87-UMc">
             <objects>
@@ -1162,6 +1335,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Health_card.png" width="4480" height="2824"/>
+        <image name="Image_1.png" width="358" height="361"/>
         <image name="Login-Screen-background.jpg" width="1080" height="2009"/>
         <image name="Logo.png" width="345" height="342"/>
         <image name="call-button.png" width="141" height="54"/>
