@@ -8,11 +8,17 @@
 
 #import "VC_offers.h"
 #import "offers_list_cell.h"
+#import "APIHelper.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @interface VC_offers ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 {
     NSMutableArray *arr_images;
+    NSDictionary *jsonresponse_DIC;
+    
+    
 }
 
 
@@ -25,31 +31,25 @@
     // Do any additional setup after loading the view.
     
     arr_images = [[NSMutableArray alloc]init];
-  
-    
-    NSDictionary *temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"CONSULTATIONS",@"key1",@"Banner-A.jpg",@"key2",nil];
-    [arr_images addObject:temp_dict];
-    
-    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"INVESTIGATIONS/LAB/RADIOLOGY",@"key1",@"Banner-B.jpg",@"key2", nil];
-    [arr_images addObject:temp_dict];
-    
-    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"PROCEDURES",@"key1",@"Banner-C.jpg",@"key2", nil];
-    [arr_images addObject:temp_dict];
-    
-    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"CONSULTATIONS",@"key1",@"Banner-A.jpg",@"key2", nil];
-    [arr_images addObject:temp_dict];
-    
-    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"PROCEDURES",@"key1",@"Banner-B.jpg",@"key2", nil];
-    [arr_images addObject:temp_dict];
-    
-
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+    
+    [APIHelper start_animation:self];
+    [self performSelector:@selector(Offers_API_CALL) withObject:nil afterDelay:0.01];
+
 
 }
 #pragma Table view delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return arr_images.count;
+    NSInteger count = 0;
+    if([[jsonresponse_DIC valueForKey:@"Services"] isKindOfClass:[NSArray class]])
+    {
+        count = [[jsonresponse_DIC valueForKey:@"Services"] count];
+    }
+    else{
+        count = 0;
+    }
+    return count;
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -65,9 +65,24 @@
         nib = [[NSBundle mainBundle] loadNibNamed:@"offers_list_cell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    UIImage *img = [UIImage imageNamed:[[arr_images objectAtIndex:indexPath.section] valueForKey:@"key2"]];
-    cell.IMG_image.image = img;
-    cell.LBL_name.text = [[arr_images objectAtIndex:indexPath.section] valueForKey:@"key1"];
+    @try
+    {
+    NSString *str_image = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"Services"]objectAtIndex:indexPath.section] valueForKey:@"image"]];
+    str_image = [APIHelper convert_NUll:str_image];
+    
+    [cell.IMG_image sd_setImageWithURL:[NSURL URLWithString:str_image]
+                      placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+    
+    NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"Services"] objectAtIndex:indexPath.section] valueForKey:@"description"]]];
+        
+    str_name = [str_name uppercaseString];
+    
+    cell.LBL_name.text =str_name;
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
     return cell;
     
 }
@@ -82,6 +97,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.delegate consultation_offers:@"consulation"];
+    [[NSUserDefaults standardUserDefaults]  setValue:[[[jsonresponse_DIC valueForKey:@"Services"] objectAtIndex:indexPath.row] valueForKey:@"id"] forKey:@"service_ID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
 
@@ -115,6 +132,48 @@
         _LBL_search_place_holder.alpha = 0.0f;
     }
 }
+#pragma News API call
+
+-(void)Offers_API_CALL
+{
+    
+    @try
+    {
+        NSHTTPURLResponse *response = nil;
+        NSError *error;
+        NSString *URL_STR = [NSString stringWithFormat:@"%@getServicesList",SERVER_URL];
+        
+        NSURL *urlProducts=[NSURL URLWithString:URL_STR];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:urlProducts];
+        [request setHTTPMethod:@"GET"];
+        [request setHTTPShouldHandleCookies:NO];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        [APIHelper stop_activity_animation:self];
+        
+        if(aData)
+        {
+            jsonresponse_DIC =(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
+            NSLog(@"%@",jsonresponse_DIC);
+            [_TBL_list reloadData];
+            
+            
+        }
+        else
+        {
+            NSDictionary *dictin = [[NSDictionary alloc]initWithObjectsAndKeys:@"Nodata",@"error", nil];
+            NSLog(@"%@",dictin);
+        }
+    }
+    @catch(NSException *Exception)
+    {
+        
+    }
+    
+}
+
 
 /*
 #pragma mark - Navigation

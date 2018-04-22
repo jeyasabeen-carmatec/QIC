@@ -17,6 +17,8 @@
 + (void)postServiceCall:(NSString*_Nullable)urlStr andParams:(NSDictionary*_Nullable)params completionHandler:(void (^_Nullable)(id  _Nullable data, NSError * _Nullable error))completionHandler;
 +(NSDictionary  *_Nullable) API_get_call:(NSString *_Nullable)url_STR;
 
++ (void)updateServiceCall:(NSString*_Nullable)urlStr andParams:(NSDictionary*_Nullable)params completionHandler:(void (^_Nullable)(id  _Nullable data, NSError * _Nullable error))completionHandler;
+
 
 +(void)start_animation:(UIViewController *_Nullable)my_controller;
 +(void)stop_activity_animation:(UIViewController *_Nullable)my_controller;

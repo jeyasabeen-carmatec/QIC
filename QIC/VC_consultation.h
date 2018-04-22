@@ -18,11 +18,20 @@
 #pragma Button
 @property(nonatomic,weak) IBOutlet UIButton *BTN_bcak;
 
+@property(nonatomic,weak) IBOutlet UILabel *LBL_header;
+
+
 #pragma delegate calling
 
 @property(nonatomic,assign) id <home_page_protocols> delegate;
 
 #pragma Favourites Button
 @property(nonatomic,weak) IBOutlet UIButton *BTN_favourite;
+
+
+#pragma Search bar views
+
+@property(nonatomic,weak) IBOutlet UILabel *LBL_search_place_holder;
+@property(nonatomic,weak) IBOutlet UITextField *TXT_search;
 
 @end

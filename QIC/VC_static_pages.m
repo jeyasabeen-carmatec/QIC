@@ -37,7 +37,7 @@
 }
 - (void)back_action {
     //Terms and Conditions
-    if([_LBL_header.text isEqualToString:@"Privacy Policy"]||[_LBL_header.text isEqualToString:@"Privacy Policy"])
+    if([_LBL_header.text isEqualToString:@"PRIVACY POLICY"]||[_LBL_header.text isEqualToString:@"TERMS AND CONDITIONS"])
     {
         [self.delegate static_page_back:@"static_page"];
     }

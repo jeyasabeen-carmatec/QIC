@@ -191,5 +191,49 @@
     }];
     [dataTask resume];
 }
+#pragma Get with Update
+
++ (void)updateServiceCall:(NSString*_Nullable)urlStr andParams:(NSDictionary*_Nullable)params completionHandler:(void (^_Nullable)(id  _Nullable data, NSError * _Nullable error))completionHandler{
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
+    [request setHTTPMethod:@"DELETE"];
+    [request setTimeoutInterval:70];
+    [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:params options:0 error:nil];
+    
+    [request setHTTPBody:postData];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.allowsCellularAccess = YES;
+    configuration.HTTPMaximumConnectionsPerHost = 10;
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(id  _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            completionHandler(nil,error);
+            
+            NSLog(@"eror g1:%@",[error localizedDescription]);
+        }else{
+            NSError *err = nil;
+            id resposeJSon = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+            if (err) {
+                completionHandler(nil,err);
+                NSLog(@"eror g2:%@",[error localizedDescription]);
+            }else{
+                @try {
+                    if (resposeJSon) {
+                        completionHandler(resposeJSon,nil);
+                        
+                    }
+                    
+                } @catch (NSException *exception)
+                {
+                    NSLog(@" 3 %@",exception);
+                }
+            }
+        }
+    }];
+    [dataTask resume];
+}
+
 
 @end

@@ -40,7 +40,7 @@
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
 
     [APIHelper start_animation:self];
-    [self performSelector:@selector(News_API_CALL) withObject:nil afterDelay:0.01];
+    [self performSelector:@selector(Categiries_API_CALL) withObject:nil afterDelay:0.01];
 
 }
 #pragma collection view delgate methods
@@ -60,10 +60,12 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     categorie_cell *cell = (categorie_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    @try
+    {
+        
+    NSString *str_image = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"Categories"]objectAtIndex:indexPath.row] valueForKey:@"image"]];
     
-//    NSString *str_image = [NSString stringWithFormat:@"%@%@",SERVER_URL,[[[jsonresponse_DIC valueForKey:@"newsList"]objectAtIndex:indexPath.section] valueForKey:@"image"]];
-    
-    [cell.IMG_categories sd_setImageWithURL:[NSURL URLWithString:@"Image-placeholder-2.png"]
+    [cell.IMG_categories sd_setImageWithURL:[NSURL URLWithString:str_image]
                       placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
 
     NSString *str_name = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"Categories"] objectAtIndex:indexPath.row] valueForKey:@"description"]];
@@ -71,6 +73,11 @@
     
     [cell.BTN_categories setTitle:str_name forState:UIControlStateNormal];
     cell.BTN_categories.layer.cornerRadius = 2.0f;
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
     
     return cell;
     
@@ -90,7 +97,15 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"display the cell");
+    if([[jsonresponse_DIC valueForKey:@"Categories"] isKindOfClass:[NSArray class]])
+    {
+    [[NSUserDefaults standardUserDefaults] setValue:[[[jsonresponse_DIC valueForKey:@"Categories"] objectAtIndex:indexPath.section] valueForKey:@"code"] forKey:@"catgory_id"];
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
     [self.delegate sub_categories_action:@"subcategories"];
+    }
+    
+    
  
     
 }
@@ -121,9 +136,9 @@
         _LBL_search_place_holder.alpha = 0.0f;
     }
 }
-#pragma News API call
+#pragma Categories API call
 
--(void)News_API_CALL
+-(void)Categiries_API_CALL
 {
     
     @try

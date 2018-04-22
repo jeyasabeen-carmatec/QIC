@@ -221,15 +221,23 @@
     }
    else if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Privacy Policy"])
    {
-       [[NSUserDefaults standardUserDefaults] setValue:@"Privacy Policy" forKey:@"header_val"];
+       
+       NSString *str_URL = [NSString stringWithFormat:@"%@pages/privacyPolicy",STATCI_URL];
+       [[NSUserDefaults standardUserDefaults]  setValue:str_URL forKey:@"Static_URL"];
+
+       [[NSUserDefaults standardUserDefaults] setValue:@"PRIVACY POLICY" forKey:@"header_val"];
        [[NSUserDefaults standardUserDefaults] synchronize];
+       
+       
        
        [self.delegate static_page_view_call];
    }
     else if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Terms and Conditions"])
     {
-        
-        [[NSUserDefaults standardUserDefaults] setValue:@"Terms and Conditions" forKey:@"header_val"];
+        NSString *str_URL = [NSString stringWithFormat:@"%@pages/termsAndConditions",STATCI_URL];
+        [[NSUserDefaults standardUserDefaults]  setValue:str_URL forKey:@"Static_URL"];
+
+        [[NSUserDefaults standardUserDefaults] setValue:@"TERMS AND CONDITIONS" forKey:@"header_val"];
         [[NSUserDefaults standardUserDefaults] synchronize];
          [self.delegate static_page_view_call];
 

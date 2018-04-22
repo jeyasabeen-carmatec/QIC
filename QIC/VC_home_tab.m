@@ -529,7 +529,6 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
    
-NSArray *arr_names = [NSArray arrayWithObjects:@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER",@"AlSHAMI MEDICAL CENTER", nil];
     
  /********************** collectionv view Providers *************************/
 if (collectionView == _collection_providers)
@@ -546,8 +545,25 @@ if (collectionView == _collection_providers)
     
     str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:str_name]];
     img_cell.LBL_name.text =  str_name;
-        img_cell.IMG_name.layer.cornerRadius = 10.0;
+        img_cell.IMG_name.layer.cornerRadius = 20.0;
         img_cell.IMG_name.layer.masksToBounds = YES;
+        CGSize result = [[UIScreen mainScreen] bounds].size;
+        if(result.height <= 480)
+        {
+            img_cell.LBL_name.layer.cornerRadius = 0.0;
+            img_cell.LBL_name.layer.masksToBounds = YES;
+        }
+        else if(result.height <= 568)
+        {
+            img_cell.LBL_name.layer.cornerRadius = 0.0;
+            img_cell.LBL_name.layer.masksToBounds = YES;
+        }
+        else
+        {
+            img_cell.LBL_name.layer.cornerRadius = 10.0;
+            img_cell.LBL_name.layer.masksToBounds = YES;
+        }
+       
     }
     @catch(NSException *exception)
     {
@@ -565,8 +581,28 @@ else if(collectionView == _collection_offers)
     {
     home_cell *img_cell = (home_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"home_cell_offers" forIndexPath:indexPath];
     img_cell.IMG_name.image = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
-    img_cell.IMG_name.layer.cornerRadius = 10.0;
+    img_cell.IMG_name.layer.cornerRadius = 20.0;
     img_cell.IMG_name.layer.masksToBounds = YES;
+        CGSize result = [[UIScreen mainScreen] bounds].size;
+
+        if(result.height <= 480)
+        {
+            img_cell.LBL_name.layer.cornerRadius = 0.0;
+            img_cell.LBL_name.layer.masksToBounds = YES;
+        }
+        else if(result.height <= 568)
+        {
+            img_cell.LBL_name.layer.cornerRadius = 0.0;
+            img_cell.LBL_name.layer.masksToBounds = YES;
+        }
+        else
+        {
+            img_cell.LBL_name.layer.cornerRadius = 10.0;
+            img_cell.LBL_name.layer.masksToBounds = YES;
+        }
+
+
+        
 
 //    [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:[arr_images objectAtIndex:indexPath.row]]
 //                         placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
@@ -601,8 +637,27 @@ else{
     NSString *str_time = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"title"]]];
     img_cell.LBL_name.text =  [NSString stringWithFormat:@"%@",str_time];
     
-    img_cell.layer.cornerRadius = 5.0f;
-    img_cell.layer.masksToBounds = YES;
+    img_cell.IMG_name.layer.cornerRadius = 20.0;
+    img_cell.IMG_name.layer.masksToBounds = YES;
+    
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+    
+    if(result.height <= 480)
+    {
+        img_cell.LBL_name.layer.cornerRadius = 0.0;
+        img_cell.LBL_name.layer.masksToBounds = YES;
+    }
+    else if(result.height <= 568)
+    {
+        img_cell.LBL_name.layer.cornerRadius = 0.0;
+        img_cell.LBL_name.layer.masksToBounds = YES;
+    }
+    else
+    {
+        img_cell.LBL_name.layer.cornerRadius = 10.0;
+        img_cell.LBL_name.layer.masksToBounds = YES;
+    }
+
 
     return img_cell;
 }
@@ -632,6 +687,10 @@ else{
 {
     if(collectionView == _collection_providers)
     {
+        [[NSUserDefaults standardUserDefaults] setObject:[[[JSON_response_dic valueForKey:@"provider_list"] objectAtIndex:indexPath.row] valueForKey:@"id"] forKey:@"category_ID"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[[JSON_response_dic valueForKey:@"provider_list"] objectAtIndex:indexPath.row] valueForKey:@"provider_id"] forKey:@"provider_ID"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
         [self.delegate calling_providers_view];
     }
     else if(collectionView == _collection_offers){

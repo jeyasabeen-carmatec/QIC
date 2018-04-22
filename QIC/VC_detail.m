@@ -9,11 +9,15 @@
 #import "VC_detail.h"
 #import "HMSegmentedControl.h"
 #import "offers_cell.h"
+#import "APIHelper.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @interface VC_detail ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
 {
     float scroll_ht;
     NSMutableArray *Arr_ofrs_list;
+    NSDictionary *jsonresponse_DIC;
     CLLocationManager *locationManager;
 }
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl4;
@@ -25,89 +29,43 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self SET_UP_VIEW];
+    [APIHelper start_animation:self];
+    [self performSelector:@selector(Detail_API) withObject:nil afterDelay:0.01];
+
+   
    }
 #pragma setiing the frames for compnents
 
 -(void)SET_UP_VIEW
 {
-    Arr_ofrs_list = [[NSMutableArray alloc]init];
-    NSDictionary *temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Consultations",@"key1",@"20%",@"key2",nil];
-    [Arr_ofrs_list addObject:temp_dict];
     
-    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Procedures",@"key1",@"30%",@"key2", nil];
-    [Arr_ofrs_list addObject:temp_dict];
+    NSString *str_image = [NSString stringWithFormat:@"%@",[[jsonresponse_DIC valueForKey:@"Providers"]valueForKey:@"logo"]];
     
-    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Pharmacy",@"key1",@"40%",@"key2", nil];
-    [Arr_ofrs_list addObject:temp_dict];
-    
-    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Laser",@"key1",@"20%",@"key2", nil];
-    [Arr_ofrs_list addObject:temp_dict];
-    
-    temp_dict=[NSDictionary dictionaryWithObjectsAndKeys:@"Cosmetic",@"key1",@"30%",@"key2", nil];
-    [Arr_ofrs_list addObject:temp_dict];
-    
+    [_IMG_center_image sd_setImageWithURL:[NSURL URLWithString:str_image]
+                           placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
 
-    
     
     _IMG_center_image.layer.cornerRadius = _IMG_center_image.frame.size.width/2;
     _IMG_center_image.layer.masksToBounds =  YES;
     
-    _LBL_center_name.text = @"AL SHAMI MEDICAL CENTER";
-    
-    
-    
-   /* NSString *str_center_name =@"Al shami medical center";
-    NSString *str_designaton = @"Dentist";
-    NSString *str_address = @"Wadi Al Utooria Strret,Khaled.";
-    NSString *str_PHONE = @"PHONE:1234567891";
-    
-    NSString *str_addres = [NSString  stringWithFormat:@"%@\n%@\n%@\n%@",str_center_name,str_designaton,str_address,str_PHONE];
-    
-    if ([_TXT_VW_address respondsToSelector:@selector(setAttributedText:)])
-    {
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle.lineHeightMultiple = 5.0f;
-        paragraphStyle.maximumLineHeight = 5.0f;
-        paragraphStyle.minimumLineHeight = 5.0f;
-
-        
-        NSDictionary *attribs = @{
-                                  NSForegroundColorAttributeName:_TXT_VW_address.textColor,
-                                  NSFontAttributeName: _TXT_VW_address.font,
-                                  NSParagraphStyleAttributeName : paragraphStyle,
-                                  };
-        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_addres attributes:attribs];
-        
-
-      [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:15.0],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0],}range:[str_addres rangeOfString:str_center_name] ];
-        
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:15.0],NSForegroundColorAttributeName:[UIColor lightGrayColor],}range:[str_addres rangeOfString:str_designaton] ];
-        
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:15.0],NSForegroundColorAttributeName:[UIColor lightGrayColor],}range:[str_addres rangeOfString:str_address] ];
-        
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:15.0],NSForegroundColorAttributeName:[UIColor lightGrayColor],}range:[str_addres rangeOfString:str_PHONE] ];
-        
-        
-        
-        _TXT_VW_address.attributedText = attributedText;
-    }
-    else{
-        _TXT_VW_address.text = str_address;
-    }*/
+    NSString *str_naeme = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"provider_name"]]];
+    str_naeme = [str_naeme uppercaseString];
 
     
+    _LBL_center_name.text = str_naeme;
+    _LBL_header.text = str_naeme;
     
+     NSString *str_speciality = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"specialities"]]];
     
-    
-    _LBL_designation.text = @"Dentist";
+    _LBL_designation.text = str_speciality;
     CGRect frameset = _LBL_designation.frame;
     frameset.origin.y = _LBL_center_name.frame.origin.y + _LBL_center_name.frame.size.height+4;
     _LBL_designation.frame = frameset;
     
     
-    _LBL_address.text = @"Wadi Al Utooria Strret,Khaled.";
+     NSString *str_address = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"address"]]];
+    
+    _LBL_address.text = str_address;
   
 
     frameset = _LBL_address.frame;
@@ -122,7 +80,12 @@
     frameset.origin.y = _LBL_address.frame.origin.y + _LBL_address.frame.size.height+4;
     _BTN_call.frame = frameset;
     
-    _LBL_phone.text = @"PHONE:1234567891";
+    NSString *str_phone = [NSString stringWithFormat:@"%@",[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"contact_no"]];
+    
+    str_phone = [NSString stringWithFormat:@"PHONE : %@",[APIHelper convert_NUll:str_phone]];
+    
+
+    _LBL_phone.text = str_phone;
     
     frameset = _LBL_phone.frame;
     frameset.origin.y = _LBL_address.frame.origin.y + _LBL_address.frame.size.height+4;
@@ -203,6 +166,7 @@
     //get_DIREction_action
     [_BTN_get_direction addTarget:self action:@selector(get_DIREction_action) forControlEvents:UIControlEventTouchUpInside];
 
+    [self viewDidLayoutSubviews];
 
     
 }
@@ -332,17 +296,21 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 #pragma map view calling
 -(void)map_VIEW_call
 {
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
-                                                            longitude:151.20
+    double latititude = [[[jsonresponse_DIC valueForKey:@"Providers"]  valueForKey:@"latitude"] doubleValue];
+    double langitude = [[[jsonresponse_DIC valueForKey:@"Providers"]  valueForKey:@"longitude"] doubleValue];
+
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:latititude
+                                                            longitude:langitude
                                                                  zoom:15];
     [_mapView animateToCameraPosition:camera];
     _mapView.myLocationEnabled = YES;
     
     // Creates a marker in the center of the map.
     GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
-    marker.title = @"Sydney";
-    marker.snippet = @"Australia";
+    marker.position = CLLocationCoordinate2DMake(latititude, langitude);
+    marker.title =[NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[jsonresponse_DIC valueForKey:@"Providers"]  valueForKey:@"provider_name"]]];
+    marker.snippet = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[jsonresponse_DIC valueForKey:@"Providers"]  valueForKey:@"address"]]];
     marker.map = _mapView;
     
     [UIView transitionWithView:_mapView
@@ -374,7 +342,16 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 #pragma Table view delegates
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return Arr_ofrs_list.count;
+    
+    NSInteger count = 0;
+    if([[jsonresponse_DIC valueForKey:@"Services"] isKindOfClass:[NSArray class]])
+    {
+        count = [[jsonresponse_DIC valueForKey:@"Services"] count];
+    }
+    else{
+        count = 0;
+    }
+    return count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -385,8 +362,21 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
         nib = [[NSBundle mainBundle] loadNibNamed:@"offers_cell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    cell.LBL_offer_names.text = [[Arr_ofrs_list objectAtIndex:indexPath.row] valueForKey:@"key1"];
-    [cell.BTN_discout setTitle:[[Arr_ofrs_list objectAtIndex:indexPath.row] valueForKey:@"key2"] forState:UIControlStateNormal];
+    
+    NSString *str_offer_name = [NSString stringWithFormat:@"%@", [[[jsonresponse_DIC valueForKey:@"Services"] objectAtIndex:indexPath.row] valueForKey:@"service_name"]];
+    str_offer_name = [APIHelper convert_NUll:str_offer_name];
+    cell.LBL_offer_names.text =str_offer_name;
+    
+    NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"Services"] objectAtIndex:indexPath.row] valueForKey:@"offer_type"]];
+    if([str_dicount isEqualToString:@"Percentage"])
+    {
+        NSString *str = @"%";
+        str_dicount = [NSString stringWithFormat:@"%@%@",[[[jsonresponse_DIC valueForKey:@"Services"] objectAtIndex:indexPath.row] valueForKey:@"offer_value"],str];
+    }
+    else{
+        str_dicount = [NSString stringWithFormat:@"%@",str_dicount];
+    }
+    [cell.BTN_discout setTitle:str_dicount forState:UIControlStateNormal];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -438,8 +428,11 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
     
     
     @try {
-        NSString *STR_ship_LAT = @"12.9592";
-        NSString *STR_ship_LON = @"77.6974";
+        double latititude = [[[jsonresponse_DIC valueForKey:@"Providers"]  valueForKey:@"latitude"] doubleValue];
+        double langitude = [[[jsonresponse_DIC valueForKey:@"Providers"]  valueForKey:@"longitude"] doubleValue];
+
+        NSString *STR_ship_LAT = [NSString stringWithFormat:@"%f",latititude];
+        NSString *STR_ship_LON =[NSString stringWithFormat:@"%f",langitude];
         
         NSString *URL_STR = [NSString stringWithFormat:@"comgooglemaps://?center=%f,%f&q=%f,%f",LOC_current.coordinate.latitude,LOC_current.coordinate.longitude, [STR_ship_LAT floatValue],[STR_ship_LON floatValue]];
         
@@ -465,7 +458,8 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 {
     NSString *phone_number;
     @try {
-        phone_number = @"9866806505";
+        phone_number = [NSString stringWithFormat:@"%@",[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"contact_no"]];
+        phone_number = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:phone_number]];
     } @catch (NSException *exception) {
         NSLog(@"No phone number available %@",exception);
     }
@@ -487,6 +481,47 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
     }
     
 }
+#pragma mark Detail-API
+-(void)Detail_API
+{
+    @try
+    {
+        NSHTTPURLResponse *response = nil;
+        NSError *error;
+        NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"category_ID"]];
+        NSString *str_provider_ID = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"provider_ID"]];
+        NSString  *URL_STR = [NSString stringWithFormat:@"%@getProvidersDetails/%@/%@",SERVER_URL,str_id,str_provider_ID];
+        
+        NSURL *urlProducts=[NSURL URLWithString:URL_STR];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:urlProducts];
+        [request setHTTPMethod:@"GET"];
+        [request setHTTPShouldHandleCookies:NO];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        [APIHelper stop_activity_animation:self];
+        
+        if(aData)
+        {
+            jsonresponse_DIC =(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
+            NSLog(@"%@",jsonresponse_DIC);
+            [self SET_UP_VIEW];
+            
+            
+        }
+        else
+        {
+            [APIHelper createaAlertWithMsg:@"Connection error" andTitle:@""];
+        }
+    }
+    @catch(NSException *Exception)
+    {
+        
+    }
+
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

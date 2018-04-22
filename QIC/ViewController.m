@@ -141,6 +141,15 @@
                     NSMutableDictionary *dictMutable = [TEMP_dict mutableCopy];
                     [dictMutable removeObjectsForKeys:[TEMP_dict allKeysForObject:[NSNull null]]];
                     
+                    NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
+                    
+                    NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                    
+                    NSDictionary *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+                    
+                    NSString *str_ID = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"membershipNo"] ];
+                    
+                    [[NSUserDefaults standardUserDefaults] setValue:str_ID forKey:@"MEMBER_id"];
                     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
@@ -200,6 +209,7 @@
                 NSDictionary *TEMP_dict = data;
                 NSLog(@"The login customer Data:%@",TEMP_dict);
                 [APIHelper stop_activity_animation:self];
+                
                 
                 NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"code"]];
                 

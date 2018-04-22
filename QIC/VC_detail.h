@@ -50,4 +50,7 @@
 #pragma Get Direction button
 @property(nonatomic,weak) IBOutlet UIButton *BTN_get_direction;
 
+@property(nonatomic,weak) IBOutlet UILabel *LBL_header;
+
+
 @end

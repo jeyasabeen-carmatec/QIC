@@ -340,6 +340,10 @@
     {
         [self consultation_offers:@"consult"];
     }
+    else if([str_back isEqualToString:@"home"])
+    {
+        [self HOme_view_calling];
+    }
   //  [self sub_category_view];
 }
 
@@ -509,7 +513,7 @@
 {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:1]];
 
-    [self providers_view_calling];
+    [self detail_PAGE];
 }
 -(void)calling_offers_view
 {
