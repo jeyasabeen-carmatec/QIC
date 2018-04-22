@@ -19,4 +19,8 @@
 #pragma delegate calling
 
 @property(nonatomic,assign) id <home_page_protocols> delegate;
+
+
+
 @end
+

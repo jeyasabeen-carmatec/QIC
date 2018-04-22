@@ -65,8 +65,7 @@
     {
         NSLog(@"The exception from setting the data:%@",exception);
     }
-    
-}
+    }
 #pragma set up view 
 
 -(void)set_UP_VIEW

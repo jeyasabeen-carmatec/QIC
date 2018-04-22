@@ -18,4 +18,7 @@
 
 
 @property(nonatomic,weak) IBOutlet UIView *VW_back_ground;
+
+@property(nonatomic,weak)IBOutlet UIButton *BTN_favourite;
+
 @end

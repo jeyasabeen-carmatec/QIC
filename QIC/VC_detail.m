@@ -38,7 +38,7 @@
 
 -(void)SET_UP_VIEW
 {
-    
+     [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
     NSString *str_image = [NSString stringWithFormat:@"%@",[[jsonresponse_DIC valueForKey:@"Providers"]valueForKey:@"logo"]];
     
     [_IMG_center_image sd_setImageWithURL:[NSURL URLWithString:str_image]

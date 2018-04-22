@@ -63,7 +63,7 @@
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
     [_TXT_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventEditingChanged];
     
-    
+     [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
     [APIHelper start_animation:self];
     [self performSelector:@selector(SUB_Categiries_API_CALL) withObject:nil afterDelay:0.01];
 
@@ -154,8 +154,8 @@
 {
     
     [self.delegate detail_page_visibility:@"subcategory_detail"];
-    [[NSUserDefaults standardUserDefaults] setObject:[[arr_total_data objectAtIndex:indexPath.row] valueForKey:@"id"] forKey:@"category_ID"];
-    [[NSUserDefaults standardUserDefaults] setObject:[[arr_total_data objectAtIndex:indexPath.row] valueForKey:@"provider_id"] forKey:@"provider_ID"];
+    [[NSUserDefaults standardUserDefaults] setObject:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"id"] forKey:@"category_ID"];
+    [[NSUserDefaults standardUserDefaults] setObject:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_id"] forKey:@"provider_ID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -266,8 +266,9 @@
         }
         else
         {
-            NSDictionary *dictin = [[NSDictionary alloc]initWithObjectsAndKeys:@"Nodata",@"error", nil];
-            NSLog(@"%@",dictin);
+            [self.delegate subcategories_back_action:@"back"];
+            [APIHelper createaAlertWithMsg:@"No providers found." andTitle:nil];
+
         }
     }
     @catch(NSException *Exception)

@@ -47,11 +47,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wci-cc-l3Y">
-                                <rect key="frame" x="267" y="9" width="30" height="32"/>
+                                <rect key="frame" x="260" y="9" width="37" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="5eS-2L-9yy"/>
+                                    <constraint firstAttribute="height" constant="45" id="5eS-2L-9yy"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="lsz-cE-saP"/>
-                                    <constraint firstAttribute="width" constant="30" id="n9W-4M-wfh"/>
+                                    <constraint firstAttribute="width" constant="37" id="n9W-4M-wfh"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="zaQ-KG-cJL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="20"/>
@@ -99,10 +99,10 @@
                             <constraint firstItem="Bqb-8u-jHT" firstAttribute="top" secondItem="Ccl-V4-Mtb" secondAttribute="bottom" constant="9" id="aea-08-L4p"/>
                             <constraint firstItem="Bqb-8u-jHT" firstAttribute="leading" secondItem="Ccl-V4-Mtb" secondAttribute="leading" id="jgd-SC-H2L"/>
                             <constraint firstItem="WHM-nL-pwz" firstAttribute="top" secondItem="oI9-Nk-HfH" secondAttribute="top" id="kOp-8q-GQs"/>
-                            <constraint firstItem="1vH-63-YZG" firstAttribute="top" secondItem="wci-cc-l3Y" secondAttribute="bottom" constant="-5" id="kbr-Lw-G6M"/>
+                            <constraint firstItem="1vH-63-YZG" firstAttribute="top" secondItem="wci-cc-l3Y" secondAttribute="bottom" constant="-18" id="kbr-Lw-G6M"/>
                             <constraint firstItem="1vH-63-YZG" firstAttribute="leading" secondItem="Ccl-V4-Mtb" secondAttribute="trailing" constant="29" id="paq-6G-6YC"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Bqb-8u-jHT" secondAttribute="bottom" constant="15" id="phU-Ur-Cwz"/>
-                            <constraint firstItem="wci-cc-l3Y" firstAttribute="leading" secondItem="WHM-nL-pwz" secondAttribute="trailing" constant="9" id="xtY-Gb-2kg"/>
+                            <constraint firstItem="wci-cc-l3Y" firstAttribute="leading" secondItem="WHM-nL-pwz" secondAttribute="trailing" constant="2" id="xtY-Gb-2kg"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -120,6 +120,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="BTN_favourite" destination="wci-cc-l3Y" id="IZs-uf-QQh"/>
                 <outlet property="IMG_title" destination="oI9-Nk-HfH" id="12a-zm-hOF"/>
                 <outlet property="LBL_addres" destination="Bqb-8u-jHT" id="mgb-7a-zfh"/>
                 <outlet property="LBL_designnantion" destination="Ccl-V4-Mtb" id="4Vw-E8-zUE"/>

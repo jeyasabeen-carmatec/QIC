@@ -32,7 +32,7 @@
     
     arr_images = [[NSMutableArray alloc]init];
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
-    
+     [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
     [APIHelper start_animation:self];
     [self performSelector:@selector(Offers_API_CALL) withObject:nil afterDelay:0.01];
 
@@ -97,7 +97,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.delegate consultation_offers:@"consulation"];
-    [[NSUserDefaults standardUserDefaults]  setValue:[[[jsonresponse_DIC valueForKey:@"Services"] objectAtIndex:indexPath.row] valueForKey:@"id"] forKey:@"service_ID"];
+    [[NSUserDefaults standardUserDefaults]  setValue:[[[jsonresponse_DIC valueForKey:@"Services"] objectAtIndex:indexPath.section] valueForKey:@"id"] forKey:@"service_ID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }

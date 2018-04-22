@@ -29,7 +29,7 @@
     // Do any additional setup after loading the view.
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg",@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
-    
+     [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
     [APIHelper start_animation:self];
     [self performSelector:@selector(News_API_CALL) withObject:nil afterDelay:0.01];
 

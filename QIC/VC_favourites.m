@@ -8,12 +8,16 @@
 
 #import "VC_favourites.h"
 #import"favourites_cell.h"
+#import "APIHelper.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 
 
 
 @interface VC_favourites ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *arr_images;
+    NSDictionary *jsonresponse_DIC;
 }
 
 @end
@@ -25,11 +29,23 @@
     // Do any additional setup after loading the view.
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
+    
+    [APIHelper start_animation:self];
+    [self performSelector:@selector(favourites_API_call) withObject:nil afterDelay:0.01];
+
 }
 #pragma Table view delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return arr_images.count;
+    NSInteger count = 0;
+    if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
+    {
+        count = [[jsonresponse_DIC valueForKey:@"List"] count];
+    }
+    else{
+        count = 0;
+    }
+    return count;
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -45,13 +61,42 @@
         nib = [[NSBundle mainBundle] loadNibNamed:@"favourites_cell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    cell.LBL_name.text = @"Al SHAMI MEDICAL CENTER";
-    cell.LBL_addres.text = @"Wadi Al utooria Street,\nAin Khaled.";
-    cell.LBL_designnantion.text = @"Services: Dentist";
-   NSString *discount = @"10%";
-
+    @try
+    {
     
-    NSString *str_addres = [NSString  stringWithFormat:@"%@\ndiscount",discount];
+    NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"provider_name"]]];
+    str_name = [str_name uppercaseString];
+    
+    
+    cell.LBL_name.text = [NSString stringWithFormat:@"%@",str_name];
+    
+    NSString *str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"service_name"]]];
+    
+    cell.LBL_designnantion.text = [NSString stringWithFormat:@"%@",str_designation];
+    
+    NSString *str_address = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"address"]]];
+    
+    cell.LBL_addres.text = [NSString stringWithFormat:@"%@",str_address];
+
+    NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"offer_type"]];
+    if([str_dicount isEqualToString:@"Percentage"])
+    {
+        NSString *str = @"%";
+        float str_va = [str_dicount floatValue];
+        str_dicount = [NSString stringWithFormat:@"%.2f",str_va];
+        str_dicount = [NSString stringWithFormat:@"%@%@\ndiscount",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section]  valueForKey:@"offer_value"],str];
+    }
+    else{
+        str_dicount = [NSString stringWithFormat:@"%@",str_dicount];
+    }
+    
+
+    [cell.BTN_favourite addTarget:self action:@selector(delete_ITEM_from_Wish_list:) forControlEvents:UIControlEventTouchUpInside];
+    cell.BTN_favourite.tag = indexPath.section;
+    
+    cell.BTN_favourite.titleLabel.textColor = [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0];
+    
+    NSString *str_addres = [NSString  stringWithFormat:@"%@",str_dicount];
     
     if ([cell.LBL_price_amount respondsToSelector:@selector(setAttributedText:)])
     {
@@ -73,14 +118,14 @@
         }
         else
         {
-            size = 17.0;
+            size = 16.0;
         }
         
         cell.LBL_price_amount.font = [UIFont fontWithName:@"Futura-Heavy" size:size];
         @try
         {
 
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Heavy" size:size],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0],}range:[str_addres rangeOfString:discount] ];
+        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Heavy" size:size],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0],}range:[str_addres rangeOfString:str_dicount] ];
         }
         @catch(NSException *exception)
         {
@@ -96,6 +141,11 @@
     cell.LBL_price_amount.transform=CGAffineTransformMakeRotation( ( 90 * M_PI ) / -360 );
 
     cell.VW_back_ground.layer.cornerRadius = 2.0f;
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
    
     return cell;
     
@@ -116,6 +166,120 @@
 {
     NSString *str_page = [[NSUserDefaults standardUserDefaults] valueForKey:@"tab_param"];
     [self.delegate favourites_back_ACTION:str_page];
+}
+
+#pragma Faourites API call
+-(void)favourites_API_call
+{
+    
+    NSString *str_URL = [NSString stringWithFormat:@"%@getFavList",SERVER_URL];
+    @try
+    {
+        NSString  *str_member_ID = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+     
+        
+        NSDictionary *TEMP_dict = @{@"customer_id":str_member_ID};
+        
+        NSDictionary *parameters = TEMP_dict;
+        [APIHelper postServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+            }
+            
+            if(data)
+            {
+                [APIHelper stop_activity_animation:self];
+                jsonresponse_DIC= data;
+                if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
+                {
+                    [_TBL_list reloadData];
+                    
+                    
+                }
+                else
+                {
+                    [APIHelper createaAlertWithMsg:@"No items found" andTitle:@""];
+                }
+                NSLog(@"The login customer Data:%@",jsonresponse_DIC);
+                
+                
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        NSLog(@"Exception from login api:%@",exception);
+    }
+
+}
+
+#pragma Delte Item from wish list
+-(void)delete_ITEM_from_Wish_list:(UIButton *)sender
+{
+    NSString *str_URL = [NSString stringWithFormat:@"%@delFromFav",SERVER_URL];
+    
+    @try
+    {
+        NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+        NSString *srm_provider_ID = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:sender.tag] valueForKey:@"provider_id"]];
+        
+        NSString *service_ID = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
+
+        
+        NSDictionary *TEMP_dict = @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"service_id":service_ID};
+        
+        NSDictionary *parameters = TEMP_dict;
+        [APIHelper updateServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+            }
+            if(data)
+            {
+                NSDictionary *temp_dict = data;
+                
+                NSString *str_code = [NSString stringWithFormat:@"%@",[temp_dict valueForKey:@"msg"]];
+                if([str_code isEqualToString:@"Sucess"])
+                {
+                    [APIHelper createaAlertWithMsg:@"Offer deleted from your favourites." andTitle:@""];
+                    int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
+                    NSString *str_count;
+                    if(i == 0 )
+                    {
+                        i = 0;
+                    }
+                    else
+                    {
+                        i = i - 1;
+                        str_count = [NSString stringWithFormat:@"%d",i];
+                    }
+                    [APIHelper start_animation:self];
+
+                    [self favourites_API_call];
+                }
+                else{
+                    [APIHelper createaAlertWithMsg:@"Something went wrong." andTitle:@""];
+                    
+                }
+                
+                
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        NSLog(@"Exception from login api:%@",exception);
+    }
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -38,7 +38,7 @@
    // _collection_categoriesl.backgroundColor = [UIColor redColor];
 
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
-
+ [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
     [APIHelper start_animation:self];
     [self performSelector:@selector(Categiries_API_CALL) withObject:nil afterDelay:0.01];
 
@@ -99,7 +99,7 @@
     NSLog(@"display the cell");
     if([[jsonresponse_DIC valueForKey:@"Categories"] isKindOfClass:[NSArray class]])
     {
-    [[NSUserDefaults standardUserDefaults] setValue:[[[jsonresponse_DIC valueForKey:@"Categories"] objectAtIndex:indexPath.section] valueForKey:@"code"] forKey:@"catgory_id"];
+    [[NSUserDefaults standardUserDefaults] setValue:[[[jsonresponse_DIC valueForKey:@"Categories"] objectAtIndex:indexPath.row] valueForKey:@"code"] forKey:@"catgory_id"];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
     [self.delegate sub_categories_action:@"subcategories"];

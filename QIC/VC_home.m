@@ -19,6 +19,7 @@
 #import "VC_favourites.h"
 #import "VC_health_card.h"
 #import "VC_static_pages.h"
+#import "APIHelper.h"
 
 @interface VC_home ()<UITabBarDelegate>
 {
@@ -41,6 +42,7 @@
     [self highlight_IMAGE];
     [self tab_BAR_set_UP];
      [self HOme_view_calling];
+    [self favourites_API_call];
      [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:0]];
     
     
@@ -606,6 +608,63 @@
                     } completion:nil
      ];
 
+}
+#pragma Faourites API call
+-(void)favourites_API_call
+{
+    
+    NSString *str_URL = [NSString stringWithFormat:@"%@getFavList",SERVER_URL];
+    @try
+    {
+        NSString  *str_member_ID = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+        
+        
+        NSDictionary *TEMP_dict = @{@"customer_id":str_member_ID};
+        
+        NSDictionary *parameters = TEMP_dict;
+        [APIHelper postServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+            }
+            
+            if(data)
+            {
+                [APIHelper stop_activity_animation:self];
+                if([[data valueForKey:@"List"] isKindOfClass:[NSArray class]])
+                {
+                    
+                    
+                    NSString *str_count = [NSString stringWithFormat:@"%@",[data valueForKey:@"count"] ];
+                    [[NSUserDefaults standardUserDefaults]  setValue:str_count forKey:@"wish_count"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+                    [self.BTN_favourite setTitle:str_count forState:UIControlStateNormal];
+                }
+                else{
+                    [[NSUserDefaults standardUserDefaults]  setValue:@"0" forKey:@"wish_count"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+
+                }
+            }
+            else
+            {
+                [APIHelper stop_activity_animation:self];
+                [APIHelper createaAlertWithMsg:@"No items found" andTitle:@""];
+            }
+            
+                
+            
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        NSLog(@"Exception from login api:%@",exception);
+    }
+    
 }
 
 /*

@@ -14,6 +14,7 @@
 #pragma Tab bar 
 @property(nonatomic,weak) IBOutlet UITabBar *TAB_menu;
 
+@property(nonatomic,weak) IBOutlet UIButton *BTN_favourite;
 
 
 #pragma Main view

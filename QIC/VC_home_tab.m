@@ -69,6 +69,8 @@
     _collection_offers.layer.cornerRadius = 5.0f;
     _collection_offers.layer.masksToBounds = YES;
 
+    [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
+
 
    
 

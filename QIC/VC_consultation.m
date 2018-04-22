@@ -56,6 +56,7 @@
     
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
+     [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
     [_TXT_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventEditingChanged];
     [_TBL_list setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
     _TBL_list.showLoadMoreView = YES;
@@ -122,8 +123,16 @@
     
     
      //   [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
+        if([[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"fav_status"] isEqualToString:@"No"])
+        {
            [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
-    
+        }
+        else{
+            //
+            [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
+
+        }
+        
     
     
     NSString *str_dicount = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"discount_type"]];
@@ -157,7 +166,7 @@
         }
         else
         {
-            size = 17.0;
+            size = 15.0;
         }
         
         cell.LBL_discount.font = [UIFont fontWithName:@"Futura-Heavy" size:size];
@@ -212,8 +221,8 @@
 {
     [self.delegate consultation_detail:@"consultation_detail"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[[arr_total_data objectAtIndex:indexPath.row] valueForKey:@"id"] forKey:@"category_ID"];
-    [[NSUserDefaults standardUserDefaults] setObject:[[arr_total_data objectAtIndex:indexPath.row] valueForKey:@"provider_id"] forKey:@"provider_ID"];
+    [[NSUserDefaults standardUserDefaults] setObject:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"id"] forKey:@"category_ID"];
+    [[NSUserDefaults standardUserDefaults] setObject:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_id"] forKey:@"provider_ID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
 }
@@ -260,10 +269,12 @@
     NSString *str_URL = [NSString stringWithFormat:@"%@addToFav",SERVER_URL];
     @try
     {
-        NSString  *str_member_ID = [[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"];
+       NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
         NSString *provider_ID = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:sender.tag] valueForKey:@"provider_id"] ];
         
-        NSDictionary *TEMP_dict = @{@"provider_id":provider_ID,@"customer_id":str_member_ID};
+        NSString *str_service_ID = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
+        
+        NSDictionary *TEMP_dict = @{@"provider_id":provider_ID,@"customer_id":str_member_ID,@"service_id":str_service_ID};
         
         NSDictionary *parameters = TEMP_dict;
         [APIHelper postServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
@@ -286,7 +297,7 @@
                 {
                     if([[TEMP_dict valueForKey:@"List"] isEqualToString:@"Provider already exist"])
                     {
-                        [self delete_ITEM_from_Wish_list:provider_ID];
+                        [self delete_ITEM_from_Wish_list:provider_ID:str_service_ID];
                         NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
                         consultation_cell *cell = (consultation_cell *)[self.TBL_list cellForRowAtIndexPath:index];
                         
@@ -303,7 +314,13 @@
                     
                        [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
                     
-                    [APIHelper createaAlertWithMsg:@"Offer added to your favourites." andTitle:@""];
+                       [APIHelper createaAlertWithMsg:@"Offer added to your favourites." andTitle:@""];
+                        int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
+                        i = i +1;
+                        NSString *str_count = [NSString stringWithFormat:@"%d",i];
+                        [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        [_BTN_favourite setTitle:str_count forState:UIControlStateNormal];
                     }
                     
                     
@@ -333,15 +350,15 @@
    }
 
 #pragma Delte Item from wish list 
--(void)delete_ITEM_from_Wish_list:(NSString *)str_provider_ID
+-(void)delete_ITEM_from_Wish_list:(NSString *)srm_provider_ID:(NSString *)service_ID
 {
     NSString *str_URL = [NSString stringWithFormat:@"%@delFromFav",SERVER_URL];
     
     @try
     {
-        NSString  *str_member_ID = [[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"];
+        NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
         
-        NSDictionary *TEMP_dict = @{@"provider_id":str_provider_ID,@"customer_id":str_member_ID};
+        NSDictionary *TEMP_dict = @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"service_id":service_ID};
         
         NSDictionary *parameters = TEMP_dict;
         [APIHelper updateServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
@@ -358,6 +375,21 @@
                 if([str_code isEqualToString:@"Sucess"])
                 {
                     [APIHelper createaAlertWithMsg:@"Offer deleted from your favourites." andTitle:@""];
+                    int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
+                    NSString *str_count;
+                    if(i == 0 )
+                    {
+                        i = 0;
+                    }
+                    else
+                    {
+                    i = i - 1;
+                     str_count = [NSString stringWithFormat:@"%d",i];
+                    }
+                    [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [_BTN_favourite setTitle:str_count forState:UIControlStateNormal];
+
                 }
                 else{
                     [APIHelper createaAlertWithMsg:@"Something went wrong." andTitle:@""];
@@ -387,8 +419,9 @@
     {
         NSHTTPURLResponse *response = nil;
         NSError *error;
+        NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
         NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
-        URL_STR = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/1",SERVER_URL,str_id];
+        URL_STR = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/1/%@",SERVER_URL,str_id,str_member_ID];
         
         NSURL *urlProducts=[NSURL URLWithString:URL_STR];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -483,7 +516,8 @@
             NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
             
             NSString *url_STR = URL_STR;
-            url_STR = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%d",SERVER_URL,str_id,page_count];
+             NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+            url_STR = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%d/%@",SERVER_URL,str_id,page_count,str_member_ID];
             url_STR =  [url_STR stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
             
             
@@ -577,8 +611,9 @@
             NSError *error;
             NSHTTPURLResponse *response = nil;
             NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
+             NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
             
-            NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%d/%@",SERVER_URL,str_id,page_count,_TXT_search.text];
+            NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%d/%@/%@",SERVER_URL,str_id,page_count,str_member_ID,_TXT_search.text];
             
             NSURL *urlProducts=[NSURL URLWithString:[NSString stringWithFormat:@"%@",str_url]];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
