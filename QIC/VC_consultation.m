@@ -37,6 +37,8 @@
     NSDictionary *jsonresponse_DIC;
     NSString *URL_STR;
     int page_count;
+    CGRect old_txt_frame,button_search_frame;
+
 
 }
 
@@ -54,10 +56,16 @@
     arr_total_data = [[NSMutableArray alloc]init];
     CPY_arr = [[NSMutableArray alloc]init];
     
+    old_txt_frame = _TXT_search.frame;
+    button_search_frame = _BTN_search.frame;
+
+    
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
-     [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
-    [_TXT_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventEditingChanged];
+    [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
+    [_BTN_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventTouchUpInside];
+
+   // [_TXT_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventEditingChanged];
     [_TBL_list setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
     _TBL_list.showLoadMoreView = YES;
     
@@ -99,7 +107,7 @@
         
     _LBL_header.text = [NSString stringWithFormat:@"%@ OFFERS",[APIHelper convert_NUll:[[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"serviceName"] uppercaseString]]];
     
-    NSString *str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_type"]]];
+    NSString *str_designation = [NSString stringWithFormat:@"Services : %@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_type"]]];
     
     cell.LBL_designnantion.text = [NSString stringWithFormat:@"%@",str_designation];
     
@@ -135,8 +143,9 @@
         
     
     
-    NSString *str_dicount = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"discount_type"]];
-    if([str_dicount isEqualToString:@"Percentage"])
+    NSString *str_dicount_type = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"discount_type"]];
+           NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"offer_value"]];
+    if([str_dicount_type isEqualToString:@"Percentage"])
     {
         NSString *str = @"%";
         str_dicount = [NSString stringWithFormat:@"%@%@\ndiscount",[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"],str];
@@ -232,7 +241,7 @@
 -(void)back_actions
 {
     
-    [self.delegate consultation_offers_back:@"back"];
+    [self.delegate consultation_offers_back:@""];
 }
 #pragma favourites_action
 -(void)favourites_ACTION
@@ -247,10 +256,29 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    CGRect frameset = _LBL_search_place_holder.frame;
+    frameset.size.width = _LBL_search_place_holder.frame.size.width - 40;
+    _LBL_search_place_holder.frame = frameset;
+    
+    frameset = _TXT_search.frame;
+    frameset.size.width = _TXT_search.frame.size.width - 40;
+    _TXT_search.frame = frameset;
+    
+    
+    frameset = _BTN_search.frame;
+    frameset.origin.x = _LBL_search_place_holder.frame.size.width + 15;
+    _BTN_search.frame = frameset;
+    
+    
+    
     _LBL_search_place_holder.alpha = 0.0f;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+    _LBL_search_place_holder.frame = old_txt_frame;
+    _TXT_search.frame =  old_txt_frame;
+    _BTN_search.frame = button_search_frame;
+     _TXT_search.text = @"";
     if([textField.text isEqualToString:@""])
     {
         _LBL_search_place_holder.alpha = 1.0f;
@@ -264,7 +292,7 @@
 
 -(void)wish_list_action:(UIButton *)sender
 {
-    [APIHelper start_animation:self];
+    // [APIHelper start_animation:self];
     
     NSString *str_URL = [NSString stringWithFormat:@"%@addToFav",SERVER_URL];
     @try
@@ -283,10 +311,10 @@
             {
                 [APIHelper stop_activity_animation:self];
             }
+            [APIHelper stop_activity_animation:self];
 
             if(data)
             {
-                [APIHelper stop_activity_animation:self];
 
                 NSDictionary *TEMP_dict = data;
                 NSLog(@"The login customer Data:%@",TEMP_dict);
@@ -297,30 +325,43 @@
                 {
                     if([[TEMP_dict valueForKey:@"List"] isEqualToString:@"Provider already exist"])
                     {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+
                         [self delete_ITEM_from_Wish_list:provider_ID:str_service_ID];
                         NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
                         consultation_cell *cell = (consultation_cell *)[self.TBL_list cellForRowAtIndexPath:index];
                         
                         [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
+                        [APIHelper createaAlertWithMsg:@"Offer deleted from your favourites." andTitle:@""];
+
+                        });
                         
 
 
                     }
                     else{
                         
-                    
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                        
                     NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
                     consultation_cell *cell = (consultation_cell *)[self.TBL_list cellForRowAtIndexPath:index];
                     
                        [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
                     
-                       [APIHelper createaAlertWithMsg:@"Offer added to your favourites." andTitle:@""];
+                         [APIHelper createaAlertWithMsg:@"Offer added to your favourites." andTitle:@""];
                         int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
                         i = i +1;
                         NSString *str_count = [NSString stringWithFormat:@"%d",i];
                         [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                         [[NSUserDefaults standardUserDefaults] synchronize];
                         [_BTN_favourite setTitle:str_count forState:UIControlStateNormal];
+                            NSMutableDictionary *wishDic = [[NSMutableDictionary alloc] initWithDictionary:[arr_total_data objectAtIndex:index.row]];
+                            
+                            [wishDic setObject:@"Yes" forKey:@"fav_status"];
+                            
+                            [arr_total_data replaceObjectAtIndex:index.row withObject:wishDic];
+
+                        });
                     }
                     
                     
@@ -374,7 +415,6 @@
                 NSString *str_code = [NSString stringWithFormat:@"%@",[temp_dict valueForKey:@"msg"]];
                 if([str_code isEqualToString:@"Sucess"])
                 {
-                    [APIHelper createaAlertWithMsg:@"Offer deleted from your favourites." andTitle:@""];
                     int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
                     NSString *str_count;
                     if(i == 0 )
@@ -567,11 +607,16 @@
                 
                 @try
                 {
-                    
+                    if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
+                    {
+                   
+
                     NSMutableArray *new_ARR = [[NSMutableArray alloc]init];
                     new_ARR = [dict valueForKey:@"List"];
                     [arr_total_data addObjectsFromArray:new_ARR];
                     [_TBL_list reloadData];
+                        
+                    }
                     
                     
                     
@@ -603,17 +648,21 @@
 
 -(void)Search_API_called
 {
-    if(_TXT_search.text.length > 1)
+    if(_TXT_search.text.length > 2)
     {
         
         @try
         {
+            [APIHelper start_animation:self];
+
             NSError *error;
             NSHTTPURLResponse *response = nil;
             NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
              NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
             
             NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%d/%@/%@",SERVER_URL,str_id,page_count,str_member_ID,_TXT_search.text];
+            str_url = [str_url stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+
             
             NSURL *urlProducts=[NSURL URLWithString:[NSString stringWithFormat:@"%@",str_url]];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -621,6 +670,7 @@
             [request setHTTPMethod:@"GET"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+              [APIHelper stop_activity_animation:self];
             if (aData)
             {
                 
@@ -628,7 +678,8 @@
                 
                 @try
                 {
-                    
+                    if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
+                    {
                     NSMutableArray *new_ARR = [[NSMutableArray alloc]init];
                     new_ARR = [jsonresponse_DIC valueForKey:@"List"];
                     [CPY_arr addObjectsFromArray:arr_total_data];
@@ -636,6 +687,7 @@
                     [arr_total_data addObjectsFromArray:new_ARR];
                     [_TBL_list reloadData];
                     
+                    }
                     
                     
                     

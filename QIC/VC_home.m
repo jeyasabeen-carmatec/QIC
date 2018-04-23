@@ -20,6 +20,8 @@
 #import "VC_health_card.h"
 #import "VC_static_pages.h"
 #import "APIHelper.h"
+#import "VC_search.h"
+#import "VC_offers_search.h"
 
 @interface VC_home ()<UITabBarDelegate>
 {
@@ -157,7 +159,9 @@
 {
     
     /************** creating objet for Home view controller and and grabbing that view  ******************/
-
+    [[NSUserDefaults standardUserDefaults] setValue:@"home" forKey:@"tab_param"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     VC_home_tab *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_home_tab"];
     categorie_vw.delegate = self;
     CGRect frameset = categorie_vw.view.frame;
@@ -315,7 +319,16 @@
 /**************** consulatation back ***********************/
 -(void)consultation_offers_back:(NSString *)str_back
 {
-    [self offers_view_calling];
+    NSString *str = [[NSUserDefaults standardUserDefaults] valueForKey:@"tab_param"];
+    if([str isEqualToString:@"home"])
+    {
+        [self HOme_view_calling];
+    }
+    else{
+        [self offers_view_calling];
+
+    }
+
 }
 -(void)consultation_detail:(NSString *)str_status
 {
@@ -345,6 +358,10 @@
     else if([str_back isEqualToString:@"home"])
     {
         [self HOme_view_calling];
+    }
+    else if([str_back isEqualToString:@"provider_search"])
+    {
+        [self providers_view_calling];
     }
   //  [self sub_category_view];
 }
@@ -523,11 +540,24 @@
 
     [self offers_view_calling];
 }
--(void)calling_news_view
+-(void)calling_news_view:(NSString *)str_param
 {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:3]];
 
-    [self news_VIEW_calling];
+    if([str_param isEqualToString:@"news_detail"])
+    {
+        [self static_page_view_call];
+    }
+    else{
+        [self news_VIEW_calling];
+ 
+    }
+
+}
+-(void)calling_category_view_all
+{
+    [self providers_view_calling];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -578,6 +608,10 @@
     if([str_param isEqualToString:@"news"])
     {
         [self news_VIEW_calling];
+    }
+    else if([str_param isEqualToString:@"top news"])
+    {
+        [self HOme_view_calling];
     }
     else{
          [self Profile_VIEW_celling];
@@ -666,7 +700,74 @@
     }
     
 }
+#pragma calling_search_VIEW
+-(void)search_VIEW_calling
+{
+    VC_search *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_search"];
+    //  [categorie_vw.TBL_profile reloadData];
+    categorie_vw.delegate = self;
+    
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = _VW_main.frame.size.height;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
 
+    
+}
+-(void)offers_search_page_calling
+{
+    VC_offers_search *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_search_offers"];
+    //  [categorie_vw.TBL_profile reloadData];
+    categorie_vw.delegate = self;
+    
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = _VW_main.frame.size.height;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    [UIView transitionWithView:self.VW_main
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.VW_main addSubview:categorie_vw.view];
+                        
+                        [self addChildViewController:categorie_vw];
+                        [categorie_vw didMoveToParentViewController:self];
+                        categorie_vw.definesPresentationContext = YES;
+                    } completion:nil
+     ];
+
+    
+}
+-(void)offers_search_back
+{
+    [self offers_view_calling];
+}
+-(void)provider_search_back:(NSString *)str_back
+{
+    if([str_back isEqualToString:@"home"])
+    {
+        [self HOme_view_calling];
+    }
+    else{
+        [self providers_view_calling];
+    }
+   
+}
 /*
 #pragma mark - Navigation
 

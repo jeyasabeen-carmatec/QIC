@@ -30,7 +30,7 @@
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
     
-    [APIHelper start_animation:self];
+  //  [APIHelper start_animation:self];
     [self performSelector:@selector(favourites_API_call) withObject:nil afterDelay:0.01];
 
 }
@@ -70,7 +70,7 @@
     
     cell.LBL_name.text = [NSString stringWithFormat:@"%@",str_name];
     
-    NSString *str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"service_name"]]];
+    NSString *str_designation = [NSString stringWithFormat:@"Services : %@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"service_name"]]];
     
     cell.LBL_designnantion.text = [NSString stringWithFormat:@"%@",str_designation];
     
@@ -78,13 +78,16 @@
     
     cell.LBL_addres.text = [NSString stringWithFormat:@"%@",str_address];
 
-    NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"offer_type"]];
-    if([str_dicount isEqualToString:@"Percentage"])
+    NSString *str_dicount_type = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"offer_type"]];
+        
+         NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"offer_value"]];
+        
+    if([str_dicount_type isEqualToString:@"Percentage"])
     {
         NSString *str = @"%";
         float str_va = [str_dicount floatValue];
-        str_dicount = [NSString stringWithFormat:@"%.2f",str_va];
-        str_dicount = [NSString stringWithFormat:@"%@%@\ndiscount",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section]  valueForKey:@"offer_value"],str];
+        str_dicount = [NSString stringWithFormat:@"%.f",str_va];
+        str_dicount = [NSString stringWithFormat:@"%@%@\ndiscount",str_dicount,str];
     }
     else{
         str_dicount = [NSString stringWithFormat:@"%@",str_dicount];
@@ -114,11 +117,11 @@
         }
         else if(result.height <= 568)
         {
-            size = 15.0;
+            size = 14.0;
         }
         else
         {
-            size = 16.0;
+            size = 15.0;
         }
         
         cell.LBL_price_amount.font = [UIFont fontWithName:@"Futura-Heavy" size:size];
@@ -187,20 +190,31 @@
             {
                 [APIHelper stop_activity_animation:self];
             }
-            
+
             if(data)
             {
-                [APIHelper stop_activity_animation:self];
+                NSLog(@"%@", jsonresponse_DIC);
                 jsonresponse_DIC= data;
                 if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
                 {
+                    [APIHelper stop_activity_animation:self];
+
+                     dispatch_async(dispatch_get_main_queue(), ^{
                     [_TBL_list reloadData];
-                    
+                     });
                     
                 }
+                
                 else
                 {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+
+                    [APIHelper stop_activity_animation:self];
+                    NSString *str_page = [[NSUserDefaults standardUserDefaults] valueForKey:@"tab_param"];
+
+                    [self.delegate favourites_back_ACTION:str_page];
                     [APIHelper createaAlertWithMsg:@"No items found" andTitle:@""];
+                         });
                 }
                 NSLog(@"The login customer Data:%@",jsonresponse_DIC);
                 
@@ -220,6 +234,8 @@
 #pragma Delte Item from wish list
 -(void)delete_ITEM_from_Wish_list:(UIButton *)sender
 {
+    
+   // [APIHelper start_animation:self];
     NSString *str_URL = [NSString stringWithFormat:@"%@delFromFav",SERVER_URL];
     
     @try
@@ -227,7 +243,7 @@
         NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
         NSString *srm_provider_ID = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:sender.tag] valueForKey:@"provider_id"]];
         
-        NSString *service_ID = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
+        NSString *service_ID = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:sender.tag] valueForKey:@"services_id"]];
 
         
         NSDictionary *TEMP_dict = @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"service_id":service_ID};
@@ -241,8 +257,10 @@
             }
             if(data)
             {
-                NSDictionary *temp_dict = data;
+               
                 
+                NSDictionary *temp_dict = data;
+                [APIHelper stop_activity_animation:self];
                 NSString *str_code = [NSString stringWithFormat:@"%@",[temp_dict valueForKey:@"msg"]];
                 if([str_code isEqualToString:@"Sucess"])
                 {
@@ -258,11 +276,15 @@
                         i = i - 1;
                         str_count = [NSString stringWithFormat:@"%d",i];
                     }
-                    [APIHelper start_animation:self];
+                    [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
 
                     [self favourites_API_call];
+
+                    
                 }
                 else{
+                    [APIHelper stop_activity_animation:self];
                     [APIHelper createaAlertWithMsg:@"Something went wrong." andTitle:@""];
                     
                 }

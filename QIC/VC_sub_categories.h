@@ -31,5 +31,7 @@
 @property(nonatomic,weak) IBOutlet UITextField *TXT_search;
 
 @property(nonatomic,weak) IBOutlet UILabel *LBL_header;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_search;
+
 
 @end

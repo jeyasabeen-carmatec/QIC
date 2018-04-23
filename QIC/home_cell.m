@@ -20,21 +20,23 @@
     if(result.height <= 480)
     {
         ht = 40;
-        origin = 50;
+        origin = 40;
     }
     else if(result.height <= 568)
     {
         ht= 40;
-        origin = 50;
+        origin = 40;
     }
     else
     {
-        ht = 60;
-        origin = 70;
+        ht = 50;
+        origin = 50;
+        
         
     }
-    
+    frameset.origin.x = _IMG_name.frame.origin.x;
     frameset.origin.y = _IMG_name.frame.origin.y + _IMG_name.frame.size.height - origin;
+    frameset.size.width = _IMG_name.frame.size.width;
 
     frameset.size.height = ht;
     _LBL_name.frame = frameset;

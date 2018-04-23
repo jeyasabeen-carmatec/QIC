@@ -38,8 +38,9 @@
    // _collection_categoriesl.backgroundColor = [UIColor redColor];
 
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
- [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
+    [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
     [APIHelper start_animation:self];
+
     [self performSelector:@selector(Categiries_API_CALL) withObject:nil afterDelay:0.01];
 
 }
@@ -64,6 +65,7 @@
     {
         
     NSString *str_image = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"Categories"]objectAtIndex:indexPath.row] valueForKey:@"image"]];
+        str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     
     [cell.IMG_categories sd_setImageWithURL:[NSURL URLWithString:str_image]
                       placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
@@ -102,6 +104,9 @@
     [[NSUserDefaults standardUserDefaults] setValue:[[[jsonresponse_DIC valueForKey:@"Categories"] objectAtIndex:indexPath.row] valueForKey:@"code"] forKey:@"catgory_id"];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+        
     [self.delegate sub_categories_action:@"subcategories"];
     }
     
@@ -125,6 +130,9 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     _LBL_search_place_holder.alpha = 0.0f;
+    [[NSUserDefaults standardUserDefaults] setValue:@"provider_search" forKey:@"tab_param"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.delegate search_VIEW_calling];
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {

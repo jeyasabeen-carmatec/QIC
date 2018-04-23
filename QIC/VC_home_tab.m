@@ -45,7 +45,6 @@
     _Scroll_contents.delegate = self;
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_providers_all addTarget:self action:@selector(providers_action) forControlEvents:UIControlEventTouchUpInside];
-    [_BTN_providers_all addTarget:self action:@selector(providers_action) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_news_all addTarget:self action:@selector(news_all_action) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_offers_all addTarget:self action:@selector(offers_all_action) forControlEvents:UIControlEventTouchUpInside];
 
@@ -69,7 +68,7 @@
     _collection_offers.layer.cornerRadius = 5.0f;
     _collection_offers.layer.masksToBounds = YES;
 
-    [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
+    [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
 
 
    
@@ -435,6 +434,7 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     _LBL_search_place_holder.alpha = 0.0f;
+    [self.delegate  search_VIEW_calling];
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
@@ -451,31 +451,23 @@
 
 -(void)providers_action
 {
-
-    [self.delegate calling_providers_view];
+    
+    [self.delegate calling_category_view_all];
+    
 }
 -(void)offers_action
 {
+    
     [self.delegate calling_offers_view];
+    
 }
 -(void)news_action
 {
-    [self.delegate calling_news_view];
+    
+    [self.delegate calling_news_view:@""];
+    
 }
 
-- (void)coverFlowView:(CFCoverFlowView *)coverFlowView didSelectPageItemAtIndex:(NSInteger)index
-{
-    if(coverFlowView == coverFlowView1)
-    {
-         [self.delegate calling_providers_view];
-    }
-    else if(coverFlowView == coverFlowView2){
-        [self.delegate calling_offers_view];
-    }
-    else{
-        [self.delegate calling_news_view];
-    }
-}
 
 #pragma View all Buttonns actions
 
@@ -485,9 +477,10 @@
 }
 -(void)news_all_action
 {
-   [self.delegate calling_news_view]; 
+    [self.delegate calling_news_view:@""];
 }
 #pragma collection view delegates
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
     if(collectionView == _collection_providers)
@@ -516,9 +509,9 @@
     }
    else{
        NSInteger count = 0;
-       if([[JSON_response_dic valueForKey:@"offers_list"] isKindOfClass:[NSArray class]])
+       if([[JSON_response_dic valueForKey:@"news_list"] isKindOfClass:[NSArray class]])
        {
-           count = [[JSON_response_dic valueForKey:@"offers_list"] count];
+           count = [[JSON_response_dic valueForKey:@"news_list"] count];
        }
        else{
            count = 0;
@@ -540,6 +533,7 @@ if (collectionView == _collection_providers)
     @try
     {
     NSString *str_IMG_URL = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"provider_list"] objectAtIndex:indexPath.row] valueForKey:@"banner_url"]];
+        str_IMG_URL = [str_IMG_URL stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:str_IMG_URL]
                  placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
     
@@ -549,22 +543,8 @@ if (collectionView == _collection_providers)
     img_cell.LBL_name.text =  str_name;
         img_cell.IMG_name.layer.cornerRadius = 20.0;
         img_cell.IMG_name.layer.masksToBounds = YES;
-        CGSize result = [[UIScreen mainScreen] bounds].size;
-        if(result.height <= 480)
-        {
-            img_cell.LBL_name.layer.cornerRadius = 0.0;
-            img_cell.LBL_name.layer.masksToBounds = YES;
-        }
-        else if(result.height <= 568)
-        {
-            img_cell.LBL_name.layer.cornerRadius = 0.0;
-            img_cell.LBL_name.layer.masksToBounds = YES;
-        }
-        else
-        {
-            img_cell.LBL_name.layer.cornerRadius = 10.0;
-            img_cell.LBL_name.layer.masksToBounds = YES;
-        }
+        img_cell.LBL_name.layer.cornerRadius = 10.0;
+        img_cell.LBL_name.layer.masksToBounds = YES;
        
     }
     @catch(NSException *exception)
@@ -582,42 +562,38 @@ else if(collectionView == _collection_offers)
     @try
     {
     home_cell *img_cell = (home_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"home_cell_offers" forIndexPath:indexPath];
-    img_cell.IMG_name.image = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.row]];
     img_cell.IMG_name.layer.cornerRadius = 20.0;
     img_cell.IMG_name.layer.masksToBounds = YES;
-        CGSize result = [[UIScreen mainScreen] bounds].size;
+        img_cell.LBL_name.layer.cornerRadius = 10.0;
+        img_cell.LBL_name.layer.masksToBounds = YES;
 
-        if(result.height <= 480)
-        {
-            img_cell.LBL_name.layer.cornerRadius = 0.0;
-            img_cell.LBL_name.layer.masksToBounds = YES;
-        }
-        else if(result.height <= 568)
-        {
-            img_cell.LBL_name.layer.cornerRadius = 0.0;
-            img_cell.LBL_name.layer.masksToBounds = YES;
-        }
-        else
-        {
-            img_cell.LBL_name.layer.cornerRadius = 10.0;
-            img_cell.LBL_name.layer.masksToBounds = YES;
-        }
+        NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"image"]];
+        str_IMG_URL = [str_IMG_URL stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 
 
+        [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:str_IMG_URL]
+                         placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
         
+        NSString *str_offer_name = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"name"]];
+    
+        NSString *str_dicount_type = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"discount_type"]];
+        NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"discount"]];
+        if([str_dicount_type isEqualToString:@"Percentage"])
+        {
+            NSString *str = @"%";
+            str_dicount = [NSString stringWithFormat:@"%@\n%@%@ discount",str_offer_name,str_dicount,str];
+            
+            
+        }
+        else{
+            str_dicount = [NSString stringWithFormat:@"%@\n%@ discount",str_offer_name,str_dicount];
+;
+            
+        }
+        img_cell.LBL_name.text = str_dicount;
 
-//    [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:[arr_images objectAtIndex:indexPath.row]]
-//                         placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
     
-    
-    
-    NSString *str_discount = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"offer_value"]];
-    
-    str_discount = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:str_discount]];
-    
-    NSString *str_discount_lbl = @"% discount";
-    img_cell.LBL_name.text =  [NSString stringWithFormat:@"%@%@",str_discount,str_discount_lbl];
-    
+      
     return img_cell;
     }
     @catch(NSException *exception)
@@ -633,7 +609,9 @@ else{
     
     
 
-    NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",SERVER_URL,[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"image"]];
+    NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"image"]];
+    str_IMG_URL = [str_IMG_URL stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+
     [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:str_IMG_URL]
                          placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
     NSString *str_time = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"title"]]];
@@ -641,25 +619,10 @@ else{
     
     img_cell.IMG_name.layer.cornerRadius = 20.0;
     img_cell.IMG_name.layer.masksToBounds = YES;
+    img_cell.LBL_name.layer.cornerRadius = 10.0;
+    img_cell.LBL_name.layer.masksToBounds = YES;
     
-    CGSize result = [[UIScreen mainScreen] bounds].size;
-    
-    if(result.height <= 480)
-    {
-        img_cell.LBL_name.layer.cornerRadius = 0.0;
-        img_cell.LBL_name.layer.masksToBounds = YES;
-    }
-    else if(result.height <= 568)
-    {
-        img_cell.LBL_name.layer.cornerRadius = 0.0;
-        img_cell.LBL_name.layer.masksToBounds = YES;
-    }
-    else
-    {
-        img_cell.LBL_name.layer.cornerRadius = 10.0;
-        img_cell.LBL_name.layer.masksToBounds = YES;
-    }
-
+  
 
     return img_cell;
 }
@@ -696,10 +659,19 @@ else{
         [self.delegate calling_providers_view];
     }
     else if(collectionView == _collection_offers){
-        [self.delegate calling_offers_view];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"id"] forKey:@"service_ID"];
+        
+        [self.delegate consultation_offers:@""];
     }
     else{
-        [self.delegate calling_news_view];
+        NSString *str_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"url_key"]];
+        [[NSUserDefaults standardUserDefaults]  setValue:str_URL forKey:@"Static_URL"];
+        
+        [[NSUserDefaults standardUserDefaults]  setValue:@"TOP NEWS" forKey:@"header_val"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+        [self.delegate calling_news_view:@"news_detail"];
     }
 
 }
@@ -807,10 +779,10 @@ else{
             INDX_selected = newIndexPath;
         }
         
-        else if ([arr_images count]  > INDX_selected.row)
+        else if ([[JSON_response_dic valueForKey:@"provider_list"] count]  > INDX_selected.row)
         {
-            if ([arr_images count] == INDX_selected.row + 1) {
-                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] - 1 inSection:0];
+            if ([[JSON_response_dic valueForKey:@"provider_list"] count] == INDX_selected.row + 1) {
+                newIndexPath = [NSIndexPath indexPathForRow:[[JSON_response_dic valueForKey:@"provider_list"] count] - 1 inSection:0];
                 INDX_selected = newIndexPath;
             }
             else
@@ -849,11 +821,11 @@ else{
             INDX_selected = newIndexPath;
         }
         
-        else if ([arr_images count]  < INDX_selected.row)
+        else if ([[JSON_response_dic valueForKey:@"provider_list"] count]  < INDX_selected.row)
         {
-            if ([arr_images count] == INDX_selected.row - 1)
+            if ([[JSON_response_dic valueForKey:@"provider_list"] count] == INDX_selected.row - 1)
             {
-                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] + 1 inSection:0];
+                newIndexPath = [NSIndexPath indexPathForRow:[[JSON_response_dic valueForKey:@"provider_list"] count] + 1 inSection:0];
                 INDX_selected = newIndexPath;
             }
             else
@@ -898,11 +870,11 @@ else{
             INDX_offers = newIndexPath;
         }
         
-        else if ([arr_images count]  < INDX_offers.row)
+        else if ([[JSON_response_dic valueForKey:@"offers_list"] count]  < INDX_offers.row)
         {
-            if ([arr_images count] == INDX_offers.row - 1)
+            if ([[JSON_response_dic valueForKey:@"offers_list"] count] == INDX_offers.row - 1)
             {
-                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] + 1 inSection:0];
+                newIndexPath = [NSIndexPath indexPathForRow:[[JSON_response_dic valueForKey:@"offers_list"] count] + 1 inSection:0];
                 INDX_offers = newIndexPath;
             }
             else
@@ -944,10 +916,10 @@ else{
             INDX_offers = newIndexPath;
         }
         
-        else if ([arr_images count]  > INDX_offers.row)
+        else if ([[JSON_response_dic valueForKey:@"offers_list"] count]  > INDX_offers.row)
         {
-            if ([arr_images count] == INDX_offers.row + 1) {
-                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] - 1 inSection:0];
+            if ([[JSON_response_dic valueForKey:@"offers_list"] count] == INDX_offers.row + 1) {
+                newIndexPath = [NSIndexPath indexPathForRow:[[JSON_response_dic valueForKey:@"offers_list"] count] - 1 inSection:0];
                 INDX_offers = newIndexPath;
             }
             else
@@ -986,11 +958,11 @@ else{
             INDX_news = newIndexPath;
         }
         
-        else if ([arr_images count]  < INDX_news.row)
+        else if ([[JSON_response_dic valueForKey:@"news_list"] count]  < INDX_news.row)
         {
-            if ([arr_images count] == INDX_news.row - 1)
+            if ([[JSON_response_dic valueForKey:@"news_list"] count] == INDX_news.row - 1)
             {
-                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] + 1 inSection:0];
+                newIndexPath = [NSIndexPath indexPathForRow:[[JSON_response_dic valueForKey:@"news_list"] count] + 1 inSection:0];
                 INDX_news = newIndexPath;
             }
             else

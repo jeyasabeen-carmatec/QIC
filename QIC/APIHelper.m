@@ -142,6 +142,10 @@
 {
     NSString *str_null = [str stringByReplacingOccurrencesOfString:@"(null)" withString:@"Not mentioned"];
     str_null = [str stringByReplacingOccurrencesOfString:@"<null>" withString:@"Not mentioned"];
+    if(str.length < 1)
+    {
+     str_null = @"Not mentioned";
+    }
     if([str_null isKindOfClass:[NSNull class]])
     {
         str_null = @"Not mentioned";
@@ -233,6 +237,22 @@
         }
     }];
     [dataTask resume];
+}
++(NSString *)set_count:(NSString *_Nullable)str_count
+{
+    if([str_count isEqualToString:@"0"])
+    {
+        str_count = @"";
+    }
+   else if(str_count.length > 2)
+   {
+       str_count = [NSString stringWithFormat:@"%@+",str_count];
+   }
+   else{
+       str_count = str_count;
+   }
+    
+    return str_count;
 }
 
 

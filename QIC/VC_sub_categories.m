@@ -38,6 +38,7 @@
     NSMutableArray *arr_total_data,*CPY_arr;
      NSDictionary *jsonresponse_DIC;
     NSString *URL_STR;
+    CGRect old_txt_frame,button_search_frame;
     int page_count;
 }
 
@@ -56,14 +57,17 @@
     arr_total_data = [[NSMutableArray alloc]init];
     CPY_arr = [[NSMutableArray alloc]init];
     
-
+    old_txt_frame = _TXT_search.frame;
+    button_search_frame = _BTN_search.frame;
     [_TBL_list setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
     _TBL_list.showLoadMoreView = YES;
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
-    [_TXT_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventEditingChanged];
-    
-     [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
+   // [_TXT_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventEditingChanged];
+    [_BTN_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
+
     [APIHelper start_animation:self];
     [self performSelector:@selector(SUB_Categiries_API_CALL) withObject:nil afterDelay:0.01];
 
@@ -123,7 +127,8 @@
         
         
     NSString *str_image = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"logo"]]];
-        
+        str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+
         [cell.IMG_title sd_setImageWithURL:[NSURL URLWithString:str_image]
                                placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
         
@@ -177,10 +182,31 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    CGRect frameset = _LBL_search_place_holder.frame;
+    frameset.size.width = _LBL_search_place_holder.frame.size.width - 40;
+    _LBL_search_place_holder.frame = frameset;
+    
+    frameset = _TXT_search.frame;
+    frameset.size.width = _TXT_search.frame.size.width - 40;
+    _TXT_search.frame = frameset;
+
+    
+    frameset = _BTN_search.frame;
+    frameset.origin.x = _LBL_search_place_holder.frame.size.width + 15;
+    _BTN_search.frame = frameset;
+    
+  
+    
     _LBL_search_place_holder.alpha = 0.0f;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+      _LBL_search_place_holder.frame = old_txt_frame;
+     _TXT_search.frame =  old_txt_frame;
+      _BTN_search.frame = button_search_frame;
+    
+    _TXT_search.text = @"";
+
     if([textField.text isEqualToString:@""])
     {
         _LBL_search_place_holder.alpha = 1.0f;
@@ -256,18 +282,23 @@
             if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
             {
                 [arr_total_data addObjectsFromArray:[jsonresponse_DIC valueForKey:@"List"]];
+                [_TBL_list reloadData];
+
+
+            }
+            else{
+                [self.delegate subcategories_back_action:@"back"];
+                [APIHelper createaAlertWithMsg:@"No providers found." andTitle:nil];
 
             }
             
             
-            [_TBL_list reloadData];
             
             
         }
         else
         {
-            [self.delegate subcategories_back_action:@"back"];
-            [APIHelper createaAlertWithMsg:@"No providers found." andTitle:nil];
+            [APIHelper createaAlertWithMsg:@"Connection error" andTitle:nil];
 
         }
     }
@@ -382,13 +413,15 @@
         
         @try
         {
-        
+            if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
+            {
+            
             NSMutableArray *new_ARR = [[NSMutableArray alloc]init];
             new_ARR = [dict valueForKey:@"List"];
             [arr_total_data addObjectsFromArray:new_ARR];
             [_TBL_list reloadData];
             
-            
+            }
             
             
         }
@@ -418,16 +451,19 @@
 
 -(void)Search_API_called
 {
-    if(_TXT_search.text.length > 1)
+    if(_TXT_search.text.length > 2)
     {
     
     @try
     {
+        [APIHelper start_animation:self];
         NSError *error;
         NSHTTPURLResponse *response = nil;
          NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"catgory_id"]];
         
         NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/%d/%@",SERVER_URL,str_id,page_count,_TXT_search.text];
+        str_url = [str_url stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+
         
         NSURL *urlProducts=[NSURL URLWithString:[NSString stringWithFormat:@"%@",str_url]];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -435,6 +471,8 @@
         [request setHTTPMethod:@"GET"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        [APIHelper stop_activity_animation:self];
+
         if (aData)
         {
             
@@ -442,6 +480,8 @@
             
             @try
             {
+                if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
+                {
                 
                 NSMutableArray *new_ARR = [[NSMutableArray alloc]init];
                 new_ARR = [jsonresponse_DIC valueForKey:@"List"];
@@ -450,7 +490,8 @@
                 [arr_total_data addObjectsFromArray:new_ARR];
                 [_TBL_list reloadData];
                 
-                
+                }
+
                 
                 
             }

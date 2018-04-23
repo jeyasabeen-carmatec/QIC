@@ -28,7 +28,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"change-language.png",@"About-QIC.png",@"privacy-policy.png",@"terms-&-condition.png", nil];
+//    ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"change-language.png",@"About-QIC.png",@"privacy-policy.png",@"terms-&-condition.png", nil];
+    
+    ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"change-language.png",@"terms-&-condition.png", nil];
+    
+
    
     
     [self set_UP_DATA];
@@ -57,9 +61,10 @@
    NSString * str_to_date = [NSString stringWithFormat:@"%@",[self getting_from_date:[[TEMP_dict valueForKey:@"validityToDate"] doubleValue]]];
     
     NSString *str_validity = [NSString stringWithFormat:@"Validity : %@ to %@",str_fromdate,str_to_date];
-   
+//        DICT_profile = [NSArray arrayWithObjects:str_name,str_QID,str_MID,str_validity,@"Depenedents",@"Health Card",@"Change language",@"About QIC",@"Privacy Policy",@"Terms and Conditions", nil];
+
     
-    DICT_profile = [NSArray arrayWithObjects:str_name,str_QID,str_MID,str_validity,@"Depenedents",@"Health Card",@"Change language",@"About QIC",@"Privacy Policy",@"Terms and Conditions", nil];
+    DICT_profile = [NSArray arrayWithObjects:str_name,str_QID,str_MID,str_validity,@"Depenedents",@"Health Card",@"Change language",@"Terms and Conditions", nil];
     }
     @catch(NSException *exception)
     {

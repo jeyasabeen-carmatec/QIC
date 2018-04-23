@@ -32,7 +32,8 @@
     
     arr_images = [[NSMutableArray alloc]init];
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
-     [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
+    [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
+
     [APIHelper start_animation:self];
     [self performSelector:@selector(Offers_API_CALL) withObject:nil afterDelay:0.01];
 
@@ -69,6 +70,10 @@
     {
     NSString *str_image = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"Services"]objectAtIndex:indexPath.section] valueForKey:@"image"]];
     str_image = [APIHelper convert_NUll:str_image];
+        
+        str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+//        cell.LBL_name.backgroundColor = [UIColor blackColor];
+//        cell.LBL_name.alpha = 0.5f;
     
     [cell.IMG_image sd_setImageWithURL:[NSURL URLWithString:str_image]
                       placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
@@ -88,7 +93,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 170;
+    return 250;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -121,6 +126,7 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     _LBL_search_place_holder.alpha = 0.0f;
+    [self.delegate offers_search_page_calling];
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {

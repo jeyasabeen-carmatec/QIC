@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "APIHelper.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITextFieldDelegate>
 
 @end
 
@@ -33,6 +33,7 @@
     
    // _VW_center.center=self.view.center;
     _TXT_uname.text =  @"28535632996";
+    _TXT_password.text = @"123456";
     
     CGRect frameset = _BTN_guest.frame;
    
@@ -92,6 +93,60 @@
     
     
 }
+#pragma Textfield dlegates
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+    
+    if(result.height <= 480)
+    {
+        [textField setTintColor:[UIColor colorWithRed:0.00 green:0.18 blue:0.35 alpha:1.0]];
+        [UIView beginAnimations:nil context:NULL];
+        self.view.frame = CGRectMake(0,-110,self.view.frame.size.width,self.view.frame.size.height);
+        [UIView commitAnimations];
+
+    }
+    else if(result.height <= 568)
+    {
+        [textField setTintColor:[UIColor colorWithRed:0.00 green:0.18 blue:0.35 alpha:1.0]];
+        [UIView beginAnimations:nil context:NULL];
+        self.view.frame = CGRectMake(0,-110,self.view.frame.size.width,self.view.frame.size.height);
+        [UIView commitAnimations];
+
+    }
+    else
+    {
+    }
+  }
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+
+    if(result.height <= 480)
+    {
+        [UIView beginAnimations:nil context:NULL];
+        self.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
+        [UIView commitAnimations];
+    }
+    else if(result.height <= 568)
+    {
+        [UIView beginAnimations:nil context:NULL];
+        self.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
+        [UIView commitAnimations];
+    }
+    else
+    {
+    }
+   
+    
+}
+
 #pragma Validation checking
 
 -(void)valdations_FOR_Text
@@ -101,6 +156,18 @@
    {
        str_msg =  @"Please enter QID number";
    }
+    else if([_TXT_password.text isEqualToString:@""])
+    {
+        str_msg = @"Please enter Mobile Number";
+    }
+    else if(_TXT_password.text.length > 8)
+    {
+        str_msg = @"Mobile number should not be more than 8 digits";
+    }
+    else if(_TXT_password.text.length < 5)
+    {
+        str_msg = @"Mobile number should not be less than 5 digits";
+    }
     if(str_msg)
     {
         [APIHelper createaAlertWithMsg:str_msg andTitle:@"Alert"];
@@ -122,7 +189,7 @@
     {
     NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
     NSString *url_str = [NSString stringWithFormat:@"https://www.devapi.anoudapps.com/anaya/memberPortalLogin?company=001"];
-    NSDictionary *parameters = @{@"memberId":str_QID};
+    NSDictionary *parameters = @{@"memberId":str_QID,@"phone":@"33156672"};
     [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
         
         if(error)
@@ -152,7 +219,7 @@
                     [[NSUserDefaults standardUserDefaults] setValue:str_ID forKey:@"MEMBER_id"];
                     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
-                    [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
+                  //  [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
                     
                     [self calling_the_Company_API];
 

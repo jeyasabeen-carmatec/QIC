@@ -17,6 +17,8 @@
 //Local Host
 //#define SERVER_URL @"http://192.168.2.116/qic/apis/"
 //#define STATCI_URL @"http://192.168.2.116/qic/"
+//#define IMAGE_URL @"http://192.168.2.116/qic/"
+
 
 
 //Local host static
@@ -25,11 +27,17 @@
 
 //192.168.0.171
 
-#define SERVER_URL @"http://192.168.0.171/QIC/apis/"
-#define STATCI_URL @"http://192.168.0.171/qic/"
-#define IMAGE_URL @"http://192.168.0.171/QIC/"
+//#define SERVER_URL @"http://192.168.0.171/QIC/apis/"
+//#define STATCI_URL @"http://192.168.0.171/QIC/"
+//#define IMAGE_URL @"http://192.168.0.171/QIC/"
 
 
+//Staging
+
+
+#define SERVER_URL @"http://104.37.188.213/QIC/apis/"
+#define STATCI_URL @"http://104.37.188.213/QIC/"
+#define IMAGE_URL @"http://104.37.188.213/QIC/"
 
 
 #endif /* QIC_pch */

@@ -40,10 +40,14 @@
     if([_LBL_header.text isEqualToString:@"PRIVACY POLICY"]||[_LBL_header.text isEqualToString:@"TERMS AND CONDITIONS"])
     {
         [self.delegate static_page_back:@"static_page"];
-    }
-    else
+    }//NEWS DETAIL
+    else if([_LBL_header.text isEqualToString:@"NEWS"])
     {
     [self.delegate static_page_back:@"news"];
+    }
+    else{
+        [self.delegate static_page_back:@"top news"];
+
     }
 }
 

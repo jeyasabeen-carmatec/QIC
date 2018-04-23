@@ -15,7 +15,7 @@
 
 @interface VC_news ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
-    NSArray *arr_images;
+    NSMutableArray *ARR_total_data,*CPY_ARR;
     NSDictionary *jsonresponse_DIC;
 }
 
@@ -27,25 +27,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg",@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+    ARR_total_data = [[NSMutableArray alloc]init];
+    CPY_ARR = [[NSMutableArray alloc]init];
+
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
-     [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
+    [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
+    [_TXT_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventEditingChanged];
+
     [APIHelper start_animation:self];
     [self performSelector:@selector(News_API_CALL) withObject:nil afterDelay:0.01];
+    _TBL_list.hidden = YES;
 
 }
 #pragma Table view delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSInteger count = 0;
-    if([[jsonresponse_DIC valueForKey:@"newsList"] isKindOfClass:[NSArray class]])
-    {
-        count = [[jsonresponse_DIC valueForKey:@"newsList"] count];
-    }
-    else{
-        count = 0;
-    }
-    return count;
+       return ARR_total_data.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -63,19 +60,19 @@
     @try
     {
         
-        NSString *str_image = [NSString stringWithFormat:@"%@%@",SERVER_URL,[[[jsonresponse_DIC valueForKey:@"newsList"]objectAtIndex:indexPath.section] valueForKey:@"image"]];
+        NSString *str_image = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[ARR_total_data objectAtIndex:indexPath.section] valueForKey:@"image"]];
         
         [cell.IMG_title sd_setImageWithURL:[NSURL URLWithString:str_image]
                              placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
 
         
-    NSString *str_title = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"newsList"]objectAtIndex:indexPath.section]valueForKey:@"title"]]];
+    NSString *str_title = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[ARR_total_data objectAtIndex:indexPath.section]valueForKey:@"title"]]];
     cell.LBL_name.text = str_title;
    
     
-    NSString *str_time = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"newsList"]objectAtIndex:indexPath.section] valueForKey:@"created"]]];
+    NSString *str_time = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[ARR_total_data objectAtIndex:indexPath.section] valueForKey:@"created"]]];
     
-    NSString *description =[NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"newsList"]objectAtIndex:indexPath.section] valueForKey:@"content"]]];
+    NSString *description =[NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[ARR_total_data objectAtIndex:indexPath.section] valueForKey:@"content"]]];
     description = [description stringByAppendingString:[NSString stringWithFormat:@"<style>body{font-family: 'FuturaT-Medi'; font-size:%dpx;}</style>",17]];
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[description dataUsingEncoding:NSUTF8StringEncoding]options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:nil];
     cell.LBL_address.attributedText = attributedString;
@@ -106,7 +103,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *str_URL = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"newsList"] objectAtIndex:indexPath.row] valueForKey:@"url_key"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"newsList"] objectAtIndex:indexPath.row] valueForKey:@"url_key"]];
     [[NSUserDefaults standardUserDefaults]  setValue:str_URL forKey:@"Static_URL"];
     
     [[NSUserDefaults standardUserDefaults]  setValue:@"NEWS" forKey:@"header_val"];
@@ -166,8 +163,16 @@
         if(aData)
         {
           jsonresponse_DIC =(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
+            if([[jsonresponse_DIC valueForKey:@"newsList"] count]>1 )
+            {
             NSLog(@"%@",jsonresponse_DIC);
+             _TBL_list.hidden = NO;
+            ARR_total_data = [jsonresponse_DIC valueForKey:@"newsList"];
             [_TBL_list reloadData];
+            }
+            else{
+                   _TBL_list.hidden = YES;
+            }
             
             
         }
@@ -175,6 +180,7 @@
         {
             NSDictionary *dictin = [[NSDictionary alloc]initWithObjectsAndKeys:@"Nodata",@"error", nil];
             NSLog(@"%@",dictin);
+             _TBL_list.hidden = NO;
         }
     }
     @catch(NSException *Exception)
@@ -183,7 +189,55 @@
     }
     
 }
+-(void)Search_API_called
+{
+    
+    
+   @try
+    {
+    NSString *substring = [NSString stringWithString:_TXT_search.text];
+    if(substring.length > 2)
+    {
+    NSArray *arr = [[jsonresponse_DIC valueForKey:@"newsList"] mutableCopy];
+    
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF['title'] BEGINSWITH[c] %@",substring];
+    NSArray *arr_lies;
+    arr_lies = [arr filteredArrayUsingPredicate:predicate];//BEGINSWITH//CONTAINS
+        [CPY_ARR addObjectsFromArray:ARR_total_data];
+    [ARR_total_data removeAllObjects];
+    [ARR_total_data addObjectsFromArray:arr_lies];
+    
+    if(ARR_total_data.count < 1)
+    {
+        _TBL_list.hidden = YES;
+    }
+    else{
+        _TBL_list.hidden =NO;
+        NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"title"
+                                                                     ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
+        NSArray *sortedArray = [ARR_total_data sortedArrayUsingDescriptors:sortDescriptors];
+        [ARR_total_data removeAllObjects];
+        
+        [ARR_total_data addObjectsFromArray:sortedArray];
+        
+        [_TBL_list reloadData];
+          }
+    }
+        else
+        {
+            
+        }
+    }
+        @catch(NSException *exception)
+        {
+            
+        }
+    
+    
 
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

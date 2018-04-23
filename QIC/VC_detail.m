@@ -38,7 +38,8 @@
 
 -(void)SET_UP_VIEW
 {
-     [self.BTN_favourite setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] forState:UIControlStateNormal];
+    [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
+
     NSString *str_image = [NSString stringWithFormat:@"%@",[[jsonresponse_DIC valueForKey:@"Providers"]valueForKey:@"logo"]];
     
     [_IMG_center_image sd_setImageWithURL:[NSURL URLWithString:str_image]
@@ -53,6 +54,7 @@
 
     
     _LBL_center_name.text = str_naeme;
+    [_LBL_center_name sizeToFit];
     _LBL_header.text = str_naeme;
     
      NSString *str_speciality = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"specialities"]]];
