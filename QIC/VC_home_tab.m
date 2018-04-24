@@ -301,7 +301,8 @@
 -(void)attributed_TEXT
 {
     
-    
+    @try
+    {
     CGSize result = [[UIScreen mainScreen] bounds].size;
     float ht_header,ht_sub_header;
     if(result.height <= 480)
@@ -402,7 +403,11 @@
     else{
         _LBL_news_header_label.text = str_news;
     }
-
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
 }
 #pragma View did lay out sub views
 
@@ -482,7 +487,8 @@
 #pragma collection view delegates
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    
+    @try
+    {
     if(collectionView == _collection_providers)
     {
         NSInteger count = 0;
@@ -519,7 +525,11 @@
        return count;
 
    }
-
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -581,12 +591,12 @@ else if(collectionView == _collection_offers)
         if([str_dicount_type isEqualToString:@"Percentage"])
         {
             NSString *str = @"%";
-            str_dicount = [NSString stringWithFormat:@"%@\n%@%@ discount",str_offer_name,str_dicount,str];
+            str_dicount = [NSString stringWithFormat:@"%@\nupto %@%@ discount",str_offer_name,str_dicount,str];
             
             
         }
         else{
-            str_dicount = [NSString stringWithFormat:@"%@\n%@ discount",str_offer_name,str_dicount];
+            str_dicount = [NSString stringWithFormat:@"%@\nupto %@ discount",str_offer_name,str_dicount];
 ;
             
         }
@@ -605,9 +615,12 @@ else if(collectionView == _collection_offers)
     /********************** collectionv view News *************************/
 
 else{
+    
     home_cell *img_cell = (home_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"home_cell_news" forIndexPath:indexPath];
     
     
+    @try
+    {
 
     NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"image"]];
     str_IMG_URL = [str_IMG_URL stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
@@ -622,7 +635,11 @@ else{
     img_cell.LBL_name.layer.cornerRadius = 10.0;
     img_cell.LBL_name.layer.masksToBounds = YES;
     
-  
+    }
+    @catch(NSException *exception)
+    {
+        NSLog(@"Exceptio from Collection News:%@",exception);
+    }
 
     return img_cell;
 }

@@ -38,6 +38,10 @@
 
 -(void)SET_UP_VIEW
 {
+    CGRect frameset;
+    
+    @try
+    {
     [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
 
     NSString *str_image = [NSString stringWithFormat:@"%@",[[jsonresponse_DIC valueForKey:@"Providers"]valueForKey:@"logo"]];
@@ -57,10 +61,22 @@
     [_LBL_center_name sizeToFit];
     _LBL_header.text = str_naeme;
     
+    NSString *str_designation;
+    if([[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"specialities"] isKindOfClass:[NSArray class]])
+    {
+        str_designation = @"Not mentioned";
+    }
+    else
+    {
+        
+        str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"specialities"]]];
+    }
+
+    
      NSString *str_speciality = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"specialities"]]];
     
     _LBL_designation.text = str_speciality;
-    CGRect frameset = _LBL_designation.frame;
+     frameset = _LBL_designation.frame;
     frameset.origin.y = _LBL_center_name.frame.origin.y + _LBL_center_name.frame.size.height+4;
     _LBL_designation.frame = frameset;
     
@@ -85,9 +101,14 @@
     NSString *str_phone = [NSString stringWithFormat:@"%@",[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"contact_no"]];
     
     str_phone = [NSString stringWithFormat:@"PHONE : %@",[APIHelper convert_NUll:str_phone]];
-    
-
     _LBL_phone.text = str_phone;
+    }
+    @catch(NSException *exception)
+    {
+        NSLog(@"Error from setting the data:%@",exception);
+    }
+
+   
     
     frameset = _LBL_phone.frame;
     frameset.origin.y = _LBL_address.frame.origin.y + _LBL_address.frame.size.height+4;
@@ -298,10 +319,11 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 #pragma map view calling
 -(void)map_VIEW_call
 {
+    @try
+    {
     double latititude = [[[jsonresponse_DIC valueForKey:@"Providers"]  valueForKey:@"latitude"] doubleValue];
     double langitude = [[[jsonresponse_DIC valueForKey:@"Providers"]  valueForKey:@"longitude"] doubleValue];
-
-    
+        
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:latititude
                                                             longitude:langitude
                                                                  zoom:15];
@@ -337,7 +359,12 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
     [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:_mapView cache:YES];
     [UIView commitAnimations];
     
-    
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
+
 }
 
 

@@ -279,9 +279,12 @@
                 
                 
                 NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"code"]];
+                NSString *str_count = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"favorites_count"]];
                 
                 if([str_code isEqualToString:@"1"])
                 {
+                    [[NSUserDefaults standardUserDefaults]  setValue:str_count forKey:@"wish_count"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
                     dispatch_async(dispatch_get_main_queue(), ^{
                     [self performSegueWithIdentifier:@"login_home" sender:self];
                         

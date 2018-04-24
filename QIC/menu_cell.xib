@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="54.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="upload-27.png" translatesAutoresizingMaskIntoConstraints="NO" id="JIU-3V-TNw">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JIU-3V-TNw">
                         <rect key="frame" x="-6" y="0.0" width="326" height="55"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
@@ -30,7 +30,4 @@
             <point key="canvasLocation" x="25" y="46.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="upload-27.png" width="180" height="180"/>
-    </resources>
 </document>

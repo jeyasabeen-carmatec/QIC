@@ -69,7 +69,17 @@
         cell.LBL_name.text = [NSString stringWithFormat:@"%@",str_name];
        
         
-        NSString *str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"specialities"]]];
+        NSString *str_designation;
+        if([[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"specialities"] isKindOfClass:[NSArray class]])
+        {
+            str_designation = @"Not mentioned";
+        }
+        else
+        {
+            
+            str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"specialities"]]];
+        }
+
         
         cell.LBL_designnantion.text = [NSString stringWithFormat:@"%@",str_designation];
         
@@ -164,7 +174,6 @@
                     if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
                     {
                         [arr_total_data removeAllObjects];
-
                         [arr_total_data addObjectsFromArray:[jsonresponse_DIC valueForKey:@"List"]];
                         [_TBL_list reloadData];
                         _TBL_list.hidden = NO;
@@ -260,6 +269,8 @@
 }
 -(void)back_ACTION
 {
+    [_TXT_search resignFirstResponder];
+
     [self.delegate offers_search_back];
 }
 - (void)didReceiveMemoryWarning {

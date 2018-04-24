@@ -70,8 +70,18 @@
     
     cell.LBL_name.text = [NSString stringWithFormat:@"%@",str_name];
     
-    NSString *str_designation = [NSString stringWithFormat:@"Services : %@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"service_name"]]];
-    
+        NSString *str_designation;
+        if([[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"service_name"] isKindOfClass:[NSArray class]])
+        {
+            str_designation = @"Not mentioned";
+        }
+        else
+        {
+            
+            str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"service_name"]]];
+        }
+        
+
     cell.LBL_designnantion.text = [NSString stringWithFormat:@"%@",str_designation];
     
     NSString *str_address = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"address"]]];

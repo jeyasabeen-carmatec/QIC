@@ -10,13 +10,35 @@
 #import "news_cell.h"
 #import "APIHelper.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UITableView+NewCategory.h"
 
 
+@class FrameObservingViewnews;
 
-@interface VC_news ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@protocol FrameObservingViewDelegate2 <NSObject>
+- (void)frameObservingViewFrameChanged:(FrameObservingViewnews *)view;
+@end
+
+@interface FrameObservingViewnews : UIView
+@property (nonatomic,assign) id<FrameObservingViewDelegate2>delegate;
+@end
+
+@implementation FrameObservingViewnews
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    [self.delegate frameObservingViewFrameChanged:self];
+}
+@end
+
+@interface VC_news ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,FrameObservingViewDelegate2,UITableViewDragLoadDelegate>
 {
     NSMutableArray *ARR_total_data,*CPY_ARR;
     NSDictionary *jsonresponse_DIC;
+    CGRect old_txt_frame,button_search_frame;
+    int page_count;
+     NSString *URL_STR;
+
 }
 
 
@@ -24,19 +46,31 @@
 
 @implementation VC_news
 
+- (void)frameObservingViewFrameChanged:(FrameObservingViewnews *)view
+{
+    _TBL_list.frame = self.view.bounds;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    page_count = 1;
     ARR_total_data = [[NSMutableArray alloc]init];
     CPY_ARR = [[NSMutableArray alloc]init];
-
+    old_txt_frame = _TXT_search.frame;
+    button_search_frame = _BTN_search.frame;
+    
     [_BTN_favourite addTarget:self action:@selector(favourites_ACTION) forControlEvents:UIControlEventTouchUpInside];
     [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
-    [_TXT_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventEditingChanged];
+   // [_TXT_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventEditingChanged];
+    [_BTN_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventTouchUpInside];
 
     [APIHelper start_animation:self];
     [self performSelector:@selector(News_API_CALL) withObject:nil afterDelay:0.01];
     _TBL_list.hidden = YES;
+    
+    [_TBL_list setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+    _TBL_list.showLoadMoreView = YES;
+
 
 }
 #pragma Table view delegate Methods
@@ -103,7 +137,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *str_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"newsList"] objectAtIndex:indexPath.row] valueForKey:@"url_key"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"newsList"] objectAtIndex:indexPath.section] valueForKey:@"url_key"]];
+    str_URL = [str_URL stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     [[NSUserDefaults standardUserDefaults]  setValue:str_URL forKey:@"Static_URL"];
     
     [[NSUserDefaults standardUserDefaults]  setValue:@"NEWS" forKey:@"header_val"];
@@ -126,10 +161,29 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    CGRect frameset = _LBL_search_place_holder.frame;
+    frameset.size.width = _LBL_search_place_holder.frame.size.width - 40;
+    _LBL_search_place_holder.frame = frameset;
+    
+    frameset = _TXT_search.frame;
+    frameset.size.width = _TXT_search.frame.size.width - 40;
+    _TXT_search.frame = frameset;
+    
+    
+    frameset = _BTN_search.frame;
+    frameset.origin.x = _LBL_search_place_holder.frame.size.width + 15;
+    _BTN_search.frame = frameset;
+    
+    
+    
     _LBL_search_place_holder.alpha = 0.0f;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+    _LBL_search_place_holder.frame = old_txt_frame;
+    _TXT_search.frame =  old_txt_frame;
+    _BTN_search.frame = button_search_frame;
+    _TXT_search.text = @"";
     if([textField.text isEqualToString:@""])
     {
         _LBL_search_place_holder.alpha = 1.0f;
@@ -148,9 +202,12 @@
     {
         NSHTTPURLResponse *response = nil;
         NSError *error;
-        NSString *URL_STR = [NSString stringWithFormat:@"%@newsList",SERVER_URL];
+        NSString *URL_ST = [NSString stringWithFormat:@"%@newsList/%@/1",SERVER_URL,@"0"];
+        URL_ST = [URL_ST stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
+
+        URL_ST = [URL_ST stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
         
-        NSURL *urlProducts=[NSURL URLWithString:URL_STR];
+        NSURL *urlProducts=[NSURL URLWithString:URL_ST];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setURL:urlProducts];
         [request setHTTPMethod:@"GET"];
@@ -163,7 +220,7 @@
         if(aData)
         {
           jsonresponse_DIC =(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
-            if([[jsonresponse_DIC valueForKey:@"newsList"] count]>1 )
+            if([[jsonresponse_DIC valueForKey:@"newsList"] count]>=1)
             {
             NSLog(@"%@",jsonresponse_DIC);
              _TBL_list.hidden = NO;
@@ -172,6 +229,9 @@
             }
             else{
                    _TBL_list.hidden = YES;
+                
+                [APIHelper createaAlertWithMsg:@"No news found," andTitle:nil];
+              
             }
             
             
@@ -180,7 +240,7 @@
         {
             NSDictionary *dictin = [[NSDictionary alloc]initWithObjectsAndKeys:@"Nodata",@"error", nil];
             NSLog(@"%@",dictin);
-             _TBL_list.hidden = NO;
+             _TBL_list.hidden = YES;
         }
     }
     @catch(NSException *Exception)
@@ -189,55 +249,250 @@
     }
     
 }
+
+
 -(void)Search_API_called
 {
-    
-    
-   @try
+    @try
     {
-    NSString *substring = [NSString stringWithString:_TXT_search.text];
-    if(substring.length > 2)
-    {
-    NSArray *arr = [[jsonresponse_DIC valueForKey:@"newsList"] mutableCopy];
-    
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF['title'] BEGINSWITH[c] %@",substring];
-    NSArray *arr_lies;
-    arr_lies = [arr filteredArrayUsingPredicate:predicate];//BEGINSWITH//CONTAINS
-        [CPY_ARR addObjectsFromArray:ARR_total_data];
-    [ARR_total_data removeAllObjects];
-    [ARR_total_data addObjectsFromArray:arr_lies];
-    
-    if(ARR_total_data.count < 1)
-    {
-        _TBL_list.hidden = YES;
-    }
-    else{
-        _TBL_list.hidden =NO;
-        NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"title"
-                                                                     ascending:YES];
-        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
-        NSArray *sortedArray = [ARR_total_data sortedArrayUsingDescriptors:sortDescriptors];
-        [ARR_total_data removeAllObjects];
+        NSHTTPURLResponse *response = nil;
+        NSError *error;
+        NSString *URL_ST = [NSString stringWithFormat:@"%@newsList/%@/1",SERVER_URL,_TXT_search.text];
+        URL_ST = [URL_ST stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
+
+        URL_ST = [URL_ST stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+
         
-        [ARR_total_data addObjectsFromArray:sortedArray];
+        NSURL *urlProducts=[NSURL URLWithString:URL_ST];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:urlProducts];
+        [request setHTTPMethod:@"GET"];
+        [request setHTTPShouldHandleCookies:NO];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
-        [_TBL_list reloadData];
-          }
-    }
+        NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        [APIHelper stop_activity_animation:self];
+        
+        if(aData)
+        {
+            jsonresponse_DIC =(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
+            if([[jsonresponse_DIC valueForKey:@"newsList"] count]>=1)
+            {
+                NSLog(@"%@",jsonresponse_DIC);
+                _TBL_list.hidden = NO;
+                [ARR_total_data removeAllObjects];
+                [ARR_total_data addObjectsFromArray: [jsonresponse_DIC valueForKey:@"newsList"]];
+                [_TBL_list reloadData];
+            }
+            else{
+                _TBL_list.hidden = YES;
+                
+                [APIHelper createaAlertWithMsg:@"No news found," andTitle:nil];
+                
+            }
+            
+            
+        }
         else
         {
-            
+            NSDictionary *dictin = [[NSDictionary alloc]initWithObjectsAndKeys:@"Nodata",@"error", nil];
+            NSLog(@"%@",dictin);
+            _TBL_list.hidden = YES;
         }
     }
-        @catch(NSException *exception)
-        {
-            
-        }
+    @catch(NSException *Exception)
+    {
+        
+    }
+
     
+//   @try
+//    {
+//    NSString *substring = [NSString stringWithString:_TXT_search.text];
+//    if(substring.length > 2)
+//    {
+//    NSArray *arr = [[jsonresponse_DIC valueForKey:@"newsList"] mutableCopy];
+//    
+//    
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF['title'] BEGINSWITH[c] %@",substring];
+//    NSArray *arr_lies;
+//    arr_lies = [arr filteredArrayUsingPredicate:predicate];//BEGINSWITH//CONTAINS
+//        [CPY_ARR addObjectsFromArray:ARR_total_data];
+//    [ARR_total_data removeAllObjects];
+//    [ARR_total_data addObjectsFromArray:arr_lies];
+//    
+//    if(ARR_total_data.count < 1)
+//    {
+//        _TBL_list.hidden = YES;
+//    }
+//    else{
+//        _TBL_list.hidden =NO;
+//        NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"title"
+//                                                                     ascending:YES];
+//        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
+//        NSArray *sortedArray = [ARR_total_data sortedArrayUsingDescriptors:sortDescriptors];
+//        [ARR_total_data removeAllObjects];
+//        
+//        [ARR_total_data addObjectsFromArray:sortedArray];
+//        
+//        [_TBL_list reloadData];
+//          }
+//    }
+//        else
+//        {
+//            
+//        }
+//    }
+//        @catch(NSException *exception)
+//        {
+//            
+//        }
+//    
     
 
 }
+#pragma mark - Control datasource
+- (void)finishRefresh
+{
+    [_TBL_list finishRefresh];
+}
+
+- (void)finishLoadMore
+{
+    [_TBL_list finishLoadMore];
+}
+
+#pragma mark - Drag delegate methods
+- (void)dragTableDidTriggerRefresh:(UITableView *)tableView
+{
+    //Pull up go to First Page
+    [self performSelector:@selector(finishRefresh) withObject:nil afterDelay:0.01];
+    
+}
+
+- (void)dragTableRefreshCanceled:(UITableView *)tableView
+{
+    //cancel refresh request(generally network request) here
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishRefresh) object:nil];
+}
+
+- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
+{
+    //Pull up go to NextPage
+    
+    @try
+    {
+        NSString *int_VAL = [NSString stringWithFormat:@"%@",[jsonresponse_DIC valueForKey:@"totalNoOfNews"]];
+        NSLog(@"The products Count:%lu",(unsigned long)[ARR_total_data count]);
+        
+        if([int_VAL intValue] == [ARR_total_data count])
+        {
+            [APIHelper stop_activity_animation:self];
+            
+            NSString *str_status = @"Sorry no more news found";
+            NSString *str_ok = @"Ok";
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str_status delegate:self cancelButtonTitle:nil otherButtonTitles:str_ok, nil];
+            [alert show];
+            
+            
+            [self performSelector:@selector(finishLoadMore) withObject:nil afterDelay:0.01];
+            
+        }
+        else
+        {
+            
+            page_count =  page_count  + 1;
+          
+            
+            NSString *url_STR = URL_STR;
+            url_STR = [NSString stringWithFormat:@"%@newsList/%@/%d",SERVER_URL,@"0",page_count];
+            url_STR =  [url_STR stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+            [[NSUserDefaults standardUserDefaults] setObject:url_STR forKey:@"URL_SAVED"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self performSelector:@selector(NEXTpage_API) withObject:nil afterDelay:0.01];
+        }
+        
+        
+    }
+    @catch (NSException *exception)
+    {
+        
+    }
+    
+}
+
+- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
+{
+    //cancel load more request(generally network request) here
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishLoadMore) object:nil];
+}
+
+-(void) NEXTpage_API
+{
+    @try
+    {
+        NSError *error;
+        NSHTTPURLResponse *response = nil;
+        
+        NSURL *urlProducts=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"URL_SAVED"]]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:urlProducts];
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if (aData)
+        {
+            
+            NSMutableDictionary *dict=(NSMutableDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
+            if([[dict valueForKey:@"msg"] isEqualToString:@"Failure"])
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Sorry no more news found." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                [alert show];
+            }
+            else{
+                
+                @try
+                {
+                    if([[dict valueForKey:@"newsList"] count] >= 1)
+                    {
+                        NSMutableArray *new_ARR = [[NSMutableArray alloc]init];
+                        new_ARR = [dict valueForKey:@"List"];
+                        [ARR_total_data addObjectsFromArray:new_ARR];
+                        [_TBL_list reloadData];
+                        
+                    }
+                    else{
+                        [APIHelper createaAlertWithMsg:@"No more news found" andTitle:@""];
+                    }
+                    
+                    
+                    
+                    
+                }
+                @catch (NSException *exception)
+                {
+                    
+                }
+                
+            }
+            
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Connection Error" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            [alert show];
+        }
+        [self performSelector:@selector(finishLoadMore) withObject:nil afterDelay:0.01];
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
+    
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -103,7 +103,17 @@
         cell.LBL_name.text = [NSString stringWithFormat:@"%@",str_name];
         _LBL_header.text = [NSString stringWithFormat:@"%@ PROVIDERS",[APIHelper convert_NUll:[[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_type"] uppercaseString]]];
         
-    NSString *str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"specialities"]]];
+        
+        NSString *str_designation;
+        if([[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"specialities"] isKindOfClass:[NSArray class]])
+        {
+            str_designation = @"Not mentioned";
+        }
+        else
+        {
+        
+          str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"specialities"]]];
+        }
         
         cell.LBL_designnantion.text = [NSString stringWithFormat:@"%@",str_designation];
         
@@ -167,6 +177,8 @@
 #pragma back action
 -(void)back_actions
 {
+    [_TXT_search resignFirstResponder];
+
     [self.delegate subcategories_back_action:@"back"];
 }
 #pragma favourites_action
@@ -461,7 +473,7 @@
         NSHTTPURLResponse *response = nil;
          NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"catgory_id"]];
         
-        NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/%d/%@",SERVER_URL,str_id,page_count,_TXT_search.text];
+        NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/%@/%@",SERVER_URL,str_id,@"1",_TXT_search.text];
         str_url = [str_url stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 
         

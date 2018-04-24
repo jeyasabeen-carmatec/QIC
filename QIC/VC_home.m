@@ -44,7 +44,7 @@
     [self highlight_IMAGE];
     [self tab_BAR_set_UP];
      [self HOme_view_calling];
-    [self favourites_API_call];
+    //[self favourites_API_call];
      [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:0]];
     
     
@@ -57,7 +57,7 @@
     
     CGFloat highlightedWidth = self.view.frame.size.width/_TAB_menu.items.count;
     [_TAB_menu setItemWidth:highlightedWidth];
-    CGRect rect = CGRectMake(0, 9, highlightedWidth, _TAB_menu.frame.size.height+21);
+    CGRect rect = CGRectMake(0, 9, highlightedWidth, _TAB_menu.frame.size.height+18);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [[UIColor colorWithRed:0.11 green:0.40 blue:0.40 alpha:1.0] CGColor]);
@@ -157,7 +157,8 @@
 
 -(void)HOme_view_calling
 {
-    
+    [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:0]];
+
     /************** creating objet for Home view controller and and grabbing that view  ******************/
     [[NSUserDefaults standardUserDefaults] setValue:@"home" forKey:@"tab_param"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -191,7 +192,8 @@
 
 -(void)providers_view_calling
 {
-    
+    [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:1]];
+
     VC_categories *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_categoies"];
     categorie_vw.delegate= self;
     
@@ -222,6 +224,8 @@
 
 -(void)offers_view_calling
 {
+    [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:2]];
+
     VC_offers *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
     categorie_vw.delegate = self;
     
@@ -394,6 +398,8 @@
 #pragma Profile View Pages calling
 -(void)Profile_VIEW_celling
 {
+    [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:4]];
+
     VC_profile *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_profile"];
     [categorie_vw.TBL_profile reloadData];
     
@@ -451,7 +457,8 @@
 #pragma News View Calling
 -(void)news_VIEW_calling
 {
-    
+    [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:3]];
+
     /************** creating objet for News view controller and and grabbing that view  ******************/
     
     VC_news *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_news"];

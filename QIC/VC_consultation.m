@@ -107,7 +107,16 @@
         
     _LBL_header.text = [NSString stringWithFormat:@"%@ OFFERS",[APIHelper convert_NUll:[[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"serviceName"] uppercaseString]]];
     
-    NSString *str_designation = [NSString stringWithFormat:@"Services : %@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_type"]]];
+        NSString *str_designation;
+        if([[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_type"] isKindOfClass:[NSArray class]])
+        {
+            str_designation = @"Not mentioned";
+        }
+        else
+        {
+            
+            str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_type"]]];
+        }
     
     cell.LBL_designnantion.text = [NSString stringWithFormat:@"%@",str_designation];
     
@@ -144,7 +153,7 @@
     
     
     NSString *str_dicount_type = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"discount_type"]];
-           NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"offer_value"]];
+           NSString *str_dicount = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"]];
     if([str_dicount_type isEqualToString:@"Percentage"])
     {
         NSString *str = @"%";
@@ -240,7 +249,8 @@
 #pragma back action
 -(void)back_actions
 {
-    
+    [_TXT_search resignFirstResponder];
+
     [self.delegate consultation_offers_back:@""];
 }
 #pragma favourites_action
@@ -325,14 +335,22 @@
                 {
                     if([[TEMP_dict valueForKey:@"List"] isEqualToString:@"Provider already exist"])
                     {
+                        
+                        [self delete_ITEM_from_Wish_list:provider_ID:str_service_ID];
+                        
                         dispatch_async(dispatch_get_main_queue(), ^{
 
-                        [self delete_ITEM_from_Wish_list:provider_ID:str_service_ID];
                         NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
                         consultation_cell *cell = (consultation_cell *)[self.TBL_list cellForRowAtIndexPath:index];
                         
                         [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
                         [APIHelper createaAlertWithMsg:@"Offer deleted from your favourites." andTitle:@""];
+                            
+                            NSMutableDictionary *wishDic = [[NSMutableDictionary alloc] initWithDictionary:[arr_total_data objectAtIndex:index.row]];
+                            
+                            [wishDic setObject:@"No" forKey:@"fav_status"];
+                            
+                            [arr_total_data replaceObjectAtIndex:index.row withObject:wishDic];
 
                         });
                         
@@ -355,7 +373,7 @@
                         [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                         [[NSUserDefaults standardUserDefaults] synchronize];
                         [_BTN_favourite setTitle:str_count forState:UIControlStateNormal];
-                            NSMutableDictionary *wishDic = [[NSMutableDictionary alloc] initWithDictionary:[arr_total_data objectAtIndex:index.row]];
+                        NSMutableDictionary *wishDic = [[NSMutableDictionary alloc] initWithDictionary:[arr_total_data objectAtIndex:index.row]];
                             
                             [wishDic setObject:@"Yes" forKey:@"fav_status"];
                             
@@ -428,8 +446,7 @@
                     }
                     [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
-                    [_BTN_favourite setTitle:str_count forState:UIControlStateNormal];
-
+                   [self.BTN_favourite setTitle:[APIHelper set_count:str_count] forState:UIControlStateNormal];
                 }
                 else{
                     [APIHelper createaAlertWithMsg:@"Something went wrong." andTitle:@""];
@@ -481,11 +498,17 @@
             if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
             {
                 [arr_total_data addObjectsFromArray:[jsonresponse_DIC valueForKey:@"List"]];
+                 [_TBL_list reloadData];
                 
             }
+            else
+            {
+                [APIHelper createaAlertWithMsg:@"No offers found." andTitle:nil];
+                [self.delegate consultation_offers_back:@""];
+
+            }
             
-            
-            [_TBL_list reloadData];
+           
             
             
         }
@@ -660,7 +683,7 @@
             NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
              NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
             
-            NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%d/%@/%@",SERVER_URL,str_id,page_count,str_member_ID,_TXT_search.text];
+            NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%@/%@/%@",SERVER_URL,str_id,@"1",str_member_ID,_TXT_search.text];
             str_url = [str_url stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 
             

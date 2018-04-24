@@ -30,7 +30,7 @@
     
 //    ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"change-language.png",@"About-QIC.png",@"privacy-policy.png",@"terms-&-condition.png", nil];
     
-    ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"change-language.png",@"terms-&-condition.png", nil];
+    ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"terms-&-condition.png", nil];
     
 
    
@@ -64,7 +64,7 @@
 //        DICT_profile = [NSArray arrayWithObjects:str_name,str_QID,str_MID,str_validity,@"Depenedents",@"Health Card",@"Change language",@"About QIC",@"Privacy Policy",@"Terms and Conditions", nil];
 
     
-    DICT_profile = [NSArray arrayWithObjects:str_name,str_QID,str_MID,str_validity,@"Depenedents",@"Health Card",@"Change language",@"Terms and Conditions", nil];
+    DICT_profile = [NSArray arrayWithObjects:str_name,str_QID,str_MID,str_validity,@"Depenedents",@"Health Card",@"Terms and Conditions", nil];
     }
     @catch(NSException *exception)
     {
