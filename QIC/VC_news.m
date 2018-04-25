@@ -107,8 +107,8 @@
     NSString *str_time = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[ARR_total_data objectAtIndex:indexPath.section] valueForKey:@"created"]]];
     
     NSString *description =[NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[ARR_total_data objectAtIndex:indexPath.section] valueForKey:@"content"]]];
-    description = [description stringByAppendingString:[NSString stringWithFormat:@"<style>body{font-family: 'FuturaT-Medi'; font-size:%dpx;}</style>",17]];
-    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[description dataUsingEncoding:NSUTF8StringEncoding]options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:nil];
+    description = [description stringByAppendingString:[NSString stringWithFormat:@"<style>body{font-family: 'FuturaT-Medi'; font-size:%dpx;}</style>",15]];
+        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[description dataUsingEncoding:NSUTF8StringEncoding]options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding),NSForegroundColorAttributeName:[UIColor grayColor]}documentAttributes:nil error:nil];
     cell.LBL_address.attributedText = attributedString;
     NSString *str = cell.LBL_address.text;
     str = [str stringByReplacingOccurrencesOfString:@"/" withString:@"\n"];

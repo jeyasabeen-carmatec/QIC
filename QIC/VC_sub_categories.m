@@ -76,7 +76,14 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    @try
+    {
     return arr_total_data.count;
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -167,11 +174,17 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    @try
+    {
     
     [self.delegate detail_page_visibility:@"subcategory_detail"];
     [[NSUserDefaults standardUserDefaults] setObject:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"id"] forKey:@"category_ID"];
     [[NSUserDefaults standardUserDefaults] setObject:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_id"] forKey:@"provider_ID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    @catch(NSException *exception)
+    {
+    }
 }
 
 #pragma back action
@@ -237,10 +250,9 @@
 
 -(void)mobile_dial:(UIButton *)sender
 {
-   // NSIndexPath *buttonIndexPath1 = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
-  //  NSString *index_str = [NSString stringWithFormat:@"%ld",(long)buttonIndexPath1.row];
-     NSString *phone_number;
-    @try {
+    NSString *phone_number;
+    @try
+    {
         phone_number =[NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:sender.tag] valueForKey:@"contact_no"]];
         phone_number = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:phone_number]];
         

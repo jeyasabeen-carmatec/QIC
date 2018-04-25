@@ -41,8 +41,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JN-Xt-yQa">
-                        <rect key="frame" x="116" y="33" width="194" height="31.5"/>
+                        <rect key="frame" x="116" y="33" width="194" height="33.5"/>
                         <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIh-Yj-mhM">
@@ -53,7 +54,7 @@
                             <constraint firstAttribute="width" constant="194" id="nti-mI-8EO"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMX-LK-G7a">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMX-LK-G7a">
                         <rect key="frame" x="116" y="91.5" width="194" height="18.5"/>
                         <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -74,7 +75,7 @@
                     <constraint firstItem="g6W-IO-VhK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="psF-xP-nXC"/>
                     <constraint firstItem="0JN-Xt-yQa" firstAttribute="top" secondItem="Sys-Nu-Cfj" secondAttribute="bottom" constant="6" id="t03-do-Mec"/>
                     <constraint firstItem="ZIh-Yj-mhM" firstAttribute="leading" secondItem="g6W-IO-VhK" secondAttribute="trailing" constant="8" id="uaS-h2-u81"/>
-                    <constraint firstItem="ZIh-Yj-mhM" firstAttribute="top" secondItem="0JN-Xt-yQa" secondAttribute="bottom" constant="8" id="xvT-fk-baH"/>
+                    <constraint firstItem="ZIh-Yj-mhM" firstAttribute="top" secondItem="0JN-Xt-yQa" secondAttribute="bottom" constant="6" id="xvT-fk-baH"/>
                     <constraint firstItem="0JN-Xt-yQa" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="zxT-y4-gRv"/>
                 </constraints>
             </tableViewCellContentView>

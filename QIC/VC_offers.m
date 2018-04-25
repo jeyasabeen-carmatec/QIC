@@ -72,8 +72,6 @@
     str_image = [APIHelper convert_NUll:str_image];
         
         str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-//        cell.LBL_name.backgroundColor = [UIColor blackColor];
-//        cell.LBL_name.alpha = 0.5f;
     
     [cell.IMG_image sd_setImageWithURL:[NSURL URLWithString:str_image]
                       placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];

@@ -100,7 +100,7 @@
     
     NSString *str_phone = [NSString stringWithFormat:@"%@",[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"contact_no"]];
     
-    str_phone = [NSString stringWithFormat:@"PHONE : %@",[APIHelper convert_NUll:str_phone]];
+    str_phone = [NSString stringWithFormat:@"Ph : %@",[APIHelper convert_NUll:str_phone]];
     _LBL_phone.text = str_phone;
     }
     @catch(NSException *exception)

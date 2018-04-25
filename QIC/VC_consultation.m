@@ -65,7 +65,6 @@
     [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
     [_BTN_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventTouchUpInside];
 
-   // [_TXT_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventEditingChanged];
     [_TBL_list setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
     _TBL_list.showLoadMoreView = YES;
     
@@ -78,8 +77,14 @@
 #pragma Table view delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return arr_total_data.count
-    ;
+    @try
+    {
+   return arr_total_data.count;
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -126,7 +131,8 @@
     
     cell.VW_back_ground.layer.cornerRadius = 2.0f;
     cell.IMG_title.layer.masksToBounds = YES;
-    
+        
+      
     
     [cell.BTN_favourite addTarget:self action:@selector(wish_list_action:) forControlEvents:UIControlEventTouchUpInside];
     cell.BTN_favourite.tag = indexPath.section;
@@ -157,7 +163,8 @@
     if([str_dicount_type isEqualToString:@"Percentage"])
     {
         NSString *str = @"%";
-        str_dicount = [NSString stringWithFormat:@"%@%@\ndiscount",[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"],str];
+        NSString *str_disc = @"coverage";
+        str_dicount = [NSString stringWithFormat:@"%@%@\n%@",[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"],str,str_disc];
    
     
     
@@ -176,20 +183,22 @@
         float size;
         if(result.height <= 480)
         {
-            size = 13.0;
+            size = 11.0;
         }
         else if(result.height <= 568)
         {
-            size = 14.0;
+            size = 13.0;
         }
         else
         {
-            size = 15.0;
+            size = 13.0;
         }
         
         cell.LBL_discount.font = [UIFont fontWithName:@"Futura-Heavy" size:size];
         @try
         {
+            [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Heavy" size:8],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0],}range:[str_addres rangeOfString:str_disc] ];
+
             
             [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Heavy" size:size],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0],}range:[str_addres rangeOfString:str_dicount] ];
         }
@@ -215,6 +224,8 @@
         cell.LBL_cost.text = str_dicount;
         cell.LBL_discount.text = @"";
            }
+        NSString *str_phone = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"contact_no"]];
+        cell.LBL_phone.text = [NSString stringWithFormat:@"Ph : %@",[APIHelper convert_NUll:str_phone]];
 
     cell.LBL_discount.transform=CGAffineTransformMakeRotation( ( 90 * M_PI ) / -360 );
     }

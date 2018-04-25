@@ -48,10 +48,16 @@
     [_BTN_news_all addTarget:self action:@selector(news_all_action) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_offers_all addTarget:self action:@selector(offers_all_action) forControlEvents:UIControlEventTouchUpInside];
 
-    
+    @try
+    {
     [self.collection_providers registerNib:[UINib nibWithNibName:@"home_cell" bundle:nil]  forCellWithReuseIdentifier:@"home_cell_providers"];
      [self.collection_offers registerNib:[UINib nibWithNibName:@"home_cell" bundle:nil]  forCellWithReuseIdentifier:@"home_cell_offers"];
      [self.collection_news registerNib:[UINib nibWithNibName:@"home_cell" bundle:nil]  forCellWithReuseIdentifier:@"home_cell_news"];
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
     
     [_BTN_provide_left addTarget:self action:@selector(BTN_left_action) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_provide_right addTarget:self action:@selector(BTN_right_action) forControlEvents:UIControlEventTouchUpInside];
@@ -138,25 +144,6 @@
     
     [self.Scroll_contents addSubview:_VW_providers];
     
-   arr_images = [NSArray arrayWithObjects:@"1.png", @"2.png", @"3.png", @"4.png", @"5.png", @"6.png", nil];
-
-   
-    
-    /*coverFlowView1 = [[CFCoverFlowView alloc] initWithFrame:self.VW_indicagtor_for_cover.frame];
-    coverFlowView1.backgroundColor = [UIColor clearColor];
-    coverFlowView1.pageItemCoverWidth = 0.0f;
-      coverFlowView1.pageItemWidth = _VW_indicagtor_for_cover.frame.size.width/width;
-
-    coverFlowView1.pageItemHeight = _VW_providers.frame.size.height/HT;
-
-    coverFlowView1.pageItemCornerRadius = 5.0;
-    coverFlowView1.delegate = self;
-    [coverFlowView1 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names];
-    [self.VW_providers addSubview:coverFlowView1];*/
-    
-
-    
-    
     
     /***************** setting of Offers view **********************/
     
@@ -172,20 +159,6 @@
     _collection_offers.frame =  frameset;
     
     [self.Scroll_contents addSubview:_VW_offers];
-    
-   /*  coverFlowView2 = [[CFCoverFlowView alloc] initWithFrame:self.VW_offer_indicator_for_cover.frame];
-    coverFlowView2.backgroundColor = [UIColor clearColor];
-    coverFlowView2.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ width;
-    coverFlowView2.pageItemCoverWidth = 0.0f;
-    coverFlowView2.pageItemHeight = _VW_offers.frame.size.height/HT;
-    coverFlowView2.pageItemCornerRadius = 5.0;
-    coverFlowView2.delegate = self;
-    
-    NSArray *arr_sub_names_offers = [NSArray arrayWithObjects:@"30% Discount",@"20% Discount",@"10% Discount",@"40% Discount",@"50% Discount",@"60% Discount", nil];
-
-   
-    [coverFlowView2 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_offers];
-    [self.VW_offers addSubview:coverFlowView2];*/
     
     
     /***************** setting of News view **********************/
@@ -204,17 +177,6 @@
     
     [self.Scroll_contents addSubview:_VW_news];
     
-   /*  coverFlowView3 = [[CFCoverFlowView alloc] initWithFrame:self.VW_news_indicator_for_cover.frame];
-    coverFlowView3.backgroundColor = [UIColor clearColor];
-    coverFlowView3.pageItemWidth = _VW_offer_indicator_for_cover.frame.size.width/ width;
-    coverFlowView3.pageItemCoverWidth = 0.0f;
-    coverFlowView3.pageItemHeight = _VW_news.frame.size.height/HT;
-    coverFlowView3.pageItemCornerRadius = 5.0;
-    NSArray *arr_sub_names_news = [NSArray arrayWithObjects:@"1 hour ago",@"2 hour ago",@"3 hour ago",@"4 hour ago",@"5 hour ago",@"6 hour ago", nil];
-    [coverFlowView3 setPageItemsWithImageNames:arr_image :arr_names :arr_sub_names_news];
-    coverFlowView3.delegate = self;
-    
-    [self.VW_news addSubview:coverFlowView3];*/
     
     frameset = _Scroll_contents.frame;
    // frameset.size.height = _VW_news.frame.origin.y + _VW_news.frame.size.height-100;
@@ -588,15 +550,16 @@ else if(collectionView == _collection_offers)
     
         NSString *str_dicount_type = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"discount_type"]];
         NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"discount"]];
+        
         if([str_dicount_type isEqualToString:@"Percentage"])
         {
             NSString *str = @"%";
-            str_dicount = [NSString stringWithFormat:@"%@\nupto %@%@ discount",str_offer_name,str_dicount,str];
+            str_dicount = [NSString stringWithFormat:@"%@\nupto %@%@ coverage",str_offer_name,str_dicount,str];
             
             
         }
         else{
-            str_dicount = [NSString stringWithFormat:@"%@\nupto %@ discount",str_offer_name,str_dicount];
+            str_dicount = [NSString stringWithFormat:@"%@\nupto %@ coverage",str_offer_name,str_dicount];
 ;
             
         }
@@ -667,6 +630,9 @@ else{
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    @try
+    {
     if(collectionView == _collection_providers)
     {
         [[NSUserDefaults standardUserDefaults] setObject:[[[JSON_response_dic valueForKey:@"provider_list"] objectAtIndex:indexPath.row] valueForKey:@"id"] forKey:@"category_ID"];
@@ -689,6 +655,11 @@ else{
         [[NSUserDefaults standardUserDefaults] synchronize];
 
         [self.delegate calling_news_view:@"news_detail"];
+    }
+    }
+    @catch(NSException *exception)
+    {
+        
     }
 
 }

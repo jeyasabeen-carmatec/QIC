@@ -91,13 +91,14 @@
     NSString *str_dicount_type = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"offer_type"]];
         
          NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"offer_value"]];
-        
+        NSString *str_disc;
     if([str_dicount_type isEqualToString:@"Percentage"])
     {
         NSString *str = @"%";
         float str_va = [str_dicount floatValue];
         str_dicount = [NSString stringWithFormat:@"%.f",str_va];
-        str_dicount = [NSString stringWithFormat:@"%@%@\ndiscount",str_dicount,str];
+        str_disc = @"coverage";
+        str_dicount = [NSString stringWithFormat:@"%@%@\n%@",str_dicount,str,str_disc];
     }
     else{
         str_dicount = [NSString stringWithFormat:@"%@",str_dicount];
@@ -123,21 +124,22 @@
         float size;
         if(result.height <= 480)
         {
-            size = 13.0;
+            size = 12.0;
         }
         else if(result.height <= 568)
         {
-            size = 14.0;
+            size = 13.0;
         }
         else
         {
-            size = 15.0;
+            size = 13.0;
         }
         
         cell.LBL_price_amount.font = [UIFont fontWithName:@"Futura-Heavy" size:size];
         @try
         {
 
+             [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Heavy" size:8],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0],}range:[str_addres rangeOfString:str_disc] ];
         [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Heavy" size:size],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0],}range:[str_addres rangeOfString:str_dicount] ];
         }
         @catch(NSException *exception)

@@ -23,4 +23,7 @@
 
 @property(nonatomic,weak)IBOutlet UIButton *BTN_favourite;
 
+@property(nonatomic,weak) IBOutlet UILabel *LBL_phone;
+
+
 @end

@@ -78,9 +78,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tP-cf-Guj">
-                                <rect key="frame" x="29" y="38" width="54" height="61"/>
+                                <rect key="frame" x="29" y="34" width="58" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Heavy" family="Futura-Heavy" pointSize="10"/>
+                                <fontDescription key="fontDescription" name="Futura-Heavy" family="Futura-Heavy" pointSize="9"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.71764705880000002" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -90,14 +90,23 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fD-vF-nko">
+                                <rect key="frame" x="121" y="99" width="165" height="20"/>
+                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bF5-E5-pco" firstAttribute="top" secondItem="83y-8m-hlr" secondAttribute="top" id="DvR-FU-ZwM"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JJI-rB-CwG" secondAttribute="bottom" constant="10" id="GaW-oN-7uw"/>
+                            <constraint firstItem="8fD-vF-nko" firstAttribute="leading" secondItem="JJI-rB-CwG" secondAttribute="leading" id="HH3-ee-8FH"/>
                             <constraint firstAttribute="trailing" secondItem="bF5-E5-pco" secondAttribute="trailing" constant="8" id="IqF-xq-EqC"/>
+                            <constraint firstItem="8fD-vF-nko" firstAttribute="top" secondItem="JJI-rB-CwG" secondAttribute="bottom" constant="8" id="Ivo-1h-HJw"/>
                             <constraint firstItem="JJI-rB-CwG" firstAttribute="top" secondItem="ReZ-V4-UXZ" secondAttribute="bottom" constant="9" id="KMa-Te-seA"/>
                             <constraint firstAttribute="trailing" secondItem="Qov-eh-uU1" secondAttribute="trailing" constant="6" id="MCp-se-aYL"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8fD-vF-nko" secondAttribute="bottom" constant="15" id="RW0-aL-KPK"/>
+                            <constraint firstItem="8fD-vF-nko" firstAttribute="trailing" secondItem="JJI-rB-CwG" secondAttribute="trailing" constant="38" id="T2g-hH-HQ3"/>
                             <constraint firstItem="bF5-E5-pco" firstAttribute="leading" secondItem="83y-8m-hlr" secondAttribute="trailing" constant="15" id="VFl-dK-E5C"/>
                             <constraint firstItem="83y-8m-hlr" firstAttribute="leading" secondItem="LEd-cd-7aR" secondAttribute="trailing" constant="13" id="X0q-OY-x8U"/>
                             <constraint firstItem="Qov-eh-uU1" firstAttribute="leading" secondItem="JJI-rB-CwG" secondAttribute="trailing" constant="-4" id="csV-yy-YuK"/>
@@ -130,6 +139,7 @@
                 <outlet property="LBL_designnantion" destination="ReZ-V4-UXZ" id="juZ-o2-kme"/>
                 <outlet property="LBL_discount" destination="5tP-cf-Guj" id="eu0-UT-vlB"/>
                 <outlet property="LBL_name" destination="83y-8m-hlr" id="YFZ-iF-gsJ"/>
+                <outlet property="LBL_phone" destination="8fD-vF-nko" id="P7P-Xr-iFl"/>
                 <outlet property="VW_back_ground" destination="t16-qK-NhG" id="7oc-2i-4mt"/>
             </connections>
             <point key="canvasLocation" x="-6" y="-16"/>

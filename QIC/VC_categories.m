@@ -74,7 +74,8 @@
     str_name = [APIHelper convert_NUll:str_name];
     
     [cell.BTN_categories setTitle:str_name forState:UIControlStateNormal];
-    cell.BTN_categories.layer.cornerRadius = 2.0f;
+    cell.BTN_categories.layer.cornerRadius = 5.0f;
+        cell.BTN_categories.layer.masksToBounds = YES;
     }
     @catch(NSException *exception)
     {
