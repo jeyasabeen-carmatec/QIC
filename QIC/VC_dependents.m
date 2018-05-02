@@ -59,7 +59,8 @@
         cell = [nib objectAtIndex:0];
     }
     NSString *string_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[ARR_dependents objectAtIndex:indexPath.section] valueForKey:@"memberName"]]];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     NSString *string_relation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[ARR_dependents objectAtIndex:indexPath.section] valueForKey:@"relationDesc"]]];
     if([string_relation isEqualToString:@"SELF"])
     {

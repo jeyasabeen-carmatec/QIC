@@ -10,6 +10,7 @@
 #import "profile_cell.h"
 #import "Profile_langugage_cell.h"
 #import "APIHelper.h"
+
 @interface VC_profile ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource>
 {
     CGRect frameset;
@@ -51,6 +52,9 @@
     NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 
     TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+        
+        
+        
     
     NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[TEMP_dict valueForKey:@"memberName"]]];
      NSString *str_QID = [NSString stringWithFormat:@"QID : %@",[APIHelper convert_NUll:[TEMP_dict valueForKey:@"membershipNo"]]];
@@ -148,53 +152,57 @@
     cell.IMG_icon.image = [UIImage imageNamed:[ARR_icons objectAtIndex:indexPath.row]];
     cell.LBL_name.text  = [DICT_profile objectAtIndex:indexPath.row];
     cell.BTN_arrow.hidden = YES;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     
     if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Depenedents"] || [[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Change language"])
     {
          cell.BTN_arrow.hidden = NO;
+       // cell.selectionStyle = UITableViewCellSelectionStyleGray;
+
     }
     
     
-    if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Change language"])
-    {
-        Profile_langugage_cell *cell = (Profile_langugage_cell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-
-        
-        NSArray *nib;
-        nib = [[NSBundle mainBundle] loadNibNamed:@"profile_cell" owner:self options:nil];
-        cell = [nib objectAtIndex:1];
-       
-        
-        Lang_picker = [[UIPickerView alloc] init];
-        Lang_picker.delegate = self;
-        Lang_picker.dataSource = self;
-        UIToolbar* conutry_close = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-        conutry_close.barStyle = UIBarStyleBlackTranslucent;
-        [conutry_close sizeToFit];
-        
-        UIButton *close=[[UIButton alloc]init];
-        close.frame=CGRectMake(conutry_close.frame.origin.x -20, 0, 100, conutry_close.frame.size.height);
-        [close setTitle:@"Close" forState:UIControlStateNormal];
-        [close addTarget:self action:@selector(close_action) forControlEvents:UIControlEventTouchUpInside];
-        [conutry_close addSubview:close];
-        
-     
-        
-        UIButton *done=[[UIButton alloc]init];
-        done.frame=CGRectMake(conutry_close.frame.size.width - 100, 0, 100, conutry_close.frame.size.height);
-        [done setTitle:@"Done" forState:UIControlStateNormal];
-        [done addTarget:self action:@selector(done_action) forControlEvents:UIControlEventTouchUpInside];
-        [conutry_close addSubview:done];
-        
-        done.tag = indexPath.row;
-        
-        cell.LBL_name.inputAccessoryView=conutry_close;
-        cell.LBL_name.inputView = Lang_picker;
-        cell.LBL_name.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"language-name"];
-        cell.LBL_name.tintColor=[UIColor clearColor];
-
-        
-    }
+//    if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Change language"])
+//    {
+//        Profile_langugage_cell *cell = (Profile_langugage_cell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+//
+//        
+//        NSArray *nib;
+//        nib = [[NSBundle mainBundle] loadNibNamed:@"profile_cell" owner:self options:nil];
+//        cell = [nib objectAtIndex:1];
+//       
+//        
+//        Lang_picker = [[UIPickerView alloc] init];
+//        Lang_picker.delegate = self;
+//        Lang_picker.dataSource = self;
+//        UIToolbar* conutry_close = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+//        conutry_close.barStyle = UIBarStyleBlackTranslucent;
+//        [conutry_close sizeToFit];
+//        
+//        UIButton *close=[[UIButton alloc]init];
+//        close.frame=CGRectMake(conutry_close.frame.origin.x -20, 0, 100, conutry_close.frame.size.height);
+//        [close setTitle:@"Close" forState:UIControlStateNormal];
+//        [close addTarget:self action:@selector(close_action) forControlEvents:UIControlEventTouchUpInside];
+//        [conutry_close addSubview:close];
+//        
+//     
+//        
+//        UIButton *done=[[UIButton alloc]init];
+//        done.frame=CGRectMake(conutry_close.frame.size.width - 100, 0, 100, conutry_close.frame.size.height);
+//        [done setTitle:@"Done" forState:UIControlStateNormal];
+//        [done addTarget:self action:@selector(done_action) forControlEvents:UIControlEventTouchUpInside];
+//        [conutry_close addSubview:done];
+//        
+//        done.tag = indexPath.row;
+//        
+//        cell.LBL_name.inputAccessoryView=conutry_close;
+//        cell.LBL_name.inputView = Lang_picker;
+//        cell.LBL_name.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"language-name"];
+//        cell.LBL_name.tintColor=[UIColor clearColor];
+//
+//        
+//    }
 
     
        return cell;
@@ -206,6 +214,10 @@
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 10;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.5;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

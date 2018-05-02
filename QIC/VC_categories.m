@@ -130,6 +130,8 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    [textField resignFirstResponder];
+
     _LBL_search_place_holder.alpha = 0.0f;
     [[NSUserDefaults standardUserDefaults] setValue:@"provider_search" forKey:@"tab_param"];
     [[NSUserDefaults standardUserDefaults] synchronize];

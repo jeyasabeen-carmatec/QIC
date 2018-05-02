@@ -79,6 +79,7 @@
             
             str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"specialities"]]];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         
         cell.LBL_designnantion.text = [NSString stringWithFormat:@"%@",str_designation];
@@ -267,6 +268,19 @@
         _LBL_search_place_holder.alpha = 0.0f;
     }
 }
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *myString = _TXT_search.text;
+    NSString *myNewString = [myString stringByReplacingOccurrencesOfString:@"\\s  "
+                                                                withString:@""
+                                                                   options:NSRegularExpressionSearch
+                                                                     range:NSMakeRange(0, [myString length])];
+    
+    _TXT_search.text = myNewString;
+    
+    return YES;
+}
+
 -(void)back_ACTION
 {
     [_TXT_search resignFirstResponder];

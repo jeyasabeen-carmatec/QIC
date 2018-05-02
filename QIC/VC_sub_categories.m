@@ -102,7 +102,8 @@
     @try
     {
     cell.contentView.layer.cornerRadius = 2.0f;
-    
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_name"]]];
         str_name = [str_name uppercaseString];
     
@@ -240,6 +241,18 @@
         _LBL_search_place_holder.alpha = 0.0f;
     }
 }
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *myString = _TXT_search.text;
+    NSString *myNewString = [myString stringByReplacingOccurrencesOfString:@"\\s  "
+                                                                withString:@""
+                                                                   options:NSRegularExpressionSearch
+                                                                     range:NSMakeRange(0, [myString length])];
+    
+    _TXT_search.text = myNewString;
+    
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -287,6 +300,8 @@
         NSError *error;
         NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"catgory_id"]];
        URL_STR = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/1",SERVER_URL,str_id];
+        URL_STR = [URL_STR stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
+
         
         NSURL *urlProducts=[NSURL URLWithString:URL_STR];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -486,6 +501,8 @@
          NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"catgory_id"]];
         
         NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/%@/%@",SERVER_URL,str_id,@"1",_TXT_search.text];
+        str_url = [str_url stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
+
         str_url = [str_url stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 
         

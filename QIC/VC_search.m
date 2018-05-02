@@ -34,7 +34,8 @@
     [_BTN_back addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
 
     _TBL_list.hidden = YES;
-
+    
+   
     // Do any additional setup after loading the view.
 }
 #pragma back_actions
@@ -71,7 +72,8 @@
             
             NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_name"]]];
             str_name = [str_name uppercaseString];
-            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             
             cell.LBL_name.text = [NSString stringWithFormat:@"%@",str_name];
             
@@ -270,6 +272,18 @@
     else{
         _LBL_search_place_holder.alpha = 0.0f;
     }
+}
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *myString = _TXT_search.text;
+    NSString *myNewString = [myString stringByReplacingOccurrencesOfString:@"\\s  "
+                                                                withString:@""
+                                                                   options:NSRegularExpressionSearch
+                                                                     range:NSMakeRange(0, [myString length])];
+    
+    _TXT_search.text = myNewString;
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

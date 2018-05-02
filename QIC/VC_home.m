@@ -90,6 +90,8 @@
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 
 {
+    @try
+    {
     if([item.title isEqualToString:@"Home"])
     {
         /************** calling home view  ******************/
@@ -128,7 +130,7 @@
         [self news_VIEW_calling];
         
     }
-    else  if([item.title isEqualToString:@"Offers"])
+    else  if([item.title isEqualToString:@"Covers"])
     {
         /************** calling Offers view  ******************/
         
@@ -149,7 +151,11 @@
         
     }
 
-
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
     
 }
 
@@ -157,6 +163,8 @@
 
 -(void)HOme_view_calling
 {
+    @try
+    {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:0]];
 
     /************** creating objet for Home view controller and and grabbing that view  ******************/
@@ -184,7 +192,11 @@
      ];
     
    
-    
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
 
 }
 
@@ -192,6 +204,8 @@
 
 -(void)providers_view_calling
 {
+    @try
+    {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:1]];
 
     VC_categories *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_categoies"];
@@ -216,7 +230,11 @@
                     } completion:nil
      ];
 
-   
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
 
 }
 
@@ -224,6 +242,8 @@
 
 -(void)offers_view_calling
 {
+    @try
+    {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:2]];
 
     VC_offers *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
@@ -248,7 +268,11 @@
      ];
     
 
-    
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
     
    
 }
@@ -569,6 +593,15 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    @try
+    {
+        
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
+    
 }
 -(void)remove_from
 {

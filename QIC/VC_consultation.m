@@ -103,7 +103,8 @@
     @try
     {
     cell.contentView.layer.cornerRadius = 2.0f;
-    
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_name"]]];
     str_name = [str_name uppercaseString];
     
@@ -308,6 +309,18 @@
         _LBL_search_place_holder.alpha = 0.0f;
     }
 }
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *myString = _TXT_search.text;
+    NSString *myNewString = [myString stringByReplacingOccurrencesOfString:@"\\s  "
+                                                                withString:@""
+                                                                   options:NSRegularExpressionSearch
+                                                                     range:NSMakeRange(0, [myString length])];
+    
+    _TXT_search.text = myNewString;
+    
+    return YES;
+}
 
 #pragma Wish_list_action
 
@@ -490,6 +503,8 @@
         NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
         NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
         URL_STR = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/1/%@",SERVER_URL,str_id,str_member_ID];
+        URL_STR = [URL_STR stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
+
         
         NSURL *urlProducts=[NSURL URLWithString:URL_STR];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -696,6 +711,8 @@
             
             NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%@/%@/%@",SERVER_URL,str_id,@"1",str_member_ID,_TXT_search.text];
             str_url = [str_url stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+            URL_STR = [URL_STR stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
+
 
             
             NSURL *urlProducts=[NSURL URLWithString:[NSString stringWithFormat:@"%@",str_url]];

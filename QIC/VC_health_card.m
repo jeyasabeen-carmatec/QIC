@@ -8,6 +8,7 @@
 
 #import "VC_health_card.h"
 #import "APIHelper.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface VC_health_card ()
 
@@ -23,6 +24,16 @@
   //  frameset.origin.x = _IMG_card.frame.size.width - _IMG_profile.frame.size.width /2 +20;
     _IMG_profile.frame = frameset;
     
+    @try
+    {
+//        NSString *str_image = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"Services"]objectAtIndex:indexPath.section] valueForKey:@"image"]];
+//        str_image = [APIHelper convert_NUll:str_image];
+//        
+//        str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+//        
+//        [_IMG_profile sd_setImageWithURL:[NSURL URLWithString:str_image]
+//                          placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+
     NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
     
     NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -55,6 +66,11 @@
 
     
     [_BTN_back addTarget:self action:@selector(back_action) forControlEvents:UIControlEventTouchUpInside];
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
 }
 -(void)back_action
 {

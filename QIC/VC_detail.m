@@ -73,9 +73,10 @@
     }
 
     
-     NSString *str_speciality = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"specialities"]]];
+//     NSString *str_speciality = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[jsonresponse_DIC valueForKey:@"Providers"] valueForKey:@"specialities"]]];
     
-    _LBL_designation.text = str_speciality;
+    _LBL_designation.text = str_designation;
+        
      frameset = _LBL_designation.frame;
     frameset.origin.y = _LBL_center_name.frame.origin.y + _LBL_center_name.frame.size.height+4;
     _LBL_designation.frame = frameset;
@@ -391,7 +392,8 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
         nib = [[NSBundle mainBundle] loadNibNamed:@"offers_cell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     NSString *str_offer_name = [NSString stringWithFormat:@"%@", [[[jsonresponse_DIC valueForKey:@"Services"] objectAtIndex:indexPath.row] valueForKey:@"service_name"]];
     str_offer_name = [APIHelper convert_NUll:str_offer_name];
     cell.LBL_offer_names.text =str_offer_name;

@@ -123,6 +123,8 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    [textField resignFirstResponder];
+
     _LBL_search_place_holder.alpha = 0.0f;
     [self.delegate offers_search_page_calling];
 }

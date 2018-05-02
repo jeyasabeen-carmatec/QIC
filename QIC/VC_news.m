@@ -98,6 +98,7 @@
         
         [cell.IMG_title sd_setImageWithURL:[NSURL URLWithString:str_image]
                              placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         
     NSString *str_title = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[ARR_total_data objectAtIndex:indexPath.section]valueForKey:@"title"]]];
@@ -192,6 +193,19 @@
         _LBL_search_place_holder.alpha = 0.0f;
     }
 }
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *myString = _TXT_search.text;
+    NSString *myNewString = [myString stringByReplacingOccurrencesOfString:@"\\s  "
+                                                                withString:@""
+                                                                   options:NSRegularExpressionSearch
+                                                                     range:NSMakeRange(0, [myString length])];
+    
+    _TXT_search.text = myNewString;
+    
+    return YES;
+}
+
 
 #pragma News API call
 

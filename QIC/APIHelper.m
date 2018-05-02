@@ -84,6 +84,8 @@
 
 +(void)start_animation:(UIViewController *_Nullable)my_controller;
 {
+    @try
+    {
     UIView *VW_overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
     
     VW_overlay.backgroundColor = [UIColor blackColor];
@@ -104,10 +106,18 @@
     [VW_overlay addSubview:actiIndicatorView];
     VW_overlay.center = my_controller.view.center;
     [my_controller.view addSubview:VW_overlay];
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
 }
 #pragma stop the animation
 +(void)stop_activity_animation:(UIViewController *)my_controller
 {
+    @try
+    {
+    
     for (UIActivityIndicatorView *activity in my_controller.view.subviews) {
         if (activity.tag == 1235) {
             [activity stopAnimating];
@@ -118,6 +128,11 @@
         if (VW_main.tag == 1234) {
             VW_main.hidden = YES;
         }
+    }
+    }
+    @catch(NSException *exception)
+    {
+        
     }
 }
 #pragma ALert view creating
@@ -253,6 +268,50 @@
    }
     
     return str_count;
+}
+
+#pragma login_API
++ (void)login_postServiceCall:(NSString*_Nullable)urlStr andParams:(NSDictionary*_Nullable)params : (NSDictionary *_Nullable)headers completionHandler:(void (^_Nullable)(id  _Nullable data, NSError * _Nullable error))completionHandler{
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setTimeoutInterval:70];
+    [request setAllHTTPHeaderFields:headers];
+    [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:params options:0 error:nil];
+    
+    [request setHTTPBody:postData];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.allowsCellularAccess = YES;
+    configuration.HTTPMaximumConnectionsPerHost = 10;
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(id  _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            completionHandler(nil,error);
+            
+            NSLog(@"eror g1:%@",[error localizedDescription]);
+        }else{
+            NSError *err = nil;
+            id resposeJSon = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+            if (err) {
+                completionHandler(nil,err);
+                NSLog(@"eror g2:%@",[error localizedDescription]);
+            }else{
+                @try {
+                    if (resposeJSon) {
+                        completionHandler(resposeJSon,nil);
+                        
+                    }
+                    
+                } @catch (NSException *exception)
+                {
+                    NSLog(@" 3 %@",exception);
+                }
+            }
+        }
+    }];
+    [dataTask resume];
 }
 
 

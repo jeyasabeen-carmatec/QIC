@@ -287,7 +287,7 @@
 
     
     NSString *str_header_name =@"TOP 5 PROVIDERS";
-    NSString *str_sub_header_name = @"This is showing the top Providers";
+    NSString *str_sub_header_name = @"This is showing the Top Providers";
     
     NSString *str_providers = [NSString  stringWithFormat:@"%@\n%@",str_header_name,str_sub_header_name];
     
@@ -314,7 +314,7 @@
         _LBL_provider_header_label.text = str_providers;
     }
     
-    NSString *str_offer_header =@"OFFERS";
+    NSString *str_offer_header =@"BEST COVERAGE";
     NSString *str_offer_sub_header_name = @"This is showing the Offers";
     
     NSString *str_offers = [NSString  stringWithFormat:@"%@\n%@",str_offer_header,str_offer_sub_header_name];
@@ -339,7 +339,7 @@
     else{
         _LBL_offer_header_label.text = str_offers;
     }
-    NSString *str_news_header =@"NEWS";
+    NSString *str_news_header =@"LATEST NEWS";
     NSString *str_news_sub_header_name = @"This is showing the News";
     
     NSString *str_news = [NSString  stringWithFormat:@"%@\n%@",str_news_header,str_news_sub_header_name];
@@ -400,6 +400,7 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    [textField resignFirstResponder];
     _LBL_search_place_holder.alpha = 0.0f;
     [self.delegate  search_VIEW_calling];
 }
@@ -504,7 +505,7 @@ if (collectionView == _collection_providers)
     
     @try
     {
-    NSString *str_IMG_URL = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"provider_list"] objectAtIndex:indexPath.row] valueForKey:@"banner_url"]];
+    NSString *str_IMG_URL = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"provider_list"] objectAtIndex:indexPath.row] valueForKey:@"logo_url"]];
         str_IMG_URL = [str_IMG_URL stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:str_IMG_URL]
                  placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
@@ -992,10 +993,10 @@ else{
             INDX_news = newIndexPath;
         }
         
-        else if ([arr_images count]  > INDX_news.row)
+        else if ([[JSON_response_dic valueForKey:@"news_list"] count]  > INDX_news.row)
         {
-            if ([arr_images count] == INDX_news.row + 1) {
-                newIndexPath = [NSIndexPath indexPathForRow:[arr_images count] - 1 inSection:0];
+            if ([[JSON_response_dic valueForKey:@"news_list"] count] == INDX_news.row + 1) {
+                newIndexPath = [NSIndexPath indexPathForRow:[[JSON_response_dic valueForKey:@"news_list"] count] - 1 inSection:0];
                 INDX_news = newIndexPath;
             }
             else

@@ -18,6 +18,8 @@
 @property(nonatomic,weak) IBOutlet UILabel  *LBL_card_number;
 @property(nonatomic,weak) IBOutlet UILabel  *LBL_expiry_date;
 @property(nonatomic,weak) IBOutlet UIButton  *BTN_back;
+@property(nonatomic,weak) IBOutlet UIImageView *IMG_profile_pic;
+
 
 #pragma Delegate action
 @property(nonatomic,assign) id <home_page_protocols> delegate;

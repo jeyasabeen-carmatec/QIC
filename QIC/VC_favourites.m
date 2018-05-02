@@ -30,7 +30,7 @@
     arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
     
-  //  [APIHelper start_animation:self];
+    [APIHelper start_animation:self];
     [self performSelector:@selector(favourites_API_call) withObject:nil afterDelay:0.01];
 
 }
@@ -194,10 +194,11 @@
      
         
         NSDictionary *TEMP_dict = @{@"customer_id":str_member_ID};
-        
+        [APIHelper stop_activity_animation:self];
+
         NSDictionary *parameters = TEMP_dict;
         [APIHelper postServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
-            
+
             if(error)
             {
                 [APIHelper stop_activity_animation:self];
@@ -209,7 +210,7 @@
                 jsonresponse_DIC= data;
                 if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
                 {
-                    [APIHelper stop_activity_animation:self];
+                   
 
                      dispatch_async(dispatch_get_main_queue(), ^{
                     [_TBL_list reloadData];
@@ -221,7 +222,7 @@
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
 
-                    [APIHelper stop_activity_animation:self];
+                   
                     NSString *str_page = [[NSUserDefaults standardUserDefaults] valueForKey:@"tab_param"];
 
                     [self.delegate favourites_back_ACTION:str_page];

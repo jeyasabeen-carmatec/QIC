@@ -32,7 +32,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dK6-HB-Sv5">
                         <rect key="frame" x="0.0" y="3" width="320" height="144.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="pp1-x9-4Cc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pp1-x9-4Cc">
                                 <rect key="frame" x="8" y="8" width="85" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="cMD-ca-Cvq"/>
@@ -121,6 +121,5 @@
     </objects>
     <resources>
         <image name="call-button.png" width="141" height="54"/>
-        <image name="house.jpg" width="493" height="740"/>
     </resources>
 </document>

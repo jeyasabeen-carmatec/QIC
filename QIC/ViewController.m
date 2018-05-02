@@ -22,18 +22,19 @@
     /****************** Calling the set up view ***********************/
 
     [self setUP_VIEW];
-    
+    [self Checka_Version];
 }
 #pragma setting the view of the components
 
 -(void)setUP_VIEW
 {
+    [_BTN_guest addTarget:self action:@selector(SIGN_UP_action) forControlEvents:UIControlEventTouchUpInside];
     
     /**************** settign te frame for view center **********************/
     
    // _VW_center.center=self.view.center;
-    _TXT_uname.text =  @"28535632996";
-    _TXT_password.text = @"123456";
+    _TXT_uname.text =  @"";
+    _TXT_password.text = @"";
     
     CGRect frameset = _BTN_guest.frame;
    
@@ -42,7 +43,7 @@
     
     /****************** setting the Button guest Text ***********************/
     
-    NSString *str_name = @"Not a QIC-Anaya Customer? ----> Go";
+    NSString *str_name = @"Not a QIC-Anaya Customer? Click here";
     _BTN_guest.titleLabel.numberOfLines = 2;
     _BTN_guest.titleLabel.textAlignment = NSTextAlignmentCenter;
     [_BTN_guest setTitle:str_name forState:UIControlStateNormal];
@@ -146,7 +147,26 @@
    
     
 }
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (!string.length)
+        return YES;
+    
+    if (textField == self.TXT_password || textField == self.TXT_uname)
+    {
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        NSString *expression = @"^([0-9]+)?(\\.([0-9]{1,2})?)?$";
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:expression
+                                                                               options:NSRegularExpressionCaseInsensitive
+                                                                                 error:nil];
+        NSUInteger numberOfMatches = [regex numberOfMatchesInString:newString
+                                                            options:0
+                                                              range:NSMakeRange(0, [newString length])];
+        if (numberOfMatches == 0)
+            return NO;
+    }
+    return YES;
+}
 #pragma Validation checking
 
 -(void)valdations_FOR_Text
@@ -160,11 +180,7 @@
     {
         str_msg = @"Please enter Mobile Number";
     }
-    else if(_TXT_password.text.length > 8)
-    {
-        str_msg = @"Mobile number should not be more than 8 digits";
-    }
-    else if(_TXT_password.text.length < 5)
+      else if(_TXT_password.text.length < 5)
     {
         str_msg = @"Mobile number should not be less than 5 digits";
     }
@@ -187,14 +203,23 @@
     
     @try
     {
-    NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
-    NSString *url_str = [NSString stringWithFormat:@"https://www.devapi.anoudapps.com/anaya/memberPortalLogin?company=001"];
+        
+        NSDictionary *headers = @{ @"username": @"f181ac8c-f294-46c9-9c34-e33c3cf09e04",
+                                   @"password": @"a8cce63d-6575-47fc-bc22-561fd8c2ad93",
+                                   @"Content-Type": @"application/json",
+                                   @"Authorization": @"Basic ZjE4MWFjOGMtZjI5NC00NmM5LTljMzQtZTMzYzNjZjA5ZTA0OmE4Y2NlNjNkLTY1NzUtNDdmYy1iYzIyLTU2MWZkOGMyYWQ5Mw==",
+                                   @"Cache-Control": @"no-cache",
+                                   @"Postman-Token": @"187dcf1a-ed17-d8d6-34dd-c64ce78df93e" };
+        NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
+    NSString *url_str = [NSString stringWithFormat:@"https://www.api.qic-insured.com/anaya-mobile/memberPortalLogin?company=001"];
     NSDictionary *parameters = @{@"memberId":str_QID,@"phone":@"33156672"};
-    [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+        [APIHelper login_postServiceCall:url_str andParams:parameters:headers completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
         
         if(error)
         {
             [APIHelper stop_activity_animation:self];
+            [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+
         }
         if(data)
         {
@@ -233,13 +258,19 @@
             }
             else
             {
-                
+                [APIHelper stop_activity_animation:self];
+
                  [APIHelper createaAlertWithMsg:@"Please check QID number" andTitle:@"Alert"];
 
             }
         
 
             
+        }
+        else{
+             [APIHelper stop_activity_animation:self];
+            [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+
         }
 
     }];
@@ -316,6 +347,72 @@
     
 }
 
+#pragma Sign UP action
+-(void)SIGN_UP_action
+{
+    //login_sign_UP
+    [self performSegueWithIdentifier:@"login_sign_UP" sender:self];
+//    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Sign_up_URL"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+#pragma Checking the version
+-(void)Checka_Version
+{
+    @try
+    {
+    NSString *str_code = [[NSLocale autoupdatingCurrentLocale] objectForKey:NSLocaleCountryCode];
+    NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://itunes.apple.com/%@/lookup?id=1377090050",str_code]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (!error) {
+                                   NSError* parseError;
+                                   NSDictionary *appMetadataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&parseError];
+                                   NSArray *resultsArray = (appMetadataDictionary)?[appMetadataDictionary objectForKey:@"results"]:nil;
+                                   NSDictionary *resultsDic = [resultsArray firstObject];
+                                   if (resultsDic) {
+                                       // compare version with your apps local version
+                                       NSString *iTunesVersion = [resultsDic objectForKey:@"version"];
+                                       
+                                       NSString *appVersion = @"1.0.0";
+                                       
+                                       NSLog(@"itunes version = %@\nAppversion = %@",iTunesVersion,appVersion);
+                                       
+                                       //                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New version available" message:[NSString stringWithFormat:@"%@",appMetadataDictionary] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                                       //                                       [alert show];
+                                       //
+                                       //                                       float itnVer = [iTunesVersion floatValue];
+                                       //                                       float apver = [appVersion floatValue];
+                                       //
+                                       //                                       NSLog(@"The val floet itune %f\nThe val float appver%f",itnVer,apver);
+                                       
+                                       if (iTunesVersion && [appVersion compare:iTunesVersion] != NSOrderedSame) {
+                                           
+                                           
+                                           //                                           UIAlertView *alert = [UIAlertView bk_showAlertViewWithTitle:@"Doha Sooq Online Shopping" message:[NSString stringWithFormat:@"New version available. Update required."] cancelButtonTitle:@"update" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                           
+                                           
+                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Version Updated %@",iTunesVersion] message:[resultsDic valueForKey:@"releaseNotes"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Update",@"Cancel", nil];
+                                           alert.tag = 123456;
+                                           [alert show];
+                                           //                                           }];
+                                           //                                           [alert show];
+                                       }
+                                   }
+                               } else {
+                                   // error occurred with http(s) request
+                                   NSLog(@"error occurred communicating with iTunes");
+                               }
+                           }];
+        }
+    @catch(NSException *exception)
+    {
+        
+    }
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
