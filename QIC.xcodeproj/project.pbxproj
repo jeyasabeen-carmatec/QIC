@@ -12,6 +12,11 @@
 		D0025575207732BE0059A349 /* favourites_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0025573207732BE0059A349 /* favourites_cell.xib */; };
 		D002557920775CF90059A349 /* Profile_langugage_cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D002557820775CF90059A349 /* Profile_langugage_cell.m */; };
 		D002557D207773690059A349 /* TXT_placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D002557C207773690059A349 /* TXT_placeholder.m */; };
+		D00C472C209B2BE700312CFA /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C472B209B2BE700312CFA /* NewRelicAgent.framework */; };
+		D00C472E209B2BFA00312CFA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C472D209B2BFA00312CFA /* CoreTelephony.framework */; };
+		D00C4730209B2C0600312CFA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C472F209B2C0600312CFA /* SystemConfiguration.framework */; };
+		D00C4732209B2C1400312CFA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C4731209B2C1300312CFA /* libc++.tbd */; };
+		D00C4734209B2C2100312CFA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C4733209B2C2100312CFA /* libz.tbd */; };
 		D02AC7B62072301D00F47C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC7B52072301D00F47C93 /* main.m */; };
 		D02AC7B92072301D00F47C93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC7B82072301D00F47C93 /* AppDelegate.m */; };
 		D02AC7BC2072301D00F47C93 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC7BB2072301D00F47C93 /* ViewController.m */; };
@@ -29,11 +34,6 @@
 		D02AC7FE2073889600F47C93 /* offer.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7F92073889600F47C93 /* offer.png */; };
 		D02AC7FF2073889600F47C93 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7FA2073889600F47C93 /* profile.png */; };
 		D02AC8002073889600F47C93 /* provider.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7FB2073889600F47C93 /* provider.png */; };
-		D02AC80220738FA400F47C93 /* home-App-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC80120738FA400F47C93 /* home-App-20x20@3x.png */; };
-		D02AC80420738FD700F47C93 /* news-App-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC80320738FD700F47C93 /* news-App-20x20@3x.png */; };
-		D02AC8062073900400F47C93 /* offerApp-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC8052073900400F47C93 /* offerApp-20x20@3x.png */; };
-		D02AC8082073902300F47C93 /* profile-App-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC8072073902300F47C93 /* profile-App-20x20@3x.png */; };
-		D02AC80A2073903A00F47C93 /* provide-App-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC8092073903A00F47C93 /* provide-App-20x20@3x.png */; };
 		D02AC81D2074766100F47C93 /* VC_profile.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC81C2074766100F47C93 /* VC_profile.m */; };
 		D02AC8212074768200F47C93 /* TXT_profile.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC8202074768200F47C93 /* TXT_profile.m */; };
 		D02AC82620747EF000F47C93 /* profile_cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC82420747EF000F47C93 /* profile_cell.m */; };
@@ -151,6 +151,11 @@
 		D002557820775CF90059A349 /* Profile_langugage_cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile_langugage_cell.m; sourceTree = "<group>"; };
 		D002557B207773690059A349 /* TXT_placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXT_placeholder.h; sourceTree = "<group>"; };
 		D002557C207773690059A349 /* TXT_placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXT_placeholder.m; sourceTree = "<group>"; };
+		D00C472B209B2BE700312CFA /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
+		D00C472D209B2BFA00312CFA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		D00C472F209B2C0600312CFA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D00C4731209B2C1300312CFA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		D00C4733209B2C2100312CFA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D02AC7B12072301D00F47C93 /* QIC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QIC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02AC7B52072301D00F47C93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D02AC7B72072301D00F47C93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -180,11 +185,6 @@
 		D02AC7F92073889600F47C93 /* offer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offer.png; sourceTree = "<group>"; };
 		D02AC7FA2073889600F47C93 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
 		D02AC7FB2073889600F47C93 /* provider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = provider.png; sourceTree = "<group>"; };
-		D02AC80120738FA400F47C93 /* home-App-20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-App-20x20@3x.png"; sourceTree = "<group>"; };
-		D02AC80320738FD700F47C93 /* news-App-20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-App-20x20@3x.png"; sourceTree = "<group>"; };
-		D02AC8052073900400F47C93 /* offerApp-20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "offerApp-20x20@3x.png"; sourceTree = "<group>"; };
-		D02AC8072073902300F47C93 /* profile-App-20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-App-20x20@3x.png"; sourceTree = "<group>"; };
-		D02AC8092073903A00F47C93 /* provide-App-20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "provide-App-20x20@3x.png"; sourceTree = "<group>"; };
 		D02AC81320739F0000F47C93 /* VC_news.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VC_news.h; sourceTree = "<group>"; };
 		D02AC8172073A02A00F47C93 /* VC_offers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VC_offers.h; sourceTree = "<group>"; };
 		D02AC81B2074766100F47C93 /* VC_profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VC_profile.h; sourceTree = "<group>"; };
@@ -336,7 +336,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D00C4734209B2C2100312CFA /* libz.tbd in Frameworks */,
+				D00C4732209B2C1400312CFA /* libc++.tbd in Frameworks */,
+				D00C4730209B2C0600312CFA /* SystemConfiguration.framework in Frameworks */,
+				D00C472E209B2BFA00312CFA /* CoreTelephony.framework in Frameworks */,
 				64B522C230F531A38E1DA83C /* libPods-QIC.a in Frameworks */,
+				D00C472C209B2BE700312CFA /* NewRelicAgent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +351,11 @@
 		016ABE74970599615BE0A7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D00C4733209B2C2100312CFA /* libz.tbd */,
+				D00C4731209B2C1300312CFA /* libc++.tbd */,
+				D00C472F209B2C0600312CFA /* SystemConfiguration.framework */,
+				D00C472D209B2BFA00312CFA /* CoreTelephony.framework */,
+				D00C472B209B2BE700312CFA /* NewRelicAgent.framework */,
 				F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */,
 			);
 			name = Frameworks;
@@ -580,11 +590,6 @@
 				D02AC7F92073889600F47C93 /* offer.png */,
 				D02AC7FA2073889600F47C93 /* profile.png */,
 				D02AC7FB2073889600F47C93 /* provider.png */,
-				D02AC80120738FA400F47C93 /* home-App-20x20@3x.png */,
-				D02AC80320738FD700F47C93 /* news-App-20x20@3x.png */,
-				D02AC8052073900400F47C93 /* offerApp-20x20@3x.png */,
-				D02AC8072073902300F47C93 /* profile-App-20x20@3x.png */,
-				D02AC8092073903A00F47C93 /* provide-App-20x20@3x.png */,
 			);
 			path = "tab bar icons";
 			sourceTree = "<group>";
@@ -950,6 +955,7 @@
 				D02AC7AF2072301D00F47C93 /* Resources */,
 				1898AE62D6F69058A5AAFAF5 /* [CP] Embed Pods Frameworks */,
 				9B8EF71867DB50072F107907 /* [CP] Copy Pods Resources */,
+				D00C4735209B2C4C00312CFA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1000,7 +1006,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D02FB93420907A3E000BCD3E /* offers_cell.xib in Resources */,
-				D02AC8082073902300F47C93 /* profile-App-20x20@3x.png in Resources */,
 				D02FB8FA208DF5C1000BCD3E /* transparent-BG.png in Resources */,
 				D02AC8AC207624D500F47C93 /* Futura Std Medium.ttf in Resources */,
 				D0AE158020875B7F004B32CD /* image-2.jpg in Resources */,
@@ -1009,7 +1014,6 @@
 				D02AC7C42072301D00F47C93 /* LaunchScreen.storyboard in Resources */,
 				D0025575207732BE0059A349 /* favourites_cell.xib in Resources */,
 				D02AC897207624AD00F47C93 /* Futura Std Book.ttf in Resources */,
-				D02AC80A2073903A00F47C93 /* provide-App-20x20@3x.png in Resources */,
 				D02FB92C209079E0000BCD3E /* consultation_cell.xib in Resources */,
 				D02FB9842095BB98000BCD3E /* Main.storyboard in Resources */,
 				D079D6D02084CA360079CA99 /* discount3.png in Resources */,
@@ -1021,7 +1025,6 @@
 				D02AC8AA207624D500F47C93 /* Futura Medium.ttf in Resources */,
 				D079D667207C5FC60079CA99 /* search-bar.png in Resources */,
 				D02AC8792075FC9100F47C93 /* services.png in Resources */,
-				D02AC80220738FA400F47C93 /* home-App-20x20@3x.png in Resources */,
 				D02AC8772075FC9100F47C93 /* privacy-policy.png in Resources */,
 				D0AE158D2088605A004B32CD /* home_cell.xib in Resources */,
 				D0AE158120875B7F004B32CD /* image-3.jpg in Resources */,
@@ -1053,7 +1056,6 @@
 				D02AC87B2075FC9100F47C93 /* validity.png in Resources */,
 				D02AC88F2076238A00F47C93 /* Futura Round Bold.ttf in Resources */,
 				D02AC8B320762E6B00F47C93 /* Info.plist in Resources */,
-				D02AC8062073900400F47C93 /* offerApp-20x20@3x.png in Resources */,
 				D02AC8AD207624D500F47C93 /* Futura TOT Medium Condensed.ttf in Resources */,
 				D02AC7E82073410600F47C93 /* menu_cell.xib in Resources */,
 				D02AC7FE2073889600F47C93 /* offer.png in Resources */,
@@ -1061,7 +1063,6 @@
 				D02AC7FD2073889600F47C93 /* news.png in Resources */,
 				D079D693207E15140079CA99 /* Futura Std Book Oblique.ttf in Resources */,
 				D0AE15A0208882DA004B32CD /* digital-7.ttf in Resources */,
-				D02AC80420738FD700F47C93 /* news-App-20x20@3x.png in Resources */,
 				D02AC8B22076274700F47C93 /* coupon.png in Resources */,
 				D02AC8912076238A00F47C93 /* Futura URW Extra Bold.ttf in Resources */,
 				D02FB925209079A6000BCD3E /* categorie_cell.xib in Resources */,
@@ -1136,6 +1137,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QIC/Pods-QIC-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		D00C4735209B2C4C00312CFA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n\n/bin/sh \"${SCRIPT}\" \"AA31f46cdbec234c294afd0758c8d1a8debd72c23e\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1312,6 +1326,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = TVWJ9WMT26;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
 				INFOPLIST_FILE = QIC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1332,6 +1350,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = TVWJ9WMT26;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
 				INFOPLIST_FILE = QIC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

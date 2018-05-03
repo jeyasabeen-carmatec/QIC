@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @import GoogleMaps;
-
+#import <NewRelicAgent/NewRelic.h>
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

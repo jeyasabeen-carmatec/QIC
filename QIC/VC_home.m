@@ -58,6 +58,10 @@
     CGFloat highlightedWidth = self.view.frame.size.width/_TAB_menu.items.count;
     [_TAB_menu setItemWidth:highlightedWidth];
     CGRect rect = CGRectMake(0, 9, highlightedWidth, _TAB_menu.frame.size.height+18);
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    if (screenSize.height == 812.0f)
+        rect = CGRectMake(0, 0, highlightedWidth, _TAB_menu.frame.size.height+32);
+
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [[UIColor colorWithRed:0.11 green:0.40 blue:0.40 alpha:1.0] CGColor]);
@@ -365,7 +369,11 @@
 }
 
 
-
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self.TAB_menu invalidateIntrinsicContentSize];
+}
 #pragma detail page visibilty
 -(void)detail_page_visibility:(NSString *)str_status;
 {

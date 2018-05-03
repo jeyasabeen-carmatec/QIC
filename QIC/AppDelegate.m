@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    [NewRelicAgent startWithApplicationToken:@"AA31f46cdbec234c294afd0758c8d1a8debd72c23e"];
     [GMSServices provideAPIKey:@"AIzaSyDdjUq1m4XayB118EUlOyd68IaBsnDGj2Q"];
     return YES;
 }
