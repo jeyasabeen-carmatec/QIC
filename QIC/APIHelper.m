@@ -53,33 +53,7 @@
     }];
     [dataTask resume];
 }
-#pragma  get api call
 
-+(NSDictionary *)API_get_call:(NSString *)url_STR
-{
-    NSHTTPURLResponse *response = nil;
-    NSError *error;
-    
-    NSURL *urlProducts=[NSURL URLWithString:url_STR];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:urlProducts];
-    [request setHTTPMethod:@"GET"];
-    [request setHTTPShouldHandleCookies:NO];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    if(aData)
-    {
-        NSMutableDictionary *dict=(NSMutableDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
-        
-        return dict;
-    }
-    else
-    {
-        NSDictionary *dictin = [[NSDictionary alloc]initWithObjectsAndKeys:@"Nodata",@"error", nil];
-        return dictin;
-    }
-}
 #pragma start animation
 
 +(void)start_animation:(UIViewController *_Nullable)my_controller;

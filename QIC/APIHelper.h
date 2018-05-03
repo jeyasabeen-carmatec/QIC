@@ -29,7 +29,7 @@
 
 +(NSString *_Nullable)convert_NUll:(NSString *_Nullable)str;
 
-+(void)Get_API_call:(NSString *_Nullable)userId completionHandler:(void (^_Nullable)(id _Nullable, NSError * _Nullable))completionHandler;
+
 
 +(NSString *_Nullable)set_count:(NSString *_Nullable)str_count;
 

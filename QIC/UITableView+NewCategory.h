@@ -13,7 +13,7 @@
 
 @protocol UITableViewDragLoadDelegate <NSObject>
 
-@optional
+@required
 //Called when table trigger a refresh event.
 - (void)dragTableDidTriggerRefresh:(UITableView *)tableView;
 
@@ -33,7 +33,7 @@
 @interface UITableView (DragLoad)
 
 //Get setted `dragDelegate`
-@property (nonatomic, readonly) id<UITableViewDragLoadDelegate> dragDelegate;
+@property (nonatomic, readonly) id<UITableViewDragDelegate> dragDelegate;
 
 //When `dragDelegate` setted, the refresh header and load more footer will be init magically.
 //Set `dragDelegate` to nil will remove refresh header and load more footer.
