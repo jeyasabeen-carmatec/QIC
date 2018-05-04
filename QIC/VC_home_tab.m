@@ -8,19 +8,15 @@
 
 #import "VC_home_tab.h"
 #import "menu_cell.h"
-#import "CFCoverFlowView.h"
 #import "home_cell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "APIHelper.h"
 
 
-@interface VC_home_tab ()<UITableViewDelegate,UITableViewDataSource,CFCoverFlowViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
+@interface VC_home_tab ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIGestureRecognizerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 {
     NSArray *arr_images;
     CGRect frameset;
-    CFCoverFlowView *coverFlowView1;
-    CFCoverFlowView *coverFlowView2;
-    CFCoverFlowView *coverFlowView3;
     NSIndexPath *INDX_selected;
     NSIndexPath *INDX_offers;
     NSIndexPath *INDX_news;
@@ -665,6 +661,7 @@ else{
 
 }
 #pragma Scrollview handling
+
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
     @try

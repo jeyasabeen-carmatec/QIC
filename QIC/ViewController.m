@@ -176,20 +176,15 @@
    {
        str_msg =  @"Please enter QID number";
    }
-    else if([_TXT_password.text isEqualToString:@""])
-    {
-        str_msg = @"Please enter Mobile Number";
-    }
-      else if(_TXT_password.text.length < 5)
-    {
-        str_msg = @"Mobile number should not be less than 5 digits";
-    }
+  
     if(str_msg)
     {
         [APIHelper createaAlertWithMsg:str_msg andTitle:@"Alert"];
     }
     else
     {
+        [_TXT_uname resignFirstResponder];
+        [_TXT_password resignFirstResponder];
         [APIHelper start_animation:self];
         [self performSelector:@selector(login_action) withObject:nil afterDelay:0.01];
 
@@ -198,12 +193,126 @@
 }
 
 #pragma mark LOGIN action
+//#pragma mark - Button Actions
+//-(void) login_action
+//{
+//    @try
+//    {
+//    NSDictionary *headers = @{ @"username": @"f181ac8c-f294-46c9-9c34-e33c3cf09e04",
+//                               @"password": @"a8cce63d-6575-47fc-bc22-561fd8c2ad93",
+//                               @"Content-Type": @"application/json",
+//                               @"Authorization": @"Basic ZjE4MWFjOGMtZjI5NC00NmM5LTljMzQtZTMzYzNjZjA5ZTA0OmE4Y2NlNjNkLTY1NzUtNDdmYy1iYzIyLTU2MWZkOGMyYWQ5Mw==",
+//                               @"Cache-Control": @"no-cache",
+//                               @"Postman-Token": @"187dcf1a-ed17-d8d6-34dd-c64ce78df93e" };
+//    NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
+//    NSString *str_phone = [NSString stringWithFormat:@"%@",_TXT_password.text];
+//
+//    NSString *url_str = [NSString stringWithFormat:@"https://www.api.qic-insured.com/anaya-mobile/memberPortalLogin?company=001"];
+//    NSDictionary *parameters = @{@"memberId":str_QID,@"phone":str_phone};
+//
+//    NSError *error;
+//    NSError *err;
+//    NSHTTPURLResponse *response = nil;
+//
+//    NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:NSASCIIStringEncoding error:&err];
+//    NSURL *urlProducts=[NSURL URLWithString:url_str];
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//    [request setURL:urlProducts];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request setHTTPBody:postData];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
+//    [request setAllHTTPHeaderFields:headers];
+//
+//    [request setHTTPShouldHandleCookies:NO];
+//    NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//    if (aData)
+//    {
+//        if (!aData)
+//        {
+//
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Connection Failed" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+//            [alert show];
+//        }
+//        else
+//        {
+//            NSMutableDictionary *json_DATA = (NSMutableDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
+//            if(json_DATA)
+//            {
+//            NSLog(@"The response %@",json_DATA);
+//                NSDictionary *TEMP_dict = json_DATA;
+//                NSLog(@"The login customer Data:%@",TEMP_dict);
+//                [APIHelper stop_activity_animation:self];
+//
+//                if([[TEMP_dict valueForKey:@"errMessage"] isEqualToString:@"Success"])
+//                {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        NSMutableDictionary *dictMutable = [TEMP_dict mutableCopy];
+//                        [dictMutable removeObjectsForKeys:[TEMP_dict allKeysForObject:[NSNull null]]];
+//
+//                        NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
+//
+//                        NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//
+//                        NSDictionary *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+//
+//                        NSString *str_ID = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"membershipNo"] ];
+//
+//                        [[NSUserDefaults standardUserDefaults] setValue:str_ID forKey:@"MEMBER_id"];
+//                        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
+//                        [[NSUserDefaults standardUserDefaults] synchronize];
+//                        //  [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
+//
+//                        [self calling_the_Company_API];
+//
+//
+//                    });
+//
+//
+//
+//
+//
+//                }
+//                else
+//                {
+//                    [APIHelper stop_activity_animation:self];
+//
+//                    [APIHelper createaAlertWithMsg:@"Please check QID number" andTitle:@"Alert"];
+//
+//                }
+//
+//
+//
+//            }
+//            else{
+//                [APIHelper stop_activity_animation:self];
+//                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+//
+//            }
+//        }
+//
+//
+//    }
+//    }
+//    @catch(NSException *exception)
+//    {
+//        [APIHelper stop_activity_animation:self];
+//        NSLog(@"Exception from login api:%@",exception);
+//    }
+//
+//
+//
+//
+//}
+
+
 -(void)login_action
 {
-    
+
     @try
     {
-        
+
         NSDictionary *headers = @{ @"username": @"f181ac8c-f294-46c9-9c34-e33c3cf09e04",
                                    @"password": @"a8cce63d-6575-47fc-bc22-561fd8c2ad93",
                                    @"Content-Type": @"application/json",
@@ -214,7 +323,7 @@
     NSString *url_str = [NSString stringWithFormat:@"https://www.api.qic-insured.com/anaya-mobile/memberPortalLogin?company=001"];
     NSDictionary *parameters = @{@"memberId":str_QID,@"phone":@"33156672"};
         [APIHelper login_postServiceCall:url_str andParams:parameters:headers completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
-        
+
         if(error)
         {
             [APIHelper stop_activity_animation:self];
@@ -226,35 +335,35 @@
             NSDictionary *TEMP_dict = data;
             NSLog(@"The login customer Data:%@",TEMP_dict);
              [APIHelper stop_activity_animation:self];
-            
+
             if([[TEMP_dict valueForKey:@"errMessage"] isEqualToString:@"Success"])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     NSMutableDictionary *dictMutable = [TEMP_dict mutableCopy];
                     [dictMutable removeObjectsForKeys:[TEMP_dict allKeysForObject:[NSNull null]]];
-                    
+
                     NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
-                    
+
                     NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    
+
                     NSDictionary *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
-                    
+
                     NSString *str_ID = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"membershipNo"] ];
-                    
+
                     [[NSUserDefaults standardUserDefaults] setValue:str_ID forKey:@"MEMBER_id"];
                     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                   //  [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
-                    
+
                     [self calling_the_Company_API];
 
 
                 });
-                
-                
-               
-                
-                
+
+
+
+
+
             }
             else
             {
@@ -263,9 +372,9 @@
                  [APIHelper createaAlertWithMsg:@"Please check QID number" andTitle:@"Alert"];
 
             }
-        
 
-            
+
+
         }
         else{
              [APIHelper stop_activity_animation:self];
@@ -280,7 +389,7 @@
          [APIHelper stop_activity_animation:self];
         NSLog(@"Exception from login api:%@",exception);
     }
-    
+
 }
 #pragma Storing data in Db
 -(void)calling_the_Company_API
