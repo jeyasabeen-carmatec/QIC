@@ -12,6 +12,7 @@
 		D0025575207732BE0059A349 /* favourites_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0025573207732BE0059A349 /* favourites_cell.xib */; };
 		D002557920775CF90059A349 /* Profile_langugage_cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D002557820775CF90059A349 /* Profile_langugage_cell.m */; };
 		D002557D207773690059A349 /* TXT_placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D002557C207773690059A349 /* TXT_placeholder.m */; };
+		D006127F20A0508700B6C649 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D006127E20A0508700B6C649 /* CFNetwork.framework */; };
 		D00C472C209B2BE700312CFA /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C472B209B2BE700312CFA /* NewRelicAgent.framework */; };
 		D00C472E209B2BFA00312CFA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C472D209B2BFA00312CFA /* CoreTelephony.framework */; };
 		D00C4730209B2C0600312CFA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C472F209B2C0600312CFA /* SystemConfiguration.framework */; };
@@ -150,6 +151,7 @@
 		D002557820775CF90059A349 /* Profile_langugage_cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile_langugage_cell.m; sourceTree = "<group>"; };
 		D002557B207773690059A349 /* TXT_placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXT_placeholder.h; sourceTree = "<group>"; };
 		D002557C207773690059A349 /* TXT_placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXT_placeholder.m; sourceTree = "<group>"; };
+		D006127E20A0508700B6C649 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D00C472B209B2BE700312CFA /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		D00C472D209B2BFA00312CFA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D00C472F209B2C0600312CFA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -334,6 +336,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D006127F20A0508700B6C649 /* CFNetwork.framework in Frameworks */,
 				D00C4734209B2C2100312CFA /* libz.tbd in Frameworks */,
 				D00C4732209B2C1400312CFA /* libc++.tbd in Frameworks */,
 				D00C4730209B2C0600312CFA /* SystemConfiguration.framework in Frameworks */,
@@ -349,6 +352,7 @@
 		016ABE74970599615BE0A7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D006127E20A0508700B6C649 /* CFNetwork.framework */,
 				D00C4733209B2C2100312CFA /* libz.tbd */,
 				D00C4731209B2C1300312CFA /* libc++.tbd */,
 				D00C472B209B2BE700312CFA /* NewRelicAgent.framework */,

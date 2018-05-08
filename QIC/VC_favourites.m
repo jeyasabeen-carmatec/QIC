@@ -97,8 +97,8 @@
         NSString *str = @"%";
         float str_va = [str_dicount floatValue];
         str_dicount = [NSString stringWithFormat:@"%.f",str_va];
-        str_disc = @"coverage";
-        str_dicount = [NSString stringWithFormat:@"%@%@\n%@",str_dicount,str,str_disc];
+        str_disc = @"Save";
+        str_dicount = [NSString stringWithFormat:@"%@\n%@%@",str_disc,str_dicount,str];
     }
     else{
         str_dicount = [NSString stringWithFormat:@"%@",str_dicount];
@@ -124,7 +124,7 @@
         float size;
         if(result.height <= 480)
         {
-            size = 12.0;
+            size = 11.0;
         }
         else if(result.height <= 568)
         {
@@ -146,7 +146,8 @@
         {
             NSLog(@"Exception for attributed text:%@",exception);
         }
-        
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0"];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@"0"];
         cell.LBL_price_amount.attributedText = attributedText;
     }
     else{

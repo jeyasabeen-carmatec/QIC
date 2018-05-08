@@ -129,16 +129,19 @@
 #pragma Convert NUll
 +(NSString *_Nullable)convert_NUll:(NSString *_Nullable)str
 {
-    NSString *str_null = [str stringByReplacingOccurrencesOfString:@"(null)" withString:@"Not mentioned"];
+    
+    NSString *str_null = str;
+    if([str_null isKindOfClass:[NSNull class]])
+    {
+        str_null = @"Not mentioned";
+    }
+    [str stringByReplacingOccurrencesOfString:@"(null)" withString:@"Not mentioned"];
     str_null = [str stringByReplacingOccurrencesOfString:@"<null>" withString:@"Not mentioned"];
     if(str.length < 1)
     {
      str_null = @"Not mentioned";
     }
-    if([str_null isKindOfClass:[NSNull class]])
-    {
-        str_null = @"Not mentioned";
-    }
+   
     return str_null;
 }
 

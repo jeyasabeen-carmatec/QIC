@@ -164,8 +164,8 @@
     if([str_dicount_type isEqualToString:@"Percentage"])
     {
         NSString *str = @"%";
-        NSString *str_disc = @"coverage";
-        str_dicount = [NSString stringWithFormat:@"%@%@\n%@",[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"],str,str_disc];
+        NSString *str_disc = @"Save";
+        str_dicount = [NSString stringWithFormat:@"%@\n%@%@",str_disc,[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"],str];
    
     
     
@@ -208,7 +208,8 @@
             NSLog(@"Exception for attributed text:%@",exception);
         }
 
-        
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0"];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@"0"];
         cell.LBL_discount.attributedText = attributedText;
     }
     else{

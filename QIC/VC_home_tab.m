@@ -310,7 +310,7 @@
         _LBL_provider_header_label.text = str_providers;
     }
     
-    NSString *str_offer_header =@"BEST COVERAGE";
+    NSString *str_offer_header =@"BEST OFFERS";
     NSString *str_offer_sub_header_name = @"This is showing the Offers";
     
     NSString *str_offers = [NSString  stringWithFormat:@"%@\n%@",str_offer_header,str_offer_sub_header_name];
@@ -551,12 +551,12 @@ else if(collectionView == _collection_offers)
         if([str_dicount_type isEqualToString:@"Percentage"])
         {
             NSString *str = @"%";
-            str_dicount = [NSString stringWithFormat:@"%@\nupto %@%@ coverage",str_offer_name,str_dicount,str];
+            str_dicount = [NSString stringWithFormat:@"%@\nSave upto %@%@",str_offer_name,str_dicount,str];
             
             
         }
         else{
-            str_dicount = [NSString stringWithFormat:@"%@\nupto %@ coverage",str_offer_name,str_dicount];
+            str_dicount = [NSString stringWithFormat:@"%@\nSave upto %@",str_offer_name,str_dicount];
 ;
             
         }

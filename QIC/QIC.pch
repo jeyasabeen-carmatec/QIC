@@ -8,7 +8,6 @@
 
 #ifndef QIC_pch
 #define QIC_pch
-
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
@@ -28,7 +27,6 @@
 
 
 //Staging
-
 
 //#define SERVER_URL @"http://104.37.188.213/QIC/apis/"
 //#define STATCI_URL @"http://104.37.188.213/QIC/"

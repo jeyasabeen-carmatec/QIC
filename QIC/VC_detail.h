@@ -52,5 +52,8 @@
 
 @property(nonatomic,weak) IBOutlet UILabel *LBL_header;
 
+#pragma Empty view
+@property(nonatomic,weak) IBOutlet UIView *VW_empty;
+
 
 @end

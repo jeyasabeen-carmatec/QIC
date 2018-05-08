@@ -313,16 +313,18 @@
     @try
     {
 
-        NSDictionary *headers = @{ @"username": @"f181ac8c-f294-46c9-9c34-e33c3cf09e04",
-                                   @"password": @"a8cce63d-6575-47fc-bc22-561fd8c2ad93",
-                                   @"Content-Type": @"application/json",
-                                   @"Authorization": @"Basic ZjE4MWFjOGMtZjI5NC00NmM5LTljMzQtZTMzYzNjZjA5ZTA0OmE4Y2NlNjNkLTY1NzUtNDdmYy1iYzIyLTU2MWZkOGMyYWQ5Mw==",
-                                   @"Cache-Control": @"no-cache",
-                                   @"Postman-Token": @"187dcf1a-ed17-d8d6-34dd-c64ce78df93e" };
+//        NSDictionary *headers = @{ @"username": @"f181ac8c-f294-46c9-9c34-e33c3cf09e04",
+//                                   @"password": @"a8cce63d-6575-47fc-bc22-561fd8c2ad93",
+//                                   @"Content-Type": @"application/json",
+//                                   @"Authorization": @"Basic ZjE4MWFjOGMtZjI5NC00NmM5LTljMzQtZTMzYzNjZjA5ZTA0OmE4Y2NlNjNkLTY1NzUtNDdmYy1iYzIyLTU2MWZkOGMyYWQ5Mw==",
+//                                   @"Cache-Control": @"no-cache",
+//                                   @"Postman-Token": @"187dcf1a-ed17-d8d6-34dd-c64ce78df93e" };
         NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
-    NSString *url_str = [NSString stringWithFormat:@"https://www.api.qic-insured.com/anaya-mobile/memberPortalLogin?company=001"];
-    NSDictionary *parameters = @{@"memberId":str_QID,@"phone":@"33156672"};
-        [APIHelper login_postServiceCall:url_str andParams:parameters:headers completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+    NSString *url_str = [NSString stringWithFormat:@"%@login",SERVER_URL];
+     //   NSString *str_Phone =[NSString stringWithFormat:@"%@",_TXT_password.text];
+    NSDictionary *parameters = @{@"memberId":str_QID};
+        [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+
 
         if(error)
         {
@@ -332,7 +334,7 @@
         }
         if(data)
         {
-            NSDictionary *TEMP_dict = data;
+            NSDictionary *TEMP_dict = [data valueForKey:@"data"];
             NSLog(@"The login customer Data:%@",TEMP_dict);
              [APIHelper stop_activity_animation:self];
 
@@ -425,6 +427,7 @@
                 {
                     [[NSUserDefaults standardUserDefaults]  setValue:str_count forKey:@"wish_count"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
+                    
                     dispatch_async(dispatch_get_main_queue(), ^{
                     [self performSegueWithIdentifier:@"login_home" sender:self];
                         

@@ -135,21 +135,44 @@
     
     [_TBL_offers reloadData];
     
-    frameset = _TBL_offers.frame;
-    frameset.origin.x = _VW_segment.frame.origin.x;
-    frameset.origin.y = _VW_segment.frame.origin.y + _VW_segment.frame.size.height + 10;
-    frameset.size.height = _TBL_offers.frame.origin.y + _TBL_offers.contentSize.height+10;
-    frameset.size.width = _VW_segment.frame.size.width;
-    _TBL_offers.frame = frameset;
-    
-    [self.VW_main addSubview:_TBL_offers];
-    
+    if([[jsonresponse_DIC valueForKey:@"Services"] count]>0)
+    {
+        frameset = _TBL_offers.frame;
+        frameset.origin.x = _VW_segment.frame.origin.x;
+        frameset.origin.y = _VW_segment.frame.origin.y + _VW_segment.frame.size.height + 10;
+        frameset.size.height = _TBL_offers.frame.origin.y + _TBL_offers.contentSize.height+10;
+        frameset.size.width = _VW_segment.frame.size.width;
+        _TBL_offers.frame = frameset;
+        
+        [self.VW_main addSubview:_TBL_offers];
+        
+    }
+    else{
+        _VW_empty.hidden = NO;
+         frameset = _VW_empty.frame;
+        frameset.origin.x = _VW_segment.frame.origin.x;
+        frameset.origin.y = _VW_segment.frame.origin.y + _VW_segment.frame.size.height + 10;
+        frameset.size.width = _sub_VW_main.frame.size.width;
+        frameset.size.height = 200;
+        _VW_empty.frame= frameset;
+        [self.VW_main addSubview:_VW_empty];
+    }
+   
     
      frameset = _mapView.frame;
-    frameset.origin.x = _TBL_offers.frame.origin.x;
-    frameset.origin.y = _TBL_offers.frame.origin.y;
-    frameset.size.width = _TBL_offers.frame.size.width;
-    frameset.size.height = 400;
+    if([[jsonresponse_DIC valueForKey:@"Services"] count]>0)
+    {
+        frameset.origin.x = _TBL_offers.frame.origin.x;
+        frameset.origin.y = _TBL_offers.frame.origin.y;
+        frameset.size.width = _TBL_offers.frame.size.width;
+    }
+    else{
+        frameset.origin.x = _VW_empty.frame.origin.x;
+        frameset.origin.y = _VW_empty.frame.origin.y;
+        frameset.size.width = _VW_empty.frame.size.width;
+       }
+   
+      frameset.size.height = 400;
     _mapView.frame = frameset;
     [self.VW_main addSubview:_mapView];
     _mapView.hidden = YES;
@@ -157,6 +180,8 @@
     
     frameset = _BTN_get_direction.frame;
     frameset.origin.x = _mapView.frame.origin.x + _mapView.frame.size.width - _BTN_get_direction.frame.size.width - 20;
+    
+   
     frameset.origin.y = _mapView.frame.origin.y + _mapView.frame.size.height - 40;
     _BTN_get_direction.frame = frameset;
   
@@ -168,7 +193,16 @@
 
     
     frameset = _VW_main.frame;
-    frameset.size.height = _TBL_offers.frame.origin.y + _TBL_offers.contentSize.height+10;
+    if([[jsonresponse_DIC valueForKey:@"Services"] count]>0)
+    {
+        frameset.size.height = _TBL_offers.frame.origin.y + _TBL_offers.contentSize.height+10;
+
+    }
+    else
+    {
+        frameset.size.height = _VW_empty.frame.origin.y + _VW_empty.frame.size.height;
+
+     }
     frameset.size.width = _scroll_contents.frame.size.width;
     _VW_main.frame = frameset;
     
@@ -242,10 +276,24 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 {
     if(segmentedControl4.selectedSegmentIndex == 0)
     {
+      if([[jsonresponse_DIC valueForKey:@"Services"] count]>0)
+      {
         [self Offers_view_showing];
+          _VW_empty.hidden = YES;
+      }
+      else{
+          _mapView.hidden = YES;
+          _VW_empty.hidden = NO;
+          _BTN_get_direction.hidden = YES;
+          scroll_ht =  _VW_empty.frame.origin.y + _VW_empty.frame.size.height;
+          
+          [self viewDidLayoutSubviews];
+       
+      }
     }
     else
     {
+        _VW_empty.hidden = YES;
         [self map_view_calling];
     }
     
@@ -254,6 +302,7 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
 
 -(void)Offers_view_showing
 {
+    
     _BTN_get_direction.hidden = YES;
     [_TBL_offers reloadData];
     _mapView.hidden = YES;
@@ -306,7 +355,30 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
     _VW_main.frame = frameset;
     
     frameset = _BTN_get_direction.frame;
-    frameset.origin.y = _mapView.frame.origin.y + _mapView.frame.size.height - 30;
+    float ht = 30;
+    {
+        
+        switch ((int)[[UIScreen mainScreen] nativeBounds].size.height) {
+                
+            case 1136:
+                ht =30;
+                break;
+            case 1334:
+                ht = 30;
+                break;
+            case  2208:
+                ht =40;
+                break;
+            case 2436:
+                ht = 40;
+                break;
+            default:
+                ht = 30;
+                
+        }
+    }
+    
+    frameset.origin.y = _mapView.frame.origin.y + _mapView.frame.size.height - ht;
     _BTN_get_direction.frame = frameset;
     
     scroll_ht =  _VW_main.frame.origin.y + _VW_main.frame.size.height;
@@ -407,7 +479,23 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
     else{
         str_dicount = [NSString stringWithFormat:@"%@",str_dicount];
     }
+    @try
+    {
+        if([str_dicount isKindOfClass:[NSNull class]])
+        {
+            str_dicount = @"0";
+        }
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0"];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@"0"];
+
     [cell.BTN_discout setTitle:str_dicount forState:UIControlStateNormal];
+    }
+    @catch(NSException *exception)
+    {
+        str_dicount = @"0";
+        [cell.BTN_discout setTitle:str_dicount forState:UIControlStateNormal];
+
+    }
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
