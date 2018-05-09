@@ -1039,6 +1039,7 @@ else{
     [APIHelper stop_activity_animation:self];
     if(aData)
     {
+        [self.delegate hide_over_lay];
         JSON_response_dic=(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
         NSLog(@"%@",JSON_response_dic);
         

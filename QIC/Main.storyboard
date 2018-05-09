@@ -144,7 +144,7 @@
                                         <inset key="imageInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-5"/>
                                     </tabBarItem>
-                                    <tabBarItem title="Covers" image="offer.png" id="HNz-eI-HM8">
+                                    <tabBarItem title="Offers" image="offer.png" id="HNz-eI-HM8">
                                         <inset key="imageInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-5"/>
                                     </tabBarItem>

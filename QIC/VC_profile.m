@@ -119,6 +119,8 @@
     _VW_IMG_background.layer.cornerRadius = _VW_IMG_background.frame.size.width/2;
     _IMG_prfoile_image.layer.cornerRadius = _IMG_prfoile_image.frame.size.width/2;
     
+     [self.delegate hide_over_lay];
+    
 }
 -(void)viewDidLayoutSubviews
 {
@@ -158,51 +160,10 @@
     if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Depenedents"] || [[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Change language"])
     {
          cell.BTN_arrow.hidden = NO;
-       // cell.selectionStyle = UITableViewCellSelectionStyleGray;
-
+      
     }
     
     
-//    if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Change language"])
-//    {
-//        Profile_langugage_cell *cell = (Profile_langugage_cell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-//
-//        
-//        NSArray *nib;
-//        nib = [[NSBundle mainBundle] loadNibNamed:@"profile_cell" owner:self options:nil];
-//        cell = [nib objectAtIndex:1];
-//       
-//        
-//        Lang_picker = [[UIPickerView alloc] init];
-//        Lang_picker.delegate = self;
-//        Lang_picker.dataSource = self;
-//        UIToolbar* conutry_close = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-//        conutry_close.barStyle = UIBarStyleBlackTranslucent;
-//        [conutry_close sizeToFit];
-//        
-//        UIButton *close=[[UIButton alloc]init];
-//        close.frame=CGRectMake(conutry_close.frame.origin.x -20, 0, 100, conutry_close.frame.size.height);
-//        [close setTitle:@"Close" forState:UIControlStateNormal];
-//        [close addTarget:self action:@selector(close_action) forControlEvents:UIControlEventTouchUpInside];
-//        [conutry_close addSubview:close];
-//        
-//     
-//        
-//        UIButton *done=[[UIButton alloc]init];
-//        done.frame=CGRectMake(conutry_close.frame.size.width - 100, 0, 100, conutry_close.frame.size.height);
-//        [done setTitle:@"Done" forState:UIControlStateNormal];
-//        [done addTarget:self action:@selector(done_action) forControlEvents:UIControlEventTouchUpInside];
-//        [conutry_close addSubview:done];
-//        
-//        done.tag = indexPath.row;
-//        
-//        cell.LBL_name.inputAccessoryView=conutry_close;
-//        cell.LBL_name.inputView = Lang_picker;
-//        cell.LBL_name.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"language-name"];
-//        cell.LBL_name.tintColor=[UIColor clearColor];
-//
-//        
-//    }
 
     
        return cell;

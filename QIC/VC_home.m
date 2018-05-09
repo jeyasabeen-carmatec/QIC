@@ -26,6 +26,8 @@
 @interface VC_home ()<UITabBarDelegate>
 {
     float scroll_ht;
+    UIView *vw_over_lay;
+    
     
 }
 
@@ -40,6 +42,10 @@
     
     /********************* setting the delegates ***************************/
     scroll_ht = _VW_main.frame.size.height;
+    vw_over_lay = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    vw_over_lay.backgroundColor = [UIColor clearColor];
+    [self.TAB_menu addSubview:vw_over_lay];
+    vw_over_lay.hidden = YES;
     
     [self highlight_IMAGE];
     [self tab_BAR_set_UP];
@@ -99,19 +105,24 @@
     if([item.title isEqualToString:@"Home"])
     {
         /************** calling home view  ******************/
+       
+        
+         vw_over_lay.hidden = NO;
         
         [[NSUserDefaults standardUserDefaults] setValue:@"home" forKey:@"tab_param"];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
         
         [self HOme_view_calling];
-
+       
+        
     }
     
     else  if([item.title isEqualToString:@"Providers"])
     {
         
         /************** calling providers view  ******************/
+         vw_over_lay.hidden = NO;
         
         [[NSUserDefaults standardUserDefaults] setValue:@"providers" forKey:@"tab_param"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -119,40 +130,45 @@
 
         [self providers_view_calling];
         
-        
+     
         
     }
     else  if([item.title isEqualToString:@"News"])
     {
         /************** calling News view  ******************/
         
+        vw_over_lay.hidden = NO;
         [[NSUserDefaults standardUserDefaults] setValue:@"news" forKey:@"tab_param"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
 
 
         [self news_VIEW_calling];
-        
+    
     }
-    else  if([item.title isEqualToString:@"Covers"])
+    else  if([item.title isEqualToString:@"Offers"])
     {
         /************** calling Offers view  ******************/
+        vw_over_lay.hidden = NO;
         
         [[NSUserDefaults standardUserDefaults] setValue:@"offers" forKey:@"tab_param"];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
 
         [self offers_view_calling];
+     
     }
     else  if([item.title isEqualToString:@"Profile"])
     {
         /************** creating objet for Profile view controller and and grabbing that view  ******************/
         
+         vw_over_lay.hidden = NO;
+        
         [[NSUserDefaults standardUserDefaults] setValue:@"profile" forKey:@"tab_param"];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
         [self Profile_VIEW_celling];
-        
+     
     }
 
     }
@@ -758,6 +774,11 @@
         [self providers_view_calling];
     }
    
+}
+#pragma hide_over_lay
+-(void)hide_over_lay
+{
+    vw_over_lay.hidden = YES;
 }
 /*
 #pragma mark - Navigation

@@ -161,6 +161,7 @@
         
         if(aData)
         {
+             [self.delegate hide_over_lay];
             jsonresponse_DIC =(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
             NSLog(@"%@",jsonresponse_DIC);
             [_TBL_list reloadData];

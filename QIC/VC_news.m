@@ -234,8 +234,10 @@
         if(aData)
         {
           jsonresponse_DIC =(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
+             [self.delegate hide_over_lay];
             if([[jsonresponse_DIC valueForKey:@"newsList"] count]>=1)
             {
+                
             NSLog(@"%@",jsonresponse_DIC);
              _TBL_list.hidden = NO;
             ARR_total_data = [jsonresponse_DIC valueForKey:@"newsList"];

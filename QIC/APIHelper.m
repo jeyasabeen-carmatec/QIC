@@ -86,6 +86,7 @@
         
     }
 }
+
 #pragma stop the animation
 +(void)stop_activity_animation:(UIViewController *)my_controller
 {
@@ -109,6 +110,8 @@
         
     }
 }
+
+
 #pragma ALert view creating
 
 +(UIAlertView *)createaAlertWithMsg:(NSString *)msg andTitle:(NSString *)title{

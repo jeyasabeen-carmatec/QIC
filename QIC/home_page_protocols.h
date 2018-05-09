@@ -65,5 +65,6 @@
 #pragma search_page_actions
 -(void)provider_search_back:(NSString *)str_back;
 
-
+#pragma close_delgate
+-(void)hide_over_lay;
 @end
