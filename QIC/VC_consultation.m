@@ -105,6 +105,12 @@
     cell.contentView.layer.cornerRadius = 2.0f;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
+        NSString *str_image = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"logo"]]];
+        str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        
+        [cell.IMG_provider sd_setImageWithURL:[NSURL URLWithString:str_image]
+                          placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+        
     NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_name"]]];
     str_name = [str_name uppercaseString];
     
@@ -133,26 +139,21 @@
     cell.VW_back_ground.layer.cornerRadius = 2.0f;
     cell.IMG_title.layer.masksToBounds = YES;
         
-      
+        cell.IMG_provider.layer.cornerRadius = cell.IMG_provider.frame.size.width/2;
+        cell.IMG_provider.layer.masksToBounds = YES;
     
     [cell.BTN_favourite addTarget:self action:@selector(wish_list_action:) forControlEvents:UIControlEventTouchUpInside];
     cell.BTN_favourite.tag = indexPath.section;
     
     cell.BTN_favourite.titleLabel.textColor = [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0];
     
-        cell.LBL_cost.layer.cornerRadius = 3.0f;
-        cell.LBL_cost.layer.borderWidth = 1.0f;
-        cell.LBL_cost.layer.borderColor = cell.LBL_name.textColor.CGColor;
-
-    
-    
-     //   [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
         if([[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"fav_status"] isEqualToString:@"No"])
         {
            [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
         }
-        else{
-            //
+        else
+        {
+            
             [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
 
         }
@@ -160,7 +161,7 @@
     
     
     NSString *str_dicount_type = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"discount_type"]];
-           NSString *str_dicount = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"]];
+           NSString *str_dicount = [NSString stringWithFormat:@"Save\n%@",[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"]];
     if([str_dicount_type isEqualToString:@"Percentage"])
     {
         NSString *str = @"%";
@@ -215,16 +216,15 @@
     else{
         cell.LBL_discount.text = str_addres;
     }
-        cell.LBL_cost.text = @"";
-        cell.LBL_cost.hidden= YES;
+       
         
     }
     else{
-        cell.LBL_cost.hidden= NO;
+       
 
         str_dicount = [NSString stringWithFormat:@"%@",str_dicount];
-        cell.LBL_cost.text = str_dicount;
-        cell.LBL_discount.text = @"";
+        cell.LBL_discount.text = str_dicount;
+        
            }
         NSString *str_phone = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"contact_no"]];
         cell.LBL_phone.text = [NSString stringWithFormat:@"Ph : %@",[APIHelper convert_NUll:str_phone]];
@@ -328,8 +328,8 @@
 -(void)wish_list_action:(UIButton *)sender
 {
     // [APIHelper start_animation:self];
-    
-    NSString *str_URL = [NSString stringWithFormat:@"%@addToFav",SERVER_URL];
+      NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@addToFav",str_image_base_URl];
     @try
     {
        NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
@@ -337,7 +337,7 @@
         
         NSString *str_service_ID = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
         
-        NSDictionary *TEMP_dict = @{@"provider_id":provider_ID,@"customer_id":str_member_ID,@"service_id":str_service_ID};
+        NSDictionary *TEMP_dict = @{@"provider_id":provider_ID,@"customer_id":str_member_ID,@"service_id":str_service_ID,@"type":@"offers"};
         
         NSDictionary *parameters = TEMP_dict;
         [APIHelper postServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
@@ -436,13 +436,14 @@
 #pragma Delte Item from wish list 
 -(void)delete_ITEM_from_Wish_list:(NSString *)srm_provider_ID:(NSString *)service_ID
 {
-    NSString *str_URL = [NSString stringWithFormat:@"%@delFromFav",SERVER_URL];
+     NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@delFromFav",str_image_base_URl];
     
     @try
     {
         NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
         
-        NSDictionary *TEMP_dict = @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"service_id":service_ID};
+        NSDictionary *TEMP_dict = @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"service_id":service_ID,@"type":@"offers"};
         
         NSDictionary *parameters = TEMP_dict;
         [APIHelper updateServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
@@ -485,8 +486,8 @@
         }
          @catch(NSException *exception)
          {
-             [APIHelper stop_activity_animation:self];
-             NSLog(@"Exception from login api:%@",exception);
+             [APIHelper stop_activity_animation:self];   
+             
          }
          
          
@@ -503,7 +504,8 @@
         NSError *error;
         NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
         NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
-        URL_STR = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/1/%@",SERVER_URL,str_id,str_member_ID];
+          NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+        URL_STR = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/1/%@",str_image_base_URl,str_id,str_member_ID];
         URL_STR = [URL_STR stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
 
         
@@ -588,13 +590,6 @@
         if([int_VAL intValue] == [arr_total_data count])
         {
             [APIHelper stop_activity_animation:self];
-            
-            NSString *str_status = @"Sorry no more offers found";
-            NSString *str_ok = @"Ok";
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str_status delegate:self cancelButtonTitle:nil otherButtonTitles:str_ok, nil];
-            [alert show];
-            
             
             [self performSelector:@selector(finishLoadMore) withObject:nil afterDelay:0.01];
             
@@ -709,8 +704,8 @@
             NSHTTPURLResponse *response = nil;
             NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"service_ID"]];
              NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
-            
-            NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%@/%@/%@",SERVER_URL,str_id,@"1",str_member_ID,_TXT_search.text];
+             NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+            NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%@/%@/%@",str_image_base_URl,str_id,@"1",str_member_ID,_TXT_search.text];
             str_url = [str_url stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
             URL_STR = [URL_STR stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
 

@@ -41,7 +41,7 @@
     {
         [self.delegate static_page_back:@"static_page"];
     }//NEWS DETAIL
-    else if([_LBL_header.text isEqualToString:@"NEWS"])
+    else if([_LBL_header.text isEqualToString:@"ARTICLES"])
     {
     [self.delegate static_page_back:@"news"];
     }

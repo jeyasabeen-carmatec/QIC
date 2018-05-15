@@ -71,6 +71,14 @@
     _collection_offers.layer.masksToBounds = YES;
 
     [self.BTN_favourite setTitle:[APIHelper set_count:[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"]] forState:UIControlStateNormal];
+    
+    _collection_providers.layer.cornerRadius = 20.0f;
+    _collection_providers.layer.masksToBounds =  YES;
+    _collection_offers.layer.cornerRadius = 20.0f;
+    _collection_offers.layer.masksToBounds =  YES;
+    _collection_news.layer.cornerRadius = 20.0f;
+    _collection_news.layer.masksToBounds =  YES;
+    
 
 
    
@@ -283,85 +291,85 @@
 
     
     NSString *str_header_name =@"TOP 5 PROVIDERS";
-    NSString *str_sub_header_name = @"This is showing the Top Providers";
+   // NSString *str_sub_header_name = @"This is showing the Top Providers";
     
-    NSString *str_providers = [NSString  stringWithFormat:@"%@\n%@",str_header_name,str_sub_header_name];
-    
-    if ([_LBL_provider_header_label respondsToSelector:@selector(setAttributedText:)])
-    {
-        
-        
-        
-        NSDictionary *attribs = @{
-                                  NSForegroundColorAttributeName:_LBL_news_header_label.textColor,
-                                  NSFontAttributeName: _LBL_news_header_label.font,
-                                  };
-        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_providers attributes:attribs];
-     
-
-        
-        
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:ht_sub_header],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_providers rangeOfString:str_sub_header_name] ];
-        
-        
-        _LBL_provider_header_label.attributedText = attributedText;
-    }
-    else{
-        _LBL_provider_header_label.text = str_providers;
-    }
-    
+    NSString *str_providers = [NSString  stringWithFormat:@"%@",str_header_name];
+    _LBL_provider_header_label.text = str_providers;
+//    if ([_LBL_provider_header_label respondsToSelector:@selector(setAttributedText:)])
+//    {
+//
+//
+//
+//        NSDictionary *attribs = @{
+//                                  NSForegroundColorAttributeName:_LBL_news_header_label.textColor,
+//                                  NSFontAttributeName: _LBL_news_header_label.font,
+//                                  };
+//        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_providers attributes:attribs];
+//
+//
+//
+//
+//        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:ht_sub_header],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_providers rangeOfString:str_sub_header_name] ];
+//
+//
+//        _LBL_provider_header_label.attributedText = attributedText;
+//    }
+//    else{
+//        _LBL_provider_header_label.text = str_providers;
+//    }
+//
     NSString *str_offer_header =@"BEST OFFERS";
-    NSString *str_offer_sub_header_name = @"This is showing the Offers";
+    //NSString *str_offer_sub_header_name = @"This is showing the Offers";
     
-    NSString *str_offers = [NSString  stringWithFormat:@"%@\n%@",str_offer_header,str_offer_sub_header_name];
+    NSString *str_offers = [NSString  stringWithFormat:@"%@",str_offer_header];
+    _LBL_offer_header_label.text = str_offers;
+//    if ([_LBL_offer_header_label respondsToSelector:@selector(setAttributedText:)])
+//    {
+//
+//
+//
+//        NSDictionary *attribs = @{
+//                                  NSForegroundColorAttributeName:_LBL_news_header_label.textColor,
+//                                  NSFontAttributeName: _LBL_news_header_label.font,
+//                                  };
+//        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_offers attributes:attribs];
+//
+//
+//        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:ht_sub_header],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_offers rangeOfString:str_offer_sub_header_name] ];
+//
+//
+//        _LBL_offer_header_label.attributedText = attributedText;
+//    }
+//    else{
+//        _LBL_offer_header_label.text = str_offers;
+//    }
+    NSString *str_news_header =@"LATEST ARTICLES";
+   // NSString *str_news_sub_header_name = @"This is showing the News";
     
-    if ([_LBL_offer_header_label respondsToSelector:@selector(setAttributedText:)])
-    {
-        
-        
-        
-        NSDictionary *attribs = @{
-                                  NSForegroundColorAttributeName:_LBL_news_header_label.textColor,
-                                  NSFontAttributeName: _LBL_news_header_label.font,
-                                  };
-        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_offers attributes:attribs];
-        
-        
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:ht_sub_header],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_offers rangeOfString:str_offer_sub_header_name] ];
-        
-        
-        _LBL_offer_header_label.attributedText = attributedText;
-    }
-    else{
-        _LBL_offer_header_label.text = str_offers;
-    }
-    NSString *str_news_header =@"LATEST NEWS";
-    NSString *str_news_sub_header_name = @"This is showing the News";
-    
-    NSString *str_news = [NSString  stringWithFormat:@"%@\n%@",str_news_header,str_news_sub_header_name];
-    
-    if ([_LBL_news_header_label respondsToSelector:@selector(setAttributedText:)])
-    {
-        
-        
-        
-        NSDictionary *attribs = @{
-                                  NSForegroundColorAttributeName:_LBL_news_header_label.textColor,
-                                  NSFontAttributeName: _LBL_news_header_label.font,
-                                  };
-        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_news attributes:attribs];
-        
-       
-        
-        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:ht_sub_header],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_news rangeOfString:str_news_sub_header_name] ];
-        
-        
-        _LBL_news_header_label.attributedText = attributedText;
-    }
-    else{
-        _LBL_news_header_label.text = str_news;
-    }
-    }
+    NSString *str_news = [NSString  stringWithFormat:@"%@",str_news_header];
+    _LBL_news_header_label.text = str_news;
+//    if ([_LBL_news_header_label respondsToSelector:@selector(setAttributedText:)])
+//    {
+//
+//
+//
+//        NSDictionary *attribs = @{
+//                                  NSForegroundColorAttributeName:_LBL_news_header_label.textColor,
+//                                  NSFontAttributeName: _LBL_news_header_label.font,
+//                                  };
+//        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_news attributes:attribs];
+//
+//
+//
+//        [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:ht_sub_header],NSForegroundColorAttributeName:[UIColor blackColor],}range:[str_news rangeOfString:str_news_sub_header_name] ];
+//
+//
+//        _LBL_news_header_label.attributedText = attributedText;
+//    }
+//    else{
+//
+//    }
+   }
     @catch(NSException *exception)
     {
         
@@ -510,8 +518,8 @@ if (collectionView == _collection_providers)
     
     str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:str_name]];
     img_cell.LBL_name.text =  str_name;
-        img_cell.IMG_name.layer.cornerRadius = 20.0;
-        img_cell.IMG_name.layer.masksToBounds = YES;
+       // img_cell.IMG_name.layer.cornerRadius = 20.0;
+       // img_cell.IMG_name.layer.masksToBounds = YES;
         img_cell.LBL_name.layer.cornerRadius = 10.0;
         img_cell.LBL_name.layer.masksToBounds = YES;
        
@@ -531,12 +539,14 @@ else if(collectionView == _collection_offers)
     @try
     {
     home_cell *img_cell = (home_cell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"home_cell_offers" forIndexPath:indexPath];
-    img_cell.IMG_name.layer.cornerRadius = 20.0;
-    img_cell.IMG_name.layer.masksToBounds = YES;
+   // img_cell.IMG_name.layer.cornerRadius = 20.0;
+    //img_cell.IMG_name.layer.masksToBounds = YES;
         img_cell.LBL_name.layer.cornerRadius = 10.0;
         img_cell.LBL_name.layer.masksToBounds = YES;
 
-        NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"image"]];
+        NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"]];
+        
+        NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",str_image_base_URl,[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"image"]];
         str_IMG_URL = [str_IMG_URL stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 
 
@@ -582,7 +592,8 @@ else{
     @try
     {
 
-    NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"image"]];
+    NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"]];
+    NSString *str_IMG_URL = [NSString stringWithFormat:@"%@%@",str_image_base_URl,[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"image"]];
     str_IMG_URL = [str_IMG_URL stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 
     [img_cell.IMG_name sd_setImageWithURL:[NSURL URLWithString:str_IMG_URL]
@@ -590,8 +601,8 @@ else{
     NSString *str_time = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"title"]]];
     img_cell.LBL_name.text =  [NSString stringWithFormat:@"%@",str_time];
     
-    img_cell.IMG_name.layer.cornerRadius = 20.0;
-    img_cell.IMG_name.layer.masksToBounds = YES;
+  //  img_cell.IMG_name.layer.cornerRadius = 20.0;
+  //  img_cell.IMG_name.layer.masksToBounds = YES;
     img_cell.LBL_name.layer.cornerRadius = 10.0;
     img_cell.LBL_name.layer.masksToBounds = YES;
     
@@ -645,10 +656,12 @@ else{
         [self.delegate consultation_offers:@""];
     }
     else{
-        NSString *str_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"url_key"]];
+        
+         NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"]];
+        NSString *str_URL = [NSString stringWithFormat:@"%@%@",str_image_base_URl,[[[JSON_response_dic valueForKey:@"news_list"] objectAtIndex:indexPath.row] valueForKey:@"url_key"]];
         [[NSUserDefaults standardUserDefaults]  setValue:str_URL forKey:@"Static_URL"];
         
-        [[NSUserDefaults standardUserDefaults]  setValue:@"TOP NEWS" forKey:@"header_val"];
+        [[NSUserDefaults standardUserDefaults]  setValue:@"TOP ARTICLES" forKey:@"header_val"];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
         [self.delegate calling_news_view:@"news_detail"];
@@ -829,6 +842,7 @@ else{
         {
             newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
             INDX_selected = newIndexPath;
+            
         }
         [_collection_providers scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:INDX_selected.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     }
@@ -1026,7 +1040,8 @@ else{
     {
     NSHTTPURLResponse *response = nil;
     NSError *error;
-    NSString *URL_STR = [NSString stringWithFormat:@"%@home",SERVER_URL];
+    NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *URL_STR = [NSString stringWithFormat:@"%@home",str_image_base_URl];
 
     NSURL *urlProducts=[NSURL URLWithString:URL_STR];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

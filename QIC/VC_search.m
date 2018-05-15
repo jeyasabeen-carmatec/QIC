@@ -158,8 +158,8 @@
         {
             NSError *error;
             NSHTTPURLResponse *response = nil;
-            
-            NSString *str_url = [NSString stringWithFormat:@"%@getProvidersBysearch/%@/%@",SERVER_URL,_TXT_search.text,@"1"];
+             NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+            NSString *str_url = [NSString stringWithFormat:@"%@getProvidersBysearch/%@/%@",str_image_base_URl,_TXT_search.text,@"1"];
             str_url = [str_url stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 
             

@@ -93,8 +93,8 @@
     }
     @try
     {
-        
-        NSString *str_image = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[ARR_total_data objectAtIndex:indexPath.section] valueForKey:@"image"]];
+          NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"]];
+        NSString *str_image = [NSString stringWithFormat:@"%@%@",str_image_base_URl,[[ARR_total_data objectAtIndex:indexPath.section] valueForKey:@"image"]];
         
         [cell.IMG_title sd_setImageWithURL:[NSURL URLWithString:str_image]
                              placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
@@ -115,7 +115,6 @@
     str = [str stringByReplacingOccurrencesOfString:@"/" withString:@"\n"];
     cell.LBL_address.text = str;
     cell.LBL_company.text = str_time;
-   // cell.IMG_title.image = [UIImage imageNamed:[arr_images objectAtIndex:indexPath.section]];
     
     }
     @catch(NSException *exception)
@@ -138,11 +137,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *str_URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"newsList"] objectAtIndex:indexPath.section] valueForKey:@"url_key"]];
+      NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"]];
+    
+    NSString *str_URL = [NSString stringWithFormat:@"%@%@",str_image_base_URl,[[[jsonresponse_DIC valueForKey:@"newsList"] objectAtIndex:indexPath.section] valueForKey:@"url_key"]];
     str_URL = [str_URL stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     [[NSUserDefaults standardUserDefaults]  setValue:str_URL forKey:@"Static_URL"];
     
-    [[NSUserDefaults standardUserDefaults]  setValue:@"NEWS" forKey:@"header_val"];
+    [[NSUserDefaults standardUserDefaults]  setValue:@"ARTICLES" forKey:@"header_val"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self.delegate static_page_view_call];
@@ -216,7 +217,8 @@
     {
         NSHTTPURLResponse *response = nil;
         NSError *error;
-        NSString *URL_ST = [NSString stringWithFormat:@"%@newsList/%@/1",SERVER_URL,@"0"];
+          NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+        NSString *URL_ST = [NSString stringWithFormat:@"%@newsList/%@/1",str_image_base_URl,@"0"];
         URL_ST = [URL_ST stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
 
         URL_ST = [URL_ST stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
@@ -322,49 +324,7 @@
     }
 
     
-//   @try
-//    {
-//    NSString *substring = [NSString stringWithString:_TXT_search.text];
-//    if(substring.length > 2)
-//    {
-//    NSArray *arr = [[jsonresponse_DIC valueForKey:@"newsList"] mutableCopy];
-//    
-//    
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF['title'] BEGINSWITH[c] %@",substring];
-//    NSArray *arr_lies;
-//    arr_lies = [arr filteredArrayUsingPredicate:predicate];//BEGINSWITH//CONTAINS
-//        [CPY_ARR addObjectsFromArray:ARR_total_data];
-//    [ARR_total_data removeAllObjects];
-//    [ARR_total_data addObjectsFromArray:arr_lies];
-//    
-//    if(ARR_total_data.count < 1)
-//    {
-//        _TBL_list.hidden = YES;
-//    }
-//    else{
-//        _TBL_list.hidden =NO;
-//        NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"title"
-//                                                                     ascending:YES];
-//        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
-//        NSArray *sortedArray = [ARR_total_data sortedArrayUsingDescriptors:sortDescriptors];
-//        [ARR_total_data removeAllObjects];
-//        
-//        [ARR_total_data addObjectsFromArray:sortedArray];
-//        
-//        [_TBL_list reloadData];
-//          }
-//    }
-//        else
-//        {
-//            
-//        }
-//    }
-//        @catch(NSException *exception)
-//        {
-//            
-//        }
-//    
-    
+
 
 }
 #pragma mark - Control datasource
@@ -404,13 +364,6 @@
         if([int_VAL intValue] == [ARR_total_data count])
         {
             [APIHelper stop_activity_animation:self];
-            
-            NSString *str_status = @"Sorry no more news found";
-            NSString *str_ok = @"Ok";
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str_status delegate:self cancelButtonTitle:nil otherButtonTitles:str_ok, nil];
-            [alert show];
-            
             
             [self performSelector:@selector(finishLoadMore) withObject:nil afterDelay:0.01];
             

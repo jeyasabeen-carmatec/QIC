@@ -15,9 +15,11 @@
 
 @property(nonatomic,weak) IBOutlet UIView *VW_main;
 @property(nonatomic,weak) IBOutlet UIView *VW_IMG_background;
-@property(nonatomic,weak) IBOutlet UIView *IMG_prfoile_image;
+@property(nonatomic,weak) IBOutlet UIImageView *IMG_prfoile_image;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_profile_name;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_mobile_number;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_camera;
+
 
 @property(nonatomic,weak) IBOutlet UITableView *TBL_profile;
 

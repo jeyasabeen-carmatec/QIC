@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "APIHelper.h"
 
-@interface ViewController ()<UITextFieldDelegate>
+@interface ViewController ()<UITextFieldDelegate,UIGestureRecognizerDelegate>
 
 @end
 
@@ -20,9 +20,12 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     /****************** Calling the set up view ***********************/
-
+    UITapGestureRecognizer *close_menu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close_keyboard)];
+    close_menu.delegate = self;
+    [_VW_center addGestureRecognizer:close_menu];
     [self setUP_VIEW];
     [self Checka_Version];
+    [self ALL_PATHS_API];
 }
 #pragma setting the view of the components
 
@@ -104,46 +107,20 @@
 {
     CGSize result = [[UIScreen mainScreen] bounds].size;
     
-    if(result.height <= 480)
-    {
+   
         [textField setTintColor:[UIColor colorWithRed:0.00 green:0.18 blue:0.35 alpha:1.0]];
         [UIView beginAnimations:nil context:NULL];
         self.view.frame = CGRectMake(0,-110,self.view.frame.size.width,self.view.frame.size.height);
         [UIView commitAnimations];
-
-    }
-    else if(result.height <= 568)
-    {
-        [textField setTintColor:[UIColor colorWithRed:0.00 green:0.18 blue:0.35 alpha:1.0]];
-        [UIView beginAnimations:nil context:NULL];
-        self.view.frame = CGRectMake(0,-110,self.view.frame.size.width,self.view.frame.size.height);
-        [UIView commitAnimations];
-
-    }
-    else
-    {
-    }
+    
   }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     CGSize result = [[UIScreen mainScreen] bounds].size;
-
-    if(result.height <= 480)
-    {
-        [UIView beginAnimations:nil context:NULL];
-        self.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
-        [UIView commitAnimations];
-    }
-    else if(result.height <= 568)
-    {
-        [UIView beginAnimations:nil context:NULL];
-        self.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
-        [UIView commitAnimations];
-    }
-    else
-    {
-    }
+   [UIView beginAnimations:nil context:NULL];
+   self.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
+    [UIView commitAnimations];
    
     
 }
@@ -166,6 +143,12 @@
             return NO;
     }
     return YES;
+}
+#pragma gesture closing
+-(void)close_keyboard
+{
+    [_TXT_uname resignFirstResponder];
+    [_TXT_password resignFirstResponder];
 }
 #pragma Validation checking
 
@@ -193,118 +176,6 @@
 }
 
 #pragma mark LOGIN action
-//#pragma mark - Button Actions
-//-(void) login_action
-//{
-//    @try
-//    {
-//    NSDictionary *headers = @{ @"username": @"f181ac8c-f294-46c9-9c34-e33c3cf09e04",
-//                               @"password": @"a8cce63d-6575-47fc-bc22-561fd8c2ad93",
-//                               @"Content-Type": @"application/json",
-//                               @"Authorization": @"Basic ZjE4MWFjOGMtZjI5NC00NmM5LTljMzQtZTMzYzNjZjA5ZTA0OmE4Y2NlNjNkLTY1NzUtNDdmYy1iYzIyLTU2MWZkOGMyYWQ5Mw==",
-//                               @"Cache-Control": @"no-cache",
-//                               @"Postman-Token": @"187dcf1a-ed17-d8d6-34dd-c64ce78df93e" };
-//    NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
-//    NSString *str_phone = [NSString stringWithFormat:@"%@",_TXT_password.text];
-//
-//    NSString *url_str = [NSString stringWithFormat:@"https://www.api.qic-insured.com/anaya-mobile/memberPortalLogin?company=001"];
-//    NSDictionary *parameters = @{@"memberId":str_QID,@"phone":str_phone};
-//
-//    NSError *error;
-//    NSError *err;
-//    NSHTTPURLResponse *response = nil;
-//
-//    NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:NSASCIIStringEncoding error:&err];
-//    NSURL *urlProducts=[NSURL URLWithString:url_str];
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//    [request setURL:urlProducts];
-//    [request setHTTPMethod:@"POST"];
-//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    [request setHTTPBody:postData];
-//    [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
-//    [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
-//    [request setAllHTTPHeaderFields:headers];
-//
-//    [request setHTTPShouldHandleCookies:NO];
-//    NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//    if (aData)
-//    {
-//        if (!aData)
-//        {
-//
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Connection Failed" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-//            [alert show];
-//        }
-//        else
-//        {
-//            NSMutableDictionary *json_DATA = (NSMutableDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
-//            if(json_DATA)
-//            {
-//            NSLog(@"The response %@",json_DATA);
-//                NSDictionary *TEMP_dict = json_DATA;
-//                NSLog(@"The login customer Data:%@",TEMP_dict);
-//                [APIHelper stop_activity_animation:self];
-//
-//                if([[TEMP_dict valueForKey:@"errMessage"] isEqualToString:@"Success"])
-//                {
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        NSMutableDictionary *dictMutable = [TEMP_dict mutableCopy];
-//                        [dictMutable removeObjectsForKeys:[TEMP_dict allKeysForObject:[NSNull null]]];
-//
-//                        NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
-//
-//                        NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//
-//                        NSDictionary *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
-//
-//                        NSString *str_ID = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"membershipNo"] ];
-//
-//                        [[NSUserDefaults standardUserDefaults] setValue:str_ID forKey:@"MEMBER_id"];
-//                        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
-//                        [[NSUserDefaults standardUserDefaults] synchronize];
-//                        //  [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
-//
-//                        [self calling_the_Company_API];
-//
-//
-//                    });
-//
-//
-//
-//
-//
-//                }
-//                else
-//                {
-//                    [APIHelper stop_activity_animation:self];
-//
-//                    [APIHelper createaAlertWithMsg:@"Please check QID number" andTitle:@"Alert"];
-//
-//                }
-//
-//
-//
-//            }
-//            else{
-//                [APIHelper stop_activity_animation:self];
-//                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
-//
-//            }
-//        }
-//
-//
-//    }
-//    }
-//    @catch(NSException *exception)
-//    {
-//        [APIHelper stop_activity_animation:self];
-//        NSLog(@"Exception from login api:%@",exception);
-//    }
-//
-//
-//
-//
-//}
 
 
 -(void)login_action
@@ -313,14 +184,10 @@
     @try
     {
 
-//        NSDictionary *headers = @{ @"username": @"f181ac8c-f294-46c9-9c34-e33c3cf09e04",
-//                                   @"password": @"a8cce63d-6575-47fc-bc22-561fd8c2ad93",
-//                                   @"Content-Type": @"application/json",
-//                                   @"Authorization": @"Basic ZjE4MWFjOGMtZjI5NC00NmM5LTljMzQtZTMzYzNjZjA5ZTA0OmE4Y2NlNjNkLTY1NzUtNDdmYy1iYzIyLTU2MWZkOGMyYWQ5Mw==",
-//                                   @"Cache-Control": @"no-cache",
-//                                   @"Postman-Token": @"187dcf1a-ed17-d8d6-34dd-c64ce78df93e" };
+
         NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
-    NSString *url_str = [NSString stringWithFormat:@"%@login",SERVER_URL];
+         NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *url_str = [NSString stringWithFormat:@"%@login",str_image_base_URl];
      //   NSString *str_Phone =[NSString stringWithFormat:@"%@",_TXT_password.text];
     NSDictionary *parameters = @{@"memberId":str_QID};
         [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
@@ -371,7 +238,7 @@
             {
                 [APIHelper stop_activity_animation:self];
 
-                 [APIHelper createaAlertWithMsg:@"Please check QID number" andTitle:@"Alert"];
+                 [APIHelper createaAlertWithMsg:@"Member not registered" andTitle:@""];
 
             }
 
@@ -397,7 +264,8 @@
 -(void)calling_the_Company_API
 {
     //customerInfo
-    NSString *str_URL = [NSString stringWithFormat:@"%@customerInfo",SERVER_URL];
+       NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@customerInfo",str_image_base_URl];
     @try
     {
         NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
@@ -431,6 +299,9 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                     [self performSegueWithIdentifier:@"login_home" sender:self];
                         
+
+                        
+                        
                         
                     });
                     
@@ -458,6 +329,56 @@
     
     
 }
+-(void)ALL_PATHS_API
+{
+    
+
+    @try
+    {
+        NSHTTPURLResponse *response = nil;
+        NSError *error;
+       NSString *URL_STR = [NSString stringWithFormat:@"%@ciqAllPathLinks",IMAGE_URL];
+        
+        NSURL *urlProducts=[NSURL URLWithString:URL_STR];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:urlProducts];
+        [request setHTTPMethod:@"GET"];
+        [request setHTTPShouldHandleCookies:NO];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        NSData *aData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        [APIHelper stop_activity_animation:self];
+        if(aData)
+        {
+          NSDictionary  *JSON_response_dic=(NSDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
+            NSLog(@"%@",JSON_response_dic);
+             NSString *str_code = [NSString stringWithFormat:@"%@",[JSON_response_dic valueForKey:@"msg"]];
+            
+            if([str_code isEqualToString:@"Success"])
+            {
+
+            [[NSUserDefaults standardUserDefaults] setValue:[[JSON_response_dic valueForKey:@"url"]valueForKey:@"api_url"] forKey:@"SERVER_URL"];
+            [[NSUserDefaults standardUserDefaults] setValue:[[JSON_response_dic valueForKey:@"url"]valueForKey:@"base_url"] forKey:@"IMAGE_URL"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        }
+        else
+        {
+            NSDictionary *dictin = [[NSDictionary alloc]initWithObjectsAndKeys:@"Nodata",@"error", nil];
+            NSLog(@"%@",dictin);
+        }
+    }
+    @catch(NSException *Exception)
+    {
+        
+    }
+
+    
+                
+    
+}
+
+
 
 #pragma Sign UP action
 -(void)SIGN_UP_action

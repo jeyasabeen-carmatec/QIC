@@ -10,16 +10,15 @@
 
 @interface consultation_cell : UITableViewCell
 
-@property(nonatomic,weak) IBOutlet UIImageView *IMG_title;
+@property(nonatomic,weak) IBOutlet UIImageView *IMG_provider;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_name;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_designnantion;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_addres;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_discount;
+@property(nonatomic,weak) IBOutlet UIImageView *IMG_title;
 
 
 @property(nonatomic,weak) IBOutlet UIView *VW_back_ground;
-
-@property(nonatomic,weak) IBOutlet UILabel *LBL_cost;
 
 @property(nonatomic,weak)IBOutlet UIButton *BTN_favourite;
 

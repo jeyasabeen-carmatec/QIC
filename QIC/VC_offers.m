@@ -68,7 +68,8 @@
     }
     @try
     {
-    NSString *str_image = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"Services"]objectAtIndex:indexPath.section] valueForKey:@"image"]];
+         NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"]];
+    NSString *str_image = [NSString stringWithFormat:@"%@%@", str_image_base_URl,[[[jsonresponse_DIC valueForKey:@"Services"]objectAtIndex:indexPath.section] valueForKey:@"image"]];
     str_image = [APIHelper convert_NUll:str_image];
         
         str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
@@ -147,7 +148,8 @@
     {
         NSHTTPURLResponse *response = nil;
         NSError *error;
-        NSString *URL_STR = [NSString stringWithFormat:@"%@getServicesList",SERVER_URL];
+          NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+        NSString *URL_STR = [NSString stringWithFormat:@"%@getServicesList",str_image_base_URl];
         
         NSURL *urlProducts=[NSURL URLWithString:URL_STR];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

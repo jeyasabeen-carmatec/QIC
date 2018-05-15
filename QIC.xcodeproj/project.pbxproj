@@ -13,6 +13,7 @@
 		D002557920775CF90059A349 /* Profile_langugage_cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D002557820775CF90059A349 /* Profile_langugage_cell.m */; };
 		D002557D207773690059A349 /* TXT_placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D002557C207773690059A349 /* TXT_placeholder.m */; };
 		D006127F20A0508700B6C649 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D006127E20A0508700B6C649 /* CFNetwork.framework */; };
+		D00612DE20A2FFD500B6C649 /* Login-Screen-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D00612DD20A2FFD500B6C649 /* Login-Screen-background.jpg */; };
 		D00C472C209B2BE700312CFA /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C472B209B2BE700312CFA /* NewRelicAgent.framework */; };
 		D00C472E209B2BFA00312CFA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C472D209B2BFA00312CFA /* CoreTelephony.framework */; };
 		D00C4730209B2C0600312CFA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00C472F209B2C0600312CFA /* SystemConfiguration.framework */; };
@@ -28,7 +29,6 @@
 		D02AC7E72073410500F47C93 /* menu_cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC7E52073410500F47C93 /* menu_cell.m */; };
 		D02AC7E82073410600F47C93 /* menu_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7E62073410500F47C93 /* menu_cell.xib */; };
 		D02AC7EA2073416A00F47C93 /* upload-27.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7E92073416A00F47C93 /* upload-27.png */; };
-		D02AC7F42073868C00F47C93 /* Login-Screen-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7F22073868C00F47C93 /* Login-Screen-background.jpg */; };
 		D02AC7F52073868C00F47C93 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7F32073868C00F47C93 /* Logo.png */; };
 		D02AC7FC2073889600F47C93 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7F72073889600F47C93 /* home.png */; };
 		D02AC7FD2073889600F47C93 /* news.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7F82073889600F47C93 /* news.png */; };
@@ -152,6 +152,7 @@
 		D002557B207773690059A349 /* TXT_placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXT_placeholder.h; sourceTree = "<group>"; };
 		D002557C207773690059A349 /* TXT_placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXT_placeholder.m; sourceTree = "<group>"; };
 		D006127E20A0508700B6C649 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D00612DD20A2FFD500B6C649 /* Login-Screen-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Login-Screen-background.jpg"; sourceTree = "<group>"; };
 		D00C472B209B2BE700312CFA /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		D00C472D209B2BFA00312CFA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D00C472F209B2C0600312CFA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -179,7 +180,6 @@
 		D02AC7E92073416A00F47C93 /* upload-27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload-27.png"; sourceTree = "<group>"; };
 		D02AC7ED2073599B00F47C93 /* VC_home_tab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VC_home_tab.h; sourceTree = "<group>"; };
 		D02AC7F120737D4F00F47C93 /* home_page_protocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = home_page_protocols.h; sourceTree = "<group>"; };
-		D02AC7F22073868C00F47C93 /* Login-Screen-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Login-Screen-background.jpg"; sourceTree = "<group>"; };
 		D02AC7F32073868C00F47C93 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		D02AC7F72073889600F47C93 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		D02AC7F82073889600F47C93 /* news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = news.png; sourceTree = "<group>"; };
@@ -558,7 +558,7 @@
 				D079D665207C5FC60079CA99 /* search-bar.png */,
 				D02AC8B12076274700F47C93 /* coupon.png */,
 				D02AC8582075FC9100F47C93 /* profile page */,
-				D02AC7F22073868C00F47C93 /* Login-Screen-background.jpg */,
+				D00612DD20A2FFD500B6C649 /* Login-Screen-background.jpg */,
 				D02AC7F32073868C00F47C93 /* Logo.png */,
 				D02AC7E92073416A00F47C93 /* upload-27.png */,
 				D02AC7F62073889600F47C93 /* tab bar icons */,
@@ -1017,6 +1017,7 @@
 				D079D6D02084CA360079CA99 /* discount3.png in Resources */,
 				D02AC8002073889600F47C93 /* provider.png in Resources */,
 				D0AE158320877309004B32CD /* Health_card.png in Resources */,
+				D00612DE20A2FFD500B6C649 /* Login-Screen-background.jpg in Resources */,
 				D02AC898207624AD00F47C93 /* Futura TOT Book.ttf in Resources */,
 				D02FB91B2090792F000BCD3E /* Assets.xcassets in Resources */,
 				D02AC8902076238A00F47C93 /* Futura Std Extra Bold.ttf in Resources */,
@@ -1040,7 +1041,6 @@
 				D02AC89B207624B700F47C93 /* Futura Heavy.ttf in Resources */,
 				D02AC82720747EF000F47C93 /* profile_cell.xib in Resources */,
 				D02AC8702075FC9100F47C93 /* fingerprint.png in Resources */,
-				D02AC7F42073868C00F47C93 /* Login-Screen-background.jpg in Resources */,
 				D02AC896207624AD00F47C93 /* Futura Book.ttf in Resources */,
 				D02AC8742075FC9100F47C93 /* Map.png in Resources */,
 				D02AC8762075FC9100F47C93 /* next-arrow.png in Resources */,

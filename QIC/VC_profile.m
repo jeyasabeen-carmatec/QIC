@@ -9,15 +9,17 @@
 #import "VC_profile.h"
 #import "profile_cell.h"
 #import "Profile_langugage_cell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "APIHelper.h"
 
-@interface VC_profile ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource>
+@interface VC_profile ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
     CGRect frameset;
     NSArray *ARR_icons;
     NSArray *DICT_profile;
     NSDictionary *TEMP_dict;
     UIPickerView *Lang_picker;
+    NSString *localFilePath;
     
 }
 
@@ -32,13 +34,14 @@
 //    ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"change-language.png",@"About-QIC.png",@"privacy-policy.png",@"terms-&-condition.png", nil];
     
     ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"terms-&-condition.png", nil];
-    
+    [_BTN_camera addTarget:self action:@selector(take_Picture) forControlEvents:UIControlEventTouchUpInside];
 
    
     
     [self set_UP_DATA];
     
     [self set_UP_VIEW];
+    [self Image_API_Calling];
     
 }
 #pragma set up DATA
@@ -80,7 +83,8 @@
 -(void)set_UP_VIEW
 {
     
-    
+    _BTN_camera.layer.cornerRadius = _BTN_camera.frame.size.width/2;
+    _BTN_camera.layer.masksToBounds = YES;
     _LBL_profile_name.numberOfLines = 0;
     [_LBL_profile_name sizeToFit];
     
@@ -118,6 +122,7 @@
     
     _VW_IMG_background.layer.cornerRadius = _VW_IMG_background.frame.size.width/2;
     _IMG_prfoile_image.layer.cornerRadius = _IMG_prfoile_image.frame.size.width/2;
+    _IMG_prfoile_image.layer.masksToBounds = YES;
     
      [self.delegate hide_over_lay];
     
@@ -198,8 +203,8 @@
     }
    else if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Privacy Policy"])
    {
-       
-       NSString *str_URL = [NSString stringWithFormat:@"%@pages/privacyPolicy",STATCI_URL];
+        NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"]];
+       NSString *str_URL = [NSString stringWithFormat:@"%@pages/privacyPolicy",str_image_base_URl];
        [[NSUserDefaults standardUserDefaults]  setValue:str_URL forKey:@"Static_URL"];
 
        [[NSUserDefaults standardUserDefaults] setValue:@"PRIVACY POLICY" forKey:@"header_val"];
@@ -211,7 +216,8 @@
    }
     else if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Terms and Conditions"])
     {
-        NSString *str_URL = [NSString stringWithFormat:@"%@pages/termsAndConditions",STATCI_URL];
+            NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"]];
+        NSString *str_URL = [NSString stringWithFormat:@"%@pages/termsAndConditions",str_image_base_URl];
         [[NSUserDefaults standardUserDefaults]  setValue:str_URL forKey:@"Static_URL"];
 
         [[NSUserDefaults standardUserDefaults] setValue:@"TERMS AND CONDITIONS" forKey:@"header_val"];
@@ -279,6 +285,227 @@
     [dateformatter setDateFormat:@"dd/MM/yyyy"];
     NSString *dateString=[dateformatter stringFromDate:date];
     return dateString;
+}
+#pragma Take paicture form camera button
+-(void)take_Picture
+{
+    UIActionSheet *actionSheet;
+    
+  
+        actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick From"
+                                                  delegate:self
+                                         cancelButtonTitle:@"Cancel"
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:@"Camera", @"Gallery", nil];
+        
+   
+    [actionSheet showInView:self.view];
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    if (buttonIndex == 0)
+    {
+        
+        if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:picker animated:YES completion:NULL];
+            
+        }
+        else{
+            [APIHelper createaAlertWithMsg:@"Camera is not Available" andTitle:@""];
+        }
+        
+    }
+    else if (buttonIndex == 1)
+    {
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo
+{
+    _IMG_prfoile_image.image = image;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    UIImage *chosenImage = _IMG_prfoile_image.image;
+    _IMG_prfoile_image.image = chosenImage;
+    
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        
+        NSData *imageData = UIImagePNGRepresentation(chosenImage);
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        
+        NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",@"cached"]];
+        
+        NSLog(@"pre writing to file");
+        if (![imageData writeToFile:imagePath atomically:NO])
+        {
+            NSLog(@"Failed to cache image data to disk");
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Please retry" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            [alert show];
+        }
+        else
+        {
+            NSLog(@"the cachedImagedPath is %@",imagePath);
+            localFilePath = imagePath;
+        }
+    }
+    else
+    {
+    NSURL *imagePath = [editingInfo objectForKey:@"UIImagePickerControllerReferenceURL"];
+    NSString *imageName = [imagePath lastPathComponent];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    localFilePath = [documentsDirectory stringByAppendingPathComponent:imageName];
+    }
+    [self uploadImage:image];
+    
+}
+
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+#pragma Storing data in Db
+
+-(void)Image_API_Calling
+{
+    //customerInfo
+    NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@profilePic",str_image_base_URl];
+    @try
+    {
+        
+        NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
+        
+        NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        NSDictionary *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+        NSString *str_member_ID = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"membershipNo"]];
+        NSDictionary *parameters = @{@"membershipNo":str_member_ID};
+        [APIHelper postServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+            }
+            if(data)
+            {
+                NSDictionary *TEMP_dict = data;
+                NSLog(@"The profile Data:%@",TEMP_dict);
+                [APIHelper stop_activity_animation:self];
+                
+                
+                NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"code"]];
+                
+                
+                if([str_code isEqualToString:@"1"])
+                {
+                    NSString *str_image = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[TEMP_dict valueForKey:@"url"]]];
+                    str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+                    
+                    [_IMG_prfoile_image sd_setImageWithURL:[NSURL URLWithString:str_image]
+                                      placeholderImage:[UIImage imageNamed:@"upload-27.png"]];
+                    
+                }
+                else
+                {
+                    
+                    [APIHelper createaAlertWithMsg:@"Some thing went wrong" andTitle:@"Alert"];
+                    
+                }
+                
+                
+                
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        NSLog(@"Exception from login api:%@",exception);
+    }
+    
+    
+}
+
+-(void)uploadImage:(UIImage *)yourImage
+{
+    [APIHelper start_animation:self];
+    
+     NSString *str_member_ID = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[TEMP_dict valueForKey:@"membershipNo"]]];
+    
+    NSData *imageData = UIImageJPEGRepresentation(yourImage, 1.0);//UIImagePNGRepresentation(yourImage);
+        NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *urlString =  [NSString stringWithFormat:@"%@profileImgUpload",str_image_base_URl];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    NSMutableData *body = [NSMutableData data];
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    localFilePath = [localFilePath stringByReplacingOccurrencesOfString:@"JPG" withString:@"jpg"];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"profile-pic\"; filename=\"%@\"\r\n",localFilePath] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[NSData dataWithData:imageData]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"customer_id\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"%@",str_member_ID]dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+
+   
+    
+    
+//    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//    //[body appendData:[[NSString stringWithString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"logo\"; filename=\"%@\"\r\n", @"serser.jpg"]] dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:[[NSString stringWithString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"profile-pic\"; filename=\"profile-pic\"\r\n"]] dataUsingEncoding:NSUTF8StringEncoding]];
+//
+//    [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:[NSData dataWithData:imageData]];
+//    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setHTTPBody:body];
+    
+    NSError *err;
+    
+    NSData *data= [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&err];
+    
+    if (err) {
+    
+        NSLog(@"%@",[err localizedDescription]);
+    }
+    [APIHelper stop_activity_animation:self];
+    
+    if (data)
+    {
+        NSMutableDictionary *jsonObject=[NSJSONSerialization
+                                         JSONObjectWithData:data
+                                         options:NSJSONReadingMutableLeaves
+                                         error:nil];
+        NSLog(@"jsonObject  %@",jsonObject);
+        [APIHelper createaAlertWithMsg:[jsonObject valueForKey:@"mes"] andTitle:@""];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

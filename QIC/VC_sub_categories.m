@@ -109,7 +109,7 @@
     
        
         cell.LBL_name.text = [NSString stringWithFormat:@"%@",str_name];
-        _LBL_header.text = [NSString stringWithFormat:@"%@ PROVIDERS",[APIHelper convert_NUll:[[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_type"] uppercaseString]]];
+        _LBL_header.text = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_type"] uppercaseString]]];
         
         
         NSString *str_designation;
@@ -142,6 +142,22 @@
     
     cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
     cell.IMG_title.layer.masksToBounds = YES;
+        
+        [cell.BTN_favourite addTarget:self action:@selector(wish_list_action:) forControlEvents:UIControlEventTouchUpInside];
+        cell.BTN_favourite.tag = indexPath.section;
+        
+        cell.BTN_favourite.titleLabel.textColor = [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0];
+        
+        if([[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"fav_status"] isEqualToString:@"No"])
+        {
+            [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
+        }
+        else
+        {
+            
+            [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
+            
+        }
         
         
     NSString *str_image = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"logo"]]];
@@ -299,7 +315,9 @@
         NSHTTPURLResponse *response = nil;
         NSError *error;
         NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"catgory_id"]];
-       URL_STR = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/1",SERVER_URL,str_id];
+        NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+          NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+       URL_STR = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/1/%@",str_image_base_URl,str_id,str_member_ID];
         URL_STR = [URL_STR stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
 
         
@@ -385,13 +403,6 @@
         {
             [APIHelper stop_activity_animation:self];
             
-            NSString *str_status = @"Sorry no more providers found";
-            NSString *str_ok = @"Ok";
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str_status delegate:self cancelButtonTitle:nil otherButtonTitles:str_ok, nil];
-            [alert show];
-            
-            
             [self performSelector:@selector(finishLoadMore) withObject:nil afterDelay:0.01];
             
         }
@@ -402,7 +413,11 @@
             NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"catgory_id"]];
            
             NSString *url_STR = URL_STR;
-            url_STR = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/%d",SERVER_URL,str_id,page_count];
+            NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+            NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+            URL_STR = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/%d/%@",str_image_base_URl,str_id,page_count,str_member_ID];
+            
+//            url_STR = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/%d",SERVER_URL,str_id,page_count];
             url_STR =  [url_STR stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
             
             
@@ -425,6 +440,8 @@
     //cancel load more request(generally network request) here
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishLoadMore) object:nil];
 }
+
+#pragma next page api calling
 
 -(void) NEXTpage_API
 {
@@ -499,8 +516,9 @@
         NSError *error;
         NSHTTPURLResponse *response = nil;
          NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"catgory_id"]];
-        
-        NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/%@/%@",SERVER_URL,str_id,@"1",_TXT_search.text];
+          NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+           NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+        NSString *str_url = [NSString stringWithFormat:@"%@getProviderstByProviderId/%@/%@/%@/%@",str_image_base_URl,str_id,@"1",str_member_ID,_TXT_search.text];
         str_url = [str_url stringByReplacingOccurrencesOfString:@"" withString:@"%20"];
 
         str_url = [str_url stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
@@ -563,6 +581,176 @@
         [_TBL_list reloadData];
     }
 
+}
+#pragma Wish_list_action
+
+-(void)wish_list_action:(UIButton *)sender
+{
+    // [APIHelper start_animation:self];
+    NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@addToFav",str_image_base_URl];
+    @try
+    {
+        NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+        NSString *provider_ID = [NSString stringWithFormat:@"%@",[[arr_total_data objectAtIndex:sender.tag] valueForKey:@"provider_id"] ];
+        
+       
+        
+        NSDictionary *TEMP_dict = @{@"provider_id":provider_ID,@"customer_id":str_member_ID,@"type":@"providers"};
+        
+        NSDictionary *parameters = TEMP_dict;
+        [APIHelper postServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+            }
+            [APIHelper stop_activity_animation:self];
+            
+            if(data)
+            {
+                
+                NSDictionary *TEMP_dict = data;
+                NSLog(@"The login customer Data:%@",TEMP_dict);
+                
+                NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"msg"]];
+                
+                if([str_code isEqualToString:@"Sucess"])
+                {
+                    if([[TEMP_dict valueForKey:@"List"] isEqualToString:@"Provider already exist"])
+                    {
+                        
+                        [self delete_ITEM_from_Wish_list:provider_ID];
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
+                            subcategory_cell  *cell = (subcategory_cell *)[self.TBL_list cellForRowAtIndexPath:index];
+                            
+                            [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
+                            [APIHelper createaAlertWithMsg:@"Offer deleted from your favourites." andTitle:@""];
+                            
+                            NSMutableDictionary *wishDic = [[NSMutableDictionary alloc] initWithDictionary:[arr_total_data objectAtIndex:index.row]];
+                            
+                            [wishDic setObject:@"No" forKey:@"fav_status"];
+                            
+                            [arr_total_data replaceObjectAtIndex:index.row withObject:wishDic];
+                            
+                        });
+                        
+                        
+                        
+                    }
+                    else{
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
+                            subcategory_cell *cell = (subcategory_cell *)[self.TBL_list cellForRowAtIndexPath:index];
+                            
+                            [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
+                            
+                            [APIHelper createaAlertWithMsg:@"Offer added to your favourites." andTitle:@""];
+                            int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
+                            i = i +1;
+                            NSString *str_count = [NSString stringWithFormat:@"%d",i];
+                            [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
+                            [[NSUserDefaults standardUserDefaults] synchronize];
+                            [_BTN_favourite setTitle:str_count forState:UIControlStateNormal];
+                            NSMutableDictionary *wishDic = [[NSMutableDictionary alloc] initWithDictionary:[arr_total_data objectAtIndex:index.row]];
+                            
+                            [wishDic setObject:@"Yes" forKey:@"fav_status"];
+                            
+                            [arr_total_data replaceObjectAtIndex:index.row withObject:wishDic];
+                            
+                        });
+                    }
+                    
+                    
+                }
+                else
+                {
+                    [APIHelper stop_activity_animation:self];
+                    
+                    [APIHelper createaAlertWithMsg:@"Some thing went wrong" andTitle:@"Alert"];
+                    
+                }
+                
+                
+                
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        NSLog(@"Exception from login api:%@",exception);
+    }
+    
+    
+    
+}
+
+#pragma Delte Item from wish list
+-(void)delete_ITEM_from_Wish_list:(NSString *)srm_provider_ID
+{
+    NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@delFromFav",str_image_base_URl];
+    
+    @try
+    {
+        NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+        
+        NSDictionary *TEMP_dict = @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"type":@"providers"};
+        
+        NSDictionary *parameters = TEMP_dict;
+        [APIHelper updateServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+            }
+            if(data)
+            {
+                NSDictionary *temp_dict = data;
+                
+                NSString *str_code = [NSString stringWithFormat:@"%@",[temp_dict valueForKey:@"msg"]];
+                if([str_code isEqualToString:@"Sucess"])
+                {
+                    int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
+                    NSString *str_count;
+                    if(i == 0 )
+                    {
+                        i = 0;
+                    }
+                    else
+                    {
+                        i = i - 1;
+                        str_count = [NSString stringWithFormat:@"%d",i];
+                    }
+                    [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [self.BTN_favourite setTitle:[APIHelper set_count:str_count] forState:UIControlStateNormal];
+                }
+                else{
+                    [APIHelper createaAlertWithMsg:@"Something went wrong." andTitle:@""];
+                    
+                }
+                
+                
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        NSLog(@"Exception from login api:%@",exception);
+    }
+    
+    
+    
 }
 /*
 #pragma mark - Navigation

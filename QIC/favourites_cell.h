@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface favourites_cell : UITableViewCell
+@property(nonatomic,weak) IBOutlet UIImageView *IMG_provider;
+
 @property(nonatomic,weak) IBOutlet UIImageView *IMG_title;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_name;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_designnantion;

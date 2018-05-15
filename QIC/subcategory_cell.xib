@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B1003" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -40,19 +40,19 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpJ-qh-pbb">
-                                <rect key="frame" x="111" y="8" width="201" height="19"/>
+                                <rect key="frame" x="111" y="8" width="147" height="19"/>
                                 <fontDescription key="fontDescription" name="FuturaT-Medi" family="FuturaTMed" pointSize="16"/>
                                 <color key="textColor" red="0.32549019607843138" green="0.71764705882352942" blue="0.77647058823529413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="dentist" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uco-zd-Ob4">
-                                <rect key="frame" x="111" y="35" width="201" height="20"/>
+                                <rect key="frame" x="111" y="35" width="147" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="fdgdhhsgsgf" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fX5-fp-rFf">
-                                <rect key="frame" x="110" y="63" width="201" height="20"/>
+                                <rect key="frame" x="110" y="63" width="148" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -75,24 +75,38 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTD-Eb-baG">
+                                <rect key="frame" x="274" y="8" width="30" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="7n2-3B-p4A"/>
+                                    <constraint firstAttribute="height" constant="32" id="FbQ-zd-q76"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="20"/>
+                                <state key="normal" title="">
+                                    <color key="titleColor" red="0.32549019610000002" green="0.71764705880000002" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="zpJ-qh-pbb" secondAttribute="trailing" constant="8" id="1WM-cq-JTb"/>
+                            <constraint firstAttribute="trailing" secondItem="zpJ-qh-pbb" secondAttribute="trailing" constant="62" id="1WM-cq-JTb"/>
                             <constraint firstItem="zpJ-qh-pbb" firstAttribute="leading" secondItem="pp1-x9-4Cc" secondAttribute="trailing" constant="18" id="FJf-K8-BdF"/>
                             <constraint firstItem="fX5-fp-rFf" firstAttribute="leading" secondItem="uco-zd-Ob4" secondAttribute="leading" constant="-1" id="GBO-rv-uzU"/>
+                            <constraint firstItem="sTD-Eb-baG" firstAttribute="top" secondItem="zpJ-qh-pbb" secondAttribute="top" id="Gfo-Jl-Wea"/>
                             <constraint firstItem="pp1-x9-4Cc" firstAttribute="leading" secondItem="dK6-HB-Sv5" secondAttribute="leading" constant="8" id="IXH-Q4-tEE"/>
                             <constraint firstItem="uco-zd-Ob4" firstAttribute="trailing" secondItem="zpJ-qh-pbb" secondAttribute="trailing" id="L3H-Jg-uvl"/>
                             <constraint firstItem="d8R-kH-abI" firstAttribute="top" secondItem="TaF-qx-phL" secondAttribute="top" id="Lpj-po-YGZ"/>
                             <constraint firstItem="zpJ-qh-pbb" firstAttribute="top" secondItem="pp1-x9-4Cc" secondAttribute="top" id="Ovz-mD-Nmd"/>
-                            <constraint firstItem="fX5-fp-rFf" firstAttribute="trailing" secondItem="uco-zd-Ob4" secondAttribute="trailing" constant="-1" id="SA9-EL-aKt"/>
+                            <constraint firstItem="fX5-fp-rFf" firstAttribute="trailing" secondItem="uco-zd-Ob4" secondAttribute="trailing" id="SA9-EL-aKt"/>
                             <constraint firstItem="uco-zd-Ob4" firstAttribute="leading" secondItem="zpJ-qh-pbb" secondAttribute="leading" id="TBh-OR-601"/>
                             <constraint firstItem="d8R-kH-abI" firstAttribute="leading" secondItem="TaF-qx-phL" secondAttribute="trailing" constant="7" id="VQh-Wu-Ioq"/>
                             <constraint firstItem="pp1-x9-4Cc" firstAttribute="top" secondItem="dK6-HB-Sv5" secondAttribute="top" constant="8" id="aFV-5F-rL7"/>
                             <constraint firstItem="TaF-qx-phL" firstAttribute="top" secondItem="fX5-fp-rFf" secondAttribute="bottom" constant="7" id="buw-HG-syv"/>
                             <constraint firstItem="fX5-fp-rFf" firstAttribute="top" secondItem="uco-zd-Ob4" secondAttribute="bottom" constant="8" id="c4Z-hq-JcU"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="TaF-qx-phL" secondAttribute="bottom" constant="10" id="jtO-YH-LIS"/>
+                            <constraint firstAttribute="trailing" secondItem="sTD-Eb-baG" secondAttribute="trailing" constant="16" id="m3f-dg-l88"/>
                             <constraint firstAttribute="trailing" secondItem="d8R-kH-abI" secondAttribute="trailing" constant="9" id="mLB-el-PR5"/>
+                            <constraint firstItem="sTD-Eb-baG" firstAttribute="leading" secondItem="zpJ-qh-pbb" secondAttribute="trailing" constant="16" id="oqZ-SB-o4N"/>
                             <constraint firstItem="uco-zd-Ob4" firstAttribute="top" secondItem="zpJ-qh-pbb" secondAttribute="bottom" constant="8" id="sDX-5x-Bcj"/>
                             <constraint firstItem="TaF-qx-phL" firstAttribute="leading" secondItem="fX5-fp-rFf" secondAttribute="leading" id="yJk-Lf-Y58"/>
                         </constraints>
@@ -108,6 +122,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="BTN_favourite" destination="sTD-Eb-baG" id="Hty-PK-iYZ"/>
                 <outlet property="BTN_phone" destination="d8R-kH-abI" id="ZG9-LB-x14"/>
                 <outlet property="IMG_title" destination="pp1-x9-4Cc" id="rzg-Pp-pJ5"/>
                 <outlet property="LBL_addres" destination="fX5-fp-rFf" id="ppz-2W-4Va"/>

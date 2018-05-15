@@ -609,7 +609,8 @@ self.segmentedControl4.selectionIndicatorHeight = 2.0f;
         NSError *error;
         NSString *str_id =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"category_ID"]];
         NSString *str_provider_ID = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"provider_ID"]];
-        NSString  *URL_STR = [NSString stringWithFormat:@"%@getProvidersDetails/%@/%@",SERVER_URL,str_id,str_provider_ID];
+         NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+        NSString  *URL_STR = [NSString stringWithFormat:@"%@getProvidersDetails/%@/%@",str_image_base_URl,str_id,str_provider_ID];
         
         NSURL *urlProducts=[NSURL URLWithString:URL_STR];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

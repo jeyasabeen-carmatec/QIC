@@ -64,6 +64,15 @@
     @try
     {
     
+        NSString *str_image = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"logo"]]];
+        str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        
+        [cell.IMG_provider sd_setImageWithURL:[NSURL URLWithString:str_image]
+                          placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+        cell.IMG_provider.layer.cornerRadius = cell.IMG_provider.frame.size.width/2;
+        cell.IMG_provider.layer.masksToBounds = YES;
+        
+        
     NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"provider_name"]]];
     str_name = [str_name uppercaseString];
     
@@ -111,6 +120,7 @@
     cell.BTN_favourite.titleLabel.textColor = [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0];
     
     NSString *str_addres = [NSString  stringWithFormat:@"%@",str_dicount];
+        str_addres = [str_addres stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
     
     if ([cell.LBL_price_amount respondsToSelector:@selector(setAttributedText:)])
     {
@@ -155,8 +165,11 @@
     }
     
     cell.LBL_price_amount.transform=CGAffineTransformMakeRotation( ( 90 * M_PI ) / -360 );
-
+  
+        
+        
     cell.VW_back_ground.layer.cornerRadius = 2.0f;
+        
     }
     @catch(NSException *exception)
     {
@@ -187,8 +200,9 @@
 #pragma Faourites API call
 -(void)favourites_API_call
 {
+      NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
     
-    NSString *str_URL = [NSString stringWithFormat:@"%@getFavList",SERVER_URL];
+    NSString *str_URL = [NSString stringWithFormat:@"%@getFavList",str_image_base_URl];
     @try
     {
         NSString  *str_member_ID = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];

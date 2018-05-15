@@ -133,7 +133,7 @@
      
         
     }
-    else  if([item.title isEqualToString:@"News"])
+    else  if([item.title isEqualToString:@"Articles"])
     {
         /************** calling News view  ******************/
         
@@ -199,17 +199,17 @@
     frameset.size.height = scroll_ht;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
     
    
     }
@@ -238,17 +238,17 @@
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
     [categorie_vw.collection_categoriesl reloadData];
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
     }
     @catch(NSException *exception)
@@ -275,17 +275,17 @@
         frameset.size.height = _VW_main.frame.size.height ;
         frameset.size.width = self.view.frame.size.width;
         categorie_vw.view.frame =  frameset;
-        [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//        [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
     
 
     }
@@ -318,17 +318,17 @@
     frameset.size.height = scroll_ht;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
 }
 -(void)subcategories_back_action:(NSString *)str_back
@@ -350,17 +350,17 @@
     frameset.size.height = scroll_ht;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
     
 }
@@ -429,17 +429,17 @@
     frameset.size.height = scroll_ht;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
 }
 
@@ -458,17 +458,17 @@
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
 
 }
@@ -484,17 +484,17 @@
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
 }
 -(void)back_ACTION:(NSString *)str_dependet
@@ -517,17 +517,17 @@
     frameset.size.height =scroll_ht ;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
  
 }
 #pragma Favourites  Action
@@ -543,17 +543,17 @@
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
     
 }
@@ -649,17 +649,17 @@
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
 }
 -(void)calling_profile_view
@@ -694,17 +694,17 @@
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
 }
 #pragma calling_search_VIEW
@@ -720,17 +720,17 @@
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
     
 }
@@ -746,17 +746,17 @@
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
     categorie_vw.view.frame =  frameset;
-    [UIView transitionWithView:self.VW_main
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
+//    [UIView transitionWithView:self.VW_main
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{
                         [self.VW_main addSubview:categorie_vw.view];
                         
                         [self addChildViewController:categorie_vw];
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
-                    } completion:nil
-     ];
+//                    } completion:nil
+//     ];
 
     
 }
