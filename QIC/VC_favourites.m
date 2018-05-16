@@ -16,7 +16,7 @@
 
 @interface VC_favourites ()<UITableViewDelegate,UITableViewDataSource>
 {
-    NSArray *arr_images;
+    NSMutableArray *arr_images;
     NSDictionary *jsonresponse_DIC;
 }
 
@@ -27,7 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
+    arr_images =  [[NSMutableArray alloc]init];
+   // arr_images = [NSArray arrayWithObjects:@"Banner-A.jpg",@"Banner-B.jpg",@"Banner-C.jpg", nil];
     [_BTN_bcak addTarget:self action:@selector(back_actions) forControlEvents:UIControlEventTouchUpInside];
     
     [APIHelper start_animation:self];
@@ -40,7 +41,7 @@
     NSInteger count = 0;
     if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
     {
-        count = [[jsonresponse_DIC valueForKey:@"List"] count];
+        count = [arr_images count];
     }
     else{
         count = 0;
@@ -64,7 +65,7 @@
     @try
     {
     
-        NSString *str_image = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"logo"]]];
+        NSString *str_image = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_images objectAtIndex:indexPath.section] valueForKey:@"logo"]]];
         str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
         
         [cell.IMG_provider sd_setImageWithURL:[NSURL URLWithString:str_image]
@@ -73,33 +74,33 @@
         cell.IMG_provider.layer.masksToBounds = YES;
         
         
-    NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"provider_name"]]];
+    NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_images objectAtIndex:indexPath.section] valueForKey:@"provider_name"]]];
     str_name = [str_name uppercaseString];
     
     
     cell.LBL_name.text = [NSString stringWithFormat:@"%@",str_name];
     
         NSString *str_designation;
-        if([[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"service_name"] isKindOfClass:[NSArray class]])
+        if([[[arr_images objectAtIndex:indexPath.section] valueForKey:@"service_name"] isKindOfClass:[NSArray class]])
         {
             str_designation = @"Not mentioned";
         }
         else
         {
             
-            str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"service_name"]]];
+            str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_images objectAtIndex:indexPath.section] valueForKey:@"service_name"]]];
         }
         
 
     cell.LBL_designnantion.text = [NSString stringWithFormat:@"%@",str_designation];
     
-    NSString *str_address = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"address"]]];
+    NSString *str_address = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_images objectAtIndex:indexPath.section] valueForKey:@"address"]]];
     
     cell.LBL_addres.text = [NSString stringWithFormat:@"%@",str_address];
 
-    NSString *str_dicount_type = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"offer_type"]];
+    NSString *str_dicount_type = [NSString stringWithFormat:@"%@",[[arr_images objectAtIndex:indexPath.section] valueForKey:@"offer_type"]];
         
-         NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:indexPath.section] valueForKey:@"offer_value"]];
+         NSString *str_dicount = [NSString stringWithFormat:@"%@",[[arr_images objectAtIndex:indexPath.section] valueForKey:@"offer_value"]];
         NSString *str_disc;
     if([str_dicount_type isEqualToString:@"Percentage"])
     {
@@ -165,7 +166,18 @@
     }
     
     cell.LBL_price_amount.transform=CGAffineTransformMakeRotation( ( 90 * M_PI ) / -360 );
-  
+     NSString *str_fav_type = [NSString stringWithFormat:@"%@",[[arr_images objectAtIndex:indexPath.section] valueForKey:@"fav_type"]];
+        str_fav_type = [str_fav_type stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+        if([str_fav_type isEqualToString:@"providers"])
+        {
+            cell.IMG_title.hidden =YES;
+            cell.LBL_price_amount.hidden = YES;
+        }
+        else
+        {
+            cell.IMG_title.hidden =NO;
+            cell.LBL_price_amount.hidden = NO;
+        }
         
         
     cell.VW_back_ground.layer.cornerRadius = 2.0f;
@@ -223,6 +235,7 @@
             {
                 NSLog(@"%@", jsonresponse_DIC);
                 jsonresponse_DIC= data;
+                arr_images = [jsonresponse_DIC valueForKey:@"List"];
                 if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
                 {
                    
@@ -264,17 +277,27 @@
 {
     
    // [APIHelper start_animation:self];
-    NSString *str_URL = [NSString stringWithFormat:@"%@delFromFav",SERVER_URL];
+     NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@delFromFav",str_image_base_URl];
     
     @try
     {
         NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
-        NSString *srm_provider_ID = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:sender.tag] valueForKey:@"provider_id"]];
+        NSString *srm_provider_ID = [NSString stringWithFormat:@"%@",[[arr_images objectAtIndex:sender.tag] valueForKey:@"provider_id"]];
         
-        NSString *service_ID = [NSString stringWithFormat:@"%@",[[[jsonresponse_DIC valueForKey:@"List"] objectAtIndex:sender.tag] valueForKey:@"services_id"]];
-
+        NSString *service_ID = [NSString stringWithFormat:@"%@",[[arr_images objectAtIndex:sender.tag] valueForKey:@"services_id"]];
+        NSString *str_fav_type = [NSString stringWithFormat:@"%@",[[arr_images objectAtIndex:sender.tag] valueForKey:@"fav_type"]];
+        str_fav_type = [str_fav_type stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
         
-        NSDictionary *TEMP_dict = @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"service_id":service_ID};
+        NSDictionary *TEMP_dict;
+        if([str_fav_type isEqualToString:@"providers"])
+        {
+         TEMP_dict =    @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"type":@"providers"};
+            
+        }
+        else{
+        TEMP_dict = @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"service_id":service_ID,@"type":@"offers"};
+        }
         
         NSDictionary *parameters = TEMP_dict;
         [APIHelper updateServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
@@ -289,10 +312,14 @@
                 
                 NSDictionary *temp_dict = data;
                 [APIHelper stop_activity_animation:self];
+                
                 NSString *str_code = [NSString stringWithFormat:@"%@",[temp_dict valueForKey:@"msg"]];
                 if([str_code isEqualToString:@"Sucess"])
                 {
                     [APIHelper createaAlertWithMsg:@"Offer deleted from your favourites." andTitle:@""];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+ 
                     int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
                     NSString *str_count;
                     if(i == 0 )
@@ -306,9 +333,11 @@
                     }
                     [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
-
-                    [self favourites_API_call];
-
+                
+                   // [arr_images removeObjectAtIndex:sender.tag];
+                   // [_TBL_list reloadData];
+                 [self favourites_API_call];
+                  });
                     
                 }
                 else{

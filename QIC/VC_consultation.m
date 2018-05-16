@@ -486,7 +486,7 @@
         }
          @catch(NSException *exception)
          {
-             [APIHelper stop_activity_animation:self];   
+             [APIHelper stop_activity_animation:self];
              
          }
          
