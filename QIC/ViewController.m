@@ -285,37 +285,95 @@
             {
                 NSDictionary *TEMP_dict = data;
                 NSLog(@"The login customer Data:%@",TEMP_dict);
-                [APIHelper stop_activity_animation:self];
-                
-                
+    
                 NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"code"]];
                 NSString *str_count = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"favorites_count"]];
                 
                 if([str_code isEqualToString:@"1"])
                 {
+                     
                     [[NSUserDefaults standardUserDefaults]  setValue:str_count forKey:@"wish_count"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
+                    NSString *dev_TOK = [[NSUserDefaults standardUserDefaults]valueForKey:@"DEV_TOK"];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                    [self performSegueWithIdentifier:@"login_home" sender:self];
+                        [self performSegueWithIdentifier:@"login_home" sender:self];
                         
-
-                        
-                        
-                        
+                        if (dev_TOK)
+                        {
+                            
+                            [self register_device_token];
+                        }
+                        else
+                        {
+                            
+                            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                                     selector:@selector(tokenAvailableNotification:)
+                                                                         name:@"NEW_TOKEN_AVAILABLE" object:nil];
+                            
+                            [APIHelper stop_activity_animation:self];
+                        }
                     });
-                    
                     
                     
                 }
                 else
                 {
-                    
+                     [APIHelper stop_activity_animation:self];
                     [APIHelper createaAlertWithMsg:@"Some thing went wrong" andTitle:@"Alert"];
                     
                 }
                 
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+      [APIHelper stop_activity_animation:self];
+      [APIHelper createaAlertWithMsg:@"Some thing went wrong" andTitle:@"Alert"];
+        
+    }
+    
+    
+}
+
+#pragma mark - Register Push Notification
+- (void)tokenAvailableNotification:(NSNotification *)notification {
+    
+    @try
+    {
+        
+        
+        NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
+        NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+        NSString *url_str = [NSString stringWithFormat:@"%@saveDeviceInfo",str_image_base_URl];
+        
+        NSString *token = [[NSUserDefaults standardUserDefaults]valueForKey:@"DEV_TOK"];
+        token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSDictionary *parameters = @{@"customer_id":str_QID,@"device_type":@"iphone",@"device_token":token};
+        [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
                 
+            }
+            [APIHelper stop_activity_animation:self];
+            if(data)
+            {
+                NSDictionary *TEMP_dict = [data valueForKey:@"data"];
+                NSLog(@"The TOken api customer Data:%@",TEMP_dict);
+                
+                
+              
+                
+            }
+            else{
+                [APIHelper stop_activity_animation:self];
+                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
                 
             }
             
@@ -325,10 +383,12 @@
     {
         [APIHelper stop_activity_animation:self];
         NSLog(@"Exception from login api:%@",exception);
+        [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+
     }
     
-    
 }
+#pragma All api paths calling
 -(void)ALL_PATHS_API
 {
     
@@ -358,8 +418,11 @@
             {
 
             [[NSUserDefaults standardUserDefaults] setValue:[[JSON_response_dic valueForKey:@"url"]valueForKey:@"api_url"] forKey:@"SERVER_URL"];
+                
             [[NSUserDefaults standardUserDefaults] setValue:[[JSON_response_dic valueForKey:@"url"]valueForKey:@"base_url"] forKey:@"IMAGE_URL"];
+                
             [[NSUserDefaults standardUserDefaults] synchronize];
+                
             }
         }
         else
@@ -372,10 +435,7 @@
     {
         
     }
-
-    
-                
-    
+  
 }
 
 
@@ -412,26 +472,14 @@
                                        NSString *appVersion = @"1.0.0";
                                        
                                        NSLog(@"itunes version = %@\nAppversion = %@",iTunesVersion,appVersion);
-                                       
-                                       //                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New version available" message:[NSString stringWithFormat:@"%@",appMetadataDictionary] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                                       //                                       [alert show];
-                                       //
-                                       //                                       float itnVer = [iTunesVersion floatValue];
-                                       //                                       float apver = [appVersion floatValue];
-                                       //
-                                       //                                       NSLog(@"The val floet itune %f\nThe val float appver%f",itnVer,apver);
+                                     
                                        
                                        if (iTunesVersion && [appVersion compare:iTunesVersion] != NSOrderedSame) {
-                                           
-                                           
-                                           //                                           UIAlertView *alert = [UIAlertView bk_showAlertViewWithTitle:@"Doha Sooq Online Shopping" message:[NSString stringWithFormat:@"New version available. Update required."] cancelButtonTitle:@"update" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                           
                                            
                                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Version Updated %@",iTunesVersion] message:[resultsDic valueForKey:@"releaseNotes"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Update",@"Cancel", nil];
                                            alert.tag = 123456;
                                            [alert show];
-                                           //                                           }];
-                                           //                                           [alert show];
+                                         
                                        }
                                    }
                                } else {
@@ -444,6 +492,54 @@
     {
         
     }
+    
+}
+-(void)register_device_token
+{
+   
+        @try
+        {
+            
+            
+            NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
+            NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+            NSString *url_str = [NSString stringWithFormat:@"%@saveDeviceInfo",str_image_base_URl];
+       
+            NSString *token = [[NSUserDefaults standardUserDefaults]valueForKey:@"DEV_TOK"];
+            token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSDictionary *parameters = @{@"customer_id":str_QID,@"device_type":@"iphone",@"device_token":token};
+            [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+                
+                
+                if(error)
+                {
+                    [APIHelper stop_activity_animation:self];
+                    [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+                    
+                }
+                if(data)
+                {
+                    NSDictionary *TEMP_dict = data;
+                    NSLog(@"The TOken api customer Data:%@",TEMP_dict);
+                    [APIHelper stop_activity_animation:self];
+                    
+                   
+                }
+                else{
+                    [APIHelper stop_activity_animation:self];
+                    [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+                    
+                }
+                
+            }];
+        }
+        @catch(NSException *exception)
+        {
+            [APIHelper stop_activity_animation:self];
+            
+            [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+        }
+        
     
 }
 - (void)didReceiveMemoryWarning {

@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate ()
+@interface AppDelegate () <UNUserNotificationCenterDelegate>
 
 @end
 
@@ -19,6 +20,22 @@
     // Override point for customization after application launch.
     [NewRelicAgent startWithApplicationToken:@"AA31f46cdbec234c294afd0758c8d1a8debd72c23e"];
     [GMSServices provideAPIKey:@"AIzaSyDdjUq1m4XayB118EUlOyd68IaBsnDGj2Q"];
+    
+    if(@available(iOS 10, *)){
+        UNUserNotificationCenter *notifiCenter = [UNUserNotificationCenter currentNotificationCenter];
+        notifiCenter.delegate = self;
+        [notifiCenter requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+            if( !error ){
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            }
+        }];
+    }
+    else
+    {
+        UIUserNotificationSettings* notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+    }
+    
     return YES;
 }
 
@@ -49,5 +66,60 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - APNS
+#ifdef __IPHONE_8_0
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings: (UIUserNotificationSettings *)notificationSettings
+{
+    //register to receive notifications
+    [application registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString   *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
+{
+    //handle the actions
+    if ([identifier isEqualToString:@"declineAction"])
+    {
+        
+    }
+    else if ([identifier isEqualToString:@"answerAction"])
+    {
+        
+    }
+    
+    NSLog(@"User info appdeliigate = %@",userInfo);
+}
+#else
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
+    
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
+    
+}
+#endif
+
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"Did Register for Remote Notifications with Device Token (%@)", deviceToken);
+    
+    
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSUInteger lenthtotes = [token length];
+    NSUInteger req = 64;
+    if (lenthtotes == req) {
+        NSLog(@"uploaded token: %@", token);
+        
+        [[NSUserDefaults standardUserDefaults]setObject:token forKey:@"DEV_TOK"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        NSNotification *notif = [NSNotification notificationWithName:@"NEW_TOKEN_AVAILABLE" object:token];
+        [[NSNotificationCenter defaultCenter] postNotification:notif];
+    }
+}
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
+    NSLog(@"User Info : %@",notification.request.content.userInfo);
+    completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
+}
 
 @end
