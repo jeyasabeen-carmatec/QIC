@@ -22,6 +22,8 @@
 #import "APIHelper.h"
 #import "VC_search.h"
 #import "VC_offers_search.h"
+#import "VC_Notifications.h"
+
 
 @interface VC_home ()<UITabBarDelegate>
 {
@@ -780,6 +782,37 @@
 {
     vw_over_lay.hidden = YES;
 }
+#pragma Notifications view calling
+-(void)notification_view_call
+{
+    VC_Notifications *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_search_offers"];
+    //  [categorie_vw.TBL_profile reloadData];
+    categorie_vw.delegate = self;
+    
+    CGRect frameset = categorie_vw.view.frame;
+    frameset.origin.x =  0;
+    frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
+    frameset.size.height = _VW_main.frame.size.height;
+    frameset.size.width = self.view.frame.size.width;
+    categorie_vw.view.frame =  frameset;
+    //    [UIView transitionWithView:self.VW_main
+    //                      duration:0.5
+    //                       options:UIViewAnimationOptionTransitionFlipFromLeft
+    //                    animations:^{
+    [self.VW_main addSubview:categorie_vw.view];
+    
+    [self addChildViewController:categorie_vw];
+    [categorie_vw didMoveToParentViewController:self];
+    categorie_vw.definesPresentationContext = YES;
+    //                    } completion:nil
+    //     ];
+
+}
+-(void)notification_back
+{
+    [self HOme_view_calling];
+}
+
 /*
 #pragma mark - Navigation
 

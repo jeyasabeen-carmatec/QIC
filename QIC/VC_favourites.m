@@ -276,7 +276,7 @@
 -(void)delete_ITEM_from_Wish_list:(UIButton *)sender
 {
     
-   // [APIHelper start_animation:self];
+    [APIHelper start_animation:self];
      NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
     NSString *str_URL = [NSString stringWithFormat:@"%@delFromFav",str_image_base_URl];
     
@@ -333,10 +333,12 @@
                     }
                     [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
+                        
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            [self favourites_API_call];
+                        });
                 
-                   // [arr_images removeObjectAtIndex:sender.tag];
-                   // [_TBL_list reloadData];
-                 [self favourites_API_call];
+                   
                   });
                     
                 }

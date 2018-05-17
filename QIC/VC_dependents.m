@@ -58,9 +58,11 @@
         nib = [[NSBundle mainBundle] loadNibNamed:@"dependents_cell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
+    @try
+    {
     NSString *string_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[ARR_dependents objectAtIndex:indexPath.section] valueForKey:@"memberName"]]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    cell.LBL_dependent_name.text = string_name; 
     NSString *string_relation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[ARR_dependents objectAtIndex:indexPath.section] valueForKey:@"relationDesc"]]];
     if([string_relation isEqualToString:@"SELF"])
     {
@@ -75,7 +77,7 @@
     
     NSString *str_validity = [NSString stringWithFormat:@"Validity : %@ to %@",str_fromdate,str_to_date];
 
-    cell.LBL_dependent_name.text = string_name;
+    
     cell.LBL_relation.text = string_relation;
     
     NSString  *str_qid;
@@ -115,7 +117,11 @@
     
     cell.VW_back_ground.layer.cornerRadius = 2.0f;
 
-    
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
     return cell;
     
 }

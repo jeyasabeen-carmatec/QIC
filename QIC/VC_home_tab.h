@@ -28,7 +28,6 @@
 #pragma list of providers
 
 @property(nonatomic,weak) IBOutlet UIView *VW_providers;
-@property(nonatomic,weak) IBOutlet UIView *VW_indicagtor_for_cover;
 @property(nonatomic,weak) IBOutlet UIImageView *IMG_providers;
 @property(nonatomic,weak) IBOutlet UIButton *BTN_providers_all;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_provider_header_label;
@@ -37,14 +36,8 @@
 @property(nonatomic,weak) IBOutlet UIButton *BTN_provide_left;
 @property(nonatomic,weak) IBOutlet UIButton *BTN_provide_right;
 
-
-
-
-
-
 #pragma list of offers
 @property(nonatomic,weak) IBOutlet UIView *VW_offers;
-@property(nonatomic,weak) IBOutlet UIView *VW_offer_indicator_for_cover;
 @property(nonatomic,weak) IBOutlet UIImageView *IMG_offers;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_offer_header_label;
 @property(nonatomic,weak) IBOutlet UIButton *BTN_offers_all;
@@ -58,7 +51,6 @@
 
 #pragma list of News
 @property(nonatomic,weak) IBOutlet UIView *VW_news;
-@property(nonatomic,weak) IBOutlet UIView *VW_news_indicator_for_cover;
 @property(nonatomic,weak) IBOutlet UIImageView *IMG_News;
 @property(nonatomic,weak) IBOutlet UILabel *LBL_news_header_label;
 @property(nonatomic,weak) IBOutlet UIButton *BTN_news_all;
@@ -74,6 +66,9 @@
 @property(nonatomic,weak) IBOutlet UILabel *LBL_search_place_holder;
 @property(nonatomic,weak) IBOutlet UITextField *TXT_search;
 
+
+#pragma mark Notification button
+@property(nonatomic,weak) IBOutlet UIButton *BTN_notification;
 
 
 

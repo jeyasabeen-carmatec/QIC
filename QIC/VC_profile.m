@@ -82,11 +82,11 @@
 
 -(void)set_UP_VIEW
 {
-    
+   
     _BTN_camera.layer.cornerRadius = _BTN_camera.frame.size.width/2;
     _BTN_camera.layer.masksToBounds = YES;
-    _LBL_profile_name.numberOfLines = 0;
-    [_LBL_profile_name sizeToFit];
+   // _LBL_profile_name.numberOfLines = 0;
+   // [_LBL_profile_name sizeToFit];
     
     @try
     {
@@ -100,10 +100,13 @@
     }
     
     
-    [_LBL_mobile_number sizeToFit];
-     _LBL_mobile_number.numberOfLines = 0;
+  //  [_LBL_mobile_number sizeToFit];
+   //  _LBL_mobile_number.numberOfLines = 0;
     
-
+    
+    
+    
+   
     frameset = _LBL_mobile_number.frame;
     frameset.origin.y = _LBL_profile_name.frame.origin.y + _LBL_profile_name.frame.size.height + 4;
     _LBL_mobile_number.frame = frameset;

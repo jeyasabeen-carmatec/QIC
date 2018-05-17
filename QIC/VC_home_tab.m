@@ -43,6 +43,8 @@
     [_BTN_providers_all addTarget:self action:@selector(providers_action) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_news_all addTarget:self action:@selector(news_all_action) forControlEvents:UIControlEventTouchUpInside];
     [_BTN_offers_all addTarget:self action:@selector(offers_all_action) forControlEvents:UIControlEventTouchUpInside];
+    [_BTN_notification addTarget:self action:@selector(notification_action) forControlEvents:UIControlEventTouchUpInside];
+
 
     @try
     {
@@ -1030,6 +1032,12 @@ else{
     {
         
     }
+}
+#pragma Notification actions
+
+-(void)notification_action
+{
+    [self.delegate notification_view_call];
 }
 
 #pragma Home page API calling

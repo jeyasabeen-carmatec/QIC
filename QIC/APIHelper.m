@@ -134,6 +134,8 @@
 {
     
     NSString *str_null = str;
+    @try
+    {
     if([str_null isKindOfClass:[NSNull class]])
     {
         str_null = @"Not mentioned";
@@ -144,7 +146,11 @@
     {
      str_null = @"Not mentioned";
     }
-   
+    }
+    @catch(NSException *exception)
+    {
+        str_null = @"Not mentioned";
+    }
     return str_null;
 }
 

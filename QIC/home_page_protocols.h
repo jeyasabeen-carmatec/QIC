@@ -67,4 +67,8 @@
 
 #pragma close_delgate
 -(void)hide_over_lay;
+
+#pragma notification view call
+-(void)notification_view_call;
+-(void)notification_back;
 @end
