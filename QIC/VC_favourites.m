@@ -180,7 +180,7 @@
         }
         
         
-    cell.VW_back_ground.layer.cornerRadius = 2.0f;
+    cell.VW_back_ground.layer.cornerRadius = 6.0f;
         
     }
     @catch(NSException *exception)

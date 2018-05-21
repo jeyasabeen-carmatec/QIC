@@ -33,7 +33,7 @@
     
 //    ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"change-language.png",@"About-QIC.png",@"privacy-policy.png",@"terms-&-condition.png", nil];
     
-    ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"terms-&-condition.png", nil];
+    ARR_icons = [NSArray arrayWithObjects:@"profile-icon.png",@"fingerprint.png",@"Vector-Smart-Object.png",@"validity.png",@"dependent.png",@"Vector-Smart-Object.png",@"terms-&-condition.png",@"logout.png", nil];
     [_BTN_camera addTarget:self action:@selector(take_Picture) forControlEvents:UIControlEventTouchUpInside];
 
    
@@ -71,7 +71,7 @@
 //        DICT_profile = [NSArray arrayWithObjects:str_name,str_QID,str_MID,str_validity,@"Depenedents",@"Health Card",@"Change language",@"About QIC",@"Privacy Policy",@"Terms and Conditions", nil];
 
     
-    DICT_profile = [NSArray arrayWithObjects:str_name,str_QID,str_MID,str_validity,@"Depenedents",@"Health Card",@"Terms and Conditions", nil];
+    DICT_profile = [NSArray arrayWithObjects:str_name,str_QID,str_MID,str_validity,@"Depenedents",@"Health Card",@"Terms and Conditions",@"Logout", nil];
     }
     @catch(NSException *exception)
     {
@@ -217,6 +217,12 @@
        
        [self.delegate static_page_view_call];
    }
+     else if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Logout"])
+     {
+//         [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+//         [[UIApplication sharedApplication] cancelAllLocalNotifications];
+         [self dismissViewControllerAnimated:YES completion:nil];
+     }
     else if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Terms and Conditions"])
     {
             NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"]];

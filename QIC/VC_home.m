@@ -185,6 +185,8 @@
 
 -(void)HOme_view_calling
 {
+   
+    
     @try
     {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:0]];
@@ -211,15 +213,28 @@
                         [categorie_vw didMoveToParentViewController:self];
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
+        
+        
 //     ];
-    
+        NSDictionary *temp_dict = [[NSUserDefaults standardUserDefaults]  valueForKey:@"notification_DICT"];
+      //  NSString *str_dict = [NSString stringWithFormat:@"%@",temp_dict];
+       
+        if(temp_dict)
+        {
+          //   [APIHelper createaAlertWithMsg:str_dict andTitle:@""];
+            [self notification_view_call];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"notification_DICT"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+        }
    
     }
     @catch(NSException *exception)
     {
-        
+          // NSString *str_dict = [NSString stringWithFormat:@"%@",exception];
+        //  [APIHelper createaAlertWithMsg:str_dict andTitle:@""];
     }
-
+    
 }
 
 #pragma Providers view callig
@@ -785,7 +800,7 @@
 #pragma Notifications view calling
 -(void)notification_view_call
 {
-    VC_Notifications *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_search_offers"];
+    VC_Notifications *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_notifications"];
     //  [categorie_vw.TBL_profile reloadData];
     categorie_vw.delegate = self;
     

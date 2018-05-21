@@ -74,10 +74,7 @@
     }
     _BTN_guest.frame = frameset;
     
-    frameset = _BTN_register.frame;
-    frameset.origin.y = _BTN_guest.frame.origin.y + _BTN_guest.frame.size.height + 20;
-    _BTN_register.frame = frameset;
-    
+   
     
     
     /****************** setting the Button Login Border ***********************/
@@ -88,9 +85,7 @@
     
     
     
-    _BTN_register.layer.borderWidth = 0.5f;
-    _BTN_register.layer.cornerRadius = 2.0f;
-    _BTN_register.layer.borderColor = [UIColor whiteColor].CGColor;
+   
 
     
     [_BTN_login addTarget:self action:@selector(valdations_FOR_Text) forControlEvents:UIControlEventTouchUpInside];
@@ -105,7 +100,7 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    CGSize result = [[UIScreen mainScreen] bounds].size;
+   
     
    
         [textField setTintColor:[UIColor colorWithRed:0.00 green:0.18 blue:0.35 alpha:1.0]];
@@ -117,7 +112,7 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    CGSize result = [[UIScreen mainScreen] bounds].size;
+  
    [UIView beginAnimations:nil context:NULL];
    self.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
     [UIView commitAnimations];

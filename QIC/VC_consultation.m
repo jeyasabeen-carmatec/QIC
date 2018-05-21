@@ -136,7 +136,7 @@
     
     cell.LBL_addres.text = [NSString stringWithFormat:@"%@",str_address];
     
-    cell.VW_back_ground.layer.cornerRadius = 2.0f;
+    cell.VW_back_ground.layer.cornerRadius = 4.0f;
     cell.IMG_title.layer.masksToBounds = YES;
         
         cell.IMG_provider.layer.cornerRadius = cell.IMG_provider.frame.size.width/2;
@@ -167,7 +167,8 @@
         NSString *str = @"%";
         NSString *str_disc = @"Save";
         str_dicount = [NSString stringWithFormat:@"%@\n%@%@",str_disc,[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"],str];
-   
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0"];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@"0"];
     
     
     
@@ -209,8 +210,7 @@
             NSLog(@"Exception for attributed text:%@",exception);
         }
 
-        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0"];
-        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@"0"];
+       
         cell.LBL_discount.attributedText = attributedText;
     }
     else{
@@ -222,7 +222,9 @@
     else{
        
 
-        str_dicount = [NSString stringWithFormat:@"%@",str_dicount];
+        str_dicount = [NSString stringWithFormat:@"Save\n%@",[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"]];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
         cell.LBL_discount.text = str_dicount;
         
            }
@@ -602,7 +604,8 @@
             
             NSString *url_STR = URL_STR;
              NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
-            url_STR = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%d/%@",SERVER_URL,str_id,page_count,str_member_ID];
+             NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+            url_STR = [NSString stringWithFormat:@"%@getProviderstByServiceId/%@/%d/%@",str_image_base_URl,str_id,page_count,str_member_ID];
             url_STR =  [url_STR stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
             
             

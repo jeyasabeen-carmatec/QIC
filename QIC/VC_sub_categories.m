@@ -101,7 +101,7 @@
     }
     @try
     {
-    cell.contentView.layer.cornerRadius = 2.0f;
+        cell.contentView.layer.cornerRadius = 2.0f;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     NSString *str_name = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_name"]]];
@@ -138,7 +138,7 @@
         cell.LBL_phone.text = [NSString stringWithFormat:@"%@",str_phone];
         
 
-    cell.VW_background.layer.cornerRadius = 2.0f;
+    cell.VW_background.layer.cornerRadius = 4.0f;
     
     cell.IMG_title.layer.cornerRadius = cell.IMG_title.frame.size.width/2;
     cell.IMG_title.layer.masksToBounds = YES;

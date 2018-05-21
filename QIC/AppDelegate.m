@@ -21,6 +21,8 @@
     [NewRelicAgent startWithApplicationToken:@"AA31f46cdbec234c294afd0758c8d1a8debd72c23e"];
     [GMSServices provideAPIKey:@"AIzaSyDdjUq1m4XayB118EUlOyd68IaBsnDGj2Q"];
     
+   
+    
     if(@available(iOS 10, *)){
         UNUserNotificationCenter *notifiCenter = [UNUserNotificationCenter currentNotificationCenter];
         notifiCenter.delegate = self;
@@ -36,6 +38,7 @@
         [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
     }
     
+  
     return YES;
 }
 
@@ -95,6 +98,8 @@
 
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
     
+    
+    
 }
 #endif
 
@@ -121,5 +126,92 @@
     NSLog(@"User Info : %@",notification.request.content.userInfo);
     completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
 }
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    [[NSUserDefaults standardUserDefaults] setObject:userInfo forKey:@"notification_DICT"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"Notification Received .. Dictionary %@",[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"notification_DICT"]);
+    
+     
+    
+    if ( application.applicationState == UIApplicationStateActive ){
+        // app was already in the foreground
+      
+        
+        
+        @try {
+            NSDictionary *DICTN_notification = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"notification_DICT"];
+            NSDictionary *aps = [DICTN_notification valueForKey:@"aps"];
+            NSDictionary *alert = [aps valueForKey:@"alert"];
+            NSString *notifMessage = [alert valueForKey:@"body"];
+            
+            //Define notifView as UIView in the header file
+            [_notifView removeFromSuperview]; //If already existing
+            
+            _notifView = [[UIView alloc] initWithFrame:CGRectMake(0, -70, self.window.frame.size.width, 80)];
+            [_notifView setBackgroundColor:[UIColor grayColor]];
+            
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10,15,30,30)];
+            imageView.image = [UIImage imageNamed:@"AppLogo.png"];
+            
+            UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 15, self.window.frame.size.width - 100 , 30)];
+            myLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0];
+            myLabel.text = notifMessage;
+            
+            [myLabel setTextColor:[UIColor whiteColor]];
+            [myLabel setNumberOfLines:0];
+            
+            [_notifView setAlpha:0.95];
+            
+            //The Icon
+            [_notifView addSubview:imageView];
+            
+            //The Text
+            [_notifView addSubview:myLabel];
+            
+            //The View
+            [self.window addSubview:_notifView];
+            
+            UITapGestureRecognizer *tapToDismissNotif = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                                action:@selector(dismissNotifFromScreen)];
+            tapToDismissNotif.numberOfTapsRequired = 1;
+            tapToDismissNotif.numberOfTouchesRequired = 1;
+            
+            [_notifView addGestureRecognizer:tapToDismissNotif];
+            
+            
+            [UIView animateWithDuration:1.0 delay:.1 usingSpringWithDamping:0.5 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                
+                [_notifView setFrame:CGRectMake(0, 0, self.window.frame.size.width, 60)];
+                
+            } completion:^(BOOL finished) {
+                
+                
+            }];
+        } @catch (NSException *exception) {
+            NSLog(@"The notification exception %@",exception);
+        }
+    }
+    else
+    {
+        completionHandler(UIBackgroundFetchResultNewData);
 
+//        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        Intial_vc *vc = [sb instantiateViewControllerWithIdentifier:@"initial_VC_cc"];
+//        self.window.rootViewController = vc;
+    }
+    
+      //  [self applicationDidFinishLaunching:[UIApplication sharedApplication]];
+}
+-(void) dismissNotifFromScreen
+{
+    _notifView.hidden = YES;
+//    NSDictionary *DICTN_notification = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"notification_DICT"];
+//    if (DICTN_notification) {
+//        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        Intial_vc *vc = [sb instantiateViewControllerWithIdentifier:@"initial_VC_cc"];
+//        self.window.rootViewController = vc;
+//    }
+}
 @end

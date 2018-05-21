@@ -22,6 +22,7 @@
 		D015A13920AD63A200AA8435 /* VC_Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = D015A13820AD63A100AA8435 /* VC_Notifications.m */; };
 		D015A13D20AD63C000AA8435 /* notifications_cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D015A13B20AD63C000AA8435 /* notifications_cell.m */; };
 		D015A13E20AD63C000AA8435 /* notifications_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D015A13C20AD63C000AA8435 /* notifications_cell.xib */; };
+		D015A14020AF174700AA8435 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = D015A13F20AF174600AA8435 /* logout.png */; };
 		D02AC7B62072301D00F47C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC7B52072301D00F47C93 /* main.m */; };
 		D02AC7B92072301D00F47C93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC7B82072301D00F47C93 /* AppDelegate.m */; };
 		D02AC7BC2072301D00F47C93 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AC7BB2072301D00F47C93 /* ViewController.m */; };
@@ -166,6 +167,7 @@
 		D015A13A20AD63C000AA8435 /* notifications_cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = notifications_cell.h; sourceTree = "<group>"; };
 		D015A13B20AD63C000AA8435 /* notifications_cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = notifications_cell.m; sourceTree = "<group>"; };
 		D015A13C20AD63C000AA8435 /* notifications_cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = notifications_cell.xib; sourceTree = "<group>"; };
+		D015A13F20AF174600AA8435 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		D02AC7B12072301D00F47C93 /* QIC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QIC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02AC7B52072301D00F47C93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D02AC7B72072301D00F47C93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 		D02AC7EB2073416F00F47C93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D015A13F20AF174600AA8435 /* logout.png */,
 				D02FB8F9208DF5C1000BCD3E /* transparent-BG.png */,
 				D0AE158E20886462004B32CD /* Image-placeholder-2.png */,
 				D0AE158220877309004B32CD /* Health_card.png */,
@@ -1074,6 +1077,7 @@
 				D02AC8AE207624D500F47C93 /* Futura URW Medium.ttf in Resources */,
 				D02AC8A2207624C200F47C93 /* Futura SCTOT Light.ttf in Resources */,
 				D02AC7EA2073416A00F47C93 /* upload-27.png in Resources */,
+				D015A14020AF174700AA8435 /* logout.png in Resources */,
 				D0AE159E208882A5004B32CD /* digital-7 (mono italic).ttf in Resources */,
 				D02AC87B2075FC9100F47C93 /* validity.png in Resources */,
 				D02AC88F2076238A00F47C93 /* Futura Round Bold.ttf in Resources */,

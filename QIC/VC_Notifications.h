@@ -12,8 +12,14 @@
 @interface VC_Notifications : UIViewController
 @property(nonatomic,weak) IBOutlet UITableView *TBL_notifications;
 @property(nonatomic,weak) IBOutlet UIButton *BTN_back;
-
+@property(nonatomic,weak) IBOutlet UITextView *TXT_view;
 #pragma Delegate action
 @property(nonatomic,assign) id <home_page_protocols> delegate;
+
+#pragma Search bar views
+
+@property(nonatomic,weak) IBOutlet UILabel *LBL_search_place_holder;
+@property(nonatomic,weak) IBOutlet UITextField *TXT_search;
+@property(nonatomic,weak) IBOutlet UIButton *BTN_search;
 
 @end

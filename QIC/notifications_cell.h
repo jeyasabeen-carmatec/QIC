@@ -11,5 +11,7 @@
 @interface notifications_cell : UITableViewCell
 @property(nonatomic,weak) IBOutlet UILabel *LBL_text;
 @property(nonatomic,weak) IBOutlet UIButton *BTN_read;
+@property(nonatomic,weak) IBOutlet UIView *VW_background;
+
 
 @end

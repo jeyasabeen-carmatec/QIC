@@ -9,8 +9,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Futura Book.ttf">
-            <string>Futura-Book</string>
+        <array key="Futura URW Medium.ttf">
+            <string>FuturaT-Medi</string>
         </array>
     </customFonts>
     <objects>
@@ -24,47 +24,35 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6h-SZ-lSH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="8" y="6" width="306" height="34"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPt-0X-xeT">
-                                <rect key="frame" x="16" y="11" width="224" height="23"/>
-                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="7" y="10" width="291" height="14"/>
+                                <fontDescription key="fontDescription" name="FuturaT-Medi" family="FuturaTMed" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01i-Td-a1P">
-                                <rect key="frame" x="248" y="11" width="64" height="19"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="19" id="Twi-dK-CHI"/>
-                                    <constraint firstAttribute="width" constant="64" id="tuK-Qr-p9Q"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="17"/>
-                                <state key="normal" title="Read">
-                                    <color key="titleColor" red="0.32549019610000002" green="0.71764705880000002" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="yPt-0X-xeT" firstAttribute="top" secondItem="N6h-SZ-lSH" secondAttribute="top" constant="11" id="264-dv-7Ev"/>
-                            <constraint firstItem="01i-Td-a1P" firstAttribute="leading" secondItem="yPt-0X-xeT" secondAttribute="trailing" constant="8" id="U1F-kW-DeS"/>
-                            <constraint firstAttribute="trailing" secondItem="01i-Td-a1P" secondAttribute="trailing" constant="8" id="U5A-h1-k5g"/>
+                            <constraint firstItem="yPt-0X-xeT" firstAttribute="top" secondItem="N6h-SZ-lSH" secondAttribute="top" constant="10" id="264-dv-7Ev"/>
+                            <constraint firstAttribute="trailing" secondItem="yPt-0X-xeT" secondAttribute="trailing" constant="8" id="BXY-47-dEA"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yPt-0X-xeT" secondAttribute="bottom" constant="10" id="nKj-Zp-0DN"/>
-                            <constraint firstItem="yPt-0X-xeT" firstAttribute="leading" secondItem="N6h-SZ-lSH" secondAttribute="leading" constant="16" id="yZg-OQ-pfR"/>
-                            <constraint firstItem="01i-Td-a1P" firstAttribute="top" secondItem="yPt-0X-xeT" secondAttribute="top" id="zU5-Al-RdU"/>
+                            <constraint firstItem="yPt-0X-xeT" firstAttribute="leading" secondItem="N6h-SZ-lSH" secondAttribute="leading" constant="7" id="yZg-OQ-pfR"/>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="N6h-SZ-lSH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9Ua-94-3xQ"/>
-                    <constraint firstItem="N6h-SZ-lSH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EYM-pH-wln"/>
-                    <constraint firstAttribute="trailing" secondItem="N6h-SZ-lSH" secondAttribute="trailing" id="GG2-os-efN"/>
-                    <constraint firstAttribute="bottom" secondItem="N6h-SZ-lSH" secondAttribute="bottom" id="z9Y-0h-mrL"/>
+                    <constraint firstItem="N6h-SZ-lSH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="9Ua-94-3xQ"/>
+                    <constraint firstItem="N6h-SZ-lSH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="EYM-pH-wln"/>
+                    <constraint firstAttribute="trailing" secondItem="N6h-SZ-lSH" secondAttribute="trailing" constant="6" id="GG2-os-efN"/>
+                    <constraint firstAttribute="bottom" secondItem="N6h-SZ-lSH" secondAttribute="bottom" constant="3.5" id="z9Y-0h-mrL"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="BTN_read" destination="01i-Td-a1P" id="oe8-LK-EEi"/>
                 <outlet property="LBL_text" destination="yPt-0X-xeT" id="4YZ-hf-w7m"/>
+                <outlet property="VW_background" destination="N6h-SZ-lSH" id="aE6-hj-JSf"/>
             </connections>
         </tableViewCell>
     </objects>
