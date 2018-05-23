@@ -34,10 +34,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>QIC wants to access your Camera</string>
+	<key>Privacy - Photo Library Usage Description </key>
+	<string>QIC wants to access your Media</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>QIC wants to access your location</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>QIC wants to access your Media</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>digital-7</string>
@@ -50,6 +50,8 @@
 		<string>Futura Medium</string>
 		<string>Futura Thin</string>
 	</array>
+	<key>UIApplicationExitsOnSuspend</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

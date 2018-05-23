@@ -26,13 +26,14 @@
     
     @try
     {
-//        NSString *str_image = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[[jsonresponse_DIC valueForKey:@"Services"]objectAtIndex:indexPath.section] valueForKey:@"image"]];
-//        str_image = [APIHelper convert_NUll:str_image];
-//        
-//        str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-//        
-//        [_IMG_profile sd_setImageWithURL:[NSURL URLWithString:str_image]
-//                          placeholderImage:[UIImage imageNamed:@"Image-placeholder-2.png"]];
+        //NSString *str_image_URL = [[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"];
+        NSString *str_image = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_NAME"]];
+        str_image = [APIHelper convert_NUll:str_image];
+        
+        str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        
+        [_IMG_profile sd_setImageWithURL:[NSURL URLWithString:str_image]
+                          placeholderImage:[UIImage imageNamed:@""]];
 
     NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
     

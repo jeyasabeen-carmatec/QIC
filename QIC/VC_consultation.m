@@ -371,7 +371,7 @@
                         consultation_cell *cell = (consultation_cell *)[self.TBL_list cellForRowAtIndexPath:index];
                         
                         [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
-                        [APIHelper createaAlertWithMsg:@"Offer deleted from your favourites." andTitle:@""];
+                        [APIHelper createaAlertWithMsg:@"Provider removed from your favourites." andTitle:@""];
                             
                             NSMutableDictionary *wishDic = [[NSMutableDictionary alloc] initWithDictionary:[arr_total_data objectAtIndex:index.row]];
                             
@@ -393,7 +393,7 @@
                     
                        [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
                     
-                         [APIHelper createaAlertWithMsg:@"Offer added to your favourites." andTitle:@""];
+                         [APIHelper createaAlertWithMsg:@"Provider added to your favourites." andTitle:@""];
                         int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
                         i = i +1;
                         NSString *str_count = [NSString stringWithFormat:@"%d",i];
@@ -538,10 +538,7 @@
                 [self.delegate consultation_offers_back:@""];
 
             }
-            
-           
-            
-            
+          
         }
         else
         {
@@ -582,6 +579,7 @@
 
 - (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
 {
+    
     //Pull up go to NextPage
     
     @try

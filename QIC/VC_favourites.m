@@ -254,7 +254,7 @@
                     NSString *str_page = [[NSUserDefaults standardUserDefaults] valueForKey:@"tab_param"];
 
                     [self.delegate favourites_back_ACTION:str_page];
-                    [APIHelper createaAlertWithMsg:@"No items found" andTitle:@""];
+                    [APIHelper createaAlertWithMsg:@"No Providers found" andTitle:@""];
                          });
                 }
                 NSLog(@"The login customer Data:%@",jsonresponse_DIC);
@@ -316,7 +316,15 @@
                 NSString *str_code = [NSString stringWithFormat:@"%@",[temp_dict valueForKey:@"msg"]];
                 if([str_code isEqualToString:@"Sucess"])
                 {
-                    [APIHelper createaAlertWithMsg:@"Offer deleted from your favourites." andTitle:@""];
+                     if([str_fav_type isEqualToString:@"providers"])
+                     {
+                         [APIHelper createaAlertWithMsg:@"Provider removed from your favourites." andTitle:@""];
+
+                     }
+                     else{
+                         [APIHelper createaAlertWithMsg:@"Provider removed from your favourites." andTitle:@""];
+
+                     }
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
  

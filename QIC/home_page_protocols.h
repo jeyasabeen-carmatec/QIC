@@ -71,4 +71,8 @@
 #pragma notification view call
 -(void)notification_view_call;
 -(void)notification_back;
+
+#pragma app delegate methods
+-(void)notify_me;
+-(void)read_status_update;
 @end

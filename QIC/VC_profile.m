@@ -11,8 +11,9 @@
 #import "Profile_langugage_cell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "APIHelper.h"
+#import <Photos/Photos.h>
 
-@interface VC_profile ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+@interface VC_profile ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 {
     CGRect frameset;
     NSArray *ARR_icons;
@@ -39,7 +40,6 @@
    
     
     [self set_UP_DATA];
-    
     [self set_UP_VIEW];
     [self Image_API_Calling];
     
@@ -107,12 +107,12 @@
     
     
    
-    frameset = _LBL_mobile_number.frame;
-    frameset.origin.y = _LBL_profile_name.frame.origin.y + _LBL_profile_name.frame.size.height + 4;
-    _LBL_mobile_number.frame = frameset;
+//    frameset = _LBL_mobile_number.frame;
+//    frameset.origin.y = _LBL_profile_name.frame.origin.y + _LBL_profile_name.frame.size.height + 4;
+//    _LBL_mobile_number.frame = frameset;
     
     frameset = _TBL_profile.frame;
-    frameset.origin.y = _LBL_mobile_number.frame.origin.y + _LBL_mobile_number.frame.size.height + 20;
+    frameset.origin.y = _VW_IMG_background.frame.origin.y + _VW_IMG_background.frame.size.height + 20;
     _TBL_profile.frame = frameset;
     
     
@@ -221,6 +221,12 @@
      {
 //         [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
 //         [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    //     [[NSNotificationCenter currentNotificationCenter] removeAllDeliveredNotifications];
+
+         
+         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"USER_DATA"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
+         
          [self dismissViewControllerAnimated:YES completion:nil];
      }
     else if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Terms and Conditions"])
@@ -317,9 +323,16 @@
     if (buttonIndex == 0)
     {
         
-        if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
-            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            [self presentViewController:picker animated:YES completion:NULL];
+        if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                [picker setModalPresentationStyle: UIModalPresentationOverFullScreen];
+                [self presentViewController:picker animated:YES completion:nil];
+
+            });
+            
+           
             
         }
         else{
@@ -329,8 +342,13 @@
     }
     else if (buttonIndex == 1)
     {
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        [picker setModalPresentationStyle: UIModalPresentationOverFullScreen];
         [self presentViewController:picker animated:YES completion:nil];
+
+
     }
 }
 
@@ -338,7 +356,9 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo
 {
+    
     _IMG_prfoile_image.image = image;
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     UIImage *chosenImage = _IMG_prfoile_image.image;
@@ -365,6 +385,7 @@
         {
             NSLog(@"the cachedImagedPath is %@",imagePath);
             localFilePath = imagePath;
+            
         }
     }
     else
@@ -374,16 +395,10 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     localFilePath = [documentsDirectory stringByAppendingPathComponent:imageName];
+   
     }
+    
     [self uploadImage:image];
-    
-}
-
-
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
-    [picker dismissViewControllerAnimated:YES completion:nil];
     
 }
 
@@ -422,8 +437,11 @@
                 
                 if([str_code isEqualToString:@"1"])
                 {
-                    NSString *str_image = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[TEMP_dict valueForKey:@"url"]]];
-                    str_image = [str_image stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+                    NSString *str_image = [NSString stringWithFormat:@"http:%@",[APIHelper convert_NUll:[TEMP_dict valueForKey:@"url"]]];
+                    [[NSUserDefaults standardUserDefaults] setValue:str_image forKey:@"IMAGE_NAME"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+
                     
                     [_IMG_prfoile_image sd_setImageWithURL:[NSURL URLWithString:str_image]
                                       placeholderImage:[UIImage imageNamed:@"upload-27.png"]];
@@ -482,17 +500,6 @@
     [body appendData:[[NSString stringWithFormat:@"%@",str_member_ID]dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
-
-   
-    
-    
-//    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-//    //[body appendData:[[NSString stringWithString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"logo\"; filename=\"%@\"\r\n", @"serser.jpg"]] dataUsingEncoding:NSUTF8StringEncoding]];
-//    [body appendData:[[NSString stringWithString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"profile-pic\"; filename=\"profile-pic\"\r\n"]] dataUsingEncoding:NSUTF8StringEncoding]];
-//
-//    [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-//    [body appendData:[NSData dataWithData:imageData]];
-//    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPBody:body];
     
     NSError *err;
@@ -512,6 +519,9 @@
                                          options:NSJSONReadingMutableLeaves
                                          error:nil];
         NSLog(@"jsonObject  %@",jsonObject);
+         NSString *str_image = [NSString stringWithFormat:@"http:%@",[APIHelper convert_NUll:[jsonObject valueForKey:@"url"]]];
+        [[NSUserDefaults standardUserDefaults] setValue:str_image forKey:@"IMAGE_NAME"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [APIHelper createaAlertWithMsg:[jsonObject valueForKey:@"mes"] andTitle:@""];
     }
     

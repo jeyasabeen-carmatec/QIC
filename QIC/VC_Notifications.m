@@ -53,39 +53,78 @@
     [_TBL_notifications setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
     _TBL_notifications.showLoadMoreView = YES;
     [_BTN_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventTouchUpInside];
-    [APIHelper start_animation:self];
-    [self performSelector:@selector(notifications_LIST_API) withObject:nil afterDelay:0.01];
+  
+    
     
     temp_dict = [[NSUserDefaults standardUserDefaults]  valueForKey:@"notification_DICT"];
-    //  NSString *str_dict = [NSString stringWithFormat:@"%@",temp_dict];
     
     if(temp_dict)
     {
-        //   [APIHelper createaAlertWithMsg:str_dict andTitle:@""];
         [self TXT_view_setting];
-       
+        NSString *str_id = [NSString stringWithFormat:@"%@",[[[temp_dict valueForKey:@"aps"]valueForKey:@"alert"]valueForKey:@"id"]];
+        [self read_status_update:str_id];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"notification_DICT"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-         _TXT_view.text =[NSString stringWithFormat:@"%@",[[[temp_dict valueForKey:@"aps"]valueForKey:@"alert"]valueForKey:@"body"]];
+        [self push_notification_setting_DATA];
         [self  search_bar_hide];
     }
+   // [APIHelper start_animation:self];
     
+    [self performSelector:@selector(notifications_LIST_API) withObject:nil afterDelay:0.01];
+
 }
+
+#pragma Push notification data setting
+-(void)push_notification_setting_DATA
+{
+    NSString *str_body = [NSString stringWithFormat:@"%@",[[[temp_dict valueForKey:@"aps"]valueForKey:@"alert"]valueForKey:@"body"]];
+     NSString *str_title = [NSString stringWithFormat:@"%@",[[[temp_dict valueForKey:@"aps"]valueForKey:@"alert"]valueForKey:@"title"]];
+    
+    
+    NSString *str_data_setting = [NSString  stringWithFormat:@"%@\n\n%@",str_title,str_body];
+    
+        if ([_TXT_view respondsToSelector:@selector(setAttributedText:)])
+        {
+    
+    
+    
+            NSDictionary *attribs = @{
+                                      NSForegroundColorAttributeName:_TXT_view.textColor,
+                                      NSFontAttributeName: _TXT_view.font,
+                                      };
+            NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_data_setting attributes:attribs];
+    
+        // [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0];
+            //FuturaT-Medi
+             [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"FuturaT-Medi" size:20],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0]}range:[str_data_setting rangeOfString:str_title] ];
+          
+    
+            [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:15],NSForegroundColorAttributeName:[UIColor whiteColor],}range:[str_data_setting rangeOfString:str_body] ];
+    
+    
+            _TXT_view.attributedText = attributedText;
+        }
+        else{
+            _TXT_view.text = str_data_setting;
+        }
+    
+    
+    
+    
+    
+//     _TXT_view.text =[NSString stringWithFormat:@"%@",[[[temp_dict valueForKey:@"aps"]valueForKey:@"alert"]valueForKey:@"body"]];
+}
+
+#pragma Textview frame setting
+
 -(void)TXT_view_setting;
 {
     _TBL_notifications.hidden = YES;
     CGRect frameset = _TXT_view.frame;
     frameset.origin.x = 10;
-    frameset.origin.y = _TXT_search.frame.origin.y + _TXT_search.frame.size.height + 10;
+    frameset.origin.y = _TXT_search.frame.origin.y;
     
     frameset.size.height = self.view.frame.size.height - _TXT_view.frame.origin.y;
-//    float ht = self.view.frame.size.height - _TXT_view.frame.origin.y;
-//    if(ht == frameset.size.height)
-//    {
-//        frameset.size.height = ht;
-//
-//    }
-//
     frameset.size.width = self.view.frame.size.width - 25;
     _TXT_view.frame = frameset;
     
@@ -97,6 +136,9 @@
 {
     if(_TBL_notifications.hidden == YES)
     {
+     
+         [self notifications_LIST_API];
+        [_TBL_notifications reloadData];
         _TBL_notifications.hidden = NO;
         _TXT_view.hidden = YES;
          [self  search_bar_hide];
@@ -147,7 +189,30 @@
     cell.VW_background.layer.cornerRadius = 4.0f;
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString *str_text = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"title"]]];
+    
+     NSString *str_des = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"message"]]];
+    
+     NSString *str_date = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"dateTime"]]];
+    
     cell.LBL_text.text =[NSString stringWithFormat:@"%@",str_text];
+    
+    cell.LBL_title.text =[NSString stringWithFormat:@"%@",str_des];
+    cell.LBL_date.text = [NSString stringWithFormat:@"%@",str_date];
+    
+    NSString *str_status = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"read_status"]]];
+    
+    if([str_status isEqualToString:@"UnRead"])
+    {
+        cell.LBL_text.textColor = [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0];
+        cell.LBL_title.textColor = [UIColor blackColor];
+         cell.LBL_date.textColor = [UIColor blackColor];
+        
+    }
+    else{
+        cell.LBL_text.textColor = [UIColor lightGrayColor];
+        cell.LBL_title.textColor = [UIColor lightGrayColor];
+        cell.LBL_date.textColor = [UIColor lightGrayColor];
+    }
     return cell;
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -159,7 +224,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        [self DELETE_notification:[[arr_total_data objectAtIndex:indexPath.row]valueForKey:@"id"]];
+        [self DELETE_notification:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"id"]:indexPath];
        
     }
 }
@@ -173,27 +238,59 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _TXT_view.hidden = NO;
-    NSString *str_text = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"message"]]];
-     NSString *str_status = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"type"]]];
-//    if([str_status isEqualToString:@"provider"])
-//    {
-        _TXT_view.text = str_text;
+    @try
+    {
         [self TXT_view_setting];
+    _TXT_view.hidden = NO;
+//    NSString *str_text = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"message"]]];
+     NSString *str_status = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"read_status"]]];
+    if([str_status isEqualToString:@"UnRead"])
+    {
+        [self status_Update:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"id"]:indexPath];
+
+    }
+
+        NSString *str_body = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"message"]]];
+        NSString *str_title = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"title"]]];
+        
+        
+        NSString *str_data_setting = [NSString  stringWithFormat:@"%@\n\n%@",str_title,str_body];
+        
+        if ([_TXT_view respondsToSelector:@selector(setAttributedText:)])
+        {
+            
+            
+            
+            NSDictionary *attribs = @{
+                                      NSForegroundColorAttributeName:_TXT_view.textColor,
+                                      NSFontAttributeName: _TXT_view.font,
+                                      };
+            NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:str_data_setting attributes:attribs];
+            
+            // [UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0];
+            
+          [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"FuturaT-Medi" size:20],NSForegroundColorAttributeName:[UIColor colorWithRed:0.33 green:0.72 blue:0.78 alpha:1.0]}range:[str_data_setting rangeOfString:str_title] ];
+            
+            
+            [attributedText setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Futura-Book" size:15],NSForegroundColorAttributeName:[UIColor whiteColor],}range:[str_data_setting rangeOfString:str_body] ];
+            
+            
+            _TXT_view.attributedText = attributedText;
+        }
+        else{
+            _TXT_view.text = str_data_setting;
+        }
+        
+       
+       
         [self search_bar_hide];
-//    }
-//    else
-//    {
-//        NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE_URL"]];
-//        NSString *str_URL = [NSString stringWithFormat:@"%@%@",str_image_base_URl,[[arr_total_data objectAtIndex:indexPath.row] valueForKey:@"url_key"]];
-//        [[NSUserDefaults standardUserDefaults]  setValue:str_URL forKey:@"Static_URL"];
-//
-//        [[NSUserDefaults standardUserDefaults]  setValue:@"TOP ARTICLES" forKey:@"header_val"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//
-//        [self.delegate calling_news_view:@"news_detail"];
-  //  }
+    }
+    @catch(NSException *exception)
+    {
+        
+    }
     
+
     
     
 }
@@ -284,12 +381,16 @@
         if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
         {
             [arr_total_data addObjectsFromArray:[jsonresponse_DIC valueForKey:@"List"]];
-            [_TBL_notifications reloadData];
+            
+            
+                [_TBL_notifications reloadData];
+            
             
         }
         else
         {
-            [APIHelper createaAlertWithMsg:@"No offers found." andTitle:nil];
+            [APIHelper createaAlertWithMsg:@"No Notifications found." andTitle:nil];
+    
            // [self.delegate consultation_offers_back:@""];
             
         }
@@ -392,7 +493,7 @@
     
 }
 #pragma mark delete Notification
--(void)DELETE_notification:(NSString *)str_notification_ID
+-(void)DELETE_notification:(NSString *)str_notification_ID : (NSIndexPath *)index
 {
     @try
     {
@@ -419,9 +520,24 @@
             }
             if(data)
             {
-                NSDictionary *TEMP_dict = [data valueForKey:@"data"];
-                NSLog(@"The login customer Data:%@",TEMP_dict);
-                [APIHelper stop_activity_animation:self];
+                  [APIHelper stop_activity_animation:self];
+                NSDictionary *TEMP_dict = data;
+                NSLog(@"The Delete Notification Data:%@",TEMP_dict);
+
+                NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"code"]];
+                if([str_code isEqualToString:@"1"])
+                {
+                 
+                  //  [wishDic setObject:@"No" forKey:@"read_status"];
+                    
+                    [arr_total_data removeObjectAtIndex:index.section];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                         [_TBL_notifications reloadData];
+                       });
+                   
+                    //[self notifications_LIST_API];
+                }
+              
                 
                
                 
@@ -441,6 +557,66 @@
         NSLog(@"Exception from login api:%@",exception);
     }
 
+}
+#pragma mark Status Update
+-(void)status_Update:(NSString *)str_notification_IDS :(NSIndexPath *)index
+{
+    @try
+    {
+        
+        
+        //  NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
+        NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+        NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+        NSString *str_id =str_notification_IDS;
+        
+        NSString *url_str = [NSString stringWithFormat:@"%@statusUpdate",str_image_base_URl];
+        //   NSString *str_Phone =[NSString stringWithFormat:@"%@",_TXT_password.text];
+        NSDictionary *parameters =@{
+                                    @"customer_id":str_member_ID,
+                                    @"notification_id":str_id
+                                    };
+        [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+                
+            }
+            if(data)
+            {
+                [APIHelper stop_activity_animation:self];
+                 NSDictionary *TEMP_dict = data;
+                NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"code"]];
+                if([str_code isEqualToString:@"1"])
+                {
+             
+                NSDictionary *TEMP_dict = data;
+                NSLog(@"The Status of Notification Data:%@",TEMP_dict);
+                NSMutableDictionary *wishDic = [[NSMutableDictionary alloc] initWithDictionary:[arr_total_data objectAtIndex:index.section]];
+                
+                [wishDic setObject:@"No" forKey:@"read_status"];
+                
+                [arr_total_data replaceObjectAtIndex:index.section withObject:wishDic];
+                }
+                
+            }
+            else{
+                [APIHelper stop_activity_animation:self];
+                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+                
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        NSLog(@"Exception from login api:%@",exception);
+    }
+    
 }
 #pragma mark - Control datasource
 - (void)finishRefresh
@@ -579,7 +755,53 @@
     }
     
 }
+-(void)read_status_update:(NSString *)str_id
+{
+    @try
+    {
+        [APIHelper stop_activity_animation:self];
+    NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+   
 
+    NSString *url_str = [NSString stringWithFormat:@"%@statusUpdate",str_image_base_URl];
+    //   NSString *str_Phone =[NSString stringWithFormat:@"%@",_TXT_password.text];
+    NSDictionary *parameters =@{
+                                @"customer_id":str_member_ID,
+                                @"notification_id":str_id
+                                };
+    [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+
+
+        if(error)
+        {
+            [APIHelper stop_activity_animation:self];
+            [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+
+        }
+        if(data)
+        {
+            [APIHelper stop_activity_animation:self];
+            NSDictionary *TEMP_dict = data;
+            NSLog(@"The temporary description is:%@",TEMP_dict);
+           // NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"code"]];
+           
+        }
+        else{
+            [APIHelper stop_activity_animation:self];
+            [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+
+        }
+
+    }];
+}
+@catch(NSException *exception)
+{
+    [APIHelper stop_activity_animation:self];
+    NSLog(@"Exception from login api:%@",exception);
+}
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

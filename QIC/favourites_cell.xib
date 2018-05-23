@@ -42,7 +42,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wci-cc-l3Y">
-                                <rect key="frame" x="256" y="1" width="37" height="45"/>
+                                <rect key="frame" x="256" y="4" width="37" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Ohl-s0-qPJ"/>
                                     <constraint firstAttribute="width" constant="37" id="ayx-05-gHv"/>
@@ -66,7 +66,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vH-63-YZG">
-                                <rect key="frame" x="256" y="32" width="47" height="16"/>
+                                <rect key="frame" x="256" y="35" width="47" height="16"/>
                                 <fontDescription key="fontDescription" name="Futura-Book" family="Futura Bk" pointSize="12"/>
                                 <color key="textColor" red="0.63529411764705879" green="0.0" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -106,7 +106,7 @@
                             <constraint firstItem="oI9-Nk-HfH" firstAttribute="leading" secondItem="Bqb-8u-jHT" secondAttribute="trailing" constant="20" id="PRX-ic-wuT"/>
                             <constraint firstItem="Ccl-V4-Mtb" firstAttribute="top" secondItem="WHM-nL-pwz" secondAttribute="bottom" constant="9" id="U94-ia-I6O"/>
                             <constraint firstItem="WHM-nL-pwz" firstAttribute="leading" secondItem="fV5-w9-Ape" secondAttribute="trailing" constant="7" id="XR4-mu-yqR"/>
-                            <constraint firstItem="wci-cc-l3Y" firstAttribute="top" secondItem="WHM-nL-pwz" secondAttribute="top" constant="-8" id="YHb-46-OHh"/>
+                            <constraint firstItem="wci-cc-l3Y" firstAttribute="top" secondItem="WHM-nL-pwz" secondAttribute="top" constant="-5" id="YHb-46-OHh"/>
                             <constraint firstItem="1vH-63-YZG" firstAttribute="top" secondItem="wci-cc-l3Y" secondAttribute="bottom" constant="-14" id="ZHe-Ar-Cee"/>
                             <constraint firstItem="1vH-63-YZG" firstAttribute="leading" secondItem="wci-cc-l3Y" secondAttribute="leading" id="gCk-nv-7fA"/>
                             <constraint firstItem="fV5-w9-Ape" firstAttribute="leading" secondItem="UOb-BT-Wvv" secondAttribute="leading" id="gDW-xJ-76q"/>
@@ -127,7 +127,7 @@
                     <constraint firstAttribute="trailing" secondItem="UOb-BT-Wvv" secondAttribute="trailing" constant="8" id="bro-GI-Z8I"/>
                     <constraint firstItem="UOb-BT-Wvv" firstAttribute="top" secondItem="MMU-gJ-cDK" secondAttribute="top" constant="8" id="cZc-tC-0Ny"/>
                     <constraint firstAttribute="trailing" secondItem="oI9-Nk-HfH" secondAttribute="trailing" constant="11" id="egG-hC-hBk"/>
-                    <constraint firstAttribute="bottom" secondItem="UOb-BT-Wvv" secondAttribute="bottom" constant="-3.5" id="qdh-lr-kv4"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UOb-BT-Wvv" secondAttribute="bottom" constant="-3.5" id="qdh-lr-kv4"/>
                     <constraint firstAttribute="trailing" secondItem="Ro1-XC-JRF" secondAttribute="trailing" constant="24" id="sgM-0E-RV5"/>
                 </constraints>
             </tableViewCellContentView>

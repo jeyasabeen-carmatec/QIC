@@ -20,24 +20,52 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     /****************** Calling the set up view ***********************/
+ 
     UITapGestureRecognizer *close_menu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close_keyboard)];
     close_menu.delegate = self;
     [_VW_center addGestureRecognizer:close_menu];
-    [self setUP_VIEW];
-    [self Checka_Version];
-    [self ALL_PATHS_API];
+     [self ALL_PATHS_API];
+      [self Checka_Version];
+  
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
+    
+    NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+   NSDictionary  *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+    if([[TEMP_dict allKeys]count] > 1)
+    {
+        _IMG_center.hidden = NO;
+        [self.view addSubview:_IMG_center];
+        _IMG_center.center = self.view.center;
+        _VW_center.hidden = YES;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"login_home" sender:self];
+              });
+    }
+    else{
+        _IMG_center.hidden = YES;
+          _VW_center.hidden = NO;
+        [self setUP_VIEW];
+      
+    }
+    
 }
 #pragma setting the view of the components
 
 -(void)setUP_VIEW
 {
+    
+       _TXT_uname.text = @"28535632996";
     [_BTN_guest addTarget:self action:@selector(SIGN_UP_action) forControlEvents:UIControlEventTouchUpInside];
     
     /**************** settign te frame for view center **********************/
     
    // _VW_center.center=self.view.center;
-    _TXT_uname.text =  @"";
-    _TXT_password.text = @"";
+//    _TXT_uname.text =  @"";
+//    _TXT_password.text = @"";
     
     CGRect frameset = _BTN_guest.frame;
    
@@ -173,84 +201,169 @@
 #pragma mark LOGIN action
 
 
+//-(void)login_action
+//{
+//
+//    @try
+//    {
+//
+//
+//        NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
+//         NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+//    NSString *url_str = [NSString stringWithFormat:@"%@login",str_image_base_URl];
+//     //   NSString *str_Phone =[NSString stringWithFormat:@"%@",_TXT_password.text];
+//    NSDictionary *parameters = @{@"memberId":str_QID};
+//        [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+//
+//
+//        if(error)
+//        {
+//            [APIHelper stop_activity_animation:self];
+//            [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+//
+//        }
+//        if(data)
+//        {
+//            NSDictionary *TEMP_dict = [data valueForKey:@"data"];
+//            NSLog(@"The login customer Data:%@",TEMP_dict);
+//             [APIHelper stop_activity_animation:self];
+//
+//            if([[TEMP_dict valueForKey:@"errMessage"] isEqualToString:@"Success"])
+//            {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    NSMutableDictionary *dictMutable = [TEMP_dict mutableCopy];
+//                    [dictMutable removeObjectsForKeys:[TEMP_dict allKeysForObject:[NSNull null]]];
+//
+////                    NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
+////
+////                    NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+////
+////                    NSDictionary *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+//
+//                    NSString *str_ID = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"membershipNo"] ];
+//
+//                    [[NSUserDefaults standardUserDefaults] setValue:str_ID forKey:@"MEMBER_id"];
+//                    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
+//                    [[NSUserDefaults standardUserDefaults] synchronize];
+//                  //  [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
+//
+//                    [self calling_the_Company_API];
+//
+//
+//                });
+//
+//
+//
+//
+//
+//            }
+//            else
+//            {
+//                [APIHelper stop_activity_animation:self];
+//
+//                 [APIHelper createaAlertWithMsg:@"Member not registered" andTitle:@""];
+//
+//            }
+//
+//
+//
+//        }
+//        else{
+//             [APIHelper stop_activity_animation:self];
+//            [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+//
+//        }
+//
+//    }];
+//    }
+//    @catch(NSException *exception)
+//    {
+//         [APIHelper stop_activity_animation:self];
+//        NSLog(@"Exception from login api:%@",exception);
+//    }
+//
+//}
+
 -(void)login_action
 {
 
     @try
     {
 
-
+        NSDictionary *headers = @{ @"username": @"f181ac8c-f294-46c9-9c34-e33c3cf09e04",
+                                   @"password": @"a8cce63d-6575-47fc-bc22-561fd8c2ad93",
+                                   @"Content-Type": @"application/json",
+                                   @"Authorization": @"Basic ZjE4MWFjOGMtZjI5NC00NmM5LTljMzQtZTMzYzNjZjA5ZTA0OmE4Y2NlNjNkLTY1NzUtNDdmYy1iYzIyLTU2MWZkOGMyYWQ5Mw==",
+                                   @"Cache-Control": @"no-cache",
+                                   @"Postman-Token": @"187dcf1a-ed17-d8d6-34dd-c64ce78df93e" };
         NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
-         NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
-    NSString *url_str = [NSString stringWithFormat:@"%@login",str_image_base_URl];
-     //   NSString *str_Phone =[NSString stringWithFormat:@"%@",_TXT_password.text];
-    NSDictionary *parameters = @{@"memberId":str_QID};
-        [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+        NSString *url_str = [NSString stringWithFormat:@"https://www.api.qic-insured.com/anaya-mobile/memberPortalLogin?company=001"];
+        NSDictionary *parameters = @{@"memberId":str_QID,@"phone":@"33156672"};
+        [APIHelper login_postServiceCall:url_str andParams:parameters:headers completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
 
-
-        if(error)
-        {
-            [APIHelper stop_activity_animation:self];
-            [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
-
-        }
-        if(data)
-        {
-            NSDictionary *TEMP_dict = [data valueForKey:@"data"];
-            NSLog(@"The login customer Data:%@",TEMP_dict);
-             [APIHelper stop_activity_animation:self];
-
-            if([[TEMP_dict valueForKey:@"errMessage"] isEqualToString:@"Success"])
-            {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSMutableDictionary *dictMutable = [TEMP_dict mutableCopy];
-                    [dictMutable removeObjectsForKeys:[TEMP_dict allKeysForObject:[NSNull null]]];
-
-                    NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
-
-                    NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-
-                    NSDictionary *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
-
-                    NSString *str_ID = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"membershipNo"] ];
-
-                    [[NSUserDefaults standardUserDefaults] setValue:str_ID forKey:@"MEMBER_id"];
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                  //  [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
-
-                    [self calling_the_Company_API];
-
-
-                });
-
-
-
-
-
-            }
-            else
+            if(error)
             {
                 [APIHelper stop_activity_animation:self];
+                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
 
-                 [APIHelper createaAlertWithMsg:@"Member not registered" andTitle:@""];
+            }
+            if(data)
+            {
+                NSDictionary *TEMP_dict = data;
+                NSLog(@"The login customer Data:%@",TEMP_dict);
+                [APIHelper stop_activity_animation:self];
+
+                if([[TEMP_dict valueForKey:@"errMessage"] isEqualToString:@"Success"])
+                {
+
+                        NSMutableDictionary *dictMutable = [TEMP_dict mutableCopy];
+                        [dictMutable removeObjectsForKeys:[TEMP_dict allKeysForObject:[NSNull null]]];
+
+                      //  NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"USER_DATA"];
+
+                    //    NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
+                   //     NSDictionary *TEMP_dicts = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+
+                        NSString *str_ID = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"membershipNo"] ];
+
+                        [[NSUserDefaults standardUserDefaults] setValue:str_ID forKey:@"MEMBER_id"];
+                        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dictMutable] forKey:@"USER_DATA"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        //  [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                        [self calling_the_Company_API];
+
+
+                    });
+
+
+
+
+
+                }
+                else
+                {
+                    [APIHelper stop_activity_animation:self];
+
+                    [APIHelper createaAlertWithMsg:@"Please check QID number" andTitle:@"Alert"];
+
+                }
+
+
+
+            }
+            else{
+                [APIHelper stop_activity_animation:self];
+                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
 
             }
 
-
-
-        }
-        else{
-             [APIHelper stop_activity_animation:self];
-            [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
-
-        }
-
-    }];
+        }];
     }
     @catch(NSException *exception)
     {
-         [APIHelper stop_activity_animation:self];
+        [APIHelper stop_activity_animation:self];
         NSLog(@"Exception from login api:%@",exception);
     }
 
@@ -412,6 +525,8 @@
             if([str_code isEqualToString:@"Success"])
             {
 
+                [[NSUserDefaults standardUserDefaults] setValue:[[JSON_response_dic valueForKey:@"url"]valueForKey:@"username"] forKey:@"UNAME"];
+                [[NSUserDefaults standardUserDefaults] setValue:[[JSON_response_dic valueForKey:@"url"]valueForKey:@"password"] forKey:@"PWD"];
             [[NSUserDefaults standardUserDefaults] setValue:[[JSON_response_dic valueForKey:@"url"]valueForKey:@"api_url"] forKey:@"SERVER_URL"];
                 
             [[NSUserDefaults standardUserDefaults] setValue:[[JSON_response_dic valueForKey:@"url"]valueForKey:@"base_url"] forKey:@"IMAGE_URL"];
@@ -439,7 +554,9 @@
 -(void)SIGN_UP_action
 {
     //login_sign_UP
-    [self performSegueWithIdentifier:@"login_sign_UP" sender:self];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.qic-anaya.com"]];
+
+   // [self performSegueWithIdentifier:@"login_sign_UP" sender:self];
 //    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Sign_up_URL"];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
 }

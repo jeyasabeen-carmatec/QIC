@@ -29,6 +29,12 @@
 {
     float scroll_ht;
     UIView *vw_over_lay;
+    VC_home_tab *home;
+    VC_offers *offers;
+    VC_categories *categorie;
+    VC_news *news;
+    VC_profile *profile;
+     VC_Notifications *notifications;
     
     
 }
@@ -51,12 +57,39 @@
     
     [self highlight_IMAGE];
     [self tab_BAR_set_UP];
-     [self HOme_view_calling];
+   
     //[self favourites_API_call];
      [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:0]];
+    NSDictionary *temp_dict = [[NSUserDefaults standardUserDefaults]  valueForKey:@"notification_DICT"];
+    //  NSString *str_dict = [NSString stringWithFormat:@"%@",temp_dict];
+    [self HOme_view_calling];
+    if(temp_dict)
+    {
+        //   [APIHelper createaAlertWithMsg:str_dict andTitle:@""];
+        [self notification_view_call];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"notification_DICT"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tokenAvailableNotification:)
+                                                 name:@"NEW_NOTIFICATION" object:nil];
+   
+
     
 }
+- (void)tokenAvailableNotification:(NSNotification *)notification
+{
+    NSDictionary *temp_dict = [[NSUserDefaults standardUserDefaults]  valueForKey:@"notification_DICT"];
+    
+    if(temp_dict)
+    {
+        [self notification_view_call];
+   
+    }
+}
+
 #pragma mark highight the Tab menu indicator image
 
 -(void)highlight_IMAGE
@@ -79,7 +112,6 @@
     _TAB_menu.selectionIndicatorImage = img;
 
 }
-
 
 #pragma tab bar setUP
 
@@ -116,6 +148,8 @@
 
         
         [self HOme_view_calling];
+      //  [VC_categories release];
+
        
         
     }
@@ -185,7 +219,8 @@
 
 -(void)HOme_view_calling
 {
-   
+    [self remove_child];
+    
     
     @try
     {
@@ -195,39 +230,37 @@
     [[NSUserDefaults standardUserDefaults] setValue:@"home" forKey:@"tab_param"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    VC_home_tab *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_home_tab"];
-    categorie_vw.delegate = self;
-    CGRect frameset = categorie_vw.view.frame;
+    home = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_home_tab"];
+    home.delegate = self;
+    CGRect frameset = home.view.frame;
     frameset.origin.x =  0;
     frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
     frameset.size.height = scroll_ht;
     frameset.size.width = self.view.frame.size.width;
-    categorie_vw.view.frame =  frameset;
+    home.view.frame =  frameset;
 //    [UIView transitionWithView:self.VW_main
 //                      duration:0.5
 //                       options:UIViewAnimationOptionTransitionFlipFromLeft
 //                    animations:^{
-                        [self.VW_main addSubview:categorie_vw.view];
+                        [self.VW_main addSubview:home.view];
                         
-                        [self addChildViewController:categorie_vw];
-                        [categorie_vw didMoveToParentViewController:self];
-                        categorie_vw.definesPresentationContext = YES;
+                        [self addChildViewController:home];
+                        [home didMoveToParentViewController:self];
+                        home.definesPresentationContext = YES;
+        
 //                    } completion:nil
         
         
 //     ];
-        NSDictionary *temp_dict = [[NSUserDefaults standardUserDefaults]  valueForKey:@"notification_DICT"];
-      //  NSString *str_dict = [NSString stringWithFormat:@"%@",temp_dict];
        
-        if(temp_dict)
-        {
-          //   [APIHelper createaAlertWithMsg:str_dict andTitle:@""];
-            [self notification_view_call];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"notification_DICT"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-        }
-   
+        [offers.view removeFromSuperview];
+        [offers removeFromParentViewController];
+        [news.view removeFromSuperview];
+        [news removeFromParentViewController];
+        [notifications.view removeFromSuperview];
+        [notifications removeFromParentViewController];
+        
+      
     }
     @catch(NSException *exception)
     {
@@ -241,32 +274,44 @@
 
 -(void)providers_view_calling
 {
+    [self remove_child];
     @try
     {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:1]];
 
-    VC_categories *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_categoies"];
-    categorie_vw.delegate= self;
+    categorie = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_categoies"];
+    categorie.delegate= self;
     
-    CGRect frameset = categorie_vw.view.frame;
+    CGRect frameset = categorie.view.frame;
     frameset.origin.x =  0;
     frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
     frameset.size.height = _VW_main.frame.size.height;
     frameset.size.width = self.view.frame.size.width;
-    categorie_vw.view.frame =  frameset;
-    [categorie_vw.collection_categoriesl reloadData];
+    categorie.view.frame =  frameset;
+    [categorie.collection_categoriesl reloadData];
 //    [UIView transitionWithView:self.VW_main
 //                      duration:0.5
 //                       options:UIViewAnimationOptionTransitionFlipFromLeft
 //                    animations:^{
-                        [self.VW_main addSubview:categorie_vw.view];
+                        [self.VW_main addSubview:categorie.view];
                         
-                        [self addChildViewController:categorie_vw];
-                        [categorie_vw didMoveToParentViewController:self];
-                        categorie_vw.definesPresentationContext = YES;
+                        [self addChildViewController:categorie];
+                        [categorie didMoveToParentViewController:self];
+                        categorie.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-
+        [home.view removeFromSuperview];
+        [home removeFromParentViewController];
+        [offers.view removeFromSuperview];
+        [offers removeFromParentViewController];
+        [news.view removeFromSuperview];
+        [news removeFromParentViewController];
+        [notifications.view removeFromSuperview];
+        [notifications removeFromParentViewController];
+        
+        
+       
+        
     }
     @catch(NSException *exception)
     {
@@ -279,31 +324,44 @@
 
 -(void)offers_view_calling
 {
+    [self remove_child];
     @try
     {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:2]];
 
-    VC_offers *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
-    categorie_vw.delegate = self;
+    offers = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
+    offers.delegate = self;
     
-        CGRect frameset = categorie_vw.view.frame;
+        CGRect frameset = offers.view.frame;
         frameset.origin.x =  0;
         frameset.origin.y = self.navigationController.navigationBar.frame.origin.y;
         frameset.size.height = _VW_main.frame.size.height ;
         frameset.size.width = self.view.frame.size.width;
-        categorie_vw.view.frame =  frameset;
+        offers.view.frame =  frameset;
 //        [UIView transitionWithView:self.VW_main
 //                      duration:0.5
 //                       options:UIViewAnimationOptionTransitionFlipFromLeft
 //                    animations:^{
-                        [self.VW_main addSubview:categorie_vw.view];
+                        [self.VW_main addSubview:offers.view];
                         
-                        [self addChildViewController:categorie_vw];
-                        [categorie_vw didMoveToParentViewController:self];
-                        categorie_vw.definesPresentationContext = YES;
+                        [self addChildViewController:offers];
+                        [offers didMoveToParentViewController:self];
+                        offers.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-    
+//        [home.view removeFromSuperview];
+//        [home removeFromParentViewController];
+//        [categorie.view removeFromSuperview];
+//        [categorie removeFromParentViewController];
+//
+        [home.view removeFromSuperview];
+        [home removeFromParentViewController];
+        [categorie.view removeFromSuperview];
+        [categorie removeFromParentViewController];
+        [news.view removeFromSuperview];
+        [news removeFromParentViewController];
+        [notifications.view removeFromSuperview];
+        [notifications removeFromParentViewController];
 
     }
     @catch(NSException *exception)
@@ -325,7 +383,7 @@
 {
     
     /************** creating objet for sub category view controller and and grabbing that view  ******************/
-
+    [self remove_child];
     
     VC_sub_categories *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_subcategories"];
     categorie_vw.delegate = self;
@@ -358,6 +416,7 @@
 -(void)consultation_offers:(NSString *)str_status
 {
     /************** creating objet for consultation  view controller and and grabbing that view  ******************/
+    [self remove_child];
     
     VC_consultation *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_consultation"];
     categorie_vw.delegate = self;
@@ -438,6 +497,8 @@
 #pragma Detail page creating
 -(void)detail_PAGE
 {
+    [self remove_child];
+    
     VC_detail *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_detail"];
     categorie_vw.delegate = self;
     CGRect frameset = categorie_vw.view.frame;
@@ -463,6 +524,8 @@
 #pragma Profile View Pages calling
 -(void)Profile_VIEW_celling
 {
+    [self remove_child];
+    
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:4]];
 
     VC_profile *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_profile"];
@@ -486,11 +549,20 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-
+    [home.view removeFromSuperview];
+    [home removeFromParentViewController];
+    [categorie.view removeFromSuperview];
+    [categorie removeFromParentViewController];
+    [news.view removeFromSuperview];
+    [news removeFromParentViewController];
+    [notifications.view removeFromSuperview];
+    [notifications removeFromParentViewController];
 
 }
 -(void)dependets_ACTION:(NSString *)str_dependet
 {
+    [self remove_child];
+    
     VC_dependents *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_dependents"];
   //  [categorie_vw.TBL_profile reloadData];
     categorie_vw.delegate = self;
@@ -522,6 +594,9 @@
 #pragma News View Calling
 -(void)news_VIEW_calling
 {
+    
+    [self remove_child];
+    
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:3]];
 
     /************** creating objet for News view controller and and grabbing that view  ******************/
@@ -545,11 +620,21 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
- 
+    [home.view removeFromSuperview];
+    [home removeFromParentViewController];
+    [categorie.view removeFromSuperview];
+    [categorie removeFromParentViewController];
+    [profile.view removeFromSuperview];
+    [profile removeFromParentViewController];
+    [notifications.view removeFromSuperview];
+    [notifications removeFromParentViewController];
 }
 #pragma Favourites  Action
 -(void)favourites_ACTION
 {
+    
+    [self remove_child];
+    
     VC_favourites *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_favourites"];
     //  [categorie_vw.TBL_profile reloadData];
     categorie_vw.delegate = self;
@@ -636,7 +721,7 @@
     // Dispose of any resources that can be recreated.
     @try
     {
-        
+      //  [VC_home release];
     }
     @catch(NSException *exception)
     {
@@ -656,6 +741,8 @@
 
 -(void)health_card_ACTION
 {
+    [self remove_child];
+    
     VC_health_card *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_health_card"];
     //  [categorie_vw.TBL_profile reloadData];
     categorie_vw.delegate = self;
@@ -701,6 +788,8 @@
 #pragma calling static_PAGE_VIEW
 -(void)static_page_view_call
 {
+    [self remove_child];
+    
     VC_static_pages *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_static_page"];
     //  [categorie_vw.TBL_profile reloadData];
     categorie_vw.delegate = self;
@@ -727,6 +816,8 @@
 #pragma calling_search_VIEW
 -(void)search_VIEW_calling
 {
+    [self remove_child];
+    
     VC_search *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_search"];
     //  [categorie_vw.TBL_profile reloadData];
     categorie_vw.delegate = self;
@@ -753,6 +844,8 @@
 }
 -(void)offers_search_page_calling
 {
+    [self remove_child];
+    
     VC_offers_search *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_search_offers"];
     //  [categorie_vw.TBL_profile reloadData];
     categorie_vw.delegate = self;
@@ -800,6 +893,9 @@
 #pragma Notifications view calling
 -(void)notification_view_call
 {
+    [self remove_child];
+    
+   // [VC_home release];
     VC_Notifications *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_notifications"];
     //  [categorie_vw.TBL_profile reloadData];
     categorie_vw.delegate = self;
@@ -825,9 +921,40 @@
 }
 -(void)notification_back
 {
+   // [VC_Notifications release];
     [self HOme_view_calling];
 }
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self dismissViewControllerAnimated:NO completion:nil];
+    // [VC_home release];
+    
+}
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
+   
+  //  [VC_home release];
+    
+}
+-(void)notify_me
+{
+    NSDictionary *temp_dict = [[NSUserDefaults standardUserDefaults]  valueForKey:@"notification_DICT"];
 
+    if(temp_dict)
+    {
+        //   [APIHelper createaAlertWithMsg:str_dict andTitle:@""];
+        [self notification_view_call];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"notification_DICT"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    
+}
+-(void)remove_child
+{
+    [self.parentViewController willMoveToParentViewController:nil];
+    [self.parentViewController removeFromParentViewController];
+    [self.parentViewController.view removeFromSuperview];
+}
 /*
 #pragma mark - Navigation
 

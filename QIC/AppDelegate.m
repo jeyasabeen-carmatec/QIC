@@ -57,6 +57,10 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+//    NSNotification *notif = [NSNotification notificationWithName:@"NEW_NOTIFICATION" object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotification:notif];
+    
+    
 }
 
 
@@ -147,48 +151,48 @@
             NSString *notifMessage = [alert valueForKey:@"body"];
             
             //Define notifView as UIView in the header file
-            [_notifView removeFromSuperview]; //If already existing
-            
-            _notifView = [[UIView alloc] initWithFrame:CGRectMake(0, -70, self.window.frame.size.width, 80)];
-            [_notifView setBackgroundColor:[UIColor grayColor]];
-            
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10,15,30,30)];
-            imageView.image = [UIImage imageNamed:@"AppLogo.png"];
-            
-            UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 15, self.window.frame.size.width - 100 , 30)];
-            myLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0];
-            myLabel.text = notifMessage;
-            
-            [myLabel setTextColor:[UIColor whiteColor]];
-            [myLabel setNumberOfLines:0];
-            
-            [_notifView setAlpha:0.95];
-            
-            //The Icon
-            [_notifView addSubview:imageView];
-            
-            //The Text
-            [_notifView addSubview:myLabel];
-            
-            //The View
-            [self.window addSubview:_notifView];
-            
-            UITapGestureRecognizer *tapToDismissNotif = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                                action:@selector(dismissNotifFromScreen)];
-            tapToDismissNotif.numberOfTapsRequired = 1;
-            tapToDismissNotif.numberOfTouchesRequired = 1;
-            
-            [_notifView addGestureRecognizer:tapToDismissNotif];
-            
-            
-            [UIView animateWithDuration:1.0 delay:.1 usingSpringWithDamping:0.5 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                
-                [_notifView setFrame:CGRectMake(0, 0, self.window.frame.size.width, 60)];
-                
-            } completion:^(BOOL finished) {
-                
-                
-            }];
+//            [_notifView removeFromSuperview]; //If already existing
+//
+//            _notifView = [[UIView alloc] initWithFrame:CGRectMake(0, -70, self.window.frame.size.width, 80)];
+//            [_notifView setBackgroundColor:[UIColor clearColor]];
+//
+//            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10,15,30,30)];
+//            imageView.image = [UIImage imageNamed:@"AppLogo.png"];
+//
+//            UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 15, self.window.frame.size.width - 100 , 30)];
+//            myLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0];
+//            myLabel.text = notifMessage;
+//
+//            [myLabel setTextColor:[UIColor whiteColor]];
+//            [myLabel setNumberOfLines:0];
+//
+//            [_notifView setAlpha:0.95];
+//
+//            //The Icon
+//            [_notifView addSubview:imageView];
+//
+//            //The Text
+//            [_notifView addSubview:myLabel];
+//
+//            //The View
+//            [self.window addSubview:_notifView];
+//
+////            UITapGestureRecognizer *tapToDismissNotif = [[UITapGestureRecognizer alloc] initWithTarget:self
+////                                                                                                action:@selector(notify_me)];
+////            tapToDismissNotif.numberOfTapsRequired = 1;
+////            tapToDismissNotif.numberOfTouchesRequired = 1;
+////
+////            [_notifView addGestureRecognizer:tapToDismissNotif];
+//
+//
+//            [UIView animateWithDuration:1.0 delay:.1 usingSpringWithDamping:0.5 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//
+//                [_notifView setFrame:CGRectMake(0, 0, self.window.frame.size.width, 60)];
+//
+//            } completion:^(BOOL finished) {
+//
+//
+//            }];
         } @catch (NSException *exception) {
             NSLog(@"The notification exception %@",exception);
         }
@@ -202,11 +206,23 @@
 //        self.window.rootViewController = vc;
     }
     
+    NSNotification *notif = [NSNotification notificationWithName:@"NEW_NOTIFICATION" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notif];
+    
+    
+    
+    NSNotification *notify = [NSNotification notificationWithName:@"NEW_NOTIFICATION FOREGROUND" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notify];
+     [self.delegate notify_me];
+    
       //  [self applicationDidFinishLaunching:[UIApplication sharedApplication]];
 }
--(void) dismissNotifFromScreen
+
+-(void) notify_me
 {
+    
     _notifView.hidden = YES;
+    [self.delegate notify_me];
 //    NSDictionary *DICTN_notification = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"notification_DICT"];
 //    if (DICTN_notification) {
 //        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

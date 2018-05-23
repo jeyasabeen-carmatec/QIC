@@ -13,6 +13,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    _VW_background.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    _VW_background.layer.shadowOpacity = 1.0;
+    _VW_background.layer.shadowRadius = 2.0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

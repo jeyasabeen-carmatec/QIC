@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "home_page_protocols.h"
+
 @import GoogleMaps;
 #import <NewRelicAgent/NewRelic.h>
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -14,6 +16,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIView *notifView;
 #pragma Delegate action
+@property(nonatomic,assign) id <home_page_protocols> delegate;
 
 
 
