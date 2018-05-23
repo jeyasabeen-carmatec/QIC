@@ -108,7 +108,6 @@
                         <outlet property="TXT_uname" destination="svA-Gl-JbH" id="Hc8-xK-JkC"/>
                         <outlet property="VW_center" destination="BTb-r1-zmh" id="7iD-Pb-iOU"/>
                         <segue destination="MDk-04-x7c" kind="modal" identifier="login_home" id="z42-k7-mF5"/>
-                        <segue destination="eTZ-RT-LwC" kind="modal" identifier="login_sign_UP" animates="NO" id="Jn2-Su-xqU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -235,12 +234,12 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPa-A8-jWH">
-                                        <rect key="frame" x="249" y="33" width="20" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPa-A8-jWH">
+                                        <rect key="frame" x="249" y="29" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
-                                        <state key="normal" title="">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="12"/>
+                                        <state key="normal" title="1" backgroundImage="bell.png">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                 </subviews>
@@ -1727,65 +1726,12 @@
             </objects>
             <point key="canvasLocation" x="3721.875" y="-640"/>
         </scene>
-        <!--signUP-->
-        <scene sceneID="cPL-Ct-3eW">
-            <objects>
-                <viewController id="eTZ-RT-LwC" customClass="VC_sign_UP" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8yh-hW-Tnb"/>
-                        <viewControllerLayoutGuide type="bottom" id="ueb-Zt-xdG"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="AAo-Ma-5dN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HTO-2P-UlS">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJx-LH-qUf">
-                                        <rect key="frame" x="47" y="20" width="226" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="FuturaT-Medi" family="FuturaTMed" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0CG-SB-DeY">
-                                        <rect key="frame" x="9" y="22" width="30" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="26"/>
-                                        <state key="normal" title="">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.1647058824" green="0.53333333329999999" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cfz-Tb-Vbc">
-                                <rect key="frame" x="0.0" y="61" width="320" height="418"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="delegate" destination="eTZ-RT-LwC" id="dzC-5g-PbR"/>
-                                </connections>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="BTN_back" destination="0CG-SB-DeY" id="876-om-UYx"/>
-                        <outlet property="about_us_VW" destination="cfz-Tb-Vbc" id="7KY-op-yNB"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zUp-Ek-CQc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="856.875" y="815"/>
-        </scene>
     </scenes>
     <resources>
         <image name="Health_card.png" width="4480" height="2824"/>
         <image name="Login-Screen-background.jpg" width="1080" height="1974"/>
         <image name="Logo.png" width="345" height="342"/>
+        <image name="bell.png" width="52" height="60"/>
         <image name="call-button.png" width="141" height="54"/>
         <image name="get-direction.png" width="284" height="60"/>
         <image name="home.png" width="61" height="55"/>

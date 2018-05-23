@@ -212,6 +212,7 @@
 #pragma Faourites API call
 -(void)favourites_API_call
 {
+     [APIHelper stop_activity_animation:self];
       NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
     
     NSString *str_URL = [NSString stringWithFormat:@"%@getFavList",str_image_base_URl];
@@ -233,12 +234,12 @@
 
             if(data)
             {
+                 [APIHelper stop_activity_animation:self];
                 NSLog(@"%@", jsonresponse_DIC);
                 jsonresponse_DIC= data;
-                arr_images = [jsonresponse_DIC valueForKey:@"List"];
                 if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
                 {
-                   
+                    [arr_images addObjectsFromArray:[jsonresponse_DIC valueForKey:@"List"]];
 
                      dispatch_async(dispatch_get_main_queue(), ^{
                     [_TBL_list reloadData];
@@ -276,7 +277,7 @@
 -(void)delete_ITEM_from_Wish_list:(UIButton *)sender
 {
     
-    [APIHelper start_animation:self];
+    //[APIHelper start_animation:self];
      NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
     NSString *str_URL = [NSString stringWithFormat:@"%@delFromFav",str_image_base_URl];
     
@@ -295,7 +296,8 @@
          TEMP_dict =    @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"type":@"providers"};
             
         }
-        else{
+        else
+        {
         TEMP_dict = @{@"provider_id":srm_provider_ID,@"customer_id":str_member_ID,@"service_id":service_ID,@"type":@"offers"};
         }
         
@@ -341,10 +343,18 @@
                     }
                     [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
-                        
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                            [self favourites_API_call];
-                        });
+                        [arr_images removeObjectAtIndex:sender.tag];
+                        [_TBL_list reloadData];
+                        NSString *str_page = [[NSUserDefaults standardUserDefaults] valueForKey:@"tab_param"];
+                        if(arr_images.count < 1)
+                        {
+                            [self.delegate favourites_back_ACTION:str_page];
+                            [APIHelper createaAlertWithMsg:@"No Providers found" andTitle:@""];
+                        }
+                       
+//                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                            [self favourites_API_call];
+//                        });
                 
                    
                   });

@@ -41,6 +41,7 @@
         [self.view addSubview:_IMG_center];
         _IMG_center.center = self.view.center;
         _VW_center.hidden = YES;
+        [self calling_the_Company_API];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"login_home" sender:self];
               });
@@ -396,11 +397,22 @@
     
                 NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"code"]];
                 NSString *str_count = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"favorites_count"]];
+                NSString *str_notification_count = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"notification_count"]];
+                str_count = [str_count stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+                str_count = [str_count stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+
+                str_notification_count = [str_notification_count stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+                 str_notification_count = [str_notification_count stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+
+                
                 
                 if([str_code isEqualToString:@"1"])
                 {
                      
                     [[NSUserDefaults standardUserDefaults]  setValue:str_count forKey:@"wish_count"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+                    [[NSUserDefaults standardUserDefaults]  setValue:str_notification_count forKey:@"noifi_count"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     NSString *dev_TOK = [[NSUserDefaults standardUserDefaults]valueForKey:@"DEV_TOK"];
                     
@@ -453,13 +465,13 @@
     {
         
         
-        NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
+     NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
         NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
         NSString *url_str = [NSString stringWithFormat:@"%@saveDeviceInfo",str_image_base_URl];
         
         NSString *token = [[NSUserDefaults standardUserDefaults]valueForKey:@"DEV_TOK"];
         token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-        NSDictionary *parameters = @{@"customer_id":str_QID,@"device_type":@"iphone",@"device_token":token};
+        NSDictionary *parameters = @{@"customer_id":str_member_ID,@"device_type":@"iphone",@"device_token":token};
         [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
             
             
@@ -532,6 +544,7 @@
             [[NSUserDefaults standardUserDefaults] setValue:[[JSON_response_dic valueForKey:@"url"]valueForKey:@"base_url"] forKey:@"IMAGE_URL"];
                 
             [[NSUserDefaults standardUserDefaults] synchronize];
+                
                 
             }
         }
@@ -613,17 +626,19 @@
         {
             
             
-            NSString *str_QID = [NSString stringWithFormat:@"%@",_TXT_uname.text];
+       NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
             NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
             NSString *url_str = [NSString stringWithFormat:@"%@saveDeviceInfo",str_image_base_URl];
        
             NSString *token = [[NSUserDefaults standardUserDefaults]valueForKey:@"DEV_TOK"];
             token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-            NSDictionary *parameters = @{@"customer_id":str_QID,@"device_type":@"iphone",@"device_token":token};
+            NSDictionary *parameters = @{@"customer_id":str_member_ID,@"device_type":@"iphone",@"device_token":token};
             [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
                 
                 
                 if(error)
+                    
+                    
                 {
                     [APIHelper stop_activity_animation:self];
                     [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];

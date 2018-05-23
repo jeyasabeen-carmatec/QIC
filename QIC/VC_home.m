@@ -219,7 +219,7 @@
 
 -(void)HOme_view_calling
 {
-    [self remove_child];
+   
     
     
     @try
@@ -253,13 +253,8 @@
         
 //     ];
        
-        [offers.view removeFromSuperview];
-        [offers removeFromParentViewController];
-        [news.view removeFromSuperview];
-        [news removeFromParentViewController];
-        [notifications.view removeFromSuperview];
-        [notifications removeFromParentViewController];
-        
+      
+         [self remove_child];
       
     }
     @catch(NSException *exception)
@@ -274,7 +269,7 @@
 
 -(void)providers_view_calling
 {
-    [self remove_child];
+  
     @try
     {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:1]];
@@ -300,16 +295,9 @@
                         categorie.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-        [home.view removeFromSuperview];
-        [home removeFromParentViewController];
-        [offers.view removeFromSuperview];
-        [offers removeFromParentViewController];
-        [news.view removeFromSuperview];
-        [news removeFromParentViewController];
-        [notifications.view removeFromSuperview];
-        [notifications removeFromParentViewController];
+       
         
-        
+          [self remove_child];
        
         
     }
@@ -324,7 +312,7 @@
 
 -(void)offers_view_calling
 {
-    [self remove_child];
+  
     @try
     {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:2]];
@@ -354,15 +342,7 @@
 //        [categorie.view removeFromSuperview];
 //        [categorie removeFromParentViewController];
 //
-        [home.view removeFromSuperview];
-        [home removeFromParentViewController];
-        [categorie.view removeFromSuperview];
-        [categorie removeFromParentViewController];
-        [news.view removeFromSuperview];
-        [news removeFromParentViewController];
-        [notifications.view removeFromSuperview];
-        [notifications removeFromParentViewController];
-
+         [self remove_child];
     }
     @catch(NSException *exception)
     {
@@ -383,7 +363,7 @@
 {
     
     /************** creating objet for sub category view controller and and grabbing that view  ******************/
-    [self remove_child];
+   
     
     VC_sub_categories *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_subcategories"];
     categorie_vw.delegate = self;
@@ -404,6 +384,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
+     [self remove_child];
 
 }
 -(void)subcategories_back_action:(NSString *)str_back
@@ -437,7 +418,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-
+      [self remove_child];
     
 }
 /**************** consulatation back ***********************/
@@ -497,7 +478,7 @@
 #pragma Detail page creating
 -(void)detail_PAGE
 {
-    [self remove_child];
+  
     
     VC_detail *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_detail"];
     categorie_vw.delegate = self;
@@ -518,13 +499,13 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-
+     [self remove_child];
 }
 
 #pragma Profile View Pages calling
 -(void)Profile_VIEW_celling
 {
-    [self remove_child];
+   
     
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:4]];
 
@@ -549,19 +530,12 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-    [home.view removeFromSuperview];
-    [home removeFromParentViewController];
-    [categorie.view removeFromSuperview];
-    [categorie removeFromParentViewController];
-    [news.view removeFromSuperview];
-    [news removeFromParentViewController];
-    [notifications.view removeFromSuperview];
-    [notifications removeFromParentViewController];
-
+   
+         [self remove_child];
 }
 -(void)dependets_ACTION:(NSString *)str_dependet
 {
-    [self remove_child];
+   
     
     VC_dependents *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_dependents"];
   //  [categorie_vw.TBL_profile reloadData];
@@ -584,7 +558,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-
+      [self remove_child];
 }
 -(void)back_ACTION:(NSString *)str_dependet
 {
@@ -595,7 +569,7 @@
 -(void)news_VIEW_calling
 {
     
-    [self remove_child];
+   
     
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:3]];
 
@@ -620,20 +594,13 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-    [home.view removeFromSuperview];
-    [home removeFromParentViewController];
-    [categorie.view removeFromSuperview];
-    [categorie removeFromParentViewController];
-    [profile.view removeFromSuperview];
-    [profile removeFromParentViewController];
-    [notifications.view removeFromSuperview];
-    [notifications removeFromParentViewController];
+    [self remove_child];
 }
 #pragma Favourites  Action
 -(void)favourites_ACTION
 {
     
-    [self remove_child];
+    
     
     VC_favourites *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_favourites"];
     //  [categorie_vw.TBL_profile reloadData];
@@ -657,7 +624,7 @@
 //                    } completion:nil
 //     ];
 
-    
+    [self remove_child];
 }
 -(void)favourites_back_ACTION:(NSString *)page_param
 {
@@ -741,7 +708,7 @@
 
 -(void)health_card_ACTION
 {
-    [self remove_child];
+   
     
     VC_health_card *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_health_card"];
     //  [categorie_vw.TBL_profile reloadData];
@@ -764,7 +731,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-
+     [self remove_child];
 }
 -(void)calling_profile_view
 {
@@ -788,7 +755,7 @@
 #pragma calling static_PAGE_VIEW
 -(void)static_page_view_call
 {
-    [self remove_child];
+   
     
     VC_static_pages *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_static_page"];
     //  [categorie_vw.TBL_profile reloadData];
@@ -811,12 +778,12 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-
+       [self remove_child];
 }
 #pragma calling_search_VIEW
 -(void)search_VIEW_calling
 {
-    [self remove_child];
+   
     
     VC_search *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_search"];
     //  [categorie_vw.TBL_profile reloadData];
@@ -839,12 +806,12 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-
+       [self remove_child];
     
 }
 -(void)offers_search_page_calling
 {
-    [self remove_child];
+   
     
     VC_offers_search *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_search_offers"];
     //  [categorie_vw.TBL_profile reloadData];
@@ -868,7 +835,7 @@
 //                    } completion:nil
 //     ];
 
-    
+     [self remove_child];
 }
 -(void)offers_search_back
 {
@@ -893,7 +860,7 @@
 #pragma Notifications view calling
 -(void)notification_view_call
 {
-    [self remove_child];
+
     
    // [VC_home release];
     VC_Notifications *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_notifications"];
@@ -917,7 +884,7 @@
     categorie_vw.definesPresentationContext = YES;
     //                    } completion:nil
     //     ];
-
+    [self remove_child];
 }
 -(void)notification_back
 {
@@ -951,9 +918,12 @@
 }
 -(void)remove_child
 {
-    [self.parentViewController willMoveToParentViewController:nil];
-    [self.parentViewController removeFromParentViewController];
-    [self.parentViewController.view removeFromSuperview];
+//    UIViewController *vc = [self.childViewControllers lastObject];
+//    [vc.view dealloc];
+//    
+//    [self.parentViewController willMoveToParentViewController:nil];
+//    [self.parentViewController removeFromParentViewController];
+//    [self.parentViewController.view removeFromSuperview];
 }
 /*
 #pragma mark - Navigation

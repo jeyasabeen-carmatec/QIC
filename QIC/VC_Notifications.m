@@ -81,7 +81,7 @@
      NSString *str_title = [NSString stringWithFormat:@"%@",[[[temp_dict valueForKey:@"aps"]valueForKey:@"alert"]valueForKey:@"title"]];
     
     
-    NSString *str_data_setting = [NSString  stringWithFormat:@"%@\n\n%@",str_title,str_body];
+    NSString *str_data_setting = [NSString  stringWithFormat:@"%@\n%@",str_title,str_body];
     
         if ([_TXT_view respondsToSelector:@selector(setAttributedText:)])
         {
@@ -138,7 +138,7 @@
     {
      
          [self notifications_LIST_API];
-        [_TBL_notifications reloadData];
+       // [_TBL_notifications reloadData];
         _TBL_notifications.hidden = NO;
         _TXT_view.hidden = YES;
          [self  search_bar_hide];
@@ -240,6 +240,7 @@
 {
     @try
     {
+        
         [self TXT_view_setting];
     _TXT_view.hidden = NO;
 //    NSString *str_text = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"message"]]];
@@ -254,7 +255,7 @@
         NSString *str_title = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section]valueForKey:@"title"]]];
         
         
-        NSString *str_data_setting = [NSString  stringWithFormat:@"%@\n\n%@",str_title,str_body];
+        NSString *str_data_setting = [NSString  stringWithFormat:@"%@\n%@",str_title,str_body];
         
         if ([_TXT_view respondsToSelector:@selector(setAttributedText:)])
         {
@@ -283,14 +284,14 @@
         
        
        
-        [self search_bar_hide];
+      
     }
     @catch(NSException *exception)
     {
         
     }
     
-
+ [self search_bar_hide];
     
     
 }
@@ -380,6 +381,7 @@
         
         if([[jsonresponse_DIC valueForKey:@"List"] isKindOfClass:[NSArray class]])
         {
+            [arr_total_data removeAllObjects];
             [arr_total_data addObjectsFromArray:[jsonresponse_DIC valueForKey:@"List"]];
             
             
@@ -599,6 +601,26 @@
                 
                 [wishDic setObject:@"No" forKey:@"read_status"];
                 
+                    NSString *str_count = [[NSUserDefaults standardUserDefaults] valueForKey:@"noifi_count"];
+                    int count = [str_count intValue];
+                    if(count == 0)
+                    {
+                        count = 0;
+                    }
+                    else{
+                       count = count  - 1;
+                    }
+                    
+                    
+                    str_count = [NSString stringWithFormat:@"%d",count];
+                    str_count = [str_count stringByReplacingOccurrencesOfString:@"0" withString:@""];
+                    str_count = [str_count stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+                    str_count = [str_count stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+                    
+                    [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"noifi_count"];
+                    [[NSUserDefaults standardUserDefaults]synchronize];
+
+
                 [arr_total_data replaceObjectAtIndex:index.section withObject:wishDic];
                 }
                 
@@ -784,6 +806,25 @@
             [APIHelper stop_activity_animation:self];
             NSDictionary *TEMP_dict = data;
             NSLog(@"The temporary description is:%@",TEMP_dict);
+            NSString *str_count = [[NSUserDefaults standardUserDefaults] valueForKey:@"noifi_count"];
+            int count = [str_count intValue];
+            if(count == 0)
+            {
+                count = 0;
+            }
+            else{
+                count = count  - 1;
+            }
+            
+            
+            str_count = [NSString stringWithFormat:@"%d",count];
+            str_count = [str_count stringByReplacingOccurrencesOfString:@"0" withString:@""];
+            str_count = [str_count stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+            str_count = [str_count stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+            
+            [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"noifi_count"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+
            // NSString *str_code = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"code"]];
            
         }

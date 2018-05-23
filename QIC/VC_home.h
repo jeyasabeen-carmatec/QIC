@@ -12,13 +12,13 @@
 @interface VC_home : UIViewController<home_page_protocols>
 
 #pragma Tab bar 
-@property(nonatomic,weak) IBOutlet UITabBar *TAB_menu;
+@property(nonatomic,strong) IBOutlet UITabBar *TAB_menu;
 
-@property(nonatomic,weak) IBOutlet UIButton *BTN_favourite;
+@property(nonatomic,strong) IBOutlet UIButton *BTN_favourite;
 
 
 #pragma Main view
 
-@property(nonatomic,weak) IBOutlet UIView *VW_main;
+@property(nonatomic,strong) IBOutlet UIView *VW_main;
 
 @end

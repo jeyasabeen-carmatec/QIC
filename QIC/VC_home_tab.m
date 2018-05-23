@@ -93,6 +93,11 @@
     
     /***************** setting of Providers view **********************/
     
+    NSString *str_count = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"noifi_count"]];
+    
+     str_count = [str_count stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+    [_BTN_notification setTitle:str_count forState:UIControlStateNormal];
+    
     CGSize result = [[UIScreen mainScreen] bounds].size;
 
     frameset = _VW_providers.frame;
