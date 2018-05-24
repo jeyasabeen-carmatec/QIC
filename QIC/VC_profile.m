@@ -526,6 +526,15 @@
 }
 -(void)log_OUT
 {
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"USER_DATA"];
+    //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"DEV_TOK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
     @try
     {
          [APIHelper start_animation:self];
@@ -558,14 +567,14 @@
                 
                
                 
-                [self dismissViewControllerAnimated:YES completion:nil];
+               
                 [APIHelper stop_activity_animation:self];
                 
                 
             }
             else{
                 [APIHelper stop_activity_animation:self];
-                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+              //  [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
                 
             }
             
@@ -575,7 +584,7 @@
     {
         [APIHelper stop_activity_animation:self];
         
-        [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+      //  [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
     }
     
 }

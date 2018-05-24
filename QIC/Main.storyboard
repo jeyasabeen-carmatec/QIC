@@ -48,11 +48,11 @@
                                 <color key="backgroundColor" red="0.1647058824" green="0.53333333329999999" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTb-r1-zmh">
-                                <rect key="frame" x="3" y="80" width="314" height="289"/>
+                                <rect key="frame" x="3" y="96" width="314" height="289"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="NGR-oC-6cu">
-                                        <rect key="frame" x="92" y="-1" width="120" height="120"/>
+                                        <rect key="frame" x="102" y="-90" width="110" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="QID NUMBER" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="svA-Gl-JbH">
@@ -103,7 +103,6 @@
                     <connections>
                         <outlet property="BTN_guest" destination="JgN-4O-zvU" id="W6S-Tk-e1T"/>
                         <outlet property="BTN_login" destination="dma-Rs-scw" id="9R6-BG-YEb"/>
-                        <outlet property="IMG_background" destination="m8D-PH-3jC" id="bGU-fG-biN"/>
                         <outlet property="IMG_center" destination="M3c-Cz-gHM" id="qse-Cf-lBR"/>
                         <outlet property="TXT_password" destination="WRd-9y-GLW" id="sM0-Ob-Zgg"/>
                         <outlet property="TXT_uname" destination="svA-Gl-JbH" id="Hc8-xK-JkC"/>
