@@ -74,5 +74,5 @@
 
 #pragma app delegate methods
 -(void)notify_me;
--(void)read_status_update;
+-(void)read_status_updates;
 @end

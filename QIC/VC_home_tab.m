@@ -82,9 +82,15 @@
     _collection_news.layer.masksToBounds =  YES;
     
 
-
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(CountAvailableNotification_API)
+                                                 name:@"NEW_NOTIFICATIO_COUNT" object:nil];
    
 
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self CountAvailableNotification_API];
 }
 #pragma set UP View for the list of VIews
 
@@ -1089,7 +1095,70 @@ else{
 
    }
 
+-(void)CountAvailableNotification_API
+{
+    NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@notificationCount",str_image_base_URl];
+    @try
+    {
+         NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+       
+        
+        NSDictionary *parameters = @{@"customer_id":str_member_ID};
+        [APIHelper postServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+            }
+            if(data)
+            {
+                NSString *str_code = [NSString stringWithFormat:@"%@",[data valueForKey:@"code"]];
+                if([str_code isEqualToString:@"1"])
+                {
+                    
+                    NSDictionary *TEMP_dict = data;
+                    NSLog(@"The login customer Data:%@",TEMP_dict);
+                    
+                    NSString *str_notification_count = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"notification_count"]];
+                    str_notification_count = [str_notification_count stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+                    str_notification_count = [str_notification_count stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+                    dispatch_async(dispatch_get_main_queue(),
+                                   ^{
+                                       [self get_count:str_notification_count];
+                    });
+                    
+                }
+                else
+                {
+                    [APIHelper stop_activity_animation:self];
+                    [APIHelper createaAlertWithMsg:@"Some thing went wrong" andTitle:@"Alert"];
+                    
+                }
+                
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        [APIHelper createaAlertWithMsg:@"Some thing went wrong" andTitle:@"Alert"];
+        
+    }
+    
+  //  [notification removeObserver:self forKeyPath:@"NEW_NOTIFICATIO_COUNT"];
 
+}
+-(void)get_count:(NSString *)str_count
+{
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
+                       [_BTN_notification setTitle:str_count forState:UIControlStateNormal];
+
+          });
+
+}
 /*
 #pragma mark - Navigation
 

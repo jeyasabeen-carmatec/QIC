@@ -24,6 +24,8 @@
 
 @property(nonatomic,weak) IBOutlet UIView *VW_center;
 @property(nonatomic,weak) IBOutlet UIImageView *IMG_center;
+@property(nonatomic,weak) IBOutlet UIImageView *IMG_background;
+
 
 
 @end

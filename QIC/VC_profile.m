@@ -223,11 +223,9 @@
 //         [[UIApplication sharedApplication] cancelAllLocalNotifications];
     //     [[NSNotificationCenter currentNotificationCenter] removeAllDeliveredNotifications];
 
+         [self log_OUT];
          
-         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"USER_DATA"];
-         [[NSUserDefaults standardUserDefaults] synchronize];
-         
-         [self dismissViewControllerAnimated:YES completion:nil];
+        
      }
     else if([[DICT_profile objectAtIndex:indexPath.row] isEqualToString:@"Terms and Conditions"])
     {
@@ -526,7 +524,61 @@
     }
     
 }
-
+-(void)log_OUT
+{
+    @try
+    {
+         [APIHelper start_animation:self];
+        
+        NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+        NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+        NSString *url_str = [NSString stringWithFormat:@"%@deleteDeviceInfo",str_image_base_URl];
+        
+        NSString *token = [[NSUserDefaults standardUserDefaults]valueForKey:@"DEV_TOK"];
+        token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSDictionary *parameters = @{@"customer_id":str_member_ID,@"device_type":@"iphone",@"device_token":token};
+        [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            
+            if(error)
+                
+                
+            {
+                [APIHelper stop_activity_animation:self];
+                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+                
+            }
+            if(data)
+            {
+                NSDictionary *TEMP_dict = data;
+                NSLog(@"The TOken api customer Data:%@",TEMP_dict);
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"USER_DATA"];
+                //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"DEV_TOK"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+               
+                
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [APIHelper stop_activity_animation:self];
+                
+                
+            }
+            else{
+                [APIHelper stop_activity_animation:self];
+                [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+                
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        
+        [APIHelper createaAlertWithMsg:@"Server Connection error" andTitle:@"Alert"];
+    }
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

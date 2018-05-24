@@ -52,6 +52,8 @@
     button_search_frame = _BTN_search.frame;
     [_TBL_notifications setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
     _TBL_notifications.showLoadMoreView = YES;
+
+    
     [_BTN_search addTarget:self action:@selector(Search_API_called) forControlEvents:UIControlEventTouchUpInside];
   
     
@@ -383,22 +385,13 @@
         {
             [arr_total_data removeAllObjects];
             [arr_total_data addObjectsFromArray:[jsonresponse_DIC valueForKey:@"List"]];
-            
-            
-                [_TBL_notifications reloadData];
-            
-            
+            [_TBL_notifications reloadData];
         }
         else
         {
             [APIHelper createaAlertWithMsg:@"No Notifications found." andTitle:nil];
-    
-           // [self.delegate consultation_offers_back:@""];
-            
+            [self back_ACTION];
         }
-        
-        
-        
         
     }
     else
@@ -599,26 +592,26 @@
                 NSLog(@"The Status of Notification Data:%@",TEMP_dict);
                 NSMutableDictionary *wishDic = [[NSMutableDictionary alloc] initWithDictionary:[arr_total_data objectAtIndex:index.section]];
                 
-                [wishDic setObject:@"No" forKey:@"read_status"];
+                [wishDic setObject:@"Read" forKey:@"read_status"];
                 
-                    NSString *str_count = [[NSUserDefaults standardUserDefaults] valueForKey:@"noifi_count"];
-                    int count = [str_count intValue];
-                    if(count == 0)
-                    {
-                        count = 0;
-                    }
-                    else{
-                       count = count  - 1;
-                    }
-                    
-                    
-                    str_count = [NSString stringWithFormat:@"%d",count];
-                    str_count = [str_count stringByReplacingOccurrencesOfString:@"0" withString:@""];
-                    str_count = [str_count stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
-                    str_count = [str_count stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
-                    
-                    [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"noifi_count"];
-                    [[NSUserDefaults standardUserDefaults]synchronize];
+//                    NSString *str_count = [[NSUserDefaults standardUserDefaults] valueForKey:@"noifi_count"];
+//                    int count = [str_count intValue];
+//                    if(count == 0)
+//                    {
+//                        count = 0;
+//                    }
+//                    else{
+//                       count = count  - 1;
+//                    }
+//                    
+//                    
+//                    str_count = [NSString stringWithFormat:@"%d",count];
+//                    str_count = [str_count stringByReplacingOccurrencesOfString:@"0" withString:@""];
+//                    str_count = [str_count stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+//                    str_count = [str_count stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+//                    
+//                    [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"noifi_count"];
+//                    [[NSUserDefaults standardUserDefaults]synchronize];
 
 
                 [arr_total_data replaceObjectAtIndex:index.section withObject:wishDic];

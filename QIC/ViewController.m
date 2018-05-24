@@ -37,16 +37,20 @@
    NSDictionary  *TEMP_dict = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
     if([[TEMP_dict allKeys]count] > 1)
     {
+        //Login-Screen-background.jpg
         _IMG_center.hidden = NO;
         [self.view addSubview:_IMG_center];
         _IMG_center.center = self.view.center;
         _VW_center.hidden = YES;
         [self calling_the_Company_API];
+        _IMG_background.image = [UIImage imageNamed:@"Login-Screen-background.jpg"];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"login_home" sender:self];
               });
     }
     else{
+        _IMG_background.image = [UIImage imageNamed:@"Anaya-girl1.png"];
+
         _IMG_center.hidden = YES;
           _VW_center.hidden = NO;
         [self setUP_VIEW];
@@ -59,7 +63,7 @@
 -(void)setUP_VIEW
 {
     
-       _TXT_uname.text = @"28535632996";
+       _TXT_uname.text = @"";
     [_BTN_guest addTarget:self action:@selector(SIGN_UP_action) forControlEvents:UIControlEventTouchUpInside];
     
     /**************** settign te frame for view center **********************/
@@ -248,7 +252,11 @@
 //                    [[NSUserDefaults standardUserDefaults] synchronize];
 //                  //  [APIHelper createaAlertWithMsg:@"Login suuccess" andTitle:@"Alert"];
 //
-//                    [self calling_the_Company_API];
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [self calling_the_Company_API];
+//
+//
+//                                            });
 //
 //
 //                });
@@ -284,15 +292,19 @@
 //    }
 //
 //}
-
+//
 -(void)login_action
 {
 
     @try
     {
 
-        NSDictionary *headers = @{ @"username": @"f181ac8c-f294-46c9-9c34-e33c3cf09e04",
-                                   @"password": @"a8cce63d-6575-47fc-bc22-561fd8c2ad93",
+
+        NSString *str_name =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UNAME"]];
+        NSString *str_pwd =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"PWD"]];
+
+        NSDictionary *headers = @{ @"username": str_name,
+                                   @"password":str_pwd,
                                    @"Content-Type": @"application/json",
                                    @"Authorization": @"Basic ZjE4MWFjOGMtZjI5NC00NmM5LTljMzQtZTMzYzNjZjA5ZTA0OmE4Y2NlNjNkLTY1NzUtNDdmYy1iYzIyLTU2MWZkOGMyYWQ5Mw==",
                                    @"Cache-Control": @"no-cache",
@@ -417,7 +429,7 @@
                     NSString *dev_TOK = [[NSUserDefaults standardUserDefaults]valueForKey:@"DEV_TOK"];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self performSegueWithIdentifier:@"login_home" sender:self];
+                       
                         
                         if (dev_TOK)
                         {
@@ -433,6 +445,9 @@
                             
                             [APIHelper stop_activity_animation:self];
                         }
+                        
+                        
+                         [self performSegueWithIdentifier:@"login_home" sender:self];
                     });
                     
                     
@@ -512,7 +527,7 @@
 -(void)ALL_PATHS_API
 {
     
-
+ [APIHelper stop_activity_animation:self];
     @try
     {
         NSHTTPURLResponse *response = nil;
@@ -632,6 +647,7 @@
        
             NSString *token = [[NSUserDefaults standardUserDefaults]valueForKey:@"DEV_TOK"];
             token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+           // [APIHelper createaAlertWithMsg:token andTitle:@"Alert"];
             NSDictionary *parameters = @{@"customer_id":str_member_ID,@"device_type":@"iphone",@"device_token":token};
             [APIHelper postServiceCall:url_str andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
                 

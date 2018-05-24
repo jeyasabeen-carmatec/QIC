@@ -42,7 +42,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Login-Screen-background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="m8D-PH-3jC">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Anaya-girl1.png" translatesAutoresizingMaskIntoConstraints="NO" id="m8D-PH-3jC">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.1647058824" green="0.53333333329999999" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -103,6 +103,7 @@
                     <connections>
                         <outlet property="BTN_guest" destination="JgN-4O-zvU" id="W6S-Tk-e1T"/>
                         <outlet property="BTN_login" destination="dma-Rs-scw" id="9R6-BG-YEb"/>
+                        <outlet property="IMG_background" destination="m8D-PH-3jC" id="bGU-fG-biN"/>
                         <outlet property="IMG_center" destination="M3c-Cz-gHM" id="qse-Cf-lBR"/>
                         <outlet property="TXT_password" destination="WRd-9y-GLW" id="sM0-Ob-Zgg"/>
                         <outlet property="TXT_uname" destination="svA-Gl-JbH" id="Hc8-xK-JkC"/>
@@ -1728,6 +1729,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Anaya-girl1.png" width="480" height="800"/>
         <image name="Health_card.png" width="4480" height="2824"/>
         <image name="Login-Screen-background.jpg" width="1080" height="1974"/>
         <image name="Logo.png" width="345" height="342"/>

@@ -138,6 +138,9 @@
 		D0F6FB9F20B53C430058A400 /* bell.png in Resources */ = {isa = PBXBuildFile; fileRef = D0F6FB9E20B53C430058A400 /* bell.png */; };
 		D0F6FBA220B546550058A400 /* Futura URW Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0F6FBA020B546540058A400 /* Futura URW Medium.ttf */; };
 		D0F6FBA320B546550058A400 /* Futura TOT Medium Condensed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0F6FBA120B546540058A400 /* Futura TOT Medium Condensed.ttf */; };
+		D0F6FBA920B56BA20058A400 /* Anaya-girl1.png in Resources */ = {isa = PBXBuildFile; fileRef = D0F6FBA820B56BA20058A400 /* Anaya-girl1.png */; };
+		D0F6FBAC20B668440058A400 /* Futura Std Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0F6FBAA20B668430058A400 /* Futura Std Heavy.ttf */; };
+		D0F6FBAD20B668440058A400 /* Futura Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0F6FBAB20B668440058A400 /* Futura Heavy.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -329,6 +332,9 @@
 		D0F6FB9E20B53C430058A400 /* bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bell.png; sourceTree = "<group>"; };
 		D0F6FBA020B546540058A400 /* Futura URW Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura URW Medium.ttf"; sourceTree = "<group>"; };
 		D0F6FBA120B546540058A400 /* Futura TOT Medium Condensed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura TOT Medium Condensed.ttf"; sourceTree = "<group>"; };
+		D0F6FBA820B56BA20058A400 /* Anaya-girl1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Anaya-girl1.png"; sourceTree = "<group>"; };
+		D0F6FBAA20B668430058A400 /* Futura Std Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura Std Heavy.ttf"; path = "../../../Desktop/QIC properties/QIC/Futura fonts/futura heavy/Futura Std Heavy.ttf"; sourceTree = "<group>"; };
+		D0F6FBAB20B668440058A400 /* Futura Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura Heavy.ttf"; path = "../../../Desktop/QIC properties/QIC/Futura fonts/futura heavy/Futura Heavy.ttf"; sourceTree = "<group>"; };
 		F0AA4F7C14BB65B3BEBED902 /* libPods-QIC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QIC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -490,6 +496,8 @@
 		D02AC7D020724A6500F47C93 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				D0F6FBAB20B668440058A400 /* Futura Heavy.ttf */,
+				D0F6FBAA20B668430058A400 /* Futura Std Heavy.ttf */,
 				D0AE159F208882DA004B32CD /* digital-7.ttf */,
 				D0AE159D208882A5004B32CD /* digital-7 (mono italic).ttf */,
 				D079D692207E15140079CA99 /* Futura Std Book Oblique.ttf */,
@@ -559,6 +567,7 @@
 		D02AC7EB2073416F00F47C93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D0F6FBA820B56BA20058A400 /* Anaya-girl1.png */,
 				D0F6FB9E20B53C430058A400 /* bell.png */,
 				D015A13F20AF174600AA8435 /* logout.png */,
 				D02FB8F9208DF5C1000BCD3E /* transparent-BG.png */,
@@ -1035,10 +1044,12 @@
 				D079D667207C5FC60079CA99 /* search-bar.png in Resources */,
 				D02AC8792075FC9100F47C93 /* services.png in Resources */,
 				D02AC8772075FC9100F47C93 /* privacy-policy.png in Resources */,
+				D0F6FBAD20B668440058A400 /* Futura Heavy.ttf in Resources */,
 				D0AE158D2088605A004B32CD /* home_cell.xib in Resources */,
 				D0AE158120875B7F004B32CD /* image-3.jpg in Resources */,
 				D02AC7FC2073889600F47C93 /* home.png in Resources */,
 				D02AC8AB207624D500F47C93 /* Futura Std Medium Condensed.ttf in Resources */,
+				D0F6FBA920B56BA20058A400 /* Anaya-girl1.png in Resources */,
 				D02AC8392074AA5600F47C93 /* subcategory_cell.xib in Resources */,
 				D0AE157F20875B7F004B32CD /* image-1.jpg in Resources */,
 				D02AC86E2075FC9100F47C93 /* dependent.png in Resources */,
@@ -1049,6 +1060,7 @@
 				D02AC86C2075FC9100F47C93 /* call-button.png in Resources */,
 				D02AC89B207624B700F47C93 /* Futura Heavy.ttf in Resources */,
 				D02AC82720747EF000F47C93 /* profile_cell.xib in Resources */,
+				D0F6FBAC20B668440058A400 /* Futura Std Heavy.ttf in Resources */,
 				D02AC8702075FC9100F47C93 /* fingerprint.png in Resources */,
 				D02AC896207624AD00F47C93 /* Futura Book.ttf in Resources */,
 				D02AC8742075FC9100F47C93 /* Map.png in Resources */,
@@ -1330,7 +1342,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QIC/QIC.entitlements;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = TVWJ9WMT26;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1343,8 +1355,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.qic-anaya";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3af41554-8a0a-41e6-901a-bb3341cc0d84";
-				PROVISIONING_PROFILE_SPECIFIER = QICAnayaDev;
+				PROVISIONING_PROFILE = "46b32581-15a3-44ea-b97e-d3e12ba40b16";
+				PROVISIONING_PROFILE_SPECIFIER = "QIC DEP";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1356,7 +1368,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QIC/QIC.entitlements;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = TVWJ9WMT26;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1370,8 +1382,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.qic-anaya";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3af41554-8a0a-41e6-901a-bb3341cc0d84";
-				PROVISIONING_PROFILE_SPECIFIER = QICAnayaDev;
+				PROVISIONING_PROFILE = "46b32581-15a3-44ea-b97e-d3e12ba40b16";
+				PROVISIONING_PROFILE_SPECIFIER = "QIC DEP";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

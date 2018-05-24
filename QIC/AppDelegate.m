@@ -128,7 +128,16 @@
 }
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
     NSLog(@"User Info : %@",notification.request.content.userInfo);
+    
+   // [self.delegate read_status_updates];
+    NSNotification *notificaion = [NSNotification notificationWithName:@"NEW_NOTIFICATIO_COUNT" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notificaion];
+    
+    
+    
     completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
+    
+    
 }
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
@@ -213,6 +222,8 @@
     
     NSNotification *notify = [NSNotification notificationWithName:@"NEW_NOTIFICATION FOREGROUND" object:nil];
     [[NSNotificationCenter defaultCenter] postNotification:notify];
+    
+   
      [self.delegate notify_me];
     
       //  [self applicationDidFinishLaunching:[UIApplication sharedApplication]];

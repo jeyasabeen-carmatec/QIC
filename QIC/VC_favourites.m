@@ -311,7 +311,7 @@
             if(data)
             {
                
-                
+              dispatch_async(dispatch_get_main_queue(), ^{
                 NSDictionary *temp_dict = data;
                 [APIHelper stop_activity_animation:self];
                 
@@ -324,11 +324,11 @@
 
                      }
                      else{
-                         [APIHelper createaAlertWithMsg:@"Provider removed from your favourites." andTitle:@""];
+                         [APIHelper createaAlertWithMsg:@"Offer removed from your favourites." andTitle:@""];
 
                      }
                     
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                  
  
                     int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
                     NSString *str_count;
@@ -343,21 +343,17 @@
                     }
                     [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
-                        [arr_images removeObjectAtIndex:sender.tag];
-                        [_TBL_list reloadData];
+                    [arr_images removeObjectAtIndex:sender.tag];
+                    [_TBL_list reloadData];
+                    
                         NSString *str_page = [[NSUserDefaults standardUserDefaults] valueForKey:@"tab_param"];
                         if(arr_images.count < 1)
                         {
                             [self.delegate favourites_back_ACTION:str_page];
                             [APIHelper createaAlertWithMsg:@"No Providers found" andTitle:@""];
                         }
-                       
-//                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//                            [self favourites_API_call];
-//                        });
-                
-                   
-                  });
+                     
+                 
                     
                 }
                 else{
@@ -366,7 +362,7 @@
                     
                 }
                 
-                
+                 });
             }
             
         }];
