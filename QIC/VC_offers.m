@@ -183,6 +183,10 @@
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self removeFromParentViewController];
+}
 
 /*
 #pragma mark - Navigation

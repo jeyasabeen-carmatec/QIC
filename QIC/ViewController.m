@@ -68,11 +68,15 @@
     
     /**************** settign te frame for view center **********************/
     
-   // _VW_center.center=self.view.center;
+    //  _VW_center.center=self.view.center;
 //    _TXT_uname.text =  @"";
 //    _TXT_password.text = @"";
     
-    CGRect frameset = _BTN_guest.frame;
+//     frameset = _VW_center.frame;
+//    frameset.origin.y = 100;
+//    _VW_center.frame = frameset;
+    
+   CGRect  frameset = _BTN_guest.frame;
    
     
     

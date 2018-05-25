@@ -103,6 +103,7 @@
                     <connections>
                         <outlet property="BTN_guest" destination="JgN-4O-zvU" id="W6S-Tk-e1T"/>
                         <outlet property="BTN_login" destination="dma-Rs-scw" id="9R6-BG-YEb"/>
+                        <outlet property="IMG_background" destination="m8D-PH-3jC" id="vrM-8E-xhY"/>
                         <outlet property="IMG_center" destination="M3c-Cz-gHM" id="qse-Cf-lBR"/>
                         <outlet property="TXT_password" destination="WRd-9y-GLW" id="sM0-Ob-Zgg"/>
                         <outlet property="TXT_uname" destination="svA-Gl-JbH" id="Hc8-xK-JkC"/>
@@ -238,7 +239,7 @@
                                         <rect key="frame" x="249" y="29" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="12"/>
-                                        <state key="normal" title="1" backgroundImage="bell.png">
+                                        <state key="normal" backgroundImage="bell.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>

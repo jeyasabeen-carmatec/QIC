@@ -127,7 +127,6 @@
     [[UITabBarItem appearance] setTitleTextAttributes:@{
                                                         NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue" size:11.0f],NSForegroundColorAttributeName:[UIColor whiteColor]
                                                         } forState:UIControlStateNormal];
-    
 }
 #pragma Tab bar did select Item
 
@@ -222,8 +221,10 @@
    
     
     
+ 
     @try
     {
+   
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:0]];
 
     /************** creating objet for Home view controller and and grabbing that view  ******************/
@@ -254,7 +255,6 @@
 //     ];
        
       
-         [self remove_child];
       
     }
     @catch(NSException *exception)
@@ -297,7 +297,7 @@
 //     ];
        
         
-          [self remove_child];
+        
        
         
     }
@@ -342,7 +342,7 @@
 //        [categorie.view removeFromSuperview];
 //        [categorie removeFromParentViewController];
 //
-         [self remove_child];
+        
     }
     @catch(NSException *exception)
     {
@@ -384,7 +384,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-     [self remove_child];
+    
 
 }
 -(void)subcategories_back_action:(NSString *)str_back
@@ -397,7 +397,7 @@
 -(void)consultation_offers:(NSString *)str_status
 {
     /************** creating objet for consultation  view controller and and grabbing that view  ******************/
-    [self remove_child];
+   
     
     VC_consultation *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_consultation"];
     categorie_vw.delegate = self;
@@ -418,7 +418,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-      [self remove_child];
+  
     
 }
 /**************** consulatation back ***********************/
@@ -478,7 +478,7 @@
 #pragma Detail page creating
 -(void)detail_PAGE
 {
-  
+   
     
     VC_detail *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_detail"];
     categorie_vw.delegate = self;
@@ -499,7 +499,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-     [self remove_child];
+
 }
 
 #pragma Profile View Pages calling
@@ -531,7 +531,7 @@
 //                    } completion:nil
 //     ];
    
-         [self remove_child];
+
 }
 -(void)dependets_ACTION:(NSString *)str_dependet
 {
@@ -558,7 +558,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-      [self remove_child];
+
 }
 -(void)back_ACTION:(NSString *)str_dependet
 {
@@ -594,13 +594,13 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-    [self remove_child];
+   
 }
 #pragma Favourites  Action
 -(void)favourites_ACTION
 {
     
-    
+   
     
     VC_favourites *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_favourites"];
     //  [categorie_vw.TBL_profile reloadData];
@@ -624,7 +624,7 @@
 //                    } completion:nil
 //     ];
 
-    [self remove_child];
+    
 }
 -(void)favourites_back_ACTION:(NSString *)page_param
 {
@@ -731,7 +731,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-     [self remove_child];
+
 }
 -(void)calling_profile_view
 {
@@ -778,7 +778,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-       [self remove_child];
+
 }
 #pragma calling_search_VIEW
 -(void)search_VIEW_calling
@@ -806,7 +806,7 @@
                         categorie_vw.definesPresentationContext = YES;
 //                    } completion:nil
 //     ];
-       [self remove_child];
+
     
 }
 -(void)offers_search_page_calling
@@ -835,7 +835,7 @@
 //                    } completion:nil
 //     ];
 
-     [self remove_child];
+    
 }
 -(void)offers_search_back
 {
@@ -860,7 +860,7 @@
 #pragma Notifications view calling
 -(void)notification_view_call
 {
-
+   
     
    // [VC_home release];
     VC_Notifications *categorie_vw = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_notifications"];
@@ -884,7 +884,7 @@
     categorie_vw.definesPresentationContext = YES;
     //                    } completion:nil
     //     ];
-    [self remove_child];
+
 }
 -(void)notification_back
 {
@@ -916,15 +916,16 @@
     }
     
 }
--(void)remove_child
-{
+
+//-(void)remove_child
+//{
 //    UIViewController *vc = [self.childViewControllers lastObject];
 //    [vc.view dealloc];
 //    
-//    [self.parentViewController willMoveToParentViewController:nil];
-//    [self.parentViewController removeFromParentViewController];
-//    [self.parentViewController.view removeFromSuperview];
-}
+////    [self.parentViewController willMoveToParentViewController:nil];
+////    [self.parentViewController removeFromParentViewController];
+////    [self.parentViewController.view removeFromSuperview];
+//}
 /*
 #pragma mark - Navigation
 
