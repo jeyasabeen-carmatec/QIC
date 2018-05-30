@@ -167,8 +167,8 @@
         NSString *str = @"%";
         NSString *str_disc = @"Save";
         str_dicount = [NSString stringWithFormat:@"%@\n%@%@",str_disc,[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"],str];
-        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0"];
-        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@"0"];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0%"];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@"0%"];
     
     
     
@@ -223,8 +223,8 @@
        
 
         str_dicount = [NSString stringWithFormat:@"Save\n%@",[[arr_total_data objectAtIndex:indexPath.section]  valueForKey:@"offer_value"]];
-        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
-        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0%"];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@"0%"];
         cell.LBL_discount.text = str_dicount;
         
            }

@@ -571,6 +571,12 @@ else if(collectionView == _collection_offers)
         NSString *str_dicount_type = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"discount_type"]];
         NSString *str_dicount = [NSString stringWithFormat:@"%@",[[[JSON_response_dic valueForKey:@"offers_list"] objectAtIndex:indexPath.row] valueForKey:@"discount"]];
         
+        if([str_dicount isKindOfClass:[NSNull class]])
+        {
+            str_dicount = @"0";
+        }
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0"];
+        
         if([str_dicount_type isEqualToString:@"Percentage"])
         {
             NSString *str = @"%";

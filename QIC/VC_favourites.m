@@ -157,8 +157,8 @@
         {
             NSLog(@"Exception for attributed text:%@",exception);
         }
-        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0"];
-        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@"0"];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"<null>" withString:@"0%"];
+        str_dicount = [str_dicount stringByReplacingOccurrencesOfString:@"(null)" withString:@"0%"];
         cell.LBL_price_amount.attributedText = attributedText;
     }
     else{

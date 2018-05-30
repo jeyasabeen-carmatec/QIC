@@ -1351,7 +1351,7 @@
 				);
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
 				INFOPLIST_FILE = QIC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.qic-anaya";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1377,7 +1377,7 @@
 				);
 				GCC_PREFIX_HEADER = QIC/QIC.pch;
 				INFOPLIST_FILE = QIC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.qic-anaya";
