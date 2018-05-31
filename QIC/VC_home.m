@@ -218,8 +218,6 @@
 
 -(void)HOme_view_calling
 {
-   
-    
     
  
     @try
@@ -273,6 +271,8 @@
     @try
     {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:1]];
+        [[NSUserDefaults standardUserDefaults] setValue:@"providers" forKey:@"tab_param"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
 
     categorie = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_categoies"];
     categorie.delegate= self;
@@ -316,7 +316,8 @@
     @try
     {
     [self.TAB_menu setSelectedItem:[[self.TAB_menu items] objectAtIndex:2]];
-
+        [[NSUserDefaults standardUserDefaults] setValue:@"offers" forKey:@"tab_param"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     offers = [self.storyboard instantiateViewControllerWithIdentifier:@"vc_offers"];
     offers.delegate = self;
     
