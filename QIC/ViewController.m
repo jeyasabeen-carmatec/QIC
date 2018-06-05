@@ -20,7 +20,26 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     /****************** Calling the set up view ***********************/
- 
+    
+    CGRect frameset = _VW_center.frame;
+   
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+    
+    if(result.height <= 480)
+    {
+         frameset.origin.y = self.view.frame.size.height/2+10;
+    }
+    else if(result.height <= 568)
+    {
+         frameset.origin.y = self.view.frame.size.height/2 -40;
+    }
+    else
+    {
+         frameset.origin.y = self.view.frame.size.height/2-50;
+    }
+     _VW_center.frame = frameset;
+    
+  //  self.VW_center.center = self.view.center;
     UITapGestureRecognizer *close_menu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close_keyboard)];
     close_menu.delegate = self;
     [_VW_center addGestureRecognizer:close_menu];
@@ -92,13 +111,13 @@
     if(result.height <= 480)
     {
       _BTN_guest.titleLabel.font =   [UIFont systemFontOfSize: 14];
-        frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 20;
+        frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height +10;
 
     }
     else if(result.height <= 568)
     {
         _BTN_guest.titleLabel.font =   [UIFont systemFontOfSize: 14];
-        frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height + 20;
+        frameset.origin.y = _VW_center.frame.origin.y + _VW_center.frame.size.height+10;
 
 
     }
