@@ -28,16 +28,16 @@
 
 //Staging
 
-#define SERVER_URL @"http://104.37.188.213/QIC/apis/"
-#define STATCI_URL @"http://104.37.188.213/QIC/"
-#define IMAGE_URL @"http://104.37.188.213/QIC/"
+//#define SERVER_URL @"http://104.37.188.213/QIC/apis/"
+//#define STATCI_URL @"http://104.37.188.213/QIC/"
+//#define IMAGE_URL @"http://104.37.188.213/QIC/"
 
 
 
 //Live URL
 
-//#define SERVER_URL @"http://cms.qic-anaya.com/apis/"
-//#define STATCI_URL @"http://cms.qic-anaya.com/"
-//#define IMAGE_URL @"http://cms.qic-anaya.com/"
+#define SERVER_URL @"http://cms.qic-anaya.com/apis/"
+#define STATCI_URL @"http://cms.qic-anaya.com/"
+#define IMAGE_URL @"http://cms.qic-anaya.com/"
 
 #endif /* QIC_pch */
