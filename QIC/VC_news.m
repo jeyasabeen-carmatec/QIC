@@ -248,7 +248,7 @@
             else{
                    _TBL_list.hidden = YES;
                 
-                [APIHelper createaAlertWithMsg:@"No news found," andTitle:nil];
+                [APIHelper createaAlertWithMsg:@"No Articles found," andTitle:nil];
               
             }
             
@@ -305,7 +305,7 @@
             else{
                 _TBL_list.hidden = YES;
                 
-                [APIHelper createaAlertWithMsg:@"No news found," andTitle:nil];
+                [APIHelper createaAlertWithMsg:@"No Articles found," andTitle:nil];
                 
             }
             
@@ -416,7 +416,7 @@
             NSMutableDictionary *dict=(NSMutableDictionary *)[NSJSONSerialization JSONObjectWithData:aData options:NSASCIIStringEncoding error:&error];
             if([[dict valueForKey:@"msg"] isEqualToString:@"Failure"])
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Sorry no more news found." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Sorry no more Articles found." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
                 [alert show];
             }
             else{
@@ -432,7 +432,7 @@
                         
                     }
                     else{
-                        [APIHelper createaAlertWithMsg:@"No more news found" andTitle:@""];
+                        [APIHelper createaAlertWithMsg:@"No more Articles found" andTitle:@""];
                     }
                     
                     
