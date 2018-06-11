@@ -27,17 +27,20 @@
     
     if(result.height <= 480)
     {
-         frameset.origin.y = self.view.frame.size.height/2-30;
+         frameset.origin.y = self.view.frame.size.height/2-50;
+        
     }
     else if(result.height <= 568)
     {
-         frameset.origin.y = self.view.frame.size.height/2 -40;
+         frameset.origin.y = self.view.frame.size.height/2 -50;
     }
     else
     {
          frameset.origin.y = self.view.frame.size.height/2-50;
     }
      _VW_center.frame = frameset;
+    
+    //self.VW_center.center = self.view.center;
     
   //  self.VW_center.center = self.view.center;
     UITapGestureRecognizer *close_menu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close_keyboard)];
@@ -62,13 +65,13 @@
         _IMG_center.center = self.view.center;
         _VW_center.hidden = YES;
         [self calling_the_Company_API];
-        _IMG_background.image = [UIImage imageNamed:@"Login-Screen-background.jpg"];
+        _IMG_background.image = [UIImage imageNamed:@"1.png"];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"login_home" sender:self];
               });
     }
     else{
-        _IMG_background.image = [UIImage imageNamed:@"Anaya-girl1.png"];
+        _IMG_background.image = [UIImage imageNamed:@"2.png"];
 
         _IMG_center.hidden = YES;
           _VW_center.hidden = NO;

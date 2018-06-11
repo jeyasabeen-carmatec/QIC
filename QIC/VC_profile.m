@@ -324,6 +324,9 @@
         if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
         {
             dispatch_async(dispatch_get_main_queue(), ^{
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.allowsEditing = YES;
                 picker.sourceType = UIImagePickerControllerSourceTypeCamera;
                 [picker setModalPresentationStyle: UIModalPresentationOverFullScreen];
                 [self presentViewController:picker animated:YES completion:nil];
@@ -341,11 +344,14 @@
     else if (buttonIndex == 1)
     {
         
-        
-        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [picker setModalPresentationStyle: UIModalPresentationOverFullScreen];
         [self presentViewController:picker animated:YES completion:nil];
-
+         });
 
     }
 }

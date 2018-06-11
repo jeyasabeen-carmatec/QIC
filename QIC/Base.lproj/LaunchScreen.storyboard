@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login-Screen-background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="2Zj-Nv-u5F">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Zj-Nv-u5F">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cwt-vG-i8C">
@@ -49,7 +49,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Login-Screen-background.jpg" width="1080" height="1974"/>
+        <image name="1.png" width="1242" height="2208"/>
         <image name="Logo.png" width="345" height="342"/>
     </resources>
 </document>

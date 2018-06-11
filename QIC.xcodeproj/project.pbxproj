@@ -84,6 +84,8 @@
 		D02AC8AC207624D500F47C93 /* Futura Std Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D02AC8A7207624D500F47C93 /* Futura Std Medium.ttf */; };
 		D02AC8B22076274700F47C93 /* coupon.png in Resources */ = {isa = PBXBuildFile; fileRef = D02AC8B12076274700F47C93 /* coupon.png */; };
 		D02AC8B320762E6B00F47C93 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D02AC7C52072301D00F47C93 /* Info.plist */; };
+		D02BD35320CE2E4D0075874E /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = D02BD35120CE2E4B0075874E /* 2.png */; };
+		D02BD35420CE2E4D0075874E /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = D02BD35220CE2E4D0075874E /* 1.png */; };
 		D02FB8F4208DC3C8000BCD3E /* VC_search.m in Sources */ = {isa = PBXBuildFile; fileRef = D02FB8F3208DC3C8000BCD3E /* VC_search.m */; };
 		D02FB8F8208DDF35000BCD3E /* VC_offers_search.m in Sources */ = {isa = PBXBuildFile; fileRef = D02FB8F7208DDF35000BCD3E /* VC_offers_search.m */; };
 		D02FB8FA208DF5C1000BCD3E /* transparent-BG.png in Resources */ = {isa = PBXBuildFile; fileRef = D02FB8F9208DF5C1000BCD3E /* transparent-BG.png */; };
@@ -252,6 +254,8 @@
 		D02AC8A6207624D500F47C93 /* Futura Std Medium Condensed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Std Medium Condensed.ttf"; sourceTree = "<group>"; };
 		D02AC8A7207624D500F47C93 /* Futura Std Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Std Medium.ttf"; sourceTree = "<group>"; };
 		D02AC8B12076274700F47C93 /* coupon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon.png; sourceTree = "<group>"; };
+		D02BD35120CE2E4B0075874E /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		D02BD35220CE2E4D0075874E /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		D02FB8F2208DC3C8000BCD3E /* VC_search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VC_search.h; sourceTree = "<group>"; };
 		D02FB8F3208DC3C8000BCD3E /* VC_search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VC_search.m; sourceTree = "<group>"; };
 		D02FB8F6208DDF35000BCD3E /* VC_offers_search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VC_offers_search.h; sourceTree = "<group>"; };
@@ -567,6 +571,8 @@
 		D02AC7EB2073416F00F47C93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D02BD35220CE2E4D0075874E /* 1.png */,
+				D02BD35120CE2E4B0075874E /* 2.png */,
 				D0F6FBA820B56BA20058A400 /* Anaya-girl1.png */,
 				D0F6FB9E20B53C430058A400 /* bell.png */,
 				D015A13F20AF174600AA8435 /* logout.png */,
@@ -1064,6 +1070,7 @@
 				D02AC8702075FC9100F47C93 /* fingerprint.png in Resources */,
 				D02AC896207624AD00F47C93 /* Futura Book.ttf in Resources */,
 				D02AC8742075FC9100F47C93 /* Map.png in Resources */,
+				D02BD35320CE2E4D0075874E /* 2.png in Resources */,
 				D02AC8762075FC9100F47C93 /* next-arrow.png in Resources */,
 				D079D66D207C78940079CA99 /* offers_list_cell.xib in Resources */,
 				D02AC88E2076238A00F47C93 /* Futura Extra Bold.ttf in Resources */,
@@ -1076,6 +1083,7 @@
 				D02AC88F2076238A00F47C93 /* Futura Round Bold.ttf in Resources */,
 				D02AC8B320762E6B00F47C93 /* Info.plist in Resources */,
 				D02AC7E82073410600F47C93 /* menu_cell.xib in Resources */,
+				D02BD35420CE2E4D0075874E /* 1.png in Resources */,
 				D02AC7FE2073889600F47C93 /* offer.png in Resources */,
 				D02AC87A2075FC9100F47C93 /* terms-&-condition.png in Resources */,
 				D02AC7FD2073889600F47C93 /* news.png in Resources */,
@@ -1268,6 +1276,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1284,7 +1293,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1317,6 +1326,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1327,8 +1337,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1340,6 +1351,7 @@
 			baseConfigurationReference = CCF1A403BDEB38A3523C5095 /* Pods-QIC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = QIC/QIC.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -1366,6 +1378,7 @@
 			baseConfigurationReference = 6DD2584364BC599693B662AC /* Pods-QIC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = QIC/QIC.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -1379,7 +1392,7 @@
 				INFOPLIST_FILE = QIC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.qic-anaya";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ed3c2134-5e67-4f5e-863e-8ff320708bb5";
