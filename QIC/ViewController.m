@@ -629,6 +629,7 @@
                                    NSDictionary *appMetadataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&parseError];
                                    NSArray *resultsArray = (appMetadataDictionary)?[appMetadataDictionary objectForKey:@"results"]:nil;
                                    NSDictionary *resultsDic = [resultsArray firstObject];
+                    
                                    if (resultsDic) {
                                        // compare version with your apps local version
                                        NSString *iTunesVersion = [resultsDic objectForKey:@"version"];

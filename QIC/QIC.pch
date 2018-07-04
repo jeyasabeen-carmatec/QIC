@@ -21,10 +21,10 @@
 
 //192.168.0.171
 
-//#define SERVER_URL @"http://192.168.0.171/QIC/apis/"
-//#define STATCI_URL @"http://192.168.0.171/QIC/"
-//#define IMAGE_URL @"http://192.168.0.171/QIC/"
-//#define SERVER_URL1 @"http://192.168.0.171/QIC"
+#define SERVER_URL @"http://192.168.0.171/QIC/apis/"
+#define STATCI_URL @"http://192.168.0.171/QIC/"
+#define IMAGE_URL @"http://192.168.0.171/QIC/"
+#define SERVER_URL1 @"http://192.168.0.171/QIC"
 
 
 
@@ -40,10 +40,10 @@
 
 //Live URL
 
-#define SERVER_URL @"http://cms.qic-anaya.com/apis/"
-#define STATCI_URL @"http://cms.qic-anaya.com/"
-#define IMAGE_URL @"http://cms.qic-anaya.com/"
-#define SERVER_URL1 @"http://cms.qic-anaya.com"
+//#define SERVER_URL @"http://cms.qic-anaya.com/apis/"
+//#define STATCI_URL @"http://cms.qic-anaya.com/"
+//#define IMAGE_URL @"http://cms.qic-anaya.com/"
+//#define SERVER_URL1 @"http://cms.qic-anaya.com"
 
 
 #endif /* QIC_pch */

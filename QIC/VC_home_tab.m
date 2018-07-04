@@ -13,7 +13,8 @@
 #import "APIHelper.h"
 
 
-@interface VC_home_tab ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIGestureRecognizerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
+@interface VC_home_tab ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIGestureRecognizerDelegate,UICollectionViewDelegate,
+UICollectionViewDataSource,UIScrollViewDelegate>
 {
     NSArray *arr_images;
     CGRect frameset;
@@ -303,7 +304,7 @@
     }
 
     
-    NSString *str_header_name =@"TOP 5 PROVIDERS";
+    NSString *str_header_name =@"TOP 10 PROVIDERS";
    // NSString *str_sub_header_name = @"This is showing the Top Providers";
     
     NSString *str_providers = [NSString  stringWithFormat:@"%@",str_header_name];
@@ -1125,13 +1126,14 @@ else{
                     
                     NSDictionary *TEMP_dict = data;
                     NSLog(@"The login customer Data:%@",TEMP_dict);
-                    
+                     NSString *str_count = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"favCount"]];
                     NSString *str_notification_count = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"notification_count"]];
                     str_notification_count = [str_notification_count stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
                     str_notification_count = [str_notification_count stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
                     dispatch_async(dispatch_get_main_queue(),
                                    ^{
                                        [self get_count:str_notification_count];
+                                       [self.BTN_favourite setTitle:[APIHelper set_count:str_count] forState:UIControlStateNormal];
                     });
                     
                 }

@@ -52,6 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self CountAvailableNotification_API];
       page_count = 1;
     arr_total_data = [[NSMutableArray alloc]init];
     CPY_arr = [[NSMutableArray alloc]init];
@@ -394,9 +395,11 @@
                        [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
                     
                          [APIHelper createaAlertWithMsg:@"Offer added to your favourites." andTitle:@""];
-                        int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
-                        i = i +1;
-                        NSString *str_count = [NSString stringWithFormat:@"%d",i];
+//                        int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
+//                        i = i +1;
+                      //  NSString *str_count = [NSString stringWithFormat:@"%d",i];
+                        NSString *str_count = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"favCount"]];
+
                         [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                         [[NSUserDefaults standardUserDefaults] synchronize];
                         [_BTN_favourite setTitle:str_count forState:UIControlStateNormal];
@@ -461,21 +464,25 @@
                 NSString *str_code = [NSString stringWithFormat:@"%@",[temp_dict valueForKey:@"msg"]];
                 if([str_code isEqualToString:@"Sucess"])
                 {
-                    int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
+                   // int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
                     NSString *str_count;
-                    if(i == 0 )
-                    {
-                        i = 0;
-                    }
-                    else
-                    {
-                    i = i - 1;
-                     str_count = [NSString stringWithFormat:@"%d",i];
-                    }
+//                    if(i == 0 )
+//                    {
+//                        i = 0;
+//                    }
+//                    else
+//                    {
+//                    i = i - 1;
+//                     str_count = [NSString stringWithFormat:@"%d",i];
+//                    }
+                    str_count = [NSString stringWithFormat:@"%@",[temp_dict valueForKey:@"favCount"]];
+
                     [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
-                   [self.BTN_favourite setTitle:[APIHelper set_count:str_count] forState:UIControlStateNormal];
-                }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.BTN_favourite setTitle:[APIHelper set_count:str_count] forState:UIControlStateNormal];
+                        
+                    });                }
                 else{
                     [APIHelper createaAlertWithMsg:@"Something went wrong." andTitle:@""];
 
@@ -768,7 +775,62 @@
     }
     
 }
-
+#pragma count API
+-(void)CountAvailableNotification_API
+{
+    NSString *str_image_base_URl = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"SERVER_URL"]];
+    NSString *str_URL = [NSString stringWithFormat:@"%@notificationCount",str_image_base_URl];
+    @try
+    {
+        NSString  *str_member_ID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"MEMBER_id"]];
+        
+        
+        NSDictionary *parameters = @{@"customer_id":str_member_ID};
+        [APIHelper postServiceCall:str_URL andParams:parameters completionHandler:^(id  _Nullable data, NSError * _Nullable error) {
+            
+            if(error)
+            {
+                [APIHelper stop_activity_animation:self];
+            }
+            if(data)
+            {
+                NSString *str_code = [NSString stringWithFormat:@"%@",[data valueForKey:@"code"]];
+                if([str_code isEqualToString:@"1"])
+                {
+                    
+                    NSDictionary *TEMP_dict = data;
+                    NSLog(@"The login customer Data:%@",TEMP_dict);
+                    
+                    NSString *str_count = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"favCount"]];
+                    
+                    dispatch_async(dispatch_get_main_queue(),
+                                   ^{
+                                       [self.BTN_favourite setTitle:[APIHelper set_count:str_count] forState:UIControlStateNormal];
+                                       
+                                   });
+                    
+                }
+                else
+                {
+                    [APIHelper stop_activity_animation:self];
+                    [APIHelper createaAlertWithMsg:@"Some thing went wrong" andTitle:@"Alert"];
+                    
+                }
+                
+            }
+            
+        }];
+    }
+    @catch(NSException *exception)
+    {
+        [APIHelper stop_activity_animation:self];
+        [APIHelper createaAlertWithMsg:@"Some thing went wrong" andTitle:@"Alert"];
+        
+    }
+    
+    //  [notification removeObserver:self forKeyPath:@"NEW_NOTIFICATIO_COUNT"];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

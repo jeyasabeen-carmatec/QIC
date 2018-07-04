@@ -371,9 +371,10 @@
                             [cell.BTN_favourite setTitle:@"" forState:UIControlStateNormal];
                             
                             [APIHelper createaAlertWithMsg:@"Offer added to your favourites." andTitle:@""];
-                            int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
-                            i = i +1;
-                            NSString *str_count = [NSString stringWithFormat:@"%d",i];
+//                            int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
+//                            i = i +1;
+                            NSString *str_count = [NSString stringWithFormat:@"%@",[TEMP_dict valueForKey:@"favCount"]];
+
                             [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                             [[NSUserDefaults standardUserDefaults] synchronize];
                             NSMutableDictionary *wishDic = [[NSMutableDictionary alloc] initWithDictionary:[arr_total_data objectAtIndex:index.row]];
@@ -437,17 +438,19 @@
                 NSString *str_code = [NSString stringWithFormat:@"%@",[temp_dict valueForKey:@"msg"]];
                 if([str_code isEqualToString:@"Sucess"])
                 {
-                    int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
+                   // int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"wish_count"] intValue];
                     NSString *str_count;
-                    if(i == 0 )
-                    {
-                        i = 0;
-                    }
-                    else
-                    {
-                        i = i - 1;
-                        str_count = [NSString stringWithFormat:@"%d",i];
-                    }
+//                    if(i == 0 )
+//                    {
+//                        i = 0;
+//                    }
+//                    else
+//                    {
+//                        i = i - 1;
+//                        str_count = [NSString stringWithFormat:@"%d",i];
+//                    }
+                    str_count = [NSString stringWithFormat:@"%@",[temp_dict valueForKey:@"favCount"]];
+
                     [[NSUserDefaults standardUserDefaults] setValue:str_count forKey:@"wish_count"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     

@@ -987,7 +987,7 @@
 				TargetAttributes = {
 					D02AC7B02072301D00F47C93 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = TVWJ9WMT26;
+						DevelopmentTeam = 4MCGAH3G26;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1354,9 +1354,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = QIC/QIC.entitlements;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = TVWJ9WMT26;
+				DEVELOPMENT_TEAM = 4MCGAH3G26;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1365,10 +1365,10 @@
 				INFOPLIST_FILE = QIC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.qic-anaya";
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.QIC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ed3c2134-5e67-4f5e-863e-8ff320708bb5";
-				PROVISIONING_PROFILE_SPECIFIER = QICAnayaDEP;
+				PROVISIONING_PROFILE = "1d772286-463a-41fe-9aa4-2a617be4341f";
+				PROVISIONING_PROFILE_SPECIFIER = QICdev;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1381,9 +1381,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = QIC/QIC.entitlements;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = TVWJ9WMT26;
+				DEVELOPMENT_TEAM = 4MCGAH3G26;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1393,10 +1393,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.qic-anaya";
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmatec.QIC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ed3c2134-5e67-4f5e-863e-8ff320708bb5";
-				PROVISIONING_PROFILE_SPECIFIER = QICAnayaDEP;
+				PROVISIONING_PROFILE = "1d772286-463a-41fe-9aa4-2a617be4341f";
+				PROVISIONING_PROFILE_SPECIFIER = QICdev;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
