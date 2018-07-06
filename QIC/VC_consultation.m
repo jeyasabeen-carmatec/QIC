@@ -128,7 +128,7 @@
         else
         {
             
-            str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"provider_type"]]];
+            str_designation = [NSString stringWithFormat:@"%@",[APIHelper convert_NUll:[[arr_total_data objectAtIndex:indexPath.section] valueForKey:@"specialities"]]];
         }
     
     cell.LBL_designnantion.text = [NSString stringWithFormat:@"%@",str_designation];

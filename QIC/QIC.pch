@@ -21,19 +21,20 @@
 
 //192.168.0.171
 
-#define SERVER_URL @"http://192.168.0.171/QIC/apis/"
-#define STATCI_URL @"http://192.168.0.171/QIC/"
-#define IMAGE_URL @"http://192.168.0.171/QIC/"
-#define SERVER_URL1 @"http://192.168.0.171/QIC"
+//#define SERVER_URL @"http://192.168.0.171/QIC/apis/"
+//#define STATCI_URL @"http://192.168.0.171/QIC/"
+//#define IMAGE_URL @"http://192.168.0.171/QIC/"
+//#define SERVER_URL1 @"http://192.168.0.171/QIC"
 
 
 
 //Staging
 
-//#define SERVER_URL @"http://104.37.188.213/QIC/apis/"
-//#define STATCI_URL @"http://104.37.188.213/QIC/"
-//#define IMAGE_URL @"http://104.37.188.213/QIC/"
-//#define SERVER_URL1 @"http://104.37.188.213/QIC"
+#define SERVER_URL @"http://104.37.188.213/QIC/apis/"
+#define STATCI_URL @"http://104.37.188.213/QIC/"
+#define IMAGE_URL @"http://104.37.188.213/QIC/"
+#define SERVER_URL1 @"http://104.37.188.213/QIC"
+#define IMAGE_URL1 @"http://104.37.188.213"
 
 
 

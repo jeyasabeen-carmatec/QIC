@@ -442,9 +442,11 @@
                 if([str_code isEqualToString:@"1"])
                 {
                    
-                    NSString *str_image = [NSString stringWithFormat:@"%@%@",SERVER_URL1,[APIHelper convert_NUll:[TEMP_dict valueForKey:@"url"]]];
+                    NSString *str_image = [NSString stringWithFormat:@"%@%@",IMAGE_URL1,[APIHelper convert_NUll:[TEMP_dict valueForKey:@"url"]]];
                     [[NSUserDefaults standardUserDefaults] setValue:str_image forKey:@"IMAGE_NAME"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+                    
                     
 
                     

@@ -102,7 +102,9 @@
 {
     [self.delegate consultation_offers:@"consulation"];
     [[NSUserDefaults standardUserDefaults]  setValue:[[[jsonresponse_DIC valueForKey:@"Services"] objectAtIndex:indexPath.section] valueForKey:@"id"] forKey:@"service_ID"];
+     [[NSUserDefaults standardUserDefaults]  setValue:[[[jsonresponse_DIC valueForKey:@"Services"] objectAtIndex:indexPath.section] valueForKey:@"description"] forKey:@"service_name"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
     
 }
 
